@@ -1,14 +1,21 @@
 <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 
-<button id="on">ON</button>
-<button onclick="ledOff()">OFF</button>
+<button id="lightOn">ON</button>
+<button id="lightOff">OFF</button>
 
 <script>
     $(document).ready(function(){
         var ledOn = function(){
-            console.log("click nigga");
+            console.log("light onnnnnn");
             $.get("home/ledOn");
         };
-        $("#on").click(ledOn);
+
+        var ledOff = function(){
+            console.log("light offffff");
+            $.get("home/ledOff");
+        };
+
+        $("#lightOn").click(ledOn);
+        $("#lightOff").click(ledOff);
     });
 </script>
