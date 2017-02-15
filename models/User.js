@@ -15,6 +15,3 @@ exports.createUser = function (username, password, email, name) {
         })
     })
 };
-
-
-
