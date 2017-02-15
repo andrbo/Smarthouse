@@ -1,9 +1,19 @@
+<script src="http://code.jquery.com/jquery-2.0.0.min.js">
 
-<input type="submit" formmethod="post" formaction="/home" value="ON">
-<button id="offButton">OFF</button>
+    function ledOn(){
+        $.ajax({
+            url: "/home/ledOn"
+        });
+    }
 
-<form method="POST">
-    <input type="text" {name="name"}> <br>
-    <input type="submit" value="Submit">
-</form>
+    function ledOff(){
+        $.ajax({
+            url: "/home/ledOff"
+        });
+    }
+
+</script>
+
+<button onclick="ledOn()">ON</button>
+<button onclick="ledOff()">OFF</button>
 
