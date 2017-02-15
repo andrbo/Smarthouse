@@ -1,9 +1,5 @@
 <script src="http://code.jquery.com/jquery-2.0.0.min.js">
-    
-    var ledOn = function(){
-        console.log("click nigga");
-        $.get("/home/ledOn");
-    }
+
 
     function ledOff() {
         $.get("/home/ledOff");
@@ -16,6 +12,10 @@
 
 <script>
     $(document).ready(function(){
+        var ledOn = function(){
+            console.log("click nigga");
+            $.get("/home/ledOn");
+        }
         $("#on").click(ledOn);
     });
 </script>
