@@ -7,16 +7,13 @@
     $(document).ready(function(){
         var ledOn = function(){
             $.get("home/ledOn");
-        }
+        };
 
-        $("#lightOn").click(ledOn);
-    });
-
-    $(document).ready(function(){
         var ledOff = function(){
             $.get("home/ledOff");
-        }
+        };
 
+        $("#lightOn").click(ledOn);
         $("#lightOff").click(ledOff);
     });
 </script>
