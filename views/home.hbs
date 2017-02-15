@@ -6,16 +6,17 @@
 <script>
     $(document).ready(function(){
         var ledOn = function(){
-            console.log("light onnnnnn");
             $.get("home/ledOn");
-        };
-
-        var ledOff = function(){
-            console.log("light offffff");
-            $.get("home/ledOff");
-        };
+        }
 
         $("#lightOn").click(ledOn);
+    });
+
+    $(document).ready(function(){
+        var ledOff = function(){
+            $.get("home/ledOff");
+        }
+
         $("#lightOff").click(ledOff);
     });
 </script>
