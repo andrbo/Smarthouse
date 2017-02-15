@@ -21,7 +21,6 @@
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
-    "rpi-gpio": "^0.7.0",
     "serve-favicon": "~2.3.0"
   }
 }
