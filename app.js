@@ -1,5 +1,5 @@
 var express = require('express');
-//var gpio = require('rpi-gpio');
+var gpio = require('rpi-gpio');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
