@@ -1,46 +1,163 @@
 var express = require('express');
+//var gpio = require('rpi-gpio');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
+var i18n = require('i18n');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+var mysql = require('mysql');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+//Uses the db.js file
+var db = require('./db');
+
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+//New pages goes here
+var home = require('./router/home');
+var about = require('./router/about');
+var products = require('./router/products');
+var security = require('./router/security');
+var users = require('./router/users');
+
+app.use('/home', home);
+app.use('/about', about);
+app.use('/products', products);
+app.use('/security', security);
+app.use('/users', users);
+
+
+// CONFIGURE HANDLEBARS
+var hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: '.hbs',
+
+    layoutsDir: __dirname + '/views/layouts/',
+    partialsDir: __dirname + '/views/partials/',
+});
+
+
+// Views folder and engine
+app.set('views', __dirname + '/views/');
 app.set('view engine', 'hbs');
+app.engine('hbs', hbs.engine);
+
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+
+//INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
+i18n.configure({
+    locales: ['no', 'en'],
+    fallbacks:{'no': 'en'},
+    cookie: 'locale',
+    defaultLocale: 'no',
+    directoryPermissions: '755',
+    directory: __dirname + "/locales",
+    autoReload: false,
+    updateFiles: false, //Do not set this to true. It will replace the .json files.
+    syncFiles: true,
+    queryParameter: 'lang',
+});
+
+// register hbs helpers in res.locals' context which provides this.locale
+hbs.handlebars.registerHelper('__', function () {
+    return i18n.__.apply(this, arguments);
+});
+hbs.handlebars.registerHelper('__n', function () {
+    return i18n.__n.apply(this, arguments);
+});
+//INTERNATIONALIZATION ENDS HERE.
+
+
+// ******** LOG IN ********
+
+//LOGINGREIER EXPRESS SESSIONS
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+//Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Express Validator
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value){
+        var namespace = param.split('.')
+            , root = namespace.shift()
+            , formParam = root;
+
+        while (namespace.length){
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return{
+            param: formParam,
+            msg : msg,
+            value : value
+        };
+    }
+}));
+
+//Connect flash
+app.use(flash());
+
+//Global vars
+app.use(function(req, res, next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash ('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+// ******** END LOG IN ********
+
+
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// error handlers
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
+
 
 module.exports = app;

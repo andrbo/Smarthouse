@@ -1,0 +1,14 @@
+{
+    "Menu-Home": "Home",
+    "Menu-About": "About us",
+    "Menu-Security": "Security",
+    "Menu-Products":"Products",
+
+    "Login-Username": "E-mail",
+    "Login-Button": "Login",
+    "Login-Password": "Password",
+
+    "User-Settings":"Settings",
+    "User-Profile": "Profile",
+    "User-Logout":"Logout"
+}

@@ -6,12 +6,24 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "body-parser": "~1.16.0",
+    "bcryptjs": "*",
+    "body-parser": "^1.15.2",
+    "connect-flash": "*",
     "cookie-parser": "~1.4.3",
-    "debug": "~2.6.0",
-    "express": "~4.14.1",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
     "hbs": "~4.0.1",
+    "i18n": "^0.8.3",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2"
+    "mysql": "^2.5.4",
+    "nodemon": "^1.11.0",
+    "passport": "*",
+    "passport-local": "*",
+    "serve-favicon": "~2.3.0"
+    "bcrypt": "*"
   }
 }
