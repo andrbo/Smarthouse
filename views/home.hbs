@@ -1,19 +1,20 @@
 <script src="http://code.jquery.com/jquery-2.0.0.min.js">
 
     function ledOn(){
-        $.ajax({
-            url: "/home/ledOn"
-        });
+        $.get("/home/ledOn");
     }
 
-    function ledOff(){
-        $.ajax({
-            url: "/home/ledOff"
-        });
+    function ledOff() {
+        $.get("/home/ledOff");
     }
 
 </script>
 
-<button onclick="ledOn()">ON</button>
+<button id="on">ON</button>
 <button onclick="ledOff()">OFF</button>
 
+<script>
+    $.ready(function(){
+        $("#on").click(ledOn());
+    });
+</script>
