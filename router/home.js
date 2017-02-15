@@ -31,8 +31,6 @@ router.get('/ledOn', function(req,res,next){
             console.log('led turned on');
         });
     }
-
-    res.send(write());
 });
 
 router.get('/ledOff', function(req,res,next){
