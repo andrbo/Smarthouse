@@ -1,21 +1,12 @@
-<script src="http://code.jquery.com/jquery-2.0.0.min.js">
-
-
-    function ledOff() {
-        $.get("/home/ledOff");
-    }
-
-</script>
-
 <button id="on">ON</button>
 <button onclick="ledOff()">OFF</button>
 
-<script>
+<script src="http://code.jquery.com/jquery-2.0.0.min.js">
     $(document).ready(function(){
         var ledOn = function(){
             console.log("click nigga");
-            $.get("/home/ledOn");
-        }
+            $.get("home/ledOn");
+        };
         $("#on").click(ledOn);
     });
 </script>

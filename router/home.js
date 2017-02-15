@@ -14,7 +14,7 @@ router.get('/ledOn', function(req,res,next){
 
     function write() {
         gpio.write(15, true, function (err) {
-            //if (err) throw err;
+            if (err) throw err;
             console.log('led turned on');
         });
     }
