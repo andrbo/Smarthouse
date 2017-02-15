@@ -1,0 +1,15 @@
+{
+
+	"Menu-Home": "Home",
+	"Menu-About": "Om oss",
+	"Menu-Security": "Sikkerhet",
+	"Menu-Products":"Produkter",
+
+	"Login-Username": "E-mail",
+	"Login-Button": "Logg inn",
+	"Login-Password": "Passord",
+
+	"User-Settings":"Innstillinger",
+	"User-Profile": "Profil",
+	"User-Logout":"Logg ut"
+}
