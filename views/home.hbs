@@ -4,17 +4,17 @@
 <button id="lightOff" value="off">OFF</button>
 
 <script>
-        function ledToggle(button){
+        /*function ledToggle(button){
             $.ajax({
                 url: "home/ledToggle",
                 type: "GET",
-                data: {button:button},
-                success: function(data){
-                    alert("success");
-                    alert(data);
-                }
+                data: {button:button}
             })
-        }
+        }*/
+
+        var ledToggle = function(button){
+            $.get("home/ledToggle", {button:button});
+        };
 
         $("#lightOn").click(ledToggle("on"));
         $("#lightOff").click(ledToggle("off"));
