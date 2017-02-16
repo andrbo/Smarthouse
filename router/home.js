@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 gpio.setup(15, gpio.DIR_OUT, write);
+write();
 
 router.get('/ledOn', function(req,res,next){
 
