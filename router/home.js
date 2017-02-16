@@ -23,12 +23,13 @@ router.get('/ledToggle', function(res, req, next){
     var ledOn = false;
     var input = req.body.button;
 
-    if(input === "on"){
+    if(input == "on"){
 
-        console.log("Inne i if");
+        console.log("Inne i if-on");
 
         ledOn = true;
     }else{
+        console.log("Inne i if-off");
         ledOn = false;
     }
 
