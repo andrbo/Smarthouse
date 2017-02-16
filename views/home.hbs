@@ -1,13 +1,14 @@
 <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 
-<button id="lightOn" name="button" value="on">ON</button>
-<button id="lightOff" name="button" value="off">OFF</button>
+<button id="lightOn" value="on">ON</button>
+<button id="lightOff" value="off">OFF</button>
 
 <script>
-        function ledToggle(){
+        function ledToggle(button){
             $.ajax({
                 url: "home/ledToggle",
-                type: "GET"
+                type: "GET",
+                data: {button:button}
             })
         }
 
@@ -15,7 +16,7 @@
             $.get("home/ledOff");
         };*/
 
-        $("#lightOn").click(ledToggle);
-        $("#lightOff").click(ledToggle);
+        $("#lightOn").click(ledToggle("on"));
+        $("#lightOff").click(ledToggle("off"));
 
 </script>
