@@ -22,15 +22,13 @@ router.get('/ledOn', function(req,res,next){
 });
 
 router.get('/ledOff', function(req,res,next){
-    on = false;
+    function write() {
+        gpio.write(15, false, function (err) {
+            if (err) throw err;
+            console.log('led turned off');
+        });
+    }
 });
-
-function write() {
-    gpio.write(15, false, function (err) {
-        if (err) throw err;
-        console.log('led turned off');
-    });
-}
 
 
 module.exports = router
