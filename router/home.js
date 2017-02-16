@@ -21,7 +21,7 @@ router.get('/ledOn', function(req,res,next){
 });
 
 router.get('/ledOff', function(req,res,next){
-    gpio.destroy(15);
+    gpio.destroy();
 });
 
 
