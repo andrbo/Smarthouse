@@ -4,13 +4,13 @@
 <button id="lightOff" name="button" value="off">OFF</button>
 
 <script>
-    
+
 
         function ledToggle(){
             $.ajax({
                 url: "home/ledToggle",
                 type: "GET",
-                data: "name"
+                data: "button"
             })
         }
 
