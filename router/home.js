@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/ledToggle', function(res, req, next){
-    console.log(req);
+    console.log(req.query);
     gpio.setup(15, gpio.DIR_OUT, write);
 
     console.log("Før if");
