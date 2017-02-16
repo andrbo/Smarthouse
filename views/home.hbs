@@ -12,11 +12,17 @@
             })
         }*/
 
+
         var ledToggle = function(button){
             $.get("home/ledToggle", {button:button});
         };
+        
 
-        $("#lightOn").click(ledToggle("on"));
-        $("#lightOff").click(ledToggle("off"));
+        $("#lightOn").click(function() {
+            ledToggle("on");
+        });
+        $("#lightOff").click(function(){
+            ledToggle("off");
+        });
 
 </script>
