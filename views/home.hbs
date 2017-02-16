@@ -5,7 +5,7 @@
 
 <script>
     $(document).ready(function(){
-        var ledToggle = function(){
+        function ledToggle(){
             $.get("home/ledToggle");
         };
 
@@ -13,7 +13,7 @@
             $.get("home/ledOff");
         };*/
 
-        $("#lightOn").click(ledtoggle);
-        $("#lightOff").click(ledToggle);
+        $("#lightOn").click(ledtoggle());
+        $("#lightOff").click(ledToggle());
     });
 </script>
