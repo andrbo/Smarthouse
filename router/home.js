@@ -8,11 +8,14 @@ router.get('/', function(req, res, next) {
     res.render('home');
 });
 
+gpio.setup(15, gpio.DIR_OUT, write);
 
-router.get('/ledOn', function(req,res,next){
+function write(){
+    led();
+}
 
-    gpio.setup(15, gpio.DIR_OUT, write);
-    function write() {
+router.get('/ledOn', function(){
+    function led() {
         gpio.write(15, true, function (err) {
             if (err) throw err;
             console.log('led turned on');
@@ -20,9 +23,14 @@ router.get('/ledOn', function(req,res,next){
     }
 });
 
-router.get('/ledOff', function(req,res,next){
-    gpio.destroy();
+router.get('/ledOff', function(){
+    function led() {
+        gpio.write(15, false, function (err) {
+            if (err) throw err;
+            console.log('led turned off');
+        });
+    }
 });
 
 
-module.exports = router
+module.exports = router;
