@@ -20,7 +20,7 @@ router.get('/ledToggle', function(res, req, next){
     console.log("Før if");
 
     var ledOn = false;
-    var input = JSON.stringify(req.body);
+    var input = JSON.stringify(req.body.button);
     console.log(input);
 
     if(input == "on"){
@@ -44,7 +44,7 @@ router.get('/ledToggle', function(res, req, next){
             console.log('led turned off');
 
             //RESET PIN
-            gpio.reset();
+            gpio.destroy();
         });
     }
 });
