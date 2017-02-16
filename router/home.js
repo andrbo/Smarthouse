@@ -17,13 +17,12 @@ router.get('/ledOn', function(res, req, next){
 
     console.log("Kommer hiy");
     var ledOn = false;
-    if(req.body.buttonOn){
+    if(res.body.buttonOn){
         ledOn = true;
     }else{
         ledOn = false;
     }
-
-
+    
     gpio.setup(15, gpio.DIR_OUT, write);
     function write() {
         gpio.write(15, ledOn, function (err) {
