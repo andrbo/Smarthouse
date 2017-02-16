@@ -21,7 +21,7 @@ router.get('/ledToggle', function(res, req, next){
     console.log("Før if");
 
     var ledOn = false;
-    var input = req.query.button;
+    var input = JSON.parse(req.query.button);
 
     if(input == "on"){
 
