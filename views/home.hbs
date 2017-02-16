@@ -8,7 +8,11 @@
             $.ajax({
                 url: "home/ledToggle",
                 type: "GET",
-                data: {button:button}
+                data: {button:button},
+                success: function(data){
+                    alert("success");
+                    alert(data);
+                }
             })
         }
 
