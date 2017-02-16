@@ -2,7 +2,8 @@ var express = require('express');
 var gpio = require('rpi-gpio');
 var bodyParser = require('body-parser');
 var app = express();
-app.use(bodyParser);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 var router = express.Router();
 
@@ -15,16 +16,26 @@ router.get('/', function(req, res, next) {
 
 router.get('/ledOn', function(res, req, next){
 
-    console.log("Kommer hiy");
+    console.log("Før if");
+
     var ledOn = false;
-    if(res.body.buttonOn){
+    if(req.body.buttonOn){
+
+        console.log("Inne i if");
+
         ledOn = true;
     }else{
         ledOn = false;
     }
-    
+
     gpio.setup(15, gpio.DIR_OUT, write);
+
+    console.log("Setter opp pin");
+
     function write() {
+
+        console.log("kjører write");
+
         gpio.write(15, ledOn, function (err) {
             if (err) throw err;
             console.log('led turned off');
