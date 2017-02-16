@@ -21,7 +21,7 @@ router.get('/ledToggle', function(res, req, next){
     console.log("Før if");
 
     var ledOn = false;
-    var input = JSON.stringify(req.body.button);
+    var input = req.body.button;
     console.log(req);
 
     if(input == "on"){
@@ -47,14 +47,5 @@ router.get('/ledToggle', function(res, req, next){
     }
 });
 
-/*router.get('/ledOff', function(){
-    function write() {
-        gpio.write(15, false, function (err) {
-            if (err) throw err;
-            console.log('led turned off');
-        });
-    }
-});
-*/
 
 module.exports = router;
