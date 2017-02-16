@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/ledOn', function(res, req, next){
 
+    console.log("Kommer hiy");
     var ledOn = false;
     if(req.body.buttonOn){
         ledOn = true;
