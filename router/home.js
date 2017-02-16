@@ -19,7 +19,7 @@ router.get('/ledOn', function(res, req, next){
     console.log("Før if");
 
     var ledOn = false;
-    if(req.body.buttonOn){
+    if(req.body.buttonOn.onclick){
 
         console.log("Inne i if");
 
