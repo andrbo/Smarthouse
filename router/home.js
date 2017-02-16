@@ -15,13 +15,13 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/ledToggle', function(res, req, next){
-    console.log(req.query);
+    console.log(req.query.button);
     gpio.setup(15, gpio.DIR_OUT, write);
 
     console.log("Før if");
 
     var ledOn = false;
-    var input = JSON.parse(req.query.button);
+    var input = JSON.stringify(req.query.button);
 
     if(input == "on"){
 
