@@ -1,7 +1,7 @@
 <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 
-<button id="lightOn">ON</button>
-<button id="lightOff">OFF</button>
+<button id="lightOn" name="buttonOn">ON</button>
+<button id="lightOff" name="buttonOff">OFF</button>
 
 <script>
     $(document).ready(function(){
@@ -9,11 +9,11 @@
             $.get("home/ledOn");
         };
 
-        var ledOff = function(){
+        /*var ledOff = function(){
             $.get("home/ledOff");
-        };
+        };*/
 
         $("#lightOn").click(ledOn);
-        $("#lightOff").click(ledOff);
+        //$("#lightOff").click(ledOff);
     });
 </script>
