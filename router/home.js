@@ -21,6 +21,7 @@ router.get('/ledOn', function(res, req, next){
 
     var ledOn = false;
     var input = req.body.button;
+
     if(input == "on"){
 
         console.log("Inne i if");
