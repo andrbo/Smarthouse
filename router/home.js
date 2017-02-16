@@ -10,10 +10,10 @@ router.get('/', function(req, res, next) {
 
 
 
-gpio.setup(15, gpio.DIR_OUT, write);
+gpio.setup(15, gpio.DIR_OUT, skriv);
 
 var on = false;
-function write() {
+var skriv = function(){
     gpio.write(15, on, function (err) {
         if (err) throw err;
         console.log('led turned off');
@@ -22,10 +22,12 @@ function write() {
 
 
 router.get('/ledOn', function(req,res,next){
+    skriv;
     on = true;
 });
 
 router.get('/ledOff', function(req,res,next){
+    skriv;
     on = false;
 });
 
