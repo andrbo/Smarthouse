@@ -26,13 +26,14 @@ var products = require('./router/products');
 var security = require('./router/security');
 var users = require('./router/users');
 
-var ledToggle = require('./router/home');
-
 app.use('/home', home);
 app.use('/about', about);
 app.use('/products', products);
 app.use('/security', security);
 app.use('/users', users);
+
+
+app.use('/home/ledToggle', home);
 
 
 // CONFIGURE HANDLEBARS
