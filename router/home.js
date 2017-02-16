@@ -42,6 +42,9 @@ router.get('/ledToggle', function(res, req, next){
         gpio.write(15, ledOn, function (err) {
             if (err) throw err;
             console.log('led turned off');
+
+            //RESET PIN
+            gpio.reset();
         });
     }
 });
