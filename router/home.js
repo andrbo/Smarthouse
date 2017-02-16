@@ -19,14 +19,15 @@ router.get('/ledOn', function(res, req, next){
     console.log("Før if");
 
     var ledOn = false;
-    /*if(req.body.buttonOn.onclick === true){
+    var input = req.body;
+    if(input == "buttonOn"){
 
         console.log("Inne i if");
 
         ledOn = true;
     }else{
         ledOn = false;
-    }*/
+    }
 
     gpio.setup(15, gpio.DIR_OUT, write);
 
