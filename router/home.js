@@ -1,8 +1,9 @@
 var express = require('express');
 var gpio = require('rpi-gpio');
-//var bodyParser = require('body-parser');
-var app = express.createServer();
-app.use(express.bodyParser());
+var bodyParser = require('body-parser');
+var app = express();
+app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({extended: true}));
 
 var router = express.Router();
 
