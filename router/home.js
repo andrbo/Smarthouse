@@ -15,12 +15,13 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/ledOn', function(res, req, next){
+    gpio.setup(15, gpio.DIR_OUT, write);
 
     console.log("Før if");
 
     var ledOn = false;
-    var input = req.body;
-    if(input == "buttonOn"){
+    var input = req.body.button;
+    if(input == "on"){
 
         console.log("Inne i if");
 
@@ -28,8 +29,6 @@ router.get('/ledOn', function(res, req, next){
     }else{
         ledOn = false;
     }
-
-    gpio.setup(15, gpio.DIR_OUT, write);
 
     console.log("Setter opp pin");
 
