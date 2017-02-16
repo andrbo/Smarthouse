@@ -9,24 +9,24 @@ router.get('/', function(req, res, next) {
 });
 
 
+
+gpio.setup(15, gpio.DIR_OUT, write);
+
+var on = false;
+function write() {
+    gpio.write(15, on, function (err) {
+        if (err) throw err;
+        console.log('led turned off');
+    });
+}
+
+
 router.get('/ledOn', function(req,res,next){
-    gpio.setup(15, gpio.DIR_OUT, write);
-    function write() {
-        gpio.write(15, true, function (err) {
-            if (err) throw err;
-            console.log('led turned on');
-        });
-    }
+    on = true;
 });
 
 router.get('/ledOff', function(req,res,next){
-    gpio.setup(15, gpio.DIR_OUT, write);
-    function write() {
-        gpio.write(15, false, function (err) {
-            if (err) throw err;
-            console.log('led turned off');
-        });
-    }
+    on = false;
 });
 
 
