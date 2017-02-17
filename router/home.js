@@ -14,37 +14,19 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/ledToggle', function(res, req, next){
+router.get('/ledToggle', function(req, res, next){
     gpio.setup(15, gpio.DIR_OUT, write);
-    console.log(req.param);
-
-    console.log("Før if");
-
     var ledOn = false;
-    var input = req.param.button;
+    var input = req.query.button;
 
     if(input == "on"){
-
-        console.log("Inne i if-on");
-
         ledOn = true;
     }else{
-        console.log("Inne i if-off");
         ledOn = false;
     }
-
-    console.log("Setter opp pin");
-
     function write() {
-
-        console.log("kjører write");
-
         gpio.write(15, ledOn, function (err) {
             if (err) throw err;
-            console.log('led turned off');
-
-            //RESET PIN
-            gpio.destroy();
         });
     }
 });
