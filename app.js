@@ -161,5 +161,37 @@ app.use(function (err, req, res, next) {
     });
 });
 
+// Test temperature reading using socket.io
+// Needed node package modules
+var io = require('socket.io').listen(3001);
+var ds = require('ds18b20');
+
+var interval = 3000; // Tiden (i ms) mellom hver spørring for avlesning av sensor
+
+
+//when a client connects
+io.sockets.on('connection', function (socket) {
+
+    var sensorId = [];
+    //fetch array containing each ds18b20 sensor's ID
+    ds18b20.sensors(function (err, id) {
+        sensorId = id;
+        socket.emit('sensors', id); //send sensor ID's to clients
+    });
+    //initiate interval timer
+    setInterval(function () {
+        //loop through each sensor id
+        sensorId.forEach(function (id) {
+
+            ds18b20.temperature(id, function (err, value) {
+
+                //send temperature reading out to connected clients
+                socket.emit('temps', {'id': id, 'value': value});
+
+            });
+        });
+
+    }, interval);
+});
 
 module.exports = app;
