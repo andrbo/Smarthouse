@@ -1,5 +1,3 @@
-var express = require('express');
-var gpio = require('rpi-gpio');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
@@ -14,19 +12,37 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/ledToggle', function(req, res, next){
+router.get('/ledToggle', function(res, req, next){
     gpio.setup(15, gpio.DIR_OUT, write);
+    console.log(req);
+
+    console.log("FOr if");
+
     var ledOn = false;
     var input = req.query.button;
 
-    if(input == "on"){
+    if(input == 'on'){
+
+        console.log("Inne i if-on");
+
         ledOn = true;
     }else{
+        console.log("Inne i if-off");
         ledOn = false;
     }
+
+    console.log("Setter opp pin");
+
     function write() {
+
+        console.log("kjOrer write");
+
         gpio.write(15, ledOn, function (err) {
             if (err) throw err;
+            console.log('led turned off');
+
+            //RESET PIN
+            gpio.destroy();
         });
     }
 });
