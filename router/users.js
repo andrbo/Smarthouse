@@ -7,12 +7,31 @@ var dbModel = require('../models/User');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
+var session = require('express-session');
+var passport = require ('passport');
+var localStrategy = require('passport-local');
+
 
 router.use(expressValidator());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(flash());
 
+router.use(session({
+    maxAge: 60000,
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
 
+router.use(function(req, res, next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash ('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 /* Registerview */
 router.get('/register', function(req, res, next) {
@@ -43,11 +62,10 @@ router.post('/register', function (req, res) {
             errors: errors
         });
     }else{
-    console.log(name, email, username, password);
-    dbModel.createUser(username, password, email, name), function (data) {
-        res.redirect('/home');
-        };
-    //req.flash('success_msg', 'Du er nå registrert');
+        dbModel.createUser(username, password, email, name);
+
+    req.flash('success_msg', 'Du er nå registrert');
+    res.redirect('/users/login');
     }
 });
 
@@ -56,6 +74,41 @@ router.post('/register', function (req, res) {
 router.get('/login', function (req, res, next) {
     res.render('login');
 });
+
+router.post('/login', function(req, res){
+    var username = req.body.username;
+    var pword = req.body.password;
+
+    console.log(username, pword);
+
+    var dbUname = dbModel.getUser(username);
+
+    console.log(dbUname);
+
+
+}),
+
+    /*
+    passport.authenticate('local',{
+        successRedirect: '/',
+        failureRedirect: '/users/login',
+        failureFlash: true }),
+        function(req, res){
+            res.redirect('/');
+        };
+
+     passport.serializeUser(function(user, done) {
+     done(null, user.id);
+     });
+
+     // used to deserialize the user
+     passport.deserializeUser(function(id, done) {
+     connection.query("select * from users where id = "+id,function(err,rows){
+     done(err, rows[0]);
+     });
+     });
+
+*/
 
 
 module.exports = router;
