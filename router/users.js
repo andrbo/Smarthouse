@@ -80,9 +80,8 @@ router.post('/login', function(req, res){
     var pword = req.body.password;
 
     console.log(username, pword);
-
-
-}),
+    dbUname = dbModel.getUser(username);
+});
 
     /*
     passport.authenticate('local',{

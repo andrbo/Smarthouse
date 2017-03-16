@@ -22,6 +22,7 @@ exports.getUser = function(username, password) {
     values = [username, password];
     db.query('SELECT * FROM users WHERE username = ? AND password = ?', values, function (err, rows) {
         if (err) return done(err);
+        console.log(rows);
     })
 }
 
