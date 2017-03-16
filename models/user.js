@@ -4,7 +4,7 @@
 var bcrypt = require('bcryptjs');
 var db = require('../db');
 
-exports.createUser = function (username, password, email, name) {
+/*exports.createUser = function (username, password, email, name) {
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(password, salt, function (err, hash) {
             password=hash;
@@ -14,8 +14,14 @@ exports.createUser = function (username, password, email, name) {
             });
         })
     })
-};
+};*/
 
+exports.createUser = function (username, password, email, firstname, surname) {
+    var values = [username, password, email, firstname, surname];
+    db.query('INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)', values, function (err, results) {
+        if(err) return done (err);
+    });
+};
 
 
 exports.getUser = function(username, password) {

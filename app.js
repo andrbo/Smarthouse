@@ -16,9 +16,11 @@ var localStrategy = require('passport-local');
 
 //Uses the db.js file
 var db = require('./db');
-
-
 var app = express();
+
+app.get('/', function (req, res) {
+    res.render('home');
+});
 
 //New pages goes here
 var home = require('./router/home');
@@ -33,7 +35,7 @@ app.use('/products', products);
 app.use('/security', security);
 app.use('/users', users);
 
-
+app.use('/users/register', home);
 app.use('/home/ledToggle', home);
 
 
@@ -44,7 +46,7 @@ var hbs = exphbs.create({
     extname: '.hbs',
 
     layoutsDir: __dirname + '/views/layouts/',
-    partialsDir: __dirname + '/views/partials/',
+    partialsDir: __dirname + '/views/partials/'
 });
 
 
@@ -74,7 +76,7 @@ i18n.configure({
     autoReload: false,
     updateFiles: false, //Do not set this to true. It will replace the .json files.
     syncFiles: true,
-    queryParameter: 'lang',
+    queryParameter: 'lang'
 });
 
 // register hbs helpers in res.locals' context which provides this.locale

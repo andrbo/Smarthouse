@@ -10,5 +10,20 @@
 
 	"User-Settings":"Innstillinger",
 	"User-Profile": "Profil",
-	"User-Logout":"Logg ut"
+	"User-Logout":"Logg ut",
+
+	"Register-Firstname": "Fornavn",
+	"Register-Surname": "Etternavn",
+	"Register-Username": "Brukernavn",
+	"Register-Email": "Email",
+	"Register-Password": "Passord",
+	"Register-Confirm-Password": "Bekreft passord",
+	"Register-Button": "Registrer",
+
+	"Firstname-Required": "Fornavn er påkrevd",
+	"Surname-Required": "Etternavn er påkrevd",
+	"Email-Required": "Email er påkrevd",
+	"Email-Not-Valid": "Email er ikke gyldig",
+	"Password-Required": "Passord er påkrevd",
+	"Password-Not-Match": "Passordene er ikke like"
 }

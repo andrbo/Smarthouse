@@ -10,5 +10,21 @@
 
     "User-Settings":"Settings",
     "User-Profile": "Profile",
-    "User-Logout":"Logout"
+    "User-Logout":"Logout",
+
+    "Register-Firstname": "First name",
+    "Register-Surname": "Surname",
+    "Register-Username": "Username",
+    "Register-Email": "Email",
+    "Register-Password": "Password",
+    "Register-Confirm-Password": "Confirm password",
+    "Register-Button": "Register",
+
+    "Firstname-Required": "Firstname is required",
+    "Surname-Required": "Surname is required",
+    "Email-Required": "Email is required",
+    "Email-Not-Valid": "Email is not valid",
+    "Password-Required": "Password is required",
+    "Password-Not-Match": "Passwords need to match"
+
 }
