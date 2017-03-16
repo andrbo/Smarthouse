@@ -11,6 +11,8 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
+    "ds18b20": "^0.1.0",
+    "epoll": "^0.1.21",
     "express": "^4.14.1",
     "express-handlebars": "^3.0.0",
     "express-messages": "*",
@@ -22,6 +24,7 @@
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "rpi-gpio": "^0.7.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.7.3"
   }
 }
