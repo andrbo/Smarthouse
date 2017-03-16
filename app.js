@@ -12,6 +12,7 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var mysql = require('mysql');
+var localStrategy = require('passport-local');
 
 //Uses the db.js file
 var db = require('./db');
@@ -34,6 +35,7 @@ app.use('/users', users);
 
 
 app.use('/home/ledToggle', home);
+
 
 
 // CONFIGURE HANDLEBARS
