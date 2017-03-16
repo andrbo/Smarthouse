@@ -81,10 +81,6 @@ router.post('/login', function(req, res){
 
     console.log(username, pword);
 
-    var dbUname = dbModel.getUser(username);
-
-    console.log(dbUname);
-
 
 }),
 
