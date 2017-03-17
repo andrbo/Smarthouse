@@ -69,16 +69,9 @@ router.post('/login', function(req, res){
     var loginPassword = req.body.password;
 
 
-    app.use(session({
-        key: 'session_cookie_name',
-        secret: 'session_cookie_secret',
-        store: sessionStore,
-        resave: true,
-        saveUninitialized: true
-    }));
 
-    console.log(username, loginPassword);
-    dbUname = dbModel.getUser(username);
+    console.log(loginUsername, loginPassword);
+    dbUname = dbModel.getUser(loginUsername);
     res.render('home', {
         login:true,
         loginUsername: loginUsername
