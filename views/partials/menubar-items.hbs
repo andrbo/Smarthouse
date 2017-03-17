@@ -32,12 +32,14 @@
                     <a href="/security">{{__ "Menu-Security"}}</a>
                 </li>
             </ul>
+            {{#if login}}
+                {{> menubar-logged-in}}
+            {{/if}}
         </div>
     </div>
 </nav>
 
-{{> menubar-not-logged-in}}
-
+<!-- Menubar items hover -->
 <script type="text/javascript">
     $(document).ready(function() {
         $('a[href="' + location.pathname + '"]').closest('li').addClass('active');

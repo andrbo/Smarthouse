@@ -16,17 +16,20 @@ var db = require('../db');
     })
 };*/
 
-exports.createUser = function (username, password, email, firstname, surname) {
-    var values = [username, password, email, firstname, surname];
-    db.query('INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)', values, function (err, results) {
+exports.createUser = function (password, email, firstname, surname) {
+    var values = [password, email, firstname, surname];
+    if(exists(email)){
+        console.log("Mail finnes fra før.");
+    }
+    db.query('INSERT INTO users (password, email, firstname, surname) VALUES (?, ?, ?, ?)', values, function (err, results) {
         if(err) return done (err);
     });
 };
 
 
-exports.getUser = function(username, password) {
-    values = [username, password];
-    db.query('SELECT * FROM users WHERE username = ? AND password = ?', values, function (err, rows) {
+exports.getUser = function(email, password) {
+    values = [email, password];
+    db.query('SELECT * FROM users WHERE email = ? AND password = ?', values, function (err, rows) {
         if (err) return done(err);
         console.log(rows);
     })
@@ -34,8 +37,16 @@ exports.getUser = function(username, password) {
 
 exports.getPassword = function(password){
     var values =[password];
-    db.query('SELECT username FROM users WHERE username = ? ', values, function(err, results){
+    db.query('SELECT email FROM users WHERE email = ? ', values, function(err, results){
         if(err) return done(err);
     });
 }
 
+
+//TODO: opprett en exist-funksjon.
+/*var exists = function(email){
+    db.query('SELECT * FROM users WHERE email = ?', email, function (err, rows) {
+        if (err) return done(err);
+        console.log(rows);
+    })
+}*/

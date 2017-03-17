@@ -7,6 +7,7 @@
     "Login-Username": "E-mail",
     "Login-Button": "Login",
     "Login-Password": "Password",
+    "Login-Forgot-Password": "Forgot password?",
 
     "User-Settings":"Settings",
     "User-Profile": "Profile",
@@ -14,7 +15,7 @@
 
     "Register-Firstname": "First name",
     "Register-Surname": "Surname",
-    "Register-Username": "Username",
+    "Register-Verification": "Verification code",
     "Register-Email": "Email",
     "Register-Password": "Password",
     "Register-Confirm-Password": "Confirm password",

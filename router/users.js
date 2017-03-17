@@ -33,18 +33,12 @@ router.use(function(req, res, next){
 router.use(passport.initialize());
 router.use(passport.session());
 
-/* Registerview */
-router.get('/register', function(req, res, next) {
-    res.render('register');
-});
-
 /* Registrer ny bruker*/
 router.post('/register', function (req, res) {
 
     var firstname = req.body.firstname;
     var surname = req.body.surname;
     var email = req.body.email;
-    var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
 
@@ -52,7 +46,6 @@ router.post('/register', function (req, res) {
     req.checkBody('surname', 'he').notEmpty();
     req.checkBody('email', 'he').notEmpty();
     req.checkBody('email', 'he').isEmail();
-    req.checkBody('username', 'he').notEmpty();
     req.checkBody('password', 'he').notEmpty();
     req.checkBody('password2', 'he').equals(password);
 
@@ -60,28 +53,36 @@ router.post('/register', function (req, res) {
 
     if(errors){
         console.log(errors);
-        res.render('/home', {
-            errors: errors
-        });
+        req.flash('errors', errors);
+        //res.redirect('/register');
+
     }else{
-        dbModel.createUser(username, password, email, firstname, surname);
-    req.flash('success_msg', 'Du er nå registrert');
-    res.redirect('/users/register');
+        dbModel.createUser(password, email, firstname, surname);
+        req.flash('success_msg', 'Du er nå registrert');
+        res.redirect('/users/register');
     }
 });
 
 
-/*Login*/
-router.get('/login', function (req, res, next) {
-    res.render('login');
-});
-
 router.post('/login', function(req, res){
-    var username = req.body.username;
-    var pword = req.body.password;
+    var loginUsername = req.body.email;
+    var loginPassword = req.body.password;
 
-    console.log(username, pword);
+
+    app.use(session({
+        key: 'session_cookie_name',
+        secret: 'session_cookie_secret',
+        store: sessionStore,
+        resave: true,
+        saveUninitialized: true
+    }));
+
+    console.log(username, loginPassword);
     dbUname = dbModel.getUser(username);
+    res.render('home', {
+        login:true,
+        loginUsername: loginUsername
+    });
 });
 
 module.exports = router;

@@ -10,6 +10,7 @@ var i18n = require('i18n');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
+var redisStore = require('connect-redis')(session);
 var passport = require('passport');
 var mysql = require('mysql');
 var localStrategy = require('passport-local');
@@ -34,10 +35,7 @@ app.use('/about', about);
 app.use('/products', products);
 app.use('/security', security);
 app.use('/users', users);
-
-app.use('/users/register', home);
-app.use('/home/ledToggle', home);
-
+app.use('/users/register', users);
 
 
 // CONFIGURE HANDLEBARS

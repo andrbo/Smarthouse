@@ -7,6 +7,7 @@
 	"Login-Username": "E-mail",
 	"Login-Button": "Logg inn",
 	"Login-Password": "Passord",
+	"Login-Forgot-Password": "Glemt passordet?",
 
 	"User-Settings":"Innstillinger",
 	"User-Profile": "Profil",
@@ -14,7 +15,7 @@
 
 	"Register-Firstname": "Fornavn",
 	"Register-Surname": "Etternavn",
-	"Register-Username": "Brukernavn",
+	"Register-Verification": "Verifikasjonskode",
 	"Register-Email": "Email",
 	"Register-Password": "Passord",
 	"Register-Confirm-Password": "Bekreft passord",
