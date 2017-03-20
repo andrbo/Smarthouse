@@ -11,7 +11,6 @@ var session = require('express-session');
 var passport = require ('passport');
 var localStrategy = require('passport-local');
 
-
 router.use(expressValidator());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(flash());
@@ -19,9 +18,11 @@ router.use(flash());
 router.use(session({
     maxAge: 60000,
     secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+    saveUninitialized: false,
+    resave: false
 }));
+
+
 
 router.use(function(req, res, next){
     res.locals.success_msg = req.flash('success_msg');
@@ -68,14 +69,25 @@ router.post('/login', function(req, res){
     var loginUsername = req.body.email;
     var loginPassword = req.body.password;
 
+    function test(){
+        dbModel.getUser(loginUsername, loginPassword, function(err, results){
+            if(err) throw err;
 
+            if(results == ''){
+                console.log("Finens ikke");
+                res.redirect('login');
+            }else{
+                console.log("Finnes");
 
-    console.log(loginUsername, loginPassword);
-    dbUname = dbModel.getUser(loginUsername);
-    res.render('home', {
-        login:true,
-        loginUsername: loginUsername
-    });
+                res.render('home', {
+                    login:true,
+                    loginUsername: loginUsername
+                });
+            }
+        });
+    };
+
+    test();
 });
 
 module.exports = router;

@@ -6,19 +6,19 @@
 var mysql = require('mysql');
 
 //DATABASE CONNECTION STARTS HERE
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
     host: 'mysql.stud.iie.ntnu.no',
     user: 'markuma',
     password: 'lflVg4Nc',
     database: 'markuma'
 });
 
-connection.connect(function (err){
-    if(err) throw err
+pool.getConnection(function (err){
+    if(err) throw err;
     console.log('connected to database from db.js');
 });
 
 
-module.exports = connection;
-exports.connection = connection;
+module.exports = pool;
+exports.connection = pool;
 //DATABASE CONNECTION ENDS HERE
