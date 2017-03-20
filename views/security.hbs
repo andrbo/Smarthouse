@@ -1,41 +1,130 @@
 <!-- include bootstrap, jquery for easy div manipulation -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="node_modules/socket.io-client/dist/socket.io.min.js"></script>
-<script>
-    var socket = io.connect('http://192.168.1.10:3001');  //enter the IP of your beaglebone and port you are using in app.js
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 
-    socket.on('sensors', function (data) { //append sensors to table
-        data.forEach(function (d) {
-            var html = '<tr><td>' + d + '</td><td id="' + d + '"></td></tr>';
-            $('#temps').append(html);
+    <style type="text/css">
+        #webCam {
+            width: 100%;
+            max-width: 640px;
+            margin: 0px auto;
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        var socket = io();
+        function sendFunction() {
+            socket.emit('new message', $('#new-message').val());
+            $('#new-message').val('');
+        }
+        socket.on('chat message', function (msg) {
+            $('#messages-area').append($('<li>').text(msg));
         });
-    });
+        socket.on('serialEvent', function (data) {
+            // you're going to move the div in the HTML:
+            var temp = document.getElementById('temp');
+            temp.innerHTML = data.Temperature;
+            var humidity = document.getElementById('humid');
+            humidity.innerHTML = data.Humidity;
+            var laser = document.getElementById('laser');
+            laser.innerHTML = data.Laser;
+            var gas = document.getElementById('gas');
+            gas.innerHTML = data.Gas;
+            var flameValue = document.getElementById('flame');
+            flameValue.innerHTML = data.Flame;
+            var flameStatus = document.getElementById('flameStatus');
+            flameStatus.innerHTML = data.FlameStatus;
+            var vibration = document.getElementById('vibe');
+            vibration.innerHTML = data.VibeValue;
+            var vibeStatus = document.getElementById('vibeStatus');
+            vibeStatus.innerHTML = data.VibeStatus;
+            var irbar = document.getElementById('ir');
+            irbar.innerHTML = data.IRBarrierValue;
+            var irbarStatus = document.getElementById('irStatus');
+            irbarStatus.innerHTML = data.IRBarrierStatus;
+            var soilValue = document.getElementById('soil');
+            soilValue.innerHTML = data.SoilMoisture;
+            var soilStatus = document.getElementById('soilStatus');
+            soilStatus.innerHTML = data.SoilMoistureStatus;
+            var leakValue = document.getElementById('leak');
+            leakValue.innerHTML = data.LeakValue;
+            var leakStatus = document.getElementById('leakStatus');
+            leakStatus.innerHTML = data.LeakStatus;
+        });
 
-    //update corresponding row with sensor value
-    socket.on('temps', function (data) {
-        $('#' + data.id).html(data.value);
-    });
+        socket.on('videoStream', function (url) {
+            $('#webCam').attr('src', url);
+            $('.start').hide();
+        });
 
-</script>
+        socket.emit('start-stream');
+    </script>
 </head>
-<body>
-<h1>DS18B20 Temps</h1>
 
-<div class="container">
-    <table class="table" id="temps">
-        <thead>
-        <tr>
-            <th>Sensor ID</th>
-            <th>Temperature (celsius)</th>
-        </tr>
-        </thead>
-    </table>
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<table class="table" id="sensors">
+    <thead>
+    <tr>
+        <th>Sensor ID</th>
+        <th>Value</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td>Temperature</td>
+        <td id="temp"></td>
+        <td id="tempStatus"></td>
+    </tr>
+    <tr>
+        <td>Humidity</td>
+        <td id="humid"></td>
+        <td id="humidStatus"></td>
+    </tr>
+    <tr>
+        <td>Laser</td>
+        <td id="laser"></td>
+        <td id="laserStatus"></td>
+    </tr>
+    <tr>
+        <td>Gas</td>
+        <td id="gas"></td>
+        <td id="gasStatus"></td>
+    </tr>
+    <tr>
+        <td>Flame</td>
+        <td id="flame"></td>
+        <td id="flameStatus"></td>
+    </tr>
+    <tr>
+        <td>Vibration</td>
+        <td id="vibe"></td>
+        <td id="vibeStatus"></td>
+    </tr>
+    <tr>
+        <td>IR barrier</td>
+        <td id="ir"></td>
+        <td id="irStatus"></td>
+    </tr>
+    <tr>
+        <td>Soil Moisture</td>
+        <td id="soil"></td>
+        <td id="soilStatus"></td>
+    </tr>
+    <tr>
+        <td>Leak</td>
+        <td id="leak"></td>
+        <td id="leakStatus"></td>
+    </tr>
+    </thead>
+</table>
+
+<div class="row">
+    <img src="" id="webCam">
 </div>
-<p>Test</p>
-<video width="640" height="400" controls="controls" src="http://[192.168.1.20:8080">
-</video>
-</body>
-</html>
 
 

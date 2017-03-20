@@ -14,10 +14,24 @@ var session = require('express-session');
 var passport = require('passport');
 var mysql = require('mysql');
 var localStrategy = require('passport-local');
+//var v4l2camera = require("v4l2camera");
+
+// Serial communication with Arduino
+var serialport = require('serialport');// include the library
+var SerialPort = serialport; // make a local instance of it
+var arduinoPort = 'COM3';
+
+// Webcam used for live video, connected to usb port on raspberry pi
+var webcam = new v4l2camera.Camera("/dev/video0");
+webcam.start();
 
 //Uses the db.js file
 var db = require('./db');
 var app = express();
+
+// call socket.io to the app
+app.io = require('socket.io')();
+
 
 app.get('/', function (req, res) {
     res.render('home');
@@ -66,7 +80,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
 i18n.configure({
     locales: ['no', 'en'],
-    fallbacks:{'no': 'en'},
+    fallbacks: {'no': 'en'},
     cookie: 'locale',
     defaultLocale: 'no',
     directoryPermissions: '755',
@@ -102,18 +116,18 @@ app.use(passport.session());
 
 //Express Validator
 app.use(expressValidator({
-    errorFormatter: function(param, msg, value){
+    errorFormatter: function (param, msg, value) {
         var namespace = param.split('.')
             , root = namespace.shift()
             , formParam = root;
 
-        while (namespace.length){
+        while (namespace.length) {
             formParam += '[' + namespace.shift() + ']';
         }
-        return{
+        return {
             param: formParam,
-            msg : msg,
-            value : value
+            msg: msg,
+            value: value
         };
     }
 }));
@@ -122,14 +136,13 @@ app.use(expressValidator({
 app.use(flash());
 
 //Global vars
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash ('error_msg');
+    res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     next();
 });
 // ******** END LOG IN ********
-
 
 
 // catch 404 and forward to error handler
@@ -163,37 +176,74 @@ app.use(function (err, req, res, next) {
     });
 });
 
-// Test temperature reading using socket.io
-// Needed node package modules
-var io = require('socket.io').listen(3001);
-var ds = require('ds18b20');
+// Setting up serial communication port with Arduino
+var arduinoSerial = new SerialPort(arduinoPort, {
+    // look for return and newline at the end of each data packet:
+    parser: serialport.parsers.readline("\r\n")
+});
 
-var interval = 3000; // Tiden (i ms) mellom hver spørring for avlesning av sensor
-
-
-//when a client connects
-io.sockets.on('connection', function (socket) {
-
-    var sensorId = [];
-    //fetch array containing each ds18b20 sensor's ID
-    ds18b20.sensors(function (err, id) {
-        sensorId = id;
-        socket.emit('sensors', id); //send sensor ID's to clients
-    });
-    //initiate interval timer
-    setInterval(function () {
-        //loop through each sensor id
-        sensorId.forEach(function (id) {
-
-            ds18b20.temperature(id, function (err, value) {
-
-                //send temperature reading out to connected clients
-                socket.emit('temps', {'id': id, 'value': value});
-
-            });
+// Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
+function stopStreaming() {
+    if (Object.keys(sockets).length == 0) {
+        app.set('watchingFile', false);
+        if (proc) proc.kill();
+        fs.unwatchFile('./stream/image_stream.jpg');
+        cam.stop();
+    }
+}
+function startWebcamStream(io) {
+    if (app.get('watchingFile')) {
+        io.sockets.emit('liveStream', 'image_stream.jpg?_t=' + (Math.random() * 100000));
+        return;
+    }
+    Capture();
+    app.set('watchingFile', true);
+    console.log('Start watching......');
+}
+// Capture function 200 means 30fps
+function Capture(){
+    setInterval(function(){
+        cam.capture(function (success) {
+            var frame = cam.frameRaw();
+            app.io.emit('liveStream', "data:image/png;base64," + Buffer(frame).toString('base64'));
         });
+    }, 50);
+}
 
-    }, interval);
+// start listen with socket.io Muligens flyttes til .js for aktuelle views?
+
+var sockets = {}; // Variable used to define if videostream should bi stopped
+
+app.io.on('connection', function (socket) {
+    console.log('a user connected');
+    sockets[socket.id] = socket;
+    console.log("Total clients connected : ", Object.keys(sockets).length);
+
+    socket.on('disconnect', function () {
+        delete sockets[socket.id];
+
+        // no more sockets, kill the stream
+        if (Object.keys(sockets).length == 0) {
+            app.set('watchingFile', false);
+            fs.unwatchFile('./stream/image_stream.jpg');
+        }
+    });
+    // Serving sensor readings from Arduino as a JSON object
+    arduinoSerial.on('data', function (data) {
+        var serialData = JSON.parse(data);
+        console.log(data);
+        // send a serial event to the web client with the data:
+        socket.emit('serialEvent', serialData);
+    });
+
+    socket.on('new message', function (msg) {
+        console.log('new message: ' + msg);
+        app.io.emit('chat message', msg);
+    });
+
+    socket.on('streamCam', function() {
+        startWebcamStream(io);
+    });
 });
 
 module.exports = app;
