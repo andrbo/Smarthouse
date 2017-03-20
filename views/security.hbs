@@ -56,12 +56,12 @@
             leakStatus.innerHTML = data.LeakStatus;
         });
 
-        socket.on('videoStream', function (url) {
+        socket.on('streamCam', function (url) {
             $('#webCam').attr('src', url);
             $('.start').hide();
         });
 
-        socket.emit('start-stream');
+        socket.emit('streamCam');
     </script>
 </head>
 
