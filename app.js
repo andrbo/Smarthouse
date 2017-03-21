@@ -17,13 +17,13 @@ var localStrategy = require('passport-local');
 //var v4l2camera = require("v4l2camera");
 
 // Serial communication with Arduino
-var serialport = require('serialport');// include the library
-var SerialPort = serialport; // make a local instance of it
-var arduinoPort = 'COM3';
+//var serialport = require('serialport');// include the library
+//var SerialPort = serialport; // make a local instance of it
+//var arduinoPort = 'COM3';
 
 // Webcam used for live video, connected to usb port on raspberry pi
-var webcam = new v4l2camera.Camera("/dev/video0");
-webcam.start();
+//var webcam = new v4l2camera.Camera("/dev/video0");
+//webcam.start();
 
 //Uses the db.js file
 var db = require('./db');
@@ -177,10 +177,10 @@ app.use(function (err, req, res, next) {
 });
 
 // Setting up serial communication port with Arduino
-var arduinoSerial = new SerialPort(arduinoPort, {
+/*var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
-});
+});*/
 
 // Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
 function stopStreaming() {
@@ -214,7 +214,7 @@ function Capture(){
 
 var sockets = {}; // Variable used to define if videostream should bi stopped
 
-app.io.on('connection', function (socket) {
+/*app.io.on('connection', function (socket) {
     console.log('a user connected');
     sockets[socket.id] = socket;
     console.log("Total clients connected : ", Object.keys(sockets).length);
@@ -245,5 +245,5 @@ app.io.on('connection', function (socket) {
         startWebcamStream(io);
     });
 });
-
+*/
 module.exports = app;
