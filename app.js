@@ -10,7 +10,7 @@ var i18n = require('i18n');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
-//var redisStore = require('connect-redis')(session);
+
 var passport = require('passport');
 var mysql = require('mysql');
 var localStrategy = require('passport-local');
@@ -19,11 +19,13 @@ var v4l2camera = require("v4l2camera");
 // Serial communication with Arduino
 var serialport = require('serialport');// include the library
 var SerialPort = serialport; // make a local instance of it
-var arduinoPort = 'COM3';
+var arduinoPort = '/dev/ttyACM0';
 
- Webcam used for live video, connected to usb port on raspberry pi
+
+// Webcam used for live video, connected to usb port on raspberry pi
 var webcam = new v4l2camera.Camera("/dev/video0");
 webcam.start();
+
 
 //Uses the db.js file
 var db = require('./db');
@@ -214,10 +216,12 @@ function Capture(){
 
 var sockets = {}; // Variable used to define if videostream should bi stopped
 
+
 app.io.on('connection', function (socket) {
    console.log('a user connected');
    sockets[socket.id] = socket;
    console.log("Total clients connected : ", Object.keys(sockets).length);
+
 
    socket.on('disconnect', function () {
        delete sockets[socket.id];
