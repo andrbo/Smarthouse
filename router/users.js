@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var dbModel = require('../models/user');
+var dbModel = require('../models/User');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
@@ -69,14 +69,16 @@ router.post('/login', function(req, res){
     var loginUsername = req.body.email;
     var loginPassword = req.body.password;
 
-    function test(){
+    function validateUser(){
         dbModel.getUser(loginUsername, loginPassword, function(err, results){
             if(err) throw err;
 
             if(results == ''){
                 console.log("Finens ikke");
                 res.redirect('login');
+                console.log(results);
             }else{
+                console.log(results);
                 console.log("Finnes");
 
                 res.render('home', {
@@ -87,7 +89,7 @@ router.post('/login', function(req, res){
         });
     };
 
-    test();
+    validateUser();
 });
 
 module.exports = router;
