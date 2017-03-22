@@ -2,8 +2,47 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <style type="text/css">
+        body {
+            background: #525252;
+            color: #ffffff;
+        }
+
+        .glyphicon {
+            font-size: 50px;
+            opacity: 0.8;
+        }
+
+        .glyphicon:hover{
+            opacity: 1.0;
+        }
+
+        .glyphicon.glyphicon-fire {
+            color: #ff9900;
+
+        }
+
+        .glyphicon.glyphicon-tint {
+            color: #00B7FF;
+        }
+
+        .glyphicon.glyphicon-cloud {
+            color: #1CA347;
+        }
+
+        .glyphicon.glyphicon-asterisk {
+            color: red;
+        }
+        .glyphicon.glyphicon-minus {
+            color: red;
+        }
+        .glyphicon.glyphicon-warning-sign{
+            color: yellow;
+            font-size: 20px;
+        }
+
         #webCam {
             width: 100%;
             max-width: 640px;
@@ -14,52 +53,99 @@
     </style>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         var socket = io();
-        function sendFunction() {
-            socket.emit('new message', $('#new-message').val());
-            $('#new-message').val('');
-        }
-        socket.on('chat message', function (msg) {
-            $('#messages-area').append($('<li>').text(msg));
-        });
+
         socket.on('serialEvent', function (data) {
-            // you're going to move the div in the HTML:
-            var temp = document.getElementById('temp');
-            temp.innerHTML = data.Temperature;
-            var humidity = document.getElementById('humid');
-            humidity.innerHTML = data.Humidity;
-            var laser = document.getElementById('laser');
-            laser.innerHTML = data.Laser;
-            var gas = document.getElementById('gas');
-            gas.innerHTML = data.Gas;
-            var flameValue = document.getElementById('flame');
-            flameValue.innerHTML = data.Flame;
-            var flameStatus = document.getElementById('flameStatus');
-            flameStatus.innerHTML = data.FlameStatus;
-            var vibration = document.getElementById('vibe');
-            vibration.innerHTML = data.VibeValue;
-            var vibeStatus = document.getElementById('vibeStatus');
-            vibeStatus.innerHTML = data.VibeStatus;
-            var irbar = document.getElementById('ir');
-            irbar.innerHTML = data.IRBarrierValue;
-            var irbarStatus = document.getElementById('irStatus');
-            irbarStatus.innerHTML = data.IRBarrierStatus;
-            var soilValue = document.getElementById('soil');
-            soilValue.innerHTML = data.SoilMoisture;
-            var soilStatus = document.getElementById('soilStatus');
-            soilStatus.innerHTML = data.SoilMoistureStatus;
-            var leakValue = document.getElementById('leak');
-            leakValue.innerHTML = data.LeakValue;
-            var leakStatus = document.getElementById('leakStatus');
-            leakStatus.innerHTML = data.LeakStatus;
+
+            var flameValue = document.getElementById('flameValue');
+            flameReading(data);
+            var gasValue = document.getElementById('gasValue');
+            gasReading(data);
+            var leakValue = document.getElementById('leakValue');
+            leakReading(data);
+            var laserValue = document.getElementById('laserValue');
+            laserReading(data);
+            var vibeValue = document.getElementById('vibeValue');
+            vibeReading(data);
+            var irValue = document.getElementById('irValue');
+            irReading(data);
         });
 
         socket.on('streamCam', function (url) {
             $('#webCam').attr('src', url);
             $('.start').hide();
         });
+
+        function flameReading(data) {
+            var flameSensorValue = data.Flame;
+            if(flameSensorValue==1){
+                flameValue.innerHTML="OK"
+                flameValue.style.color = "green";
+            }else{
+                flameValue.innerHTML="{{__ "Visible-Flame"}}";
+                flameValue.style.color = "red";
+            }
+        };
+
+        // Må kalibreres mot en gass
+        function gasReading(data) {
+            var gasSensorValue = data.Gas;
+            if(gasSensorValue <=300){
+                gasValue.innerHTML = "OK";
+                gasValue.style.color ="green";
+            }else{
+                gasValue.innerHTML= "{{__ "Gas-Detection"}}";
+                gasValue.style.color ="red";
+            }
+        };
+
+        function leakReading(data) {
+            var leakSensorValue = data.LeakValue;
+            if(leakSensorValue >970){
+                leakValue.innerHTML = "OK";
+                leakValue.style.color ="green";
+            }else{
+                leakValue.innerHTML = "{{__ "Leak-Detection"}}";
+                leakValue.style.color ="red";
+            }
+        };
+
+        function laserReading(data) {
+            var laserSensorValue = data.Laser;
+            if(laserSensorValue == 0){
+                laserValue.innerHTML="OK";
+                laserValue.style.color ="green";
+            }else{
+                laserValue.innerHTML="{{__ "Laser-Trip"}}";
+                laserValue.style.color ="red";
+            }
+        };
+
+        function vibeReading(data) {
+            var vibeSensorValue = data.VibeValue;
+            if(vibeSensorValue == 0){
+                vibeValue.innerHTML = "OK";
+                vibeValue.style.color ="green";
+            }else{
+                vibeValue.innerHTML="{{__ "Vibe-Detection"}}";
+                vibeValue.style.color ="red";
+            }
+
+        };
+
+        function irReading(data){
+           var irSensorValue = data.IRBarrierValue;
+            if(irSensorValue == 1){
+                irValue.innerHTML="OK";
+                irValue.style.color="green";
+            }else{
+                irValue.innerHTML="{{__ "IR-Detection"}}";
+                irValue.style.color = "red";
+            }
+        };
 
         socket.emit('streamCam');
     </script>
@@ -68,63 +154,72 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
-<table class="table" id="sensors">
-    <thead>
-    <tr>
-        <th>Sensor ID</th>
-        <th>Value</th>
-        <th>Status</th>
-    </tr>
-    <tr>
-        <td>Temperature</td>
-        <td id="temp"></td>
-        <td id="tempStatus"></td>
-    </tr>
-    <tr>
-        <td>Humidity</td>
-        <td id="humid"></td>
-        <td id="humidStatus"></td>
-    </tr>
-    <tr>
-        <td>Laser</td>
-        <td id="laser"></td>
-        <td id="laserStatus"></td>
-    </tr>
-    <tr>
-        <td>Gas</td>
-        <td id="gas"></td>
-        <td id="gasStatus"></td>
-    </tr>
-    <tr>
-        <td>Flame</td>
-        <td id="flame"></td>
-        <td id="flameStatus"></td>
-    </tr>
-    <tr>
-        <td>Vibration</td>
-        <td id="vibe"></td>
-        <td id="vibeStatus"></td>
-    </tr>
-    <tr>
-        <td>IR barrier</td>
-        <td id="ir"></td>
-        <td id="irStatus"></td>
-    </tr>
-    <tr>
-        <td>Soil Moisture</td>
-        <td id="soil"></td>
-        <td id="soilStatus"></td>
-    </tr>
-    <tr>
-        <td>Leak</td>
-        <td id="leak"></td>
-        <td id="leakStatus"></td>
-    </tr>
-    </thead>
-</table>
-
 <div class="row">
     <img src="" id="webCam">
 </div>
+
+<div class="container" id="sensordata">
+    <div class="row" id="flameSensor">
+        <div class="col-sm-2">
+            <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+            <h6>Flammesensor</h6>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="flameValue"></h3>
+        </div>
+    </div>
+    <div class="row" id="gasSensor">
+        <div class="col-sm-2">
+            <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
+            <h6>Gass sensor</h6>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="gasValue"></h3>
+        </div>
+    </div>
+
+    <div class="row" id="leakSensor">
+        <div class="col-sm-2">
+            <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+            <h6>Lekasjesensor</h6>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="leakValue"></h3>
+        </div>
+    </div>
+
+    <div class="row" id="laserSensor">
+        <div class="col-sm-2">
+            </span><span class = "glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+            <h6>Laserbarriere</h6>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="laserValue"></h3>
+        </div>
+    </div>
+
+    <div class="row" id="IRbarrier">
+        <div class="col-sm-2">
+            <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+            <h6>IR barriere</h6>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="irValue"></h3>
+        </div>
+    </div>
+
+    <div class="row" id="vibeSensor">
+        <div class="col-sm-2">
+            <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
+            <h6>Vibrasjon</h6>
+        </div>
+        <div class="col-sm-4">
+            <h3 id="vibeValue"></h3>
+        </div>
+    </div>
+</div>
+
+
+
 
 

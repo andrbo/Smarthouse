@@ -26,6 +26,13 @@
     "Email-Required": "Email is required",
     "Email-Not-Valid": "Email is not valid",
     "Password-Required": "Password is required",
-    "Password-Not-Match": "Passwords need to match"
+    "Password-Not-Match": "Passwords need to match",
+
+    "Visible-Flame": "Visible flame!",
+    "IR-Detection": "IR barrier broken!",
+    "Vibe-Detection": "Vibrations detected!",
+    "Laser-Trip": "Laser broken!",
+    "Gas-Detection": "Gas detected!",
+    "Leak-Detection": "Leak detected!"
 
 }
