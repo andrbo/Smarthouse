@@ -4,35 +4,24 @@
 var express = require('express');
 var router = express.Router();
 var dbModel = require('../models/User');
-var flash = require('connect-flash');
+var session = require('../session');
+var redis = require('redis');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var session = require('express-session');
-var passport = require ('passport');
-var localStrategy = require('passport-local');
+var bcrypt = require('bcryptjs');
+
 
 router.use(expressValidator());
 router.use(bodyParser.urlencoded({extended: true}));
-router.use(flash());
-
-router.use(session({
-    maxAge: 60000,
-    secret: 'secret',
-    saveUninitialized: false,
-    resave: false
-}));
-
 
 
 router.use(function(req, res, next){
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash ('error_msg');
-    res.locals.error = req.flash('error');
+    res.locals.success_msg = session.flash('success_msg');
+    res.locals.error_msg = session.flash ('error_msg');
+    res.locals.error = session.flash('error');
     next();
 });
 
-router.use(passport.initialize());
-router.use(passport.session());
 
 /* Registrer ny bruker*/
 router.post('/register', function (req, res) {
@@ -54,42 +43,85 @@ router.post('/register', function (req, res) {
 
     if(errors){
         console.log(errors);
-        req.flash('errors', errors);
-        //res.redirect('/register');
+        session.flash('errors', errors);
+        res.redirect('/register');
 
     }else{
-        dbModel.createUser(password, email, firstname, surname);
-        req.flash('success_msg', 'Du er nå registrert');
-        res.redirect('/users/register');
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                password=hash;
+                if(err){ console.log(err)}
+                else {
+                    dbModel.createUser(password, email, firstname, surname);
+                    session.flash('success_msg', 'Du er nå registrert');
+                    res.redirect('/users/register');
+                }
+            })
+        });
     }
 });
 
 
-router.post('/login', function(req, res){
+router.post('/login', function (req, res) {
     var loginUsername = req.body.email;
     var loginPassword = req.body.password;
 
-    function validateUser(){
-        dbModel.getUser(loginUsername, loginPassword, function(err, results){
-            if(err) throw err;
 
-            if(results == ''){
-                console.log("Finens ikke");
-                res.redirect('login');
-                console.log(results);
-            }else{
-                console.log(results);
-                console.log("Finnes");
+    function validateUser() {
+        dbModel.getPassword(loginUsername, function (err, passwordFromDb) {
+            var string = JSON.stringify(passwordFromDb);
+            var parse = JSON.parse(string);
+            var pwordfromDB = parse[0].password;
+            bcrypt.compare(loginPassword, pwordfromDB, function (err, result) {
+                if (err) {
+                    console.log(err)
+                } else if (result === true) {
+                    console.log(loginPassword, pwordfromDB);
+                    console.log('Pass ok!');
+                    session.email = loginUsername;
+                    console.log(session.email);
+                    res.redirect('secret');
+                } else {
+                    console.log("Res === false: " + loginPassword, pwordfromDB);
+                    console.log("res: " + result)
+                    console.log('Pass ikke ok!')
+                    res.redirect('secret');
 
-                res.render('home', {
-                    login:true,
-                    loginUsername: loginUsername
-                });
-            }
-        });
-    };
-
+                }
+            })
+        })
+    }
     validateUser();
 });
+
+router.get('/logout', function (req, res) {
+    //TODO: Lag heller en destroy-metode, tror ikke dette er veldig sikkert.
+    session.email = null;
+    res.render('home', {
+        login: false
+    });
+});
+
+function checkAuth(req, res, next) {
+    if(!session.email){
+        console.log("bruker ikke logget inn");
+        res.render('home', {
+            error_msg: 'Ikke tilgang',
+            login: false
+        })
+    }else{
+        next();
+    }
+};
+
+router.get('/secret', checkAuth, function (req, res) {
+
+    res.render('home', {
+        login: true,
+        loginUsername: session.email
+    });
+    console.log("GODKJENT");
+});
+
 
 module.exports = router;

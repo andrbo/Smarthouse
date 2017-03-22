@@ -9,27 +9,27 @@ var exphbs = require('express-handlebars');
 var i18n = require('i18n');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
-var session = require('express-session');
-var fs = require('fs');
 
-var passport = require('passport');
-var mysql = require('mysql');
-var localStrategy = require('passport-local');
-var v4l2camera = require("v4l2camera");
+//var session = require('express-session');
+//var fs = require('fs');
+
+
+//var v4l2camera = require("v4l2camera");
 
 // Serial communication with Arduino
-var serialport = require('serialport');// include the library
+/*var serialport = require('serialport');// include the library
 var SerialPort = serialport; // make a local instance of it
 var arduinoPort = '/dev/ttyACM0';
-
+*/
 
 // Webcam used for live video, connected to usb port on raspberry pi
-var webcam = new v4l2camera.Camera("/dev/video0");
-webcam.start();
+/*var webcam = new v4l2camera.Camera("/dev/video0");
+webcam.start();*/
 
 
 //Uses the db.js file
 var db = require('./db');
+var session = require('./session');
 var app = express();
 
 // call socket.io to the app
@@ -53,6 +53,7 @@ app.use('/products', products);
 app.use('/security', security);
 app.use('/users', users);
 app.use('/users/register', users);
+app.use('/users/logout', users);
 
 
 // CONFIGURE HANDLEBARS
@@ -102,20 +103,6 @@ hbs.handlebars.registerHelper('__n', function () {
     return i18n.__n.apply(this, arguments);
 });
 //INTERNATIONALIZATION ENDS HERE.
-
-
-// ******** LOG IN ********
-
-//LOGINGREIER EXPRESS SESSIONS
-app.use(session({
-    secret: 'secret',
-    saveUninitialized: true,
-    resave: true
-}));
-
-//Passport init
-app.use(passport.initialize());
-app.use(passport.session());
 
 //Express Validator
 app.use(expressValidator({
@@ -180,13 +167,13 @@ app.use(function (err, req, res, next) {
 });
 
 // Setting up serial communication port with Arduino
-var arduinoSerial = new SerialPort(arduinoPort, {
+/*var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
-});
+});*/
 
 // Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
-function stopStreaming() {
+/*function stopStreaming() {
     if (Object.keys(sockets).length == 0) {
         app.set('watchingFile', false);
         if (proc) proc.kill();
@@ -196,7 +183,7 @@ function stopStreaming() {
 }
 function startWebcamStream(io) {
     if (app.get('watchingFile')) {
-        io.sockets.emit('liveStream', 'image_stream.jpg?_t=' + (Math.random() * 100000));
+        io.sockets.emit('streamCam', 'image_stream.jpg?_t=' + (Math.random() * 100000));
         return;
     }
     Capture();
@@ -206,9 +193,9 @@ function startWebcamStream(io) {
 // Capture function 200 means 30fps
 function Capture(){
    setInterval(function(){
-       webcam.capture(function (success) {
+      webcam.capture(function (success) {
            var frame = webcam.frameRaw();
-            app.io.emit('liveStream', "data:image/png;base64," + Buffer(frame).toString('base64'));
+            app.io.emit('streamCam', "data:image/png;base64," + Buffer(frame).toString('base64'));
         });
    }, 50);
 }
@@ -249,6 +236,6 @@ app.io.on('connection', function (socket) {
     socket.on('streamCam', function() {
        startWebcamStream(app.io);
     });
-});
+});*/
 
 module.exports = app;

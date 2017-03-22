@@ -1,35 +1,23 @@
 var express = require('express');
-
 var bodyParser = require('body-parser');
-var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
 var router = express.Router();
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended: true}));
+var session = require('../session');
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('home');
-});
-
-
-router.get('/ledToggle', function(req, res, next){
-    gpio.setup(15, gpio.DIR_OUT, write);
-    var ledOn = false;
-    var input = req.query.button;
-
-    if(input == "on"){
-        ledOn = true;
+    if(!session.email){
+        res.render('home', {
+            login: false
+        });
     }else{
-        ledOn = false;
-    }
-    function write() {
-        gpio.write(15, ledOn, function (err) {
-            if (err) throw err;
+        res.render('home', {
+            login: true,
+            loginUsername: session.email
         });
     }
 });
-
 
 module.exports = router;
