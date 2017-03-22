@@ -11,19 +11,28 @@ var session = require('express-session');
 var passport = require ('passport');
 var localStrategy = require('passport-local');
 var bcrypt = require('bcryptjs');
+var redis = require('redis');
+var redisStore = require('connect-redis')(session);
+var client = redis.createClient();
+
+
+client.on('connect', function(){
+    console.log("connected to redis from users.js");
+});
+
+router.use(session({
+    cookie: {maxAge: 600000},
+    secret: 'secret',
+    // create new redis store.
+    store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl :  260}),
+    saveUninitialized: false,
+    resave: false
+}));
 
 
 router.use(expressValidator());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(flash());
-
-router.use(session({
-    maxAge: 60000,
-    secret: 'secret',
-    saveUninitialized: false,
-    resave: false
-}));
-
 
 
 router.use(function(req, res, next){
@@ -54,8 +63,6 @@ router.post('/register', function (req, res) {
 
     var errors = req.validationErrors();
 
-
-
     if(errors){
         console.log(errors);
         req.flash('errors', errors);
@@ -82,33 +89,55 @@ router.post('/login', function (req, res) {
     var loginPassword = req.body.password;
 
 
-    function validatePassword() {
+    function validateUser() {
         dbModel.getPassword(loginUsername, function (err, passwordFromDb) {
             var string = JSON.stringify(passwordFromDb);
             var parse = JSON.parse(string);
             var pwordfromDB = parse[0].password;
-            bcrypt.compare(loginPassword, pwordfromDB, function (err, res) {
+            bcrypt.compare(loginPassword, pwordfromDB, function (err, result) {
                 if (err) {
                     console.log(err)
-                } else if (res === true) {
+                } else if (result === true) {
                     console.log(loginPassword, pwordfromDB);
                     console.log('Pass ok!')
-                    res.render('home', {
-                        login: true,
-                        loginUsername: loginUsername
-                    });
+                    res.redirect('secret');
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
-                    console.log("res: " + res)
+                    console.log("res: " + result)
                     console.log('Pass ikke ok!')
-                    res.render('login');
+                    res.redirect('secret');
 
                 }
             })
         })
     }
-
-    validatePassword();
+    validateUser();
 });
+
+router.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.redirect('home');
+});
+
+function checkAuth(req, res, next) {
+    if(!req.session.email){
+        console.log("bruker ikke logget inn");
+        res.render('home', {
+            error_msg: 'Ikke tilgang',
+            login: false
+        })
+    }else{
+        next();
+    }
+};
+
+router.get('/secret', checkAuth, function (req, res) {
+
+    res.render('home', {
+        login: true
+    });
+    console.log("GODKJENT");
+});
+
 
 module.exports = router;

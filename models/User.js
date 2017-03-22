@@ -24,10 +24,4 @@ exports.getPassword = function(email, callback){
     })
 };
 
-exports.setSessionId = function (newSessionId, userId) {
-    db.query('UPDATE users SET session_id = ? WHERE id = ?', newSessionId, userId, function (err, results) {
-        if (err) return done(err);
-    });
-}
-
 //TODO: opprett en exist-funksjon.

@@ -4,32 +4,36 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 var router = express.Router();
+
+var session = require('express-session');
+var redis = require('redis');
+var redisStore = require('connect-redis')(session);
+var client = redis.createClient();
+
+
+client.on('connect', function(){
+    console.log("connected to redis from users.js");
+});
+
+router.use(session({
+    cookie: {maxAge: 600000},
+    secret: 'secret',
+    // create new redis store.
+    store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl :  260}),
+    saveUninitialized: false,
+    resave: false
+}));
+
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('home');
+    res.render('home', {
+        login: true
+    });
 });
 
-
-router.get('/ledToggle', function(req, res, next){
-    gpio.setup(15, gpio.DIR_OUT, write);
-    var ledOn = false;
-    var input = req.query.button;
-
-    if(input == "on"){
-        ledOn = true;
-    }else{
-        ledOn = false;
-    }
-    function write() {
-        gpio.write(15, ledOn, function (err) {
-            if (err) throw err;
-        });
-    }
-});
 
 
 module.exports = router;
