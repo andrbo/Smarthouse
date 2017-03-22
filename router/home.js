@@ -29,9 +29,15 @@ router.use(session({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('home', {
-        login: true
-    });
+    if(!req.session.email){
+        res.render('home', {
+            login: false
+        });
+    }else{
+        res.render('home', {
+            login: true
+        });
+    }
 });
 
 

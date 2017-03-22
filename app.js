@@ -50,6 +50,7 @@ app.use('/products', products);
 app.use('/security', security);
 app.use('/users', users);
 app.use('/users/register', users);
+app.use('/users/logout', users);
 
 
 // CONFIGURE HANDLEBARS

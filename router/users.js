@@ -8,8 +8,6 @@ var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var session = require('express-session');
-var passport = require ('passport');
-var localStrategy = require('passport-local');
 var bcrypt = require('bcryptjs');
 var redis = require('redis');
 var redisStore = require('connect-redis')(session);
@@ -42,8 +40,6 @@ router.use(function(req, res, next){
     next();
 });
 
-router.use(passport.initialize());
-router.use(passport.session());
 
 /* Registrer ny bruker*/
 router.post('/register', function (req, res) {
@@ -99,7 +95,9 @@ router.post('/login', function (req, res) {
                     console.log(err)
                 } else if (result === true) {
                     console.log(loginPassword, pwordfromDB);
-                    console.log('Pass ok!')
+                    console.log('Pass ok!');
+                    req.session.email = loginUsername;
+                    console.log(req.session.email);
                     res.redirect('secret');
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
@@ -116,7 +114,9 @@ router.post('/login', function (req, res) {
 
 router.get('/logout', function (req, res) {
     req.session.destroy();
-    res.redirect('home');
+    res.render('home', {
+        login: false
+    });
 });
 
 function checkAuth(req, res, next) {
