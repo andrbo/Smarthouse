@@ -10,6 +10,8 @@ var expressValidator = require('express-validator');
 var session = require('express-session');
 var passport = require ('passport');
 var localStrategy = require('passport-local');
+var bcrypt = require('bcryptjs');
+
 
 router.use(expressValidator());
 router.use(bodyParser.urlencoded({extended: true}));
@@ -52,44 +54,61 @@ router.post('/register', function (req, res) {
 
     var errors = req.validationErrors();
 
+
+
     if(errors){
         console.log(errors);
         req.flash('errors', errors);
-        //res.redirect('/register');
+        res.redirect('/register');
 
     }else{
-        dbModel.createUser(password, email, firstname, surname);
-        req.flash('success_msg', 'Du er nå registrert');
-        res.redirect('/users/register');
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                password=hash;
+                if(err){ console.log(err)}
+                else {
+                    dbModel.createUser(password, email, firstname, surname);
+                    req.flash('success_msg', 'Du er nå registrert');
+                    res.redirect('/users/register');
+                }
+            })
+        });
     }
 });
 
 
-router.post('/login', function(req, res){
+router.post('/login', function (req, res) {
     var loginUsername = req.body.email;
     var loginPassword = req.body.password;
 
-    function validateUser(){
-        dbModel.getUser(loginUsername, loginPassword, function(err, results){
-            if(err) throw err;
 
-            if(results == ''){
-                console.log("Finens ikke");
-                res.redirect('login');
-                console.log(results);
-            }else{
-                console.log(results);
-                console.log("Finnes");
+    function validatePassword() {
+        dbModel.getPassword(loginUsername, function (err, passwordFromDb) {
+            var string = JSON.stringify(passwordFromDb);
+            var parse = JSON.parse(string);
+            var pwordfromDB = parse[0].password;
+            bcrypt.compare(loginPassword, pwordfromDB, function (err, res) {
+                if (err) {
+                    console.log(err)
+                } else if (res === true) {
+                    console.log(loginPassword, pwordfromDB);
+                    console.log('Pass ok!')
+                    res.render('home', {
+                        login: true,
+                        loginUsername: loginUsername
+                    });
+                } else {
+                    console.log("Res === false: " + loginPassword, pwordfromDB);
+                    console.log("res: " + res)
+                    console.log('Pass ikke ok!')
+                    res.render('login');
 
-                res.render('home', {
-                    login:true,
-                    loginUsername: loginUsername
-                });
-            }
-        });
-    };
+                }
+            })
+        })
+    }
 
-    validateUser();
+    validatePassword();
 });
 
 module.exports = router;
