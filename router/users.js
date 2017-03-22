@@ -4,39 +4,21 @@
 var express = require('express');
 var router = express.Router();
 var dbModel = require('../models/User');
-var flash = require('connect-flash');
+var session = require('../session');
+var redis = require('redis');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var session = require('express-session');
 var bcrypt = require('bcryptjs');
-var redis = require('redis');
-var redisStore = require('connect-redis')(session);
-var client = redis.createClient();
-
-
-client.on('connect', function(){
-    console.log("connected to redis from users.js");
-});
-
-router.use(session({
-    cookie: {maxAge: 600000},
-    secret: 'secret',
-    // create new redis store.
-    store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl :  260}),
-    saveUninitialized: false,
-    resave: false
-}));
 
 
 router.use(expressValidator());
 router.use(bodyParser.urlencoded({extended: true}));
-router.use(flash());
 
 
 router.use(function(req, res, next){
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash ('error_msg');
-    res.locals.error = req.flash('error');
+    res.locals.success_msg = session.flash('success_msg');
+    res.locals.error_msg = session.flash ('error_msg');
+    res.locals.error = session.flash('error');
     next();
 });
 
@@ -61,7 +43,7 @@ router.post('/register', function (req, res) {
 
     if(errors){
         console.log(errors);
-        req.flash('errors', errors);
+        session.flash('errors', errors);
         res.redirect('/register');
 
     }else{
@@ -71,7 +53,7 @@ router.post('/register', function (req, res) {
                 if(err){ console.log(err)}
                 else {
                     dbModel.createUser(password, email, firstname, surname);
-                    req.flash('success_msg', 'Du er nå registrert');
+                    session.flash('success_msg', 'Du er nå registrert');
                     res.redirect('/users/register');
                 }
             })
@@ -96,8 +78,8 @@ router.post('/login', function (req, res) {
                 } else if (result === true) {
                     console.log(loginPassword, pwordfromDB);
                     console.log('Pass ok!');
-                    req.session.email = loginUsername;
-                    console.log(req.session.email);
+                    session.email = loginUsername;
+                    console.log(session.email);
                     res.redirect('secret');
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
@@ -113,14 +95,15 @@ router.post('/login', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    req.session.destroy();
+    //TODO: Lag heller en destroy-metode, tror ikke dette er veldig sikkert.
+    session.email = null;
     res.render('home', {
         login: false
     });
 });
 
 function checkAuth(req, res, next) {
-    if(!req.session.email){
+    if(!session.email){
         console.log("bruker ikke logget inn");
         res.render('home', {
             error_msg: 'Ikke tilgang',
@@ -134,7 +117,8 @@ function checkAuth(req, res, next) {
 router.get('/secret', checkAuth, function (req, res) {
 
     res.render('home', {
-        login: true
+        login: true,
+        loginUsername: session.email
     });
     console.log("GODKJENT");
 });
