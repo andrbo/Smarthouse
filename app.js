@@ -10,6 +10,7 @@ var i18n = require('i18n');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
+var fs = require('fs');
 
 var passport = require('passport');
 var mysql = require('mysql');
@@ -190,7 +191,7 @@ function stopStreaming() {
         app.set('watchingFile', false);
         if (proc) proc.kill();
         fs.unwatchFile('./stream/image_stream.jpg');
-        cam.stop();
+        webcam.stop();
     }
 }
 function startWebcamStream(io) {
@@ -205,8 +206,8 @@ function startWebcamStream(io) {
 // Capture function 200 means 30fps
 function Capture(){
    setInterval(function(){
-       cam.capture(function (success) {
-           var frame = cam.frameRaw();
+       webcam.capture(function (success) {
+           var frame = webcam.frameRaw();
             app.io.emit('liveStream', "data:image/png;base64," + Buffer(frame).toString('base64'));
         });
    }, 50);
@@ -246,7 +247,7 @@ app.io.on('connection', function (socket) {
     });
 
     socket.on('streamCam', function() {
-       startWebcamStream(io);
+       startWebcamStream(app.io);
     });
 });
 
