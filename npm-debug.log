@@ -1,0 +1,2668 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@4.0.5
+3 info using node@v7.4.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData connect-redis
+20 silly mapToRegistry name connect-redis
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry data Result {
+23 silly mapToRegistry   raw: 'connect-redis',
+23 silly mapToRegistry   scope: null,
+23 silly mapToRegistry   escapedName: 'connect-redis',
+23 silly mapToRegistry   name: 'connect-redis',
+23 silly mapToRegistry   rawSpec: '',
+23 silly mapToRegistry   spec: 'latest',
+23 silly mapToRegistry   type: 'tag' }
+24 silly mapToRegistry uri https://registry.npmjs.org/connect-redis
+25 silly fetchNamedPackageData epoll
+26 silly mapToRegistry name epoll
+27 silly mapToRegistry using default registry
+28 silly mapToRegistry registry https://registry.npmjs.org/
+29 silly mapToRegistry data Result {
+29 silly mapToRegistry   raw: 'epoll',
+29 silly mapToRegistry   scope: null,
+29 silly mapToRegistry   escapedName: 'epoll',
+29 silly mapToRegistry   name: 'epoll',
+29 silly mapToRegistry   rawSpec: '',
+29 silly mapToRegistry   spec: 'latest',
+29 silly mapToRegistry   type: 'tag' }
+30 silly mapToRegistry uri https://registry.npmjs.org/epoll
+31 silly fetchNamedPackageData fs
+32 silly mapToRegistry name fs
+33 silly mapToRegistry using default registry
+34 silly mapToRegistry registry https://registry.npmjs.org/
+35 silly mapToRegistry data Result {
+35 silly mapToRegistry   raw: 'fs',
+35 silly mapToRegistry   scope: null,
+35 silly mapToRegistry   escapedName: 'fs',
+35 silly mapToRegistry   name: 'fs',
+35 silly mapToRegistry   rawSpec: '',
+35 silly mapToRegistry   spec: 'latest',
+35 silly mapToRegistry   type: 'tag' }
+36 silly mapToRegistry uri https://registry.npmjs.org/fs
+37 silly fetchNamedPackageData redis
+38 silly mapToRegistry name redis
+39 silly mapToRegistry using default registry
+40 silly mapToRegistry registry https://registry.npmjs.org/
+41 silly mapToRegistry data Result {
+41 silly mapToRegistry   raw: 'redis',
+41 silly mapToRegistry   scope: null,
+41 silly mapToRegistry   escapedName: 'redis',
+41 silly mapToRegistry   name: 'redis',
+41 silly mapToRegistry   rawSpec: '',
+41 silly mapToRegistry   spec: 'latest',
+41 silly mapToRegistry   type: 'tag' }
+42 silly mapToRegistry uri https://registry.npmjs.org/redis
+43 silly fetchNamedPackageData rpi-gpio
+44 silly mapToRegistry name rpi-gpio
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry data Result {
+47 silly mapToRegistry   raw: 'rpi-gpio',
+47 silly mapToRegistry   scope: null,
+47 silly mapToRegistry   escapedName: 'rpi-gpio',
+47 silly mapToRegistry   name: 'rpi-gpio',
+47 silly mapToRegistry   rawSpec: '',
+47 silly mapToRegistry   spec: 'latest',
+47 silly mapToRegistry   type: 'tag' }
+48 silly mapToRegistry uri https://registry.npmjs.org/rpi-gpio
+49 verbose request uri https://registry.npmjs.org/connect-redis
+50 verbose request no auth needed
+51 info attempt registry request try #1 at 14:24:23
+52 verbose request id 19d0be1902a764b2
+53 http request GET https://registry.npmjs.org/connect-redis
+54 verbose request uri https://registry.npmjs.org/fs
+55 verbose request no auth needed
+56 info attempt registry request try #1 at 14:24:23
+57 http request GET https://registry.npmjs.org/fs
+58 verbose request uri https://registry.npmjs.org/redis
+59 verbose request no auth needed
+60 info attempt registry request try #1 at 14:24:23
+61 http request GET https://registry.npmjs.org/redis
+62 verbose request uri https://registry.npmjs.org/epoll
+63 verbose request no auth needed
+64 info attempt registry request try #1 at 14:24:23
+65 verbose etag W/"58a0161c-a385"
+66 verbose lastModified Sun, 12 Feb 2017 08:00:28 GMT
+67 http request GET https://registry.npmjs.org/epoll
+68 verbose request uri https://registry.npmjs.org/rpi-gpio
+69 verbose request no auth needed
+70 info attempt registry request try #1 at 14:24:23
+71 verbose etag W/"58ad88ae-5f19"
+72 verbose lastModified Wed, 22 Feb 2017 12:48:46 GMT
+73 http request GET https://registry.npmjs.org/rpi-gpio
+74 http 200 https://registry.npmjs.org/fs
+75 verbose headers { server: 'nginx/1.10.1',
+75 verbose headers   'content-type': 'application/json',
+75 verbose headers   'last-modified': 'Fri, 09 Dec 2016 16:38:04 GMT',
+75 verbose headers   etag: 'W/"584addec-d57"',
+75 verbose headers   'content-encoding': 'gzip',
+75 verbose headers   'cache-control': 'max-age=300',
+75 verbose headers   'content-length': '1015',
+75 verbose headers   'accept-ranges': 'bytes',
+75 verbose headers   date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+75 verbose headers   via: '1.1 varnish',
+75 verbose headers   age: '62',
+75 verbose headers   connection: 'keep-alive',
+75 verbose headers   'x-served-by': 'cache-bma7023-BMA',
+75 verbose headers   'x-cache': 'HIT',
+75 verbose headers   'x-cache-hits': '2',
+75 verbose headers   'x-timer': 'S1490275464.547191,VS0,VE0',
+75 verbose headers   vary: 'Accept-Encoding' }
+76 silly get cb [ 200,
+76 silly get   { server: 'nginx/1.10.1',
+76 silly get     'content-type': 'application/json',
+76 silly get     'last-modified': 'Fri, 09 Dec 2016 16:38:04 GMT',
+76 silly get     etag: 'W/"584addec-d57"',
+76 silly get     'content-encoding': 'gzip',
+76 silly get     'cache-control': 'max-age=300',
+76 silly get     'content-length': '1015',
+76 silly get     'accept-ranges': 'bytes',
+76 silly get     date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+76 silly get     via: '1.1 varnish',
+76 silly get     age: '62',
+76 silly get     connection: 'keep-alive',
+76 silly get     'x-served-by': 'cache-bma7023-BMA',
+76 silly get     'x-cache': 'HIT',
+76 silly get     'x-cache-hits': '2',
+76 silly get     'x-timer': 'S1490275464.547191,VS0,VE0',
+76 silly get     vary: 'Accept-Encoding' } ]
+77 verbose get saving fs to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\fs\.cache.json
+78 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+79 http 200 https://registry.npmjs.org/connect-redis
+80 verbose headers { server: 'nginx/1.10.1',
+80 verbose headers   'content-type': 'application/json',
+80 verbose headers   'last-modified': 'Thu, 16 Mar 2017 16:07:56 GMT',
+80 verbose headers   etag: 'W/"58cab85c-aa2a"',
+80 verbose headers   'content-encoding': 'gzip',
+80 verbose headers   'cache-control': 'max-age=300',
+80 verbose headers   'content-length': '6714',
+80 verbose headers   'accept-ranges': 'bytes',
+80 verbose headers   date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+80 verbose headers   via: '1.1 varnish',
+80 verbose headers   age: '164',
+80 verbose headers   connection: 'keep-alive',
+80 verbose headers   'x-served-by': 'cache-bma7028-BMA',
+80 verbose headers   'x-cache': 'HIT',
+80 verbose headers   'x-cache-hits': '1',
+80 verbose headers   'x-timer': 'S1490275464.539989,VS0,VE0',
+80 verbose headers   vary: 'Accept-Encoding' }
+81 silly get cb [ 200,
+81 silly get   { server: 'nginx/1.10.1',
+81 silly get     'content-type': 'application/json',
+81 silly get     'last-modified': 'Thu, 16 Mar 2017 16:07:56 GMT',
+81 silly get     etag: 'W/"58cab85c-aa2a"',
+81 silly get     'content-encoding': 'gzip',
+81 silly get     'cache-control': 'max-age=300',
+81 silly get     'content-length': '6714',
+81 silly get     'accept-ranges': 'bytes',
+81 silly get     date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+81 silly get     via: '1.1 varnish',
+81 silly get     age: '164',
+81 silly get     connection: 'keep-alive',
+81 silly get     'x-served-by': 'cache-bma7028-BMA',
+81 silly get     'x-cache': 'HIT',
+81 silly get     'x-cache-hits': '1',
+81 silly get     'x-timer': 'S1490275464.539989,VS0,VE0',
+81 silly get     vary: 'Accept-Encoding' } ]
+82 verbose get saving connect-redis to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\connect-redis\.cache.json
+83 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+84 http 304 https://registry.npmjs.org/epoll
+85 verbose headers { date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+85 verbose headers   via: '1.1 varnish',
+85 verbose headers   'cache-control': 'max-age=300',
+85 verbose headers   etag: 'W/"58a0161c-a385"',
+85 verbose headers   age: '0',
+85 verbose headers   connection: 'keep-alive',
+85 verbose headers   'x-served-by': 'cache-bma7027-BMA',
+85 verbose headers   'x-cache': 'MISS',
+85 verbose headers   'x-cache-hits': '0',
+85 verbose headers   'x-timer': 'S1490275464.539401,VS0,VE26',
+85 verbose headers   vary: 'Accept-Encoding' }
+86 silly get cb [ 304,
+86 silly get   { date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+86 silly get     via: '1.1 varnish',
+86 silly get     'cache-control': 'max-age=300',
+86 silly get     etag: 'W/"58a0161c-a385"',
+86 silly get     age: '0',
+86 silly get     connection: 'keep-alive',
+86 silly get     'x-served-by': 'cache-bma7027-BMA',
+86 silly get     'x-cache': 'MISS',
+86 silly get     'x-cache-hits': '0',
+86 silly get     'x-timer': 'S1490275464.539401,VS0,VE26',
+86 silly get     vary: 'Accept-Encoding' } ]
+87 verbose etag https://registry.npmjs.org/epoll from cache
+88 verbose get saving epoll to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\epoll\.cache.json
+89 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+90 http 304 https://registry.npmjs.org/rpi-gpio
+91 verbose headers { date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+91 verbose headers   via: '1.1 varnish',
+91 verbose headers   'cache-control': 'max-age=300',
+91 verbose headers   etag: 'W/"58ad88ae-5f19"',
+91 verbose headers   age: '0',
+91 verbose headers   connection: 'keep-alive',
+91 verbose headers   'x-served-by': 'cache-bma7031-BMA',
+91 verbose headers   'x-cache': 'MISS',
+91 verbose headers   'x-cache-hits': '0',
+91 verbose headers   'x-timer': 'S1490275464.544191,VS0,VE29',
+91 verbose headers   vary: 'Accept-Encoding' }
+92 silly get cb [ 304,
+92 silly get   { date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+92 silly get     via: '1.1 varnish',
+92 silly get     'cache-control': 'max-age=300',
+92 silly get     etag: 'W/"58ad88ae-5f19"',
+92 silly get     age: '0',
+92 silly get     connection: 'keep-alive',
+92 silly get     'x-served-by': 'cache-bma7031-BMA',
+92 silly get     'x-cache': 'MISS',
+92 silly get     'x-cache-hits': '0',
+92 silly get     'x-timer': 'S1490275464.544191,VS0,VE29',
+92 silly get     vary: 'Accept-Encoding' } ]
+93 verbose etag https://registry.npmjs.org/rpi-gpio from cache
+94 verbose get saving rpi-gpio to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\rpi-gpio\.cache.json
+95 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+96 silly resolveWithNewModule fs@0.0.1-security checking installable status
+97 silly cache add args [ 'fs@0.0.1-security', null ]
+98 verbose cache add spec fs@0.0.1-security
+99 silly cache add parsed spec Result {
+99 silly cache add   raw: 'fs@0.0.1-security',
+99 silly cache add   scope: null,
+99 silly cache add   escapedName: 'fs',
+99 silly cache add   name: 'fs',
+99 silly cache add   rawSpec: '0.0.1-security',
+99 silly cache add   spec: '0.0.1-security',
+99 silly cache add   type: 'version' }
+100 silly addNamed fs@0.0.1-security
+101 verbose addNamed "0.0.1-security" is a plain semver version for fs
+102 silly mapToRegistry name fs
+103 silly mapToRegistry using default registry
+104 silly mapToRegistry registry https://registry.npmjs.org/
+105 silly mapToRegistry data Result {
+105 silly mapToRegistry   raw: 'fs',
+105 silly mapToRegistry   scope: null,
+105 silly mapToRegistry   escapedName: 'fs',
+105 silly mapToRegistry   name: 'fs',
+105 silly mapToRegistry   rawSpec: '',
+105 silly mapToRegistry   spec: 'latest',
+105 silly mapToRegistry   type: 'tag' }
+106 silly mapToRegistry uri https://registry.npmjs.org/fs
+107 verbose addNameVersion registry:https://registry.npmjs.org/fs not in flight; fetching
+108 silly resolveWithNewModule connect-redis@3.2.0 checking installable status
+109 silly cache add args [ 'connect-redis@^3.2.0', null ]
+110 verbose cache add spec connect-redis@^3.2.0
+111 silly cache add parsed spec Result {
+111 silly cache add   raw: 'connect-redis@^3.2.0',
+111 silly cache add   scope: null,
+111 silly cache add   escapedName: 'connect-redis',
+111 silly cache add   name: 'connect-redis',
+111 silly cache add   rawSpec: '^3.2.0',
+111 silly cache add   spec: '>=3.2.0 <4.0.0',
+111 silly cache add   type: 'range' }
+112 silly addNamed connect-redis@>=3.2.0 <4.0.0
+113 verbose addNamed ">=3.2.0 <4.0.0" is a valid semver range for connect-redis
+114 silly addNameRange { name: 'connect-redis',
+114 silly addNameRange   range: '>=3.2.0 <4.0.0',
+114 silly addNameRange   hasData: false }
+115 silly mapToRegistry name connect-redis
+116 silly mapToRegistry using default registry
+117 silly mapToRegistry registry https://registry.npmjs.org/
+118 silly mapToRegistry data Result {
+118 silly mapToRegistry   raw: 'connect-redis',
+118 silly mapToRegistry   scope: null,
+118 silly mapToRegistry   escapedName: 'connect-redis',
+118 silly mapToRegistry   name: 'connect-redis',
+118 silly mapToRegistry   rawSpec: '',
+118 silly mapToRegistry   spec: 'latest',
+118 silly mapToRegistry   type: 'tag' }
+119 silly mapToRegistry uri https://registry.npmjs.org/connect-redis
+120 verbose addNameRange registry:https://registry.npmjs.org/connect-redis not in flight; fetching
+121 verbose get https://registry.npmjs.org/connect-redis not expired, no request
+122 silly addNameRange number 2 { name: 'connect-redis', range: '>=3.2.0 <4.0.0', hasData: true }
+123 silly addNameRange versions [ 'connect-redis',
+123 silly addNameRange   [ '0.0.1',
+123 silly addNameRange     '0.0.2',
+123 silly addNameRange     '0.1.0',
+123 silly addNameRange     '0.1.1',
+123 silly addNameRange     '0.1.2',
+123 silly addNameRange     '0.1.3',
+123 silly addNameRange     '0.2.0',
+123 silly addNameRange     '0.2.1',
+123 silly addNameRange     '0.2.2',
+123 silly addNameRange     '0.2.3',
+123 silly addNameRange     '1.0.0',
+123 silly addNameRange     '1.0.1',
+123 silly addNameRange     '1.0.2',
+123 silly addNameRange     '1.0.3',
+123 silly addNameRange     '1.0.4',
+123 silly addNameRange     '1.0.5',
+123 silly addNameRange     '1.0.6',
+123 silly addNameRange     '1.0.7',
+123 silly addNameRange     '1.1.0',
+123 silly addNameRange     '1.2.0',
+123 silly addNameRange     '1.3.0',
+123 silly addNameRange     '1.4.0',
+123 silly addNameRange     '1.4.1',
+123 silly addNameRange     '1.4.2',
+123 silly addNameRange     '1.4.3',
+123 silly addNameRange     '1.4.4',
+123 silly addNameRange     '1.4.5',
+123 silly addNameRange     '1.4.6',
+123 silly addNameRange     '1.4.7',
+123 silly addNameRange     '1.5.0',
+123 silly addNameRange     '2.0.0',
+123 silly addNameRange     '2.1.0',
+123 silly addNameRange     '2.2.0',
+123 silly addNameRange     '2.3.0',
+123 silly addNameRange     '2.4.0',
+123 silly addNameRange     '2.4.1',
+123 silly addNameRange     '2.5.0',
+123 silly addNameRange     '2.5.1',
+123 silly addNameRange     '3.0.0',
+123 silly addNameRange     '3.0.1',
+123 silly addNameRange     '3.0.2',
+123 silly addNameRange     '3.1.0',
+123 silly addNameRange     '3.2.0' ] ]
+124 silly addNamed connect-redis@3.2.0
+125 verbose addNamed "3.2.0" is a plain semver version for connect-redis
+126 verbose get https://registry.npmjs.org/fs not expired, no request
+127 silly mapToRegistry name connect-redis
+128 silly mapToRegistry using default registry
+129 silly mapToRegistry registry https://registry.npmjs.org/
+130 silly mapToRegistry data Result {
+130 silly mapToRegistry   raw: 'connect-redis',
+130 silly mapToRegistry   scope: null,
+130 silly mapToRegistry   escapedName: 'connect-redis',
+130 silly mapToRegistry   name: 'connect-redis',
+130 silly mapToRegistry   rawSpec: '',
+130 silly mapToRegistry   spec: 'latest',
+130 silly mapToRegistry   type: 'tag' }
+131 silly mapToRegistry uri https://registry.npmjs.org/connect-redis
+132 verbose addRemoteTarball https://registry.npmjs.org/connect-redis/-/connect-redis-3.2.0.tgz not in flight; adding
+133 verbose addRemoteTarball [ 'https://registry.npmjs.org/connect-redis/-/connect-redis-3.2.0.tgz',
+133 verbose addRemoteTarball   '2d29ea60c8ae8c2c818a710247fdfed158f43388' ]
+134 silly mapToRegistry name fs
+135 silly mapToRegistry using default registry
+136 silly mapToRegistry registry https://registry.npmjs.org/
+137 silly mapToRegistry data Result {
+137 silly mapToRegistry   raw: 'fs',
+137 silly mapToRegistry   scope: null,
+137 silly mapToRegistry   escapedName: 'fs',
+137 silly mapToRegistry   name: 'fs',
+137 silly mapToRegistry   rawSpec: '',
+137 silly mapToRegistry   spec: 'latest',
+137 silly mapToRegistry   type: 'tag' }
+138 silly mapToRegistry uri https://registry.npmjs.org/fs
+139 verbose addRemoteTarball https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz not in flight; adding
+140 verbose addRemoteTarball [ 'https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz',
+140 verbose addRemoteTarball   '8a7bd37186b6dddf3813f23858b57ecaaf5e41d4' ]
+141 silly resolveWithNewModule epoll@0.1.21 checking installable status
+142 silly cache add args [ 'epoll@^0.1.21', null ]
+143 verbose cache add spec epoll@^0.1.21
+144 silly cache add parsed spec Result {
+144 silly cache add   raw: 'epoll@^0.1.21',
+144 silly cache add   scope: null,
+144 silly cache add   escapedName: 'epoll',
+144 silly cache add   name: 'epoll',
+144 silly cache add   rawSpec: '^0.1.21',
+144 silly cache add   spec: '>=0.1.21 <0.2.0',
+144 silly cache add   type: 'range' }
+145 silly addNamed epoll@>=0.1.21 <0.2.0
+146 verbose addNamed ">=0.1.21 <0.2.0" is a valid semver range for epoll
+147 silly addNameRange { name: 'epoll', range: '>=0.1.21 <0.2.0', hasData: false }
+148 silly mapToRegistry name epoll
+149 silly mapToRegistry using default registry
+150 silly mapToRegistry registry https://registry.npmjs.org/
+151 silly mapToRegistry data Result {
+151 silly mapToRegistry   raw: 'epoll',
+151 silly mapToRegistry   scope: null,
+151 silly mapToRegistry   escapedName: 'epoll',
+151 silly mapToRegistry   name: 'epoll',
+151 silly mapToRegistry   rawSpec: '',
+151 silly mapToRegistry   spec: 'latest',
+151 silly mapToRegistry   type: 'tag' }
+152 silly mapToRegistry uri https://registry.npmjs.org/epoll
+153 verbose addNameRange registry:https://registry.npmjs.org/epoll not in flight; fetching
+154 http 200 https://registry.npmjs.org/redis
+155 verbose headers { server: 'nginx/1.10.1',
+155 verbose headers   'content-type': 'application/json',
+155 verbose headers   'last-modified': 'Tue, 14 Mar 2017 21:17:01 GMT',
+155 verbose headers   etag: 'W/"58c85dcd-27399"',
+155 verbose headers   'content-encoding': 'gzip',
+155 verbose headers   'cache-control': 'max-age=300',
+155 verbose headers   'content-length': '25902',
+155 verbose headers   'accept-ranges': 'bytes',
+155 verbose headers   date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+155 verbose headers   via: '1.1 varnish',
+155 verbose headers   age: '184',
+155 verbose headers   connection: 'keep-alive',
+155 verbose headers   'x-served-by': 'cache-bma7032-BMA',
+155 verbose headers   'x-cache': 'HIT',
+155 verbose headers   'x-cache-hits': '112',
+155 verbose headers   'x-timer': 'S1490275464.546836,VS0,VE0',
+155 verbose headers   vary: 'Accept-Encoding' }
+156 silly get cb [ 200,
+156 silly get   { server: 'nginx/1.10.1',
+156 silly get     'content-type': 'application/json',
+156 silly get     'last-modified': 'Tue, 14 Mar 2017 21:17:01 GMT',
+156 silly get     etag: 'W/"58c85dcd-27399"',
+156 silly get     'content-encoding': 'gzip',
+156 silly get     'cache-control': 'max-age=300',
+156 silly get     'content-length': '25902',
+156 silly get     'accept-ranges': 'bytes',
+156 silly get     date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+156 silly get     via: '1.1 varnish',
+156 silly get     age: '184',
+156 silly get     connection: 'keep-alive',
+156 silly get     'x-served-by': 'cache-bma7032-BMA',
+156 silly get     'x-cache': 'HIT',
+156 silly get     'x-cache-hits': '112',
+156 silly get     'x-timer': 'S1490275464.546836,VS0,VE0',
+156 silly get     vary: 'Accept-Encoding' } ]
+157 verbose get saving redis to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\redis\.cache.json
+158 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+159 silly resolveWithNewModule rpi-gpio@0.7.0 checking installable status
+160 silly cache add args [ 'rpi-gpio@^0.7.0', null ]
+161 verbose cache add spec rpi-gpio@^0.7.0
+162 silly cache add parsed spec Result {
+162 silly cache add   raw: 'rpi-gpio@^0.7.0',
+162 silly cache add   scope: null,
+162 silly cache add   escapedName: 'rpi-gpio',
+162 silly cache add   name: 'rpi-gpio',
+162 silly cache add   rawSpec: '^0.7.0',
+162 silly cache add   spec: '>=0.7.0 <0.8.0',
+162 silly cache add   type: 'range' }
+163 silly addNamed rpi-gpio@>=0.7.0 <0.8.0
+164 verbose addNamed ">=0.7.0 <0.8.0" is a valid semver range for rpi-gpio
+165 silly addNameRange { name: 'rpi-gpio', range: '>=0.7.0 <0.8.0', hasData: false }
+166 silly mapToRegistry name rpi-gpio
+167 silly mapToRegistry using default registry
+168 silly mapToRegistry registry https://registry.npmjs.org/
+169 silly mapToRegistry data Result {
+169 silly mapToRegistry   raw: 'rpi-gpio',
+169 silly mapToRegistry   scope: null,
+169 silly mapToRegistry   escapedName: 'rpi-gpio',
+169 silly mapToRegistry   name: 'rpi-gpio',
+169 silly mapToRegistry   rawSpec: '',
+169 silly mapToRegistry   spec: 'latest',
+169 silly mapToRegistry   type: 'tag' }
+170 silly mapToRegistry uri https://registry.npmjs.org/rpi-gpio
+171 verbose addNameRange registry:https://registry.npmjs.org/rpi-gpio not in flight; fetching
+172 verbose get https://registry.npmjs.org/epoll not expired, no request
+173 silly addNameRange number 2 { name: 'epoll', range: '>=0.1.21 <0.2.0', hasData: true }
+174 silly addNameRange versions [ 'epoll',
+174 silly addNameRange   [ '0.0.1',
+174 silly addNameRange     '0.0.2',
+174 silly addNameRange     '0.0.3',
+174 silly addNameRange     '0.0.4',
+174 silly addNameRange     '0.0.5',
+174 silly addNameRange     '0.0.6',
+174 silly addNameRange     '0.0.7',
+174 silly addNameRange     '0.0.8',
+174 silly addNameRange     '0.1.0',
+174 silly addNameRange     '0.1.1',
+174 silly addNameRange     '0.1.2',
+174 silly addNameRange     '0.1.3',
+174 silly addNameRange     '0.1.4',
+174 silly addNameRange     '0.1.5',
+174 silly addNameRange     '0.1.7',
+174 silly addNameRange     '0.1.8',
+174 silly addNameRange     '0.1.9',
+174 silly addNameRange     '0.1.10',
+174 silly addNameRange     '0.1.11',
+174 silly addNameRange     '0.1.12',
+174 silly addNameRange     '0.1.13',
+174 silly addNameRange     '0.1.14',
+174 silly addNameRange     '0.1.15',
+174 silly addNameRange     '0.1.16',
+174 silly addNameRange     '0.1.17',
+174 silly addNameRange     '0.1.18',
+174 silly addNameRange     '0.1.19',
+174 silly addNameRange     '0.1.20',
+174 silly addNameRange     '0.1.21' ] ]
+175 silly addNamed epoll@0.1.21
+176 verbose addNamed "0.1.21" is a plain semver version for epoll
+177 verbose get https://registry.npmjs.org/rpi-gpio not expired, no request
+178 silly addNameRange number 2 { name: 'rpi-gpio', range: '>=0.7.0 <0.8.0', hasData: true }
+179 silly addNameRange versions [ 'rpi-gpio',
+179 silly addNameRange   [ '0.0.1',
+179 silly addNameRange     '0.0.2',
+179 silly addNameRange     '0.0.3',
+179 silly addNameRange     '0.0.4',
+179 silly addNameRange     '0.1.0',
+179 silly addNameRange     '0.2.0',
+179 silly addNameRange     '0.3.1',
+179 silly addNameRange     '0.3.2',
+179 silly addNameRange     '0.3.3',
+179 silly addNameRange     '0.3.4',
+179 silly addNameRange     '0.4.0',
+179 silly addNameRange     '0.4.1',
+179 silly addNameRange     '0.5.0',
+179 silly addNameRange     '0.5.1',
+179 silly addNameRange     '0.5.2',
+179 silly addNameRange     '0.6.0',
+179 silly addNameRange     '0.7.0' ] ]
+180 silly addNamed rpi-gpio@0.7.0
+181 verbose addNamed "0.7.0" is a plain semver version for rpi-gpio
+182 info retry fetch attempt 1 at 14:24:23
+183 info attempt registry request try #1 at 14:24:23
+184 http fetch GET https://registry.npmjs.org/connect-redis/-/connect-redis-3.2.0.tgz
+185 info retry fetch attempt 1 at 14:24:23
+186 info attempt registry request try #1 at 14:24:23
+187 http fetch GET https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz
+188 silly cache afterAdd epoll@0.1.21
+189 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\epoll\0.1.21\package\package.json not in flight; writing
+190 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+191 silly cache afterAdd rpi-gpio@0.7.0
+192 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\rpi-gpio\0.7.0\package\package.json not in flight; writing
+193 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+194 silly resolveWithNewModule redis@2.7.1 checking installable status
+195 silly cache add args [ 'redis@^2.7.1', null ]
+196 verbose cache add spec redis@^2.7.1
+197 silly cache add parsed spec Result {
+197 silly cache add   raw: 'redis@^2.7.1',
+197 silly cache add   scope: null,
+197 silly cache add   escapedName: 'redis',
+197 silly cache add   name: 'redis',
+197 silly cache add   rawSpec: '^2.7.1',
+197 silly cache add   spec: '>=2.7.1 <3.0.0',
+197 silly cache add   type: 'range' }
+198 silly addNamed redis@>=2.7.1 <3.0.0
+199 verbose addNamed ">=2.7.1 <3.0.0" is a valid semver range for redis
+200 silly addNameRange { name: 'redis', range: '>=2.7.1 <3.0.0', hasData: false }
+201 silly mapToRegistry name redis
+202 silly mapToRegistry using default registry
+203 silly mapToRegistry registry https://registry.npmjs.org/
+204 silly mapToRegistry data Result {
+204 silly mapToRegistry   raw: 'redis',
+204 silly mapToRegistry   scope: null,
+204 silly mapToRegistry   escapedName: 'redis',
+204 silly mapToRegistry   name: 'redis',
+204 silly mapToRegistry   rawSpec: '',
+204 silly mapToRegistry   spec: 'latest',
+204 silly mapToRegistry   type: 'tag' }
+205 silly mapToRegistry uri https://registry.npmjs.org/redis
+206 verbose addNameRange registry:https://registry.npmjs.org/redis not in flight; fetching
+207 http fetch 200 https://registry.npmjs.org/connect-redis/-/connect-redis-3.2.0.tgz
+208 verbose get https://registry.npmjs.org/redis not expired, no request
+209 silly addNameRange number 2 { name: 'redis', range: '>=2.7.1 <3.0.0', hasData: true }
+210 silly addNameRange versions [ 'redis',
+210 silly addNameRange   [ '0.0.1',
+210 silly addNameRange     '0.0.2',
+210 silly addNameRange     '0.0.3',
+210 silly addNameRange     '0.0.4',
+210 silly addNameRange     '0.0.7',
+210 silly addNameRange     '0.0.8',
+210 silly addNameRange     '0.1.0',
+210 silly addNameRange     '0.1.1',
+210 silly addNameRange     '0.1.2',
+210 silly addNameRange     '0.2.0',
+210 silly addNameRange     '0.2.1',
+210 silly addNameRange     '0.2.2',
+210 silly addNameRange     '0.2.3',
+210 silly addNameRange     '0.2.4',
+210 silly addNameRange     '0.2.6',
+210 silly addNameRange     '0.3.0',
+210 silly addNameRange     '0.3.1',
+210 silly addNameRange     '0.3.2',
+210 silly addNameRange     '0.3.3',
+210 silly addNameRange     '0.3.4',
+210 silly addNameRange     '0.3.5',
+210 silly addNameRange     '0.3.6',
+210 silly addNameRange     '0.3.7',
+210 silly addNameRange     '0.3.9',
+210 silly addNameRange     '0.4.0',
+210 silly addNameRange     '0.4.1',
+210 silly addNameRange     '0.4.2',
+210 silly addNameRange     '0.5.0',
+210 silly addNameRange     '0.5.1',
+210 silly addNameRange     '0.5.2',
+210 silly addNameRange     '0.5.3',
+210 silly addNameRange     '0.5.4',
+210 silly addNameRange     '0.5.5',
+210 silly addNameRange     '0.5.6',
+210 silly addNameRange     '0.5.7',
+210 silly addNameRange     '0.5.8',
+210 silly addNameRange     '0.5.9',
+210 silly addNameRange     '0.5.10',
+210 silly addNameRange     '0.5.11',
+210 silly addNameRange     '0.6.0',
+210 silly addNameRange     '0.6.1',
+210 silly addNameRange     '0.6.2',
+210 silly addNameRange     '0.6.3',
+210 silly addNameRange     '0.6.4',
+210 silly addNameRange     '0.6.5',
+210 silly addNameRange     '0.6.6',
+210 silly addNameRange     '0.6.7',
+210 silly addNameRange     '0.7.0',
+210 silly addNameRange     '0.7.1',
+210 silly addNameRange     '0.7.2',
+210 silly addNameRange     '0.7.3',
+210 silly addNameRange     '0.8.0',
+210 silly addNameRange     '0.8.1',
+210 silly addNameRange     '0.8.2',
+210 silly addNameRange     '0.8.3',
+210 silly addNameRange     '0.8.4',
+210 silly addNameRange     '0.8.5',
+210 silly addNameRange     '0.8.6',
+210 silly addNameRange     '0.9.0',
+210 silly addNameRange     '0.9.1',
+210 silly addNameRange     '0.9.2',
+210 silly addNameRange     '0.10.0',
+210 silly addNameRange     '0.10.1',
+210 silly addNameRange     '0.10.2',
+210 silly addNameRange     '0.10.3',
+210 silly addNameRange     '0.11.0',
+210 silly addNameRange     '0.12.0',
+210 silly addNameRange     '0.12.1',
+210 silly addNameRange     '1.0.0',
+210 silly addNameRange     '2.0.0',
+210 silly addNameRange     '2.0.1',
+210 silly addNameRange     '2.1.0',
+210 silly addNameRange     '2.2.0',
+210 silly addNameRange     '2.2.1',
+210 silly addNameRange     '2.2.2',
+210 silly addNameRange     '2.2.3',
+210 silly addNameRange     '2.2.4',
+210 silly addNameRange     '2.2.5',
+210 silly addNameRange     '2.3.0',
+210 silly addNameRange     '2.3.1',
+210 silly addNameRange     '2.4.0',
+210 silly addNameRange     '2.4.1',
+210 silly addNameRange     '2.4.2',
+210 silly addNameRange     '2.5.0-1',
+210 silly addNameRange     '2.5.0',
+210 silly addNameRange     '2.5.1',
+210 silly addNameRange     '2.5.2',
+210 silly addNameRange     '2.5.3',
+210 silly addNameRange     '2.6.0-0',
+210 silly addNameRange     '2.6.0-1',
+210 silly addNameRange     '2.6.0-2',
+210 silly addNameRange     '2.6.0',
+210 silly addNameRange     '2.6.1',
+210 silly addNameRange     '2.6.2',
+210 silly addNameRange     '2.6.3',
+210 silly addNameRange     '2.6.4',
+210 silly addNameRange     '2.6.5',
+210 silly addNameRange     '2.7.0',
+210 silly addNameRange     '2.7.1' ] ]
+211 silly addNamed redis@2.7.1
+212 verbose addNamed "2.7.1" is a plain semver version for redis
+213 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\epoll\0.1.21\package\package.json written
+214 http fetch 200 https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz
+215 silly mapToRegistry name redis
+216 silly mapToRegistry using default registry
+217 silly mapToRegistry registry https://registry.npmjs.org/
+218 silly mapToRegistry data Result {
+218 silly mapToRegistry   raw: 'redis',
+218 silly mapToRegistry   scope: null,
+218 silly mapToRegistry   escapedName: 'redis',
+218 silly mapToRegistry   name: 'redis',
+218 silly mapToRegistry   rawSpec: '',
+218 silly mapToRegistry   spec: 'latest',
+218 silly mapToRegistry   type: 'tag' }
+219 silly mapToRegistry uri https://registry.npmjs.org/redis
+220 verbose addRemoteTarball https://registry.npmjs.org/redis/-/redis-2.7.1.tgz not in flight; adding
+221 verbose addRemoteTarball [ 'https://registry.npmjs.org/redis/-/redis-2.7.1.tgz',
+221 verbose addRemoteTarball   '7d56f7875b98b20410b71539f1d878ed58ebf46a' ]
+222 silly fetchAndShaCheck shasum 2d29ea60c8ae8c2c818a710247fdfed158f43388
+223 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\rpi-gpio\0.7.0\package\package.json written
+224 info retry fetch attempt 1 at 14:24:24
+225 info attempt registry request try #1 at 14:24:24
+226 http fetch GET https://registry.npmjs.org/redis/-/redis-2.7.1.tgz
+227 verbose addTmpTarball C:\Users\Anbor\AppData\Local\Temp\npm-1264-baf2b555\registry.npmjs.org\connect-redis\-\connect-redis-3.2.0.tgz not in flight; adding
+228 verbose addTmpTarball already have metadata; skipping unpack for connect-redis@3.2.0
+229 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+230 silly fetchAndShaCheck shasum 8a7bd37186b6dddf3813f23858b57ecaaf5e41d4
+231 verbose addTmpTarball C:\Users\Anbor\AppData\Local\Temp\npm-1264-baf2b555\registry.npmjs.org\fs\-\fs-0.0.1-security.tgz not in flight; adding
+232 verbose addTmpTarball already have metadata; skipping unpack for fs@0.0.1-security
+233 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+234 http fetch 200 https://registry.npmjs.org/redis/-/redis-2.7.1.tgz
+235 silly cache afterAdd connect-redis@3.2.0
+236 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\connect-redis\3.2.0\package\package.json not in flight; writing
+237 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+238 silly cache afterAdd fs@0.0.1-security
+239 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\fs\0.0.1-security\package\package.json not in flight; writing
+240 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+241 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\connect-redis\3.2.0\package\package.json written
+242 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\fs\0.0.1-security\package\package.json written
+243 silly fetchAndShaCheck shasum 7d56f7875b98b20410b71539f1d878ed58ebf46a
+244 verbose addTmpTarball C:\Users\Anbor\AppData\Local\Temp\npm-1264-baf2b555\registry.npmjs.org\redis\-\redis-2.7.1.tgz not in flight; adding
+245 verbose addTmpTarball already have metadata; skipping unpack for redis@2.7.1
+246 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+247 silly cache afterAdd redis@2.7.1
+248 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\redis\2.7.1\package\package.json not in flight; writing
+249 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+250 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\redis\2.7.1\package\package.json written
+251 silly fetchNamedPackageData double-ended-queue
+252 silly mapToRegistry name double-ended-queue
+253 silly mapToRegistry using default registry
+254 silly mapToRegistry registry https://registry.npmjs.org/
+255 silly mapToRegistry data Result {
+255 silly mapToRegistry   raw: 'double-ended-queue',
+255 silly mapToRegistry   scope: null,
+255 silly mapToRegistry   escapedName: 'double-ended-queue',
+255 silly mapToRegistry   name: 'double-ended-queue',
+255 silly mapToRegistry   rawSpec: '',
+255 silly mapToRegistry   spec: 'latest',
+255 silly mapToRegistry   type: 'tag' }
+256 silly mapToRegistry uri https://registry.npmjs.org/double-ended-queue
+257 silly fetchNamedPackageData redis-commands
+258 silly mapToRegistry name redis-commands
+259 silly mapToRegistry using default registry
+260 silly mapToRegistry registry https://registry.npmjs.org/
+261 silly mapToRegistry data Result {
+261 silly mapToRegistry   raw: 'redis-commands',
+261 silly mapToRegistry   scope: null,
+261 silly mapToRegistry   escapedName: 'redis-commands',
+261 silly mapToRegistry   name: 'redis-commands',
+261 silly mapToRegistry   rawSpec: '',
+261 silly mapToRegistry   spec: 'latest',
+261 silly mapToRegistry   type: 'tag' }
+262 silly mapToRegistry uri https://registry.npmjs.org/redis-commands
+263 silly fetchNamedPackageData redis-parser
+264 silly mapToRegistry name redis-parser
+265 silly mapToRegistry using default registry
+266 silly mapToRegistry registry https://registry.npmjs.org/
+267 silly mapToRegistry data Result {
+267 silly mapToRegistry   raw: 'redis-parser',
+267 silly mapToRegistry   scope: null,
+267 silly mapToRegistry   escapedName: 'redis-parser',
+267 silly mapToRegistry   name: 'redis-parser',
+267 silly mapToRegistry   rawSpec: '',
+267 silly mapToRegistry   spec: 'latest',
+267 silly mapToRegistry   type: 'tag' }
+268 silly mapToRegistry uri https://registry.npmjs.org/redis-parser
+269 verbose request uri https://registry.npmjs.org/double-ended-queue
+270 verbose request no auth needed
+271 info attempt registry request try #1 at 14:24:24
+272 http request GET https://registry.npmjs.org/double-ended-queue
+273 verbose request uri https://registry.npmjs.org/redis-commands
+274 verbose request no auth needed
+275 info attempt registry request try #1 at 14:24:24
+276 http request GET https://registry.npmjs.org/redis-commands
+277 verbose request uri https://registry.npmjs.org/redis-parser
+278 verbose request no auth needed
+279 info attempt registry request try #1 at 14:24:24
+280 http request GET https://registry.npmjs.org/redis-parser
+281 http 200 https://registry.npmjs.org/double-ended-queue
+282 verbose headers { server: 'nginx/1.10.1',
+282 verbose headers   'content-type': 'application/json',
+282 verbose headers   'last-modified': 'Tue, 06 Dec 2016 15:02:06 GMT',
+282 verbose headers   etag: 'W/"5846d2ee-350e"',
+282 verbose headers   'content-encoding': 'gzip',
+282 verbose headers   'cache-control': 'max-age=300',
+282 verbose headers   'content-length': '3792',
+282 verbose headers   'accept-ranges': 'bytes',
+282 verbose headers   date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+282 verbose headers   via: '1.1 varnish',
+282 verbose headers   age: '170',
+282 verbose headers   connection: 'keep-alive',
+282 verbose headers   'x-served-by': 'cache-bma7032-BMA',
+282 verbose headers   'x-cache': 'HIT',
+282 verbose headers   'x-cache-hits': '1',
+282 verbose headers   'x-timer': 'S1490275464.887587,VS0,VE0',
+282 verbose headers   vary: 'Accept-Encoding' }
+283 silly get cb [ 200,
+283 silly get   { server: 'nginx/1.10.1',
+283 silly get     'content-type': 'application/json',
+283 silly get     'last-modified': 'Tue, 06 Dec 2016 15:02:06 GMT',
+283 silly get     etag: 'W/"5846d2ee-350e"',
+283 silly get     'content-encoding': 'gzip',
+283 silly get     'cache-control': 'max-age=300',
+283 silly get     'content-length': '3792',
+283 silly get     'accept-ranges': 'bytes',
+283 silly get     date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+283 silly get     via: '1.1 varnish',
+283 silly get     age: '170',
+283 silly get     connection: 'keep-alive',
+283 silly get     'x-served-by': 'cache-bma7032-BMA',
+283 silly get     'x-cache': 'HIT',
+283 silly get     'x-cache-hits': '1',
+283 silly get     'x-timer': 'S1490275464.887587,VS0,VE0',
+283 silly get     vary: 'Accept-Encoding' } ]
+284 verbose get saving double-ended-queue to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\double-ended-queue\.cache.json
+285 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+286 http 200 https://registry.npmjs.org/redis-commands
+287 verbose headers { server: 'nginx/1.10.1',
+287 verbose headers   'content-type': 'application/json',
+287 verbose headers   'last-modified': 'Wed, 25 Jan 2017 16:55:56 GMT',
+287 verbose headers   etag: 'W/"5888d89c-395e"',
+287 verbose headers   'content-encoding': 'gzip',
+287 verbose headers   'cache-control': 'max-age=300',
+287 verbose headers   'content-length': '2700',
+287 verbose headers   'accept-ranges': 'bytes',
+287 verbose headers   date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+287 verbose headers   via: '1.1 varnish',
+287 verbose headers   age: '160',
+287 verbose headers   connection: 'keep-alive',
+287 verbose headers   'x-served-by': 'cache-bma7031-BMA',
+287 verbose headers   'x-cache': 'HIT',
+287 verbose headers   'x-cache-hits': '1',
+287 verbose headers   'x-timer': 'S1490275464.887772,VS0,VE0',
+287 verbose headers   vary: 'Accept-Encoding' }
+288 silly get cb [ 200,
+288 silly get   { server: 'nginx/1.10.1',
+288 silly get     'content-type': 'application/json',
+288 silly get     'last-modified': 'Wed, 25 Jan 2017 16:55:56 GMT',
+288 silly get     etag: 'W/"5888d89c-395e"',
+288 silly get     'content-encoding': 'gzip',
+288 silly get     'cache-control': 'max-age=300',
+288 silly get     'content-length': '2700',
+288 silly get     'accept-ranges': 'bytes',
+288 silly get     date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+288 silly get     via: '1.1 varnish',
+288 silly get     age: '160',
+288 silly get     connection: 'keep-alive',
+288 silly get     'x-served-by': 'cache-bma7031-BMA',
+288 silly get     'x-cache': 'HIT',
+288 silly get     'x-cache-hits': '1',
+288 silly get     'x-timer': 'S1490275464.887772,VS0,VE0',
+288 silly get     vary: 'Accept-Encoding' } ]
+289 verbose get saving redis-commands to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\redis-commands\.cache.json
+290 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+291 http 200 https://registry.npmjs.org/redis-parser
+292 verbose headers { server: 'nginx/1.10.1',
+292 verbose headers   'content-type': 'application/json',
+292 verbose headers   'last-modified': 'Sat, 11 Mar 2017 16:15:15 GMT',
+292 verbose headers   etag: 'W/"58c42293-8734"',
+292 verbose headers   'content-encoding': 'gzip',
+292 verbose headers   'cache-control': 'max-age=300',
+292 verbose headers   'content-length': '5399',
+292 verbose headers   'accept-ranges': 'bytes',
+292 verbose headers   date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+292 verbose headers   via: '1.1 varnish',
+292 verbose headers   age: '281',
+292 verbose headers   connection: 'keep-alive',
+292 verbose headers   'x-served-by': 'cache-bma7028-BMA',
+292 verbose headers   'x-cache': 'HIT',
+292 verbose headers   'x-cache-hits': '2',
+292 verbose headers   'x-timer': 'S1490275464.889023,VS0,VE0',
+292 verbose headers   vary: 'Accept-Encoding' }
+293 silly get cb [ 200,
+293 silly get   { server: 'nginx/1.10.1',
+293 silly get     'content-type': 'application/json',
+293 silly get     'last-modified': 'Sat, 11 Mar 2017 16:15:15 GMT',
+293 silly get     etag: 'W/"58c42293-8734"',
+293 silly get     'content-encoding': 'gzip',
+293 silly get     'cache-control': 'max-age=300',
+293 silly get     'content-length': '5399',
+293 silly get     'accept-ranges': 'bytes',
+293 silly get     date: 'Thu, 23 Mar 2017 13:24:24 GMT',
+293 silly get     via: '1.1 varnish',
+293 silly get     age: '281',
+293 silly get     connection: 'keep-alive',
+293 silly get     'x-served-by': 'cache-bma7028-BMA',
+293 silly get     'x-cache': 'HIT',
+293 silly get     'x-cache-hits': '2',
+293 silly get     'x-timer': 'S1490275464.889023,VS0,VE0',
+293 silly get     vary: 'Accept-Encoding' } ]
+294 verbose get saving redis-parser to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\redis-parser\.cache.json
+295 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+296 silly resolveWithNewModule redis-commands@1.3.1 checking installable status
+297 silly cache add args [ 'redis-commands@^1.2.0', null ]
+298 verbose cache add spec redis-commands@^1.2.0
+299 silly cache add parsed spec Result {
+299 silly cache add   raw: 'redis-commands@^1.2.0',
+299 silly cache add   scope: null,
+299 silly cache add   escapedName: 'redis-commands',
+299 silly cache add   name: 'redis-commands',
+299 silly cache add   rawSpec: '^1.2.0',
+299 silly cache add   spec: '>=1.2.0 <2.0.0',
+299 silly cache add   type: 'range' }
+300 silly addNamed redis-commands@>=1.2.0 <2.0.0
+301 verbose addNamed ">=1.2.0 <2.0.0" is a valid semver range for redis-commands
+302 silly addNameRange { name: 'redis-commands',
+302 silly addNameRange   range: '>=1.2.0 <2.0.0',
+302 silly addNameRange   hasData: false }
+303 silly mapToRegistry name redis-commands
+304 silly mapToRegistry using default registry
+305 silly mapToRegistry registry https://registry.npmjs.org/
+306 silly mapToRegistry data Result {
+306 silly mapToRegistry   raw: 'redis-commands',
+306 silly mapToRegistry   scope: null,
+306 silly mapToRegistry   escapedName: 'redis-commands',
+306 silly mapToRegistry   name: 'redis-commands',
+306 silly mapToRegistry   rawSpec: '',
+306 silly mapToRegistry   spec: 'latest',
+306 silly mapToRegistry   type: 'tag' }
+307 silly mapToRegistry uri https://registry.npmjs.org/redis-commands
+308 verbose addNameRange registry:https://registry.npmjs.org/redis-commands not in flight; fetching
+309 silly resolveWithNewModule double-ended-queue@2.1.0-0 checking installable status
+310 silly cache add args [ 'double-ended-queue@^2.1.0-0', null ]
+311 verbose cache add spec double-ended-queue@^2.1.0-0
+312 silly cache add parsed spec Result {
+312 silly cache add   raw: 'double-ended-queue@^2.1.0-0',
+312 silly cache add   scope: null,
+312 silly cache add   escapedName: 'double-ended-queue',
+312 silly cache add   name: 'double-ended-queue',
+312 silly cache add   rawSpec: '^2.1.0-0',
+312 silly cache add   spec: '>=2.1.0-0 <3.0.0',
+312 silly cache add   type: 'range' }
+313 silly addNamed double-ended-queue@>=2.1.0-0 <3.0.0
+314 verbose addNamed ">=2.1.0-0 <3.0.0" is a valid semver range for double-ended-queue
+315 silly addNameRange { name: 'double-ended-queue',
+315 silly addNameRange   range: '>=2.1.0-0 <3.0.0',
+315 silly addNameRange   hasData: false }
+316 silly mapToRegistry name double-ended-queue
+317 silly mapToRegistry using default registry
+318 silly mapToRegistry registry https://registry.npmjs.org/
+319 silly mapToRegistry data Result {
+319 silly mapToRegistry   raw: 'double-ended-queue',
+319 silly mapToRegistry   scope: null,
+319 silly mapToRegistry   escapedName: 'double-ended-queue',
+319 silly mapToRegistry   name: 'double-ended-queue',
+319 silly mapToRegistry   rawSpec: '',
+319 silly mapToRegistry   spec: 'latest',
+319 silly mapToRegistry   type: 'tag' }
+320 silly mapToRegistry uri https://registry.npmjs.org/double-ended-queue
+321 verbose addNameRange registry:https://registry.npmjs.org/double-ended-queue not in flight; fetching
+322 verbose get https://registry.npmjs.org/redis-commands not expired, no request
+323 silly addNameRange number 2 { name: 'redis-commands',
+323 silly addNameRange   range: '>=1.2.0 <2.0.0',
+323 silly addNameRange   hasData: true }
+324 silly addNameRange versions [ 'redis-commands',
+324 silly addNameRange   [ '0.0.1',
+324 silly addNameRange     '0.0.2',
+324 silly addNameRange     '0.0.3',
+324 silly addNameRange     '1.0.0',
+324 silly addNameRange     '1.0.1',
+324 silly addNameRange     '1.0.2',
+324 silly addNameRange     '1.1.0',
+324 silly addNameRange     '1.2.0',
+324 silly addNameRange     '1.3.0',
+324 silly addNameRange     '1.3.1' ] ]
+325 silly addNamed redis-commands@1.3.1
+326 verbose addNamed "1.3.1" is a plain semver version for redis-commands
+327 silly mapToRegistry name redis-commands
+328 silly mapToRegistry using default registry
+329 silly mapToRegistry registry https://registry.npmjs.org/
+330 silly mapToRegistry data Result {
+330 silly mapToRegistry   raw: 'redis-commands',
+330 silly mapToRegistry   scope: null,
+330 silly mapToRegistry   escapedName: 'redis-commands',
+330 silly mapToRegistry   name: 'redis-commands',
+330 silly mapToRegistry   rawSpec: '',
+330 silly mapToRegistry   spec: 'latest',
+330 silly mapToRegistry   type: 'tag' }
+331 silly mapToRegistry uri https://registry.npmjs.org/redis-commands
+332 verbose addRemoteTarball https://registry.npmjs.org/redis-commands/-/redis-commands-1.3.1.tgz not in flight; adding
+333 verbose addRemoteTarball [ 'https://registry.npmjs.org/redis-commands/-/redis-commands-1.3.1.tgz',
+333 verbose addRemoteTarball   '81d826f45fa9c8b2011f4cd7a0fe597d241d442b' ]
+334 verbose get https://registry.npmjs.org/double-ended-queue not expired, no request
+335 silly addNameRange number 2 { name: 'double-ended-queue',
+335 silly addNameRange   range: '>=2.1.0-0 <3.0.0',
+335 silly addNameRange   hasData: true }
+336 silly addNameRange versions [ 'double-ended-queue', [ '0.9.7', '2.0.0-0', '2.1.0-0' ] ]
+337 silly addNamed double-ended-queue@2.1.0-0
+338 verbose addNamed "2.1.0-0" is a plain semver version for double-ended-queue
+339 silly resolveWithNewModule redis-parser@2.5.0 checking installable status
+340 silly cache add args [ 'redis-parser@^2.5.0', null ]
+341 verbose cache add spec redis-parser@^2.5.0
+342 silly cache add parsed spec Result {
+342 silly cache add   raw: 'redis-parser@^2.5.0',
+342 silly cache add   scope: null,
+342 silly cache add   escapedName: 'redis-parser',
+342 silly cache add   name: 'redis-parser',
+342 silly cache add   rawSpec: '^2.5.0',
+342 silly cache add   spec: '>=2.5.0 <3.0.0',
+342 silly cache add   type: 'range' }
+343 silly addNamed redis-parser@>=2.5.0 <3.0.0
+344 verbose addNamed ">=2.5.0 <3.0.0" is a valid semver range for redis-parser
+345 silly addNameRange { name: 'redis-parser', range: '>=2.5.0 <3.0.0', hasData: false }
+346 silly mapToRegistry name redis-parser
+347 silly mapToRegistry using default registry
+348 silly mapToRegistry registry https://registry.npmjs.org/
+349 silly mapToRegistry data Result {
+349 silly mapToRegistry   raw: 'redis-parser',
+349 silly mapToRegistry   scope: null,
+349 silly mapToRegistry   escapedName: 'redis-parser',
+349 silly mapToRegistry   name: 'redis-parser',
+349 silly mapToRegistry   rawSpec: '',
+349 silly mapToRegistry   spec: 'latest',
+349 silly mapToRegistry   type: 'tag' }
+350 silly mapToRegistry uri https://registry.npmjs.org/redis-parser
+351 verbose addNameRange registry:https://registry.npmjs.org/redis-parser not in flight; fetching
+352 silly mapToRegistry name double-ended-queue
+353 silly mapToRegistry using default registry
+354 silly mapToRegistry registry https://registry.npmjs.org/
+355 silly mapToRegistry data Result {
+355 silly mapToRegistry   raw: 'double-ended-queue',
+355 silly mapToRegistry   scope: null,
+355 silly mapToRegistry   escapedName: 'double-ended-queue',
+355 silly mapToRegistry   name: 'double-ended-queue',
+355 silly mapToRegistry   rawSpec: '',
+355 silly mapToRegistry   spec: 'latest',
+355 silly mapToRegistry   type: 'tag' }
+356 silly mapToRegistry uri https://registry.npmjs.org/double-ended-queue
+357 verbose addRemoteTarball https://registry.npmjs.org/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz not in flight; adding
+358 verbose addRemoteTarball [ 'https://registry.npmjs.org/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz',
+358 verbose addRemoteTarball   '103d3527fd31528f40188130c841efdd78264e5c' ]
+359 verbose get https://registry.npmjs.org/redis-parser not expired, no request
+360 silly addNameRange number 2 { name: 'redis-parser', range: '>=2.5.0 <3.0.0', hasData: true }
+361 silly addNameRange versions [ 'redis-parser',
+361 silly addNameRange   [ '0.0.1',
+361 silly addNameRange     '1.0.0',
+361 silly addNameRange     '1.1.0',
+361 silly addNameRange     '1.2.0',
+361 silly addNameRange     '1.3.0',
+361 silly addNameRange     '2.0.0',
+361 silly addNameRange     '2.0.1',
+361 silly addNameRange     '2.0.2',
+361 silly addNameRange     '2.0.3',
+361 silly addNameRange     '2.0.4',
+361 silly addNameRange     '2.1.0',
+361 silly addNameRange     '2.1.1',
+361 silly addNameRange     '2.2.0',
+361 silly addNameRange     '2.3.0',
+361 silly addNameRange     '2.4.0',
+361 silly addNameRange     '2.5.0' ] ]
+362 silly addNamed redis-parser@2.5.0
+363 verbose addNamed "2.5.0" is a plain semver version for redis-parser
+364 info retry fetch attempt 1 at 14:24:24
+365 info attempt registry request try #1 at 14:24:24
+366 http fetch GET https://registry.npmjs.org/redis-commands/-/redis-commands-1.3.1.tgz
+367 silly mapToRegistry name redis-parser
+368 silly mapToRegistry using default registry
+369 silly mapToRegistry registry https://registry.npmjs.org/
+370 silly mapToRegistry data Result {
+370 silly mapToRegistry   raw: 'redis-parser',
+370 silly mapToRegistry   scope: null,
+370 silly mapToRegistry   escapedName: 'redis-parser',
+370 silly mapToRegistry   name: 'redis-parser',
+370 silly mapToRegistry   rawSpec: '',
+370 silly mapToRegistry   spec: 'latest',
+370 silly mapToRegistry   type: 'tag' }
+371 silly mapToRegistry uri https://registry.npmjs.org/redis-parser
+372 verbose addRemoteTarball https://registry.npmjs.org/redis-parser/-/redis-parser-2.5.0.tgz not in flight; adding
+373 verbose addRemoteTarball [ 'https://registry.npmjs.org/redis-parser/-/redis-parser-2.5.0.tgz',
+373 verbose addRemoteTarball   '79fc2b1d4a6e4d2870b35368433639271fca2617' ]
+374 info retry fetch attempt 1 at 14:24:24
+375 info attempt registry request try #1 at 14:24:24
+376 http fetch GET https://registry.npmjs.org/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz
+377 info retry fetch attempt 1 at 14:24:24
+378 info attempt registry request try #1 at 14:24:24
+379 http fetch GET https://registry.npmjs.org/redis-parser/-/redis-parser-2.5.0.tgz
+380 http fetch 200 https://registry.npmjs.org/redis-commands/-/redis-commands-1.3.1.tgz
+381 http fetch 200 https://registry.npmjs.org/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz
+382 http fetch 200 https://registry.npmjs.org/redis-parser/-/redis-parser-2.5.0.tgz
+383 silly fetchAndShaCheck shasum 81d826f45fa9c8b2011f4cd7a0fe597d241d442b
+384 verbose addTmpTarball C:\Users\Anbor\AppData\Local\Temp\npm-1264-baf2b555\registry.npmjs.org\redis-commands\-\redis-commands-1.3.1.tgz not in flight; adding
+385 verbose addTmpTarball already have metadata; skipping unpack for redis-commands@1.3.1
+386 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+387 silly fetchAndShaCheck shasum 79fc2b1d4a6e4d2870b35368433639271fca2617
+388 silly fetchAndShaCheck shasum 103d3527fd31528f40188130c841efdd78264e5c
+389 verbose addTmpTarball C:\Users\Anbor\AppData\Local\Temp\npm-1264-baf2b555\registry.npmjs.org\redis-parser\-\redis-parser-2.5.0.tgz not in flight; adding
+390 verbose addTmpTarball already have metadata; skipping unpack for redis-parser@2.5.0
+391 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+392 verbose addTmpTarball C:\Users\Anbor\AppData\Local\Temp\npm-1264-baf2b555\registry.npmjs.org\double-ended-queue\-\double-ended-queue-2.1.0-0.tgz not in flight; adding
+393 verbose addTmpTarball already have metadata; skipping unpack for double-ended-queue@2.1.0-0
+394 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+395 silly cache afterAdd redis-commands@1.3.1
+396 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\redis-commands\1.3.1\package\package.json not in flight; writing
+397 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+398 silly cache afterAdd double-ended-queue@2.1.0-0
+399 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\double-ended-queue\2.1.0-0\package\package.json not in flight; writing
+400 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+401 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\redis-commands\1.3.1\package\package.json written
+402 silly cache afterAdd redis-parser@2.5.0
+403 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\redis-parser\2.5.0\package\package.json not in flight; writing
+404 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+405 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\double-ended-queue\2.1.0-0\package\package.json written
+406 verbose afterAdd C:\Users\Anbor\AppData\Roaming\npm-cache\redis-parser\2.5.0\package\package.json written
+407 silly fetchNamedPackageData fsevents
+408 silly mapToRegistry name fsevents
+409 silly mapToRegistry using default registry
+410 silly mapToRegistry registry https://registry.npmjs.org/
+411 silly mapToRegistry data Result {
+411 silly mapToRegistry   raw: 'fsevents',
+411 silly mapToRegistry   scope: null,
+411 silly mapToRegistry   escapedName: 'fsevents',
+411 silly mapToRegistry   name: 'fsevents',
+411 silly mapToRegistry   rawSpec: '',
+411 silly mapToRegistry   spec: 'latest',
+411 silly mapToRegistry   type: 'tag' }
+412 silly mapToRegistry uri https://registry.npmjs.org/fsevents
+413 verbose request uri https://registry.npmjs.org/fsevents
+414 verbose request no auth needed
+415 info attempt registry request try #1 at 14:24:24
+416 verbose etag W/"58cbe1d5-d5e6"
+417 verbose lastModified Fri, 17 Mar 2017 13:17:09 GMT
+418 http request GET https://registry.npmjs.org/fsevents
+419 http 304 https://registry.npmjs.org/fsevents
+420 verbose headers { date: 'Thu, 23 Mar 2017 13:24:25 GMT',
+420 verbose headers   via: '1.1 varnish',
+420 verbose headers   'cache-control': 'max-age=300',
+420 verbose headers   etag: 'W/"58cbe1d5-d5e6"',
+420 verbose headers   age: '282',
+420 verbose headers   connection: 'keep-alive',
+420 verbose headers   'x-served-by': 'cache-bma7031-BMA',
+420 verbose headers   'x-cache': 'HIT',
+420 verbose headers   'x-cache-hits': '28',
+420 verbose headers   'x-timer': 'S1490275465.188505,VS0,VE0',
+420 verbose headers   vary: 'Accept-Encoding' }
+421 silly get cb [ 304,
+421 silly get   { date: 'Thu, 23 Mar 2017 13:24:25 GMT',
+421 silly get     via: '1.1 varnish',
+421 silly get     'cache-control': 'max-age=300',
+421 silly get     etag: 'W/"58cbe1d5-d5e6"',
+421 silly get     age: '282',
+421 silly get     connection: 'keep-alive',
+421 silly get     'x-served-by': 'cache-bma7031-BMA',
+421 silly get     'x-cache': 'HIT',
+421 silly get     'x-cache-hits': '28',
+421 silly get     'x-timer': 'S1490275465.188505,VS0,VE0',
+421 silly get     vary: 'Accept-Encoding' } ]
+422 verbose etag https://registry.npmjs.org/fsevents from cache
+423 verbose get saving fsevents to C:\Users\Anbor\AppData\Roaming\npm-cache\registry.npmjs.org\fsevents\.cache.json
+424 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+425 silly resolveWithNewModule fsevents@1.1.1 checking installable status
+426 silly loadAllDepsIntoIdealTree Finishing
+427 silly loadIdealTree Finishing
+428 silly currentTree smarthouse@0.0.0
+428 silly currentTree +-- @types/bluebird@3.0.37
+428 silly currentTree +-- @types/express-serve-static-core@4.0.41
+428 silly currentTree +-- @types/express@4.0.35
+428 silly currentTree +-- @types/mime@0.0.29
+428 silly currentTree +-- @types/node@7.0.8
+428 silly currentTree +-- @types/serve-static@1.7.31
+428 silly currentTree +-- abbrev@1.1.0
+428 silly currentTree +-- accepts@1.3.3
+428 silly currentTree +-- after@0.8.2
+428 silly currentTree +-- align-text@0.1.4
+428 silly currentTree +-- ambi@2.5.0
+428 silly currentTree | `-- typechecker@4.4.1
+428 silly currentTree +-- amdefine@1.0.1
+428 silly currentTree +-- ansi-regex@2.1.1
+428 silly currentTree +-- ansi-styles@2.2.1
+428 silly currentTree +-- anymatch@1.3.0
+428 silly currentTree +-- arr-diff@2.0.0
+428 silly currentTree +-- arr-flatten@1.0.1
+428 silly currentTree +-- array-flatten@1.1.1
+428 silly currentTree +-- array-unique@0.2.1
+428 silly currentTree +-- arraybuffer.slice@0.0.6
+428 silly currentTree +-- arrify@1.0.1
+428 silly currentTree +-- asap@2.0.5
+428 silly currentTree +-- async-each@1.0.1
+428 silly currentTree +-- async@1.5.2
+428 silly currentTree +-- backo2@1.0.2
+428 silly currentTree +-- balanced-match@0.4.2
+428 silly currentTree +-- base64-arraybuffer@0.1.5
+428 silly currentTree +-- base64id@1.0.0
+428 silly currentTree +-- basic-auth@1.0.4
+428 silly currentTree +-- bcryptjs@2.4.3
+428 silly currentTree +-- better-assert@1.0.2
+428 silly currentTree +-- bignumber.js@3.1.2
+428 silly currentTree +-- binary-extensions@1.8.0
+428 silly currentTree +-- bindings@1.2.1
+428 silly currentTree +-- blob@0.0.4
+428 silly currentTree +-- bluebird@3.5.0
+428 silly currentTree +-- body-parser@1.17.1
+428 silly currentTree | +-- debug@2.6.1
+428 silly currentTree | `-- qs@6.4.0
+428 silly currentTree +-- brace-expansion@1.1.6
+428 silly currentTree +-- braces@1.8.5
+428 silly currentTree +-- buffer-shims@1.0.0
+428 silly currentTree +-- bytes@2.4.0
+428 silly currentTree +-- callsite@1.0.0
+428 silly currentTree +-- camelcase@1.2.1
+428 silly currentTree +-- center-align@0.1.3
+428 silly currentTree +-- chalk@1.1.3
+428 silly currentTree +-- chokidar@1.6.1
+428 silly currentTree +-- cliui@2.1.0
+428 silly currentTree | `-- wordwrap@0.0.2
+428 silly currentTree +-- commander@2.9.0
+428 silly currentTree +-- component-bind@1.0.0
+428 silly currentTree +-- component-emitter@1.1.2
+428 silly currentTree +-- component-inherit@0.0.3
+428 silly currentTree +-- concat-map@0.0.1
+428 silly currentTree +-- configstore@1.4.0
+428 silly currentTree +-- connect-flash@0.1.1
+428 silly currentTree +-- content-disposition@0.5.2
+428 silly currentTree +-- content-type@1.0.2
+428 silly currentTree +-- cookie-parser@1.4.3
+428 silly currentTree +-- cookie-signature@1.0.6
+428 silly currentTree +-- cookie@0.3.1
+428 silly currentTree +-- core-util-is@1.0.2
+428 silly currentTree +-- crc@3.4.4
+428 silly currentTree +-- csextends@1.0.3
+428 silly currentTree +-- debug@2.2.0
+428 silly currentTree | `-- ms@0.7.1
+428 silly currentTree +-- decamelize@1.2.0
+428 silly currentTree +-- deep-extend@0.4.1
+428 silly currentTree +-- define-properties@1.1.2
+428 silly currentTree +-- depd@1.1.0
+428 silly currentTree +-- destroy@1.0.4
+428 silly currentTree +-- ds18b20@0.1.0
+428 silly currentTree +-- duplexer@0.1.1
+428 silly currentTree +-- duplexify@3.5.0
+428 silly currentTree | +-- isarray@1.0.0
+428 silly currentTree | `-- readable-stream@2.2.6
+428 silly currentTree +-- eachr@2.0.4
+428 silly currentTree +-- editions@1.3.3
+428 silly currentTree +-- ee-first@1.1.1
+428 silly currentTree +-- encodeurl@1.0.1
+428 silly currentTree +-- end-of-stream@1.0.0
+428 silly currentTree | `-- once@1.3.3
+428 silly currentTree +-- engine.io-client@1.8.3
+428 silly currentTree | +-- component-emitter@1.2.1
+428 silly currentTree | `-- debug@2.3.3
+428 silly currentTree +-- engine.io-parser@1.3.2
+428 silly currentTree +-- engine.io@1.8.3
+428 silly currentTree | `-- debug@2.3.3
+428 silly currentTree +-- es6-promise@3.3.1
+428 silly currentTree +-- escape-html@1.0.3
+428 silly currentTree +-- escape-string-regexp@1.0.5
+428 silly currentTree +-- etag@1.8.0
+428 silly currentTree +-- event-stream@3.3.4
+428 silly currentTree +-- expand-brackets@0.1.5
+428 silly currentTree +-- expand-range@1.8.2
+428 silly currentTree +-- express-handlebars@3.0.0
+428 silly currentTree | +-- handlebars@4.0.6
+428 silly currentTree | +-- optimist@0.6.1
+428 silly currentTree | `-- uglify-js@2.8.14
+428 silly currentTree |   `-- source-map@0.5.6
+428 silly currentTree +-- express-messages@1.0.1
+428 silly currentTree +-- express-session@1.15.1
+428 silly currentTree | `-- debug@2.6.1
+428 silly currentTree +-- express-validator@3.1.2
+428 silly currentTree +-- express@4.15.2
+428 silly currentTree | +-- debug@2.6.1
+428 silly currentTree | `-- qs@6.4.0
+428 silly currentTree +-- extendr@2.1.0
+428 silly currentTree | `-- typechecker@2.0.8
+428 silly currentTree +-- extglob@0.3.2
+428 silly currentTree +-- extract-opts@2.2.0
+428 silly currentTree | `-- typechecker@2.0.8
+428 silly currentTree +-- filename-regex@2.0.0
+428 silly currentTree +-- fill-range@2.2.3
+428 silly currentTree +-- finalhandler@1.0.0
+428 silly currentTree | `-- debug@2.6.1
+428 silly currentTree +-- for-in@1.0.2
+428 silly currentTree +-- for-own@0.1.5
+428 silly currentTree +-- foreach@2.0.5
+428 silly currentTree +-- forwarded@0.1.0
+428 silly currentTree +-- fresh@0.5.0
+428 silly currentTree +-- from@0.1.7
+428 silly currentTree +-- function-bind@1.1.0
+428 silly currentTree +-- glob-base@0.3.0
+428 silly currentTree +-- glob-parent@2.0.0
+428 silly currentTree +-- glob@6.0.4
+428 silly currentTree +-- got@3.3.1
+428 silly currentTree | `-- object-assign@3.0.0
+428 silly currentTree +-- graceful-fs@4.1.11
+428 silly currentTree +-- graceful-readlink@1.0.1
+428 silly currentTree +-- handlebars
+428 silly currentTree +-- has-ansi@2.0.0
+428 silly currentTree +-- has-binary@0.1.7
+428 silly currentTree +-- has-cors@1.1.0
+428 silly currentTree +-- http-errors@1.6.1
+428 silly currentTree +-- i18n@0.8.3
+428 silly currentTree +-- iconv-lite@0.4.15
+428 silly currentTree +-- ignore-by-default@1.0.1
+428 silly currentTree +-- ignorefs@1.2.0
+428 silly currentTree +-- ignorepatterns@1.1.0
+428 silly currentTree +-- immediate@3.0.6
+428 silly currentTree +-- imurmurhash@0.1.4
+428 silly currentTree +-- indexof@0.0.1
+428 silly currentTree +-- infinity-agent@2.0.3
+428 silly currentTree +-- inflight@1.0.6
+428 silly currentTree +-- inherits@2.0.3
+428 silly currentTree +-- ini@1.3.4
+428 silly currentTree +-- ipaddr.js@1.2.0
+428 silly currentTree +-- is-binary-path@1.0.1
+428 silly currentTree +-- is-buffer@1.1.5
+428 silly currentTree +-- is-dotfile@1.0.2
+428 silly currentTree +-- is-equal-shallow@0.1.3
+428 silly currentTree +-- is-extendable@0.1.1
+428 silly currentTree +-- is-extglob@1.0.0
+428 silly currentTree +-- is-finite@1.0.2
+428 silly currentTree +-- is-glob@2.0.1
+428 silly currentTree +-- is-npm@1.0.0
+428 silly currentTree +-- is-number@2.1.0
+428 silly currentTree +-- is-posix-bracket@0.1.1
+428 silly currentTree +-- is-primitive@2.0.0
+428 silly currentTree +-- is-redirect@1.0.0
+428 silly currentTree +-- is-stream@1.1.0
+428 silly currentTree +-- isarray@0.0.1
+428 silly currentTree +-- isobject@2.1.0
+428 silly currentTree | `-- isarray@1.0.0
+428 silly currentTree +-- json3@3.3.2
+428 silly currentTree +-- kind-of@3.1.0
+428 silly currentTree +-- latest-version@1.0.1
+428 silly currentTree +-- lazy-cache@1.0.4
+428 silly currentTree +-- lie@3.1.1
+428 silly currentTree +-- lodash._baseassign@3.2.0
+428 silly currentTree +-- lodash._basecopy@3.0.1
+428 silly currentTree +-- lodash._bindcallback@3.0.1
+428 silly currentTree +-- lodash._createassigner@3.1.1
+428 silly currentTree +-- lodash._getnative@3.9.1
+428 silly currentTree +-- lodash._isiterateecall@3.0.9
+428 silly currentTree +-- lodash.assign@3.2.0
+428 silly currentTree +-- lodash.defaults@3.1.2
+428 silly currentTree +-- lodash.isarguments@3.1.0
+428 silly currentTree +-- lodash.isarray@3.0.4
+428 silly currentTree +-- lodash.keys@3.1.2
+428 silly currentTree +-- lodash.restparam@3.6.1
+428 silly currentTree +-- lodash@4.17.4
+428 silly currentTree +-- longest@1.0.1
+428 silly currentTree +-- lowercase-keys@1.0.0
+428 silly currentTree +-- make-plural@3.0.6
+428 silly currentTree | `-- minimist@1.2.0
+428 silly currentTree +-- map-stream@0.1.0
+428 silly currentTree +-- math-interval-parser@1.1.0
+428 silly currentTree +-- media-typer@0.3.0
+428 silly currentTree +-- merge-descriptors@1.0.1
+428 silly currentTree +-- messageformat@0.3.1
+428 silly currentTree +-- methods@1.1.2
+428 silly currentTree +-- micromatch@2.3.11
+428 silly currentTree +-- mime
+428 silly currentTree +-- mime-db@1.26.0
+428 silly currentTree +-- mime-types@2.1.14
+428 silly currentTree +-- minimatch@3.0.3
+428 silly currentTree +-- minimist@0.0.10
+428 silly currentTree +-- mkdirp@0.5.1
+428 silly currentTree | `-- minimist@0.0.8
+428 silly currentTree +-- morgan@1.7.0
+428 silly currentTree +-- ms@0.7.2
+428 silly currentTree +-- mustache@2.3.0
+428 silly currentTree +-- mysql@2.13.0
+428 silly currentTree +-- nan@2.5.1
+428 silly currentTree +-- negotiator@0.6.1
+428 silly currentTree +-- nested-error-stacks@1.0.2
+428 silly currentTree +-- nodemon@1.11.0
+428 silly currentTree +-- nopt@3.0.6
+428 silly currentTree +-- normalize-path@2.0.1
+428 silly currentTree +-- number-is-nan@1.0.1
+428 silly currentTree +-- object-assign@4.1.1
+428 silly currentTree +-- object-component@0.0.3
+428 silly currentTree +-- object-keys@1.0.11
+428 silly currentTree +-- object.assign@4.0.4
+428 silly currentTree +-- object.omit@2.0.1
+428 silly currentTree +-- on-finished@2.3.0
+428 silly currentTree +-- on-headers@1.0.1
+428 silly currentTree +-- once@1.4.0
+428 silly currentTree +-- optimist
+428 silly currentTree +-- options@0.0.6
+428 silly currentTree +-- os-homedir@1.0.2
+428 silly currentTree +-- os-tmpdir@1.0.2
+428 silly currentTree +-- osenv@0.1.4
+428 silly currentTree +-- package-json@1.2.0
+428 silly currentTree +-- parse-glob@3.0.4
+428 silly currentTree +-- parsejson@0.0.3
+428 silly currentTree +-- parseqs@0.0.5
+428 silly currentTree +-- parseuri@0.0.5
+428 silly currentTree +-- parseurl@1.3.1
+428 silly currentTree +-- passport-local@1.0.0
+428 silly currentTree +-- passport-strategy@1.0.0
+428 silly currentTree +-- passport@0.3.2
+428 silly currentTree +-- path-is-absolute@1.0.1
+428 silly currentTree +-- path-to-regexp@0.1.7
+428 silly currentTree +-- pause-stream@0.0.11
+428 silly currentTree +-- pause@0.0.1
+428 silly currentTree +-- pinkie-promise@2.0.1
+428 silly currentTree +-- pinkie@2.0.4
+428 silly currentTree +-- prepend-http@1.0.4
+428 silly currentTree +-- preserve@0.2.0
+428 silly currentTree +-- process-nextick-args@1.0.7
+428 silly currentTree +-- promise@7.1.1
+428 silly currentTree +-- proxy-addr@1.1.3
+428 silly currentTree +-- ps-tree@1.1.0
+428 silly currentTree +-- qs@6.4.0
+428 silly currentTree +-- random-bytes@1.0.0
+428 silly currentTree +-- randomatic@1.1.6
+428 silly currentTree +-- range-parser@1.2.0
+428 silly currentTree +-- raw-body@2.2.0
+428 silly currentTree +-- rc@1.1.7
+428 silly currentTree | `-- minimist@1.2.0
+428 silly currentTree +-- read-all-stream@3.1.0
+428 silly currentTree | +-- isarray@1.0.0
+428 silly currentTree | `-- readable-stream@2.2.6
+428 silly currentTree +-- readable-stream@1.1.14
+428 silly currentTree +-- readdirp@2.1.0
+428 silly currentTree | +-- isarray@1.0.0
+428 silly currentTree | `-- readable-stream@2.2.6
+428 silly currentTree +-- regex-cache@0.4.3
+428 silly currentTree +-- registry-url@3.1.0
+428 silly currentTree +-- repeat-element@1.1.2
+428 silly currentTree +-- repeat-string@1.6.1
+428 silly currentTree +-- repeating@1.1.3
+428 silly currentTree +-- right-align@0.1.3
+428 silly currentTree +-- safefs@3.2.2
+428 silly currentTree +-- scandirectory@2.5.0
+428 silly currentTree +-- semver-diff@2.1.0
+428 silly currentTree +-- semver@5.3.0
+428 silly currentTree +-- send@0.15.1
+428 silly currentTree | +-- debug@2.6.1
+428 silly currentTree | `-- mime@1.3.4
+428 silly currentTree +-- serialport@4.0.7
+428 silly currentTree | +-- debug@2.6.3
+428 silly currentTree | `-- node-pre-gyp@0.6.32
+428 silly currentTree |   +-- mkdirp@0.5.1
+428 silly currentTree |   | `-- minimist@0.0.8
+428 silly currentTree |   +-- nopt@3.0.6
+428 silly currentTree |   | `-- abbrev@1.0.9
+428 silly currentTree |   +-- npmlog@4.0.1
+428 silly currentTree |   | +-- are-we-there-yet@1.1.2
+428 silly currentTree |   | | +-- delegates@1.0.0
+428 silly currentTree |   | | `-- readable-stream@2.2.2
+428 silly currentTree |   | |   +-- buffer-shims@1.0.0
+428 silly currentTree |   | |   +-- core-util-is@1.0.2
+428 silly currentTree |   | |   +-- inherits@2.0.3
+428 silly currentTree |   | |   +-- isarray@1.0.0
+428 silly currentTree |   | |   +-- process-nextick-args@1.0.7
+428 silly currentTree |   | |   +-- string_decoder@0.10.31
+428 silly currentTree |   | |   `-- util-deprecate@1.0.2
+428 silly currentTree |   | +-- console-control-strings@1.1.0
+428 silly currentTree |   | +-- gauge@2.7.2
+428 silly currentTree |   | | +-- aproba@1.0.4
+428 silly currentTree |   | | +-- has-unicode@2.0.1
+428 silly currentTree |   | | +-- object-assign@4.1.0
+428 silly currentTree |   | | +-- signal-exit@3.0.2
+428 silly currentTree |   | | +-- string-width@1.0.2
+428 silly currentTree |   | | | +-- code-point-at@1.1.0
+428 silly currentTree |   | | | `-- is-fullwidth-code-point@1.0.0
+428 silly currentTree |   | | |   `-- number-is-nan@1.0.1
+428 silly currentTree |   | | +-- strip-ansi@3.0.1
+428 silly currentTree |   | | | `-- ansi-regex@2.0.0
+428 silly currentTree |   | | +-- supports-color@0.2.0
+428 silly currentTree |   | | `-- wide-align@1.1.0
+428 silly currentTree |   | `-- set-blocking@2.0.0
+428 silly currentTree |   +-- rc@1.1.6
+428 silly currentTree |   | +-- deep-extend@0.4.1
+428 silly currentTree |   | +-- ini@1.3.4
+428 silly currentTree |   | +-- minimist@1.2.0
+428 silly currentTree |   | `-- strip-json-comments@1.0.4
+428 silly currentTree |   +-- request@2.79.0
+428 silly currentTree |   | +-- aws-sign2@0.6.0
+428 silly currentTree |   | +-- aws4@1.5.0
+428 silly currentTree |   | +-- caseless@0.11.0
+428 silly currentTree |   | +-- combined-stream@1.0.5
+428 silly currentTree |   | | `-- delayed-stream@1.0.0
+428 silly currentTree |   | +-- extend@3.0.0
+428 silly currentTree |   | +-- forever-agent@0.6.1
+428 silly currentTree |   | +-- form-data@2.1.2
+428 silly currentTree |   | | `-- asynckit@0.4.0
+428 silly currentTree |   | +-- har-validator@2.0.6
+428 silly currentTree |   | | +-- chalk@1.1.3
+428 silly currentTree |   | | | +-- ansi-styles@2.2.1
+428 silly currentTree |   | | | +-- escape-string-regexp@1.0.5
+428 silly currentTree |   | | | +-- has-ansi@2.0.0
+428 silly currentTree |   | | | | `-- ansi-regex@2.0.0
+428 silly currentTree |   | | | +-- strip-ansi@3.0.1
+428 silly currentTree |   | | | | `-- ansi-regex@2.0.0
+428 silly currentTree |   | | | `-- supports-color@2.0.0
+428 silly currentTree |   | | +-- is-my-json-valid@2.15.0
+428 silly currentTree |   | | | +-- generate-function@2.0.0
+428 silly currentTree |   | | | +-- generate-object-property@1.2.0
+428 silly currentTree |   | | | | `-- is-property@1.0.2
+428 silly currentTree |   | | | +-- jsonpointer@4.0.0
+428 silly currentTree |   | | | `-- xtend@4.0.1
+428 silly currentTree |   | | `-- pinkie-promise@2.0.1
+428 silly currentTree |   | |   `-- pinkie@2.0.4
+428 silly currentTree |   | +-- hawk@3.1.3
+428 silly currentTree |   | | +-- boom@2.10.1
+428 silly currentTree |   | | +-- cryptiles@2.0.5
+428 silly currentTree |   | | +-- hoek@2.16.3
+428 silly currentTree |   | | `-- sntp@1.0.9
+428 silly currentTree |   | +-- http-signature@1.1.1
+428 silly currentTree |   | | +-- assert-plus@0.2.0
+428 silly currentTree |   | | +-- jsprim@1.3.1
+428 silly currentTree |   | | | +-- extsprintf@1.0.2
+428 silly currentTree |   | | | +-- json-schema@0.2.3
+428 silly currentTree |   | | | `-- verror@1.3.6
+428 silly currentTree |   | | `-- sshpk@1.10.1
+428 silly currentTree |   | |   +-- asn1@0.2.3
+428 silly currentTree |   | |   +-- assert-plus@1.0.0
+428 silly currentTree |   | |   +-- bcrypt-pbkdf@1.0.0
+428 silly currentTree |   | |   +-- dashdash@1.14.1
+428 silly currentTree |   | |   +-- ecc-jsbn@0.1.1
+428 silly currentTree |   | |   +-- getpass@0.1.6
+428 silly currentTree |   | |   +-- jodid25519@1.0.2
+428 silly currentTree |   | |   +-- jsbn@0.1.0
+428 silly currentTree |   | |   `-- tweetnacl@0.14.4
+428 silly currentTree |   | +-- is-typedarray@1.0.0
+428 silly currentTree |   | +-- isstream@0.1.2
+428 silly currentTree |   | +-- json-stringify-safe@5.0.1
+428 silly currentTree |   | +-- mime-types@2.1.13
+428 silly currentTree |   | | `-- mime-db@1.25.0
+428 silly currentTree |   | +-- oauth-sign@0.8.2
+428 silly currentTree |   | +-- qs@6.3.0
+428 silly currentTree |   | +-- stringstream@0.0.5
+428 silly currentTree |   | +-- tough-cookie@2.3.2
+428 silly currentTree |   | | `-- punycode@1.4.1
+428 silly currentTree |   | +-- tunnel-agent@0.4.3
+428 silly currentTree |   | `-- uuid@3.0.1
+428 silly currentTree |   +-- rimraf@2.5.4
+428 silly currentTree |   | `-- glob@7.1.1
+428 silly currentTree |   |   +-- fs.realpath@1.0.0
+428 silly currentTree |   |   +-- inflight@1.0.6
+428 silly currentTree |   |   | `-- wrappy@1.0.2
+428 silly currentTree |   |   +-- inherits@2.0.3
+428 silly currentTree |   |   +-- minimatch@3.0.3
+428 silly currentTree |   |   | `-- brace-expansion@1.1.6
+428 silly currentTree |   |   |   +-- balanced-match@0.4.2
+428 silly currentTree |   |   |   `-- concat-map@0.0.1
+428 silly currentTree |   |   +-- once@1.4.0
+428 silly currentTree |   |   | `-- wrappy@1.0.2
+428 silly currentTree |   |   `-- path-is-absolute@1.0.1
+428 silly currentTree |   +-- semver@5.3.0
+428 silly currentTree |   +-- tar-pack@3.3.0
+428 silly currentTree |   | +-- debug@2.2.0
+428 silly currentTree |   | | `-- ms@0.7.1
+428 silly currentTree |   | +-- fstream-ignore@1.0.5
+428 silly currentTree |   | | +-- inherits@2.0.3
+428 silly currentTree |   | | `-- minimatch@3.0.3
+428 silly currentTree |   | |   `-- brace-expansion@1.1.6
+428 silly currentTree |   | |     +-- balanced-match@0.4.2
+428 silly currentTree |   | |     `-- concat-map@0.0.1
+428 silly currentTree |   | +-- fstream@1.0.10
+428 silly currentTree |   | | +-- graceful-fs@4.1.11
+428 silly currentTree |   | | `-- inherits@2.0.3
+428 silly currentTree |   | +-- once@1.3.3
+428 silly currentTree |   | | `-- wrappy@1.0.2
+428 silly currentTree |   | +-- readable-stream@2.1.5
+428 silly currentTree |   | | +-- buffer-shims@1.0.0
+428 silly currentTree |   | | +-- core-util-is@1.0.2
+428 silly currentTree |   | | +-- inherits@2.0.3
+428 silly currentTree |   | | +-- isarray@1.0.0
+428 silly currentTree |   | | +-- process-nextick-args@1.0.7
+428 silly currentTree |   | | +-- string_decoder@0.10.31
+428 silly currentTree |   | | `-- util-deprecate@1.0.2
+428 silly currentTree |   | `-- uid-number@0.0.6
+428 silly currentTree |   `-- tar@2.2.1
+428 silly currentTree |     +-- block-stream@0.0.9
+428 silly currentTree |     +-- fstream@1.0.10
+428 silly currentTree |     | `-- graceful-fs@4.1.11
+428 silly currentTree |     `-- inherits@2.0.3
+428 silly currentTree +-- serve-favicon@2.3.2
+428 silly currentTree | +-- etag@1.7.0
+428 silly currentTree | `-- fresh@0.3.0
+428 silly currentTree +-- serve-static@1.12.1
+428 silly currentTree +-- set-immediate-shim@1.0.1
+428 silly currentTree +-- setprototypeof@1.0.3
+428 silly currentTree +-- slide@1.1.6
+428 silly currentTree +-- socket.io-adapter@0.5.0
+428 silly currentTree | `-- debug@2.3.3
+428 silly currentTree +-- socket.io-client@1.7.3
+428 silly currentTree | +-- component-emitter@1.2.1
+428 silly currentTree | `-- debug@2.3.3
+428 silly currentTree +-- socket.io-parser@2.3.1
+428 silly currentTree +-- socket.io@1.7.3
+428 silly currentTree | +-- debug@2.3.3
+428 silly currentTree | `-- object-assign@4.1.0
+428 silly currentTree +-- source-map@0.4.4
+428 silly currentTree +-- split@0.3.3
+428 silly currentTree +-- sprintf-js@1.0.3
+428 silly currentTree +-- sqlstring@2.2.0
+428 silly currentTree +-- statuses@1.3.1
+428 silly currentTree +-- stream-combiner@0.0.4
+428 silly currentTree +-- stream-shift@1.0.0
+428 silly currentTree +-- string_decoder@0.10.31
+428 silly currentTree +-- string-length@1.0.1
+428 silly currentTree +-- strip-ansi@3.0.1
+428 silly currentTree +-- strip-json-comments@2.0.1
+428 silly currentTree +-- supports-color@2.0.0
+428 silly currentTree +-- taskgroup@4.3.1
+428 silly currentTree +-- through@2.3.8
+428 silly currentTree +-- timed-out@2.0.0
+428 silly currentTree +-- to-array@0.1.4
+428 silly currentTree +-- touch@1.0.0
+428 silly currentTree | `-- nopt@1.0.10
+428 silly currentTree +-- type-is@1.6.14
+428 silly currentTree +-- typechecker@2.1.0
+428 silly currentTree +-- uglify-js
+428 silly currentTree +-- uglify-to-browserify@1.0.2
+428 silly currentTree +-- uid-safe@2.1.4
+428 silly currentTree +-- ultron@1.0.2
+428 silly currentTree +-- undefsafe@0.0.3
+428 silly currentTree +-- unpipe@1.0.0
+428 silly currentTree +-- update-notifier@0.5.0
+428 silly currentTree +-- util-deprecate@1.0.2
+428 silly currentTree +-- utils-merge@1.0.0
+428 silly currentTree +-- uuid@2.0.3
+428 silly currentTree +-- validator@6.2.1
+428 silly currentTree +-- vary@1.1.0
+428 silly currentTree +-- watchr@2.4.13
+428 silly currentTree +-- window-size@0.1.0
+428 silly currentTree +-- wordwrap@0.0.3
+428 silly currentTree +-- wrappy@1.0.2
+428 silly currentTree +-- write-file-atomic@1.3.1
+428 silly currentTree +-- ws@1.1.2
+428 silly currentTree +-- wtf-8@1.0.0
+428 silly currentTree +-- xdg-basedir@2.0.0
+428 silly currentTree +-- xmlhttprequest-ssl@1.5.3
+428 silly currentTree +-- xregexp@2.0.0
+428 silly currentTree +-- yargs@3.10.0
+428 silly currentTree `-- yeast@0.1.2
+429 silly idealTree smarthouse@0.0.0
+429 silly idealTree +-- @types/bluebird@3.0.37
+429 silly idealTree +-- @types/express-serve-static-core@4.0.41
+429 silly idealTree +-- @types/express@4.0.35
+429 silly idealTree +-- @types/mime@0.0.29
+429 silly idealTree +-- @types/node@7.0.8
+429 silly idealTree +-- @types/serve-static@1.7.31
+429 silly idealTree +-- abbrev@1.1.0
+429 silly idealTree +-- accepts@1.3.3
+429 silly idealTree +-- after@0.8.2
+429 silly idealTree +-- align-text@0.1.4
+429 silly idealTree +-- ambi@2.5.0
+429 silly idealTree | `-- typechecker@4.4.1
+429 silly idealTree +-- amdefine@1.0.1
+429 silly idealTree +-- ansi-regex@2.1.1
+429 silly idealTree +-- ansi-styles@2.2.1
+429 silly idealTree +-- anymatch@1.3.0
+429 silly idealTree +-- arr-diff@2.0.0
+429 silly idealTree +-- arr-flatten@1.0.1
+429 silly idealTree +-- array-flatten@1.1.1
+429 silly idealTree +-- array-unique@0.2.1
+429 silly idealTree +-- arraybuffer.slice@0.0.6
+429 silly idealTree +-- arrify@1.0.1
+429 silly idealTree +-- asap@2.0.5
+429 silly idealTree +-- async-each@1.0.1
+429 silly idealTree +-- async@1.5.2
+429 silly idealTree +-- backo2@1.0.2
+429 silly idealTree +-- balanced-match@0.4.2
+429 silly idealTree +-- base64-arraybuffer@0.1.5
+429 silly idealTree +-- base64id@1.0.0
+429 silly idealTree +-- basic-auth@1.0.4
+429 silly idealTree +-- bcryptjs@2.4.3
+429 silly idealTree +-- better-assert@1.0.2
+429 silly idealTree +-- bignumber.js@3.1.2
+429 silly idealTree +-- binary-extensions@1.8.0
+429 silly idealTree +-- bindings@1.2.1
+429 silly idealTree +-- blob@0.0.4
+429 silly idealTree +-- bluebird@3.5.0
+429 silly idealTree +-- body-parser@1.17.1
+429 silly idealTree | +-- debug@2.6.1
+429 silly idealTree | `-- qs@6.4.0
+429 silly idealTree +-- brace-expansion@1.1.6
+429 silly idealTree +-- braces@1.8.5
+429 silly idealTree +-- buffer-shims@1.0.0
+429 silly idealTree +-- bytes@2.4.0
+429 silly idealTree +-- callsite@1.0.0
+429 silly idealTree +-- camelcase@1.2.1
+429 silly idealTree +-- center-align@0.1.3
+429 silly idealTree +-- chalk@1.1.3
+429 silly idealTree +-- chokidar@1.6.1
+429 silly idealTree +-- cliui@2.1.0
+429 silly idealTree | `-- wordwrap@0.0.2
+429 silly idealTree +-- commander@2.9.0
+429 silly idealTree +-- component-bind@1.0.0
+429 silly idealTree +-- component-emitter@1.1.2
+429 silly idealTree +-- component-inherit@0.0.3
+429 silly idealTree +-- concat-map@0.0.1
+429 silly idealTree +-- configstore@1.4.0
+429 silly idealTree +-- connect-flash@0.1.1
+429 silly idealTree +-- connect-redis@3.2.0
+429 silly idealTree +-- content-disposition@0.5.2
+429 silly idealTree +-- content-type@1.0.2
+429 silly idealTree +-- cookie-parser@1.4.3
+429 silly idealTree +-- cookie-signature@1.0.6
+429 silly idealTree +-- cookie@0.3.1
+429 silly idealTree +-- core-util-is@1.0.2
+429 silly idealTree +-- crc@3.4.4
+429 silly idealTree +-- csextends@1.0.3
+429 silly idealTree +-- debug@2.2.0
+429 silly idealTree | `-- ms@0.7.1
+429 silly idealTree +-- decamelize@1.2.0
+429 silly idealTree +-- deep-extend@0.4.1
+429 silly idealTree +-- define-properties@1.1.2
+429 silly idealTree +-- depd@1.1.0
+429 silly idealTree +-- destroy@1.0.4
+429 silly idealTree +-- double-ended-queue@2.1.0-0
+429 silly idealTree +-- ds18b20@0.1.0
+429 silly idealTree +-- duplexer@0.1.1
+429 silly idealTree +-- duplexify@3.5.0
+429 silly idealTree | +-- isarray@1.0.0
+429 silly idealTree | `-- readable-stream@2.2.6
+429 silly idealTree +-- eachr@2.0.4
+429 silly idealTree +-- editions@1.3.3
+429 silly idealTree +-- ee-first@1.1.1
+429 silly idealTree +-- encodeurl@1.0.1
+429 silly idealTree +-- end-of-stream@1.0.0
+429 silly idealTree | `-- once@1.3.3
+429 silly idealTree +-- engine.io-client@1.8.3
+429 silly idealTree | +-- component-emitter@1.2.1
+429 silly idealTree | `-- debug@2.3.3
+429 silly idealTree +-- engine.io-parser@1.3.2
+429 silly idealTree +-- engine.io@1.8.3
+429 silly idealTree | `-- debug@2.3.3
+429 silly idealTree +-- epoll@0.1.21
+429 silly idealTree +-- es6-promise@3.3.1
+429 silly idealTree +-- escape-html@1.0.3
+429 silly idealTree +-- escape-string-regexp@1.0.5
+429 silly idealTree +-- etag@1.8.0
+429 silly idealTree +-- event-stream@3.3.4
+429 silly idealTree +-- expand-brackets@0.1.5
+429 silly idealTree +-- expand-range@1.8.2
+429 silly idealTree +-- express-handlebars@3.0.0
+429 silly idealTree | +-- handlebars@4.0.6
+429 silly idealTree | +-- optimist@0.6.1
+429 silly idealTree | `-- uglify-js@2.8.14
+429 silly idealTree |   `-- source-map@0.5.6
+429 silly idealTree +-- express-messages@1.0.1
+429 silly idealTree +-- express-session@1.15.1
+429 silly idealTree | `-- debug@2.6.1
+429 silly idealTree +-- express-validator@3.1.2
+429 silly idealTree +-- express@4.15.2
+429 silly idealTree | +-- debug@2.6.1
+429 silly idealTree | `-- qs@6.4.0
+429 silly idealTree +-- extendr@2.1.0
+429 silly idealTree | `-- typechecker@2.0.8
+429 silly idealTree +-- extglob@0.3.2
+429 silly idealTree +-- extract-opts@2.2.0
+429 silly idealTree | `-- typechecker@2.0.8
+429 silly idealTree +-- filename-regex@2.0.0
+429 silly idealTree +-- fill-range@2.2.3
+429 silly idealTree +-- finalhandler@1.0.0
+429 silly idealTree | `-- debug@2.6.1
+429 silly idealTree +-- for-in@1.0.2
+429 silly idealTree +-- for-own@0.1.5
+429 silly idealTree +-- foreach@2.0.5
+429 silly idealTree +-- forwarded@0.1.0
+429 silly idealTree +-- fresh@0.5.0
+429 silly idealTree +-- from@0.1.7
+429 silly idealTree +-- fs@0.0.1-security
+429 silly idealTree +-- function-bind@1.1.0
+429 silly idealTree +-- glob-base@0.3.0
+429 silly idealTree +-- glob-parent@2.0.0
+429 silly idealTree +-- glob@6.0.4
+429 silly idealTree +-- got@3.3.1
+429 silly idealTree | `-- object-assign@3.0.0
+429 silly idealTree +-- graceful-fs@4.1.11
+429 silly idealTree +-- graceful-readlink@1.0.1
+429 silly idealTree +-- handlebars
+429 silly idealTree +-- has-ansi@2.0.0
+429 silly idealTree +-- has-binary@0.1.7
+429 silly idealTree +-- has-cors@1.1.0
+429 silly idealTree +-- http-errors@1.6.1
+429 silly idealTree +-- i18n@0.8.3
+429 silly idealTree +-- iconv-lite@0.4.15
+429 silly idealTree +-- ignore-by-default@1.0.1
+429 silly idealTree +-- ignorefs@1.2.0
+429 silly idealTree +-- ignorepatterns@1.1.0
+429 silly idealTree +-- immediate@3.0.6
+429 silly idealTree +-- imurmurhash@0.1.4
+429 silly idealTree +-- indexof@0.0.1
+429 silly idealTree +-- infinity-agent@2.0.3
+429 silly idealTree +-- inflight@1.0.6
+429 silly idealTree +-- inherits@2.0.3
+429 silly idealTree +-- ini@1.3.4
+429 silly idealTree +-- ipaddr.js@1.2.0
+429 silly idealTree +-- is-binary-path@1.0.1
+429 silly idealTree +-- is-buffer@1.1.5
+429 silly idealTree +-- is-dotfile@1.0.2
+429 silly idealTree +-- is-equal-shallow@0.1.3
+429 silly idealTree +-- is-extendable@0.1.1
+429 silly idealTree +-- is-extglob@1.0.0
+429 silly idealTree +-- is-finite@1.0.2
+429 silly idealTree +-- is-glob@2.0.1
+429 silly idealTree +-- is-npm@1.0.0
+429 silly idealTree +-- is-number@2.1.0
+429 silly idealTree +-- is-posix-bracket@0.1.1
+429 silly idealTree +-- is-primitive@2.0.0
+429 silly idealTree +-- is-redirect@1.0.0
+429 silly idealTree +-- is-stream@1.1.0
+429 silly idealTree +-- isarray@0.0.1
+429 silly idealTree +-- isobject@2.1.0
+429 silly idealTree | `-- isarray@1.0.0
+429 silly idealTree +-- json3@3.3.2
+429 silly idealTree +-- kind-of@3.1.0
+429 silly idealTree +-- latest-version@1.0.1
+429 silly idealTree +-- lazy-cache@1.0.4
+429 silly idealTree +-- lie@3.1.1
+429 silly idealTree +-- lodash._baseassign@3.2.0
+429 silly idealTree +-- lodash._basecopy@3.0.1
+429 silly idealTree +-- lodash._bindcallback@3.0.1
+429 silly idealTree +-- lodash._createassigner@3.1.1
+429 silly idealTree +-- lodash._getnative@3.9.1
+429 silly idealTree +-- lodash._isiterateecall@3.0.9
+429 silly idealTree +-- lodash.assign@3.2.0
+429 silly idealTree +-- lodash.defaults@3.1.2
+429 silly idealTree +-- lodash.isarguments@3.1.0
+429 silly idealTree +-- lodash.isarray@3.0.4
+429 silly idealTree +-- lodash.keys@3.1.2
+429 silly idealTree +-- lodash.restparam@3.6.1
+429 silly idealTree +-- lodash@4.17.4
+429 silly idealTree +-- longest@1.0.1
+429 silly idealTree +-- lowercase-keys@1.0.0
+429 silly idealTree +-- make-plural@3.0.6
+429 silly idealTree | `-- minimist@1.2.0
+429 silly idealTree +-- map-stream@0.1.0
+429 silly idealTree +-- math-interval-parser@1.1.0
+429 silly idealTree +-- media-typer@0.3.0
+429 silly idealTree +-- merge-descriptors@1.0.1
+429 silly idealTree +-- messageformat@0.3.1
+429 silly idealTree +-- methods@1.1.2
+429 silly idealTree +-- micromatch@2.3.11
+429 silly idealTree +-- mime
+429 silly idealTree +-- mime-db@1.26.0
+429 silly idealTree +-- mime-types@2.1.14
+429 silly idealTree +-- minimatch@3.0.3
+429 silly idealTree +-- minimist@0.0.10
+429 silly idealTree +-- mkdirp@0.5.1
+429 silly idealTree | `-- minimist@0.0.8
+429 silly idealTree +-- morgan@1.7.0
+429 silly idealTree +-- ms@0.7.2
+429 silly idealTree +-- mustache@2.3.0
+429 silly idealTree +-- mysql@2.13.0
+429 silly idealTree +-- nan@2.5.1
+429 silly idealTree +-- negotiator@0.6.1
+429 silly idealTree +-- nested-error-stacks@1.0.2
+429 silly idealTree +-- nodemon@1.11.0
+429 silly idealTree +-- nopt@3.0.6
+429 silly idealTree +-- normalize-path@2.0.1
+429 silly idealTree +-- number-is-nan@1.0.1
+429 silly idealTree +-- object-assign@4.1.1
+429 silly idealTree +-- object-component@0.0.3
+429 silly idealTree +-- object-keys@1.0.11
+429 silly idealTree +-- object.assign@4.0.4
+429 silly idealTree +-- object.omit@2.0.1
+429 silly idealTree +-- on-finished@2.3.0
+429 silly idealTree +-- on-headers@1.0.1
+429 silly idealTree +-- once@1.4.0
+429 silly idealTree +-- optimist
+429 silly idealTree +-- options@0.0.6
+429 silly idealTree +-- os-homedir@1.0.2
+429 silly idealTree +-- os-tmpdir@1.0.2
+429 silly idealTree +-- osenv@0.1.4
+429 silly idealTree +-- package-json@1.2.0
+429 silly idealTree +-- parse-glob@3.0.4
+429 silly idealTree +-- parsejson@0.0.3
+429 silly idealTree +-- parseqs@0.0.5
+429 silly idealTree +-- parseuri@0.0.5
+429 silly idealTree +-- parseurl@1.3.1
+429 silly idealTree +-- passport-local@1.0.0
+429 silly idealTree +-- passport-strategy@1.0.0
+429 silly idealTree +-- passport@0.3.2
+429 silly idealTree +-- path-is-absolute@1.0.1
+429 silly idealTree +-- path-to-regexp@0.1.7
+429 silly idealTree +-- pause-stream@0.0.11
+429 silly idealTree +-- pause@0.0.1
+429 silly idealTree +-- pinkie-promise@2.0.1
+429 silly idealTree +-- pinkie@2.0.4
+429 silly idealTree +-- prepend-http@1.0.4
+429 silly idealTree +-- preserve@0.2.0
+429 silly idealTree +-- process-nextick-args@1.0.7
+429 silly idealTree +-- promise@7.1.1
+429 silly idealTree +-- proxy-addr@1.1.3
+429 silly idealTree +-- ps-tree@1.1.0
+429 silly idealTree +-- qs@6.4.0
+429 silly idealTree +-- random-bytes@1.0.0
+429 silly idealTree +-- randomatic@1.1.6
+429 silly idealTree +-- range-parser@1.2.0
+429 silly idealTree +-- raw-body@2.2.0
+429 silly idealTree +-- rc@1.1.7
+429 silly idealTree | `-- minimist@1.2.0
+429 silly idealTree +-- read-all-stream@3.1.0
+429 silly idealTree | +-- isarray@1.0.0
+429 silly idealTree | `-- readable-stream@2.2.6
+429 silly idealTree +-- readable-stream@1.1.14
+429 silly idealTree +-- readdirp@2.1.0
+429 silly idealTree | +-- isarray@1.0.0
+429 silly idealTree | `-- readable-stream@2.2.6
+429 silly idealTree +-- redis-commands@1.3.1
+429 silly idealTree +-- redis-parser@2.5.0
+429 silly idealTree +-- redis@2.7.1
+429 silly idealTree +-- regex-cache@0.4.3
+429 silly idealTree +-- registry-url@3.1.0
+429 silly idealTree +-- repeat-element@1.1.2
+429 silly idealTree +-- repeat-string@1.6.1
+429 silly idealTree +-- repeating@1.1.3
+429 silly idealTree +-- right-align@0.1.3
+429 silly idealTree +-- rpi-gpio@0.7.0
+429 silly idealTree +-- safefs@3.2.2
+429 silly idealTree +-- scandirectory@2.5.0
+429 silly idealTree +-- semver-diff@2.1.0
+429 silly idealTree +-- semver@5.3.0
+429 silly idealTree +-- send@0.15.1
+429 silly idealTree | +-- debug@2.6.1
+429 silly idealTree | `-- mime@1.3.4
+429 silly idealTree +-- serialport@4.0.7
+429 silly idealTree | +-- debug@2.6.3
+429 silly idealTree | `-- node-pre-gyp@0.6.32
+429 silly idealTree |   +-- mkdirp@0.5.1
+429 silly idealTree |   | `-- minimist@0.0.8
+429 silly idealTree |   +-- nopt@3.0.6
+429 silly idealTree |   | `-- abbrev@1.0.9
+429 silly idealTree |   +-- npmlog@4.0.1
+429 silly idealTree |   | +-- are-we-there-yet@1.1.2
+429 silly idealTree |   | | +-- delegates@1.0.0
+429 silly idealTree |   | | `-- readable-stream@2.2.2
+429 silly idealTree |   | |   +-- buffer-shims@1.0.0
+429 silly idealTree |   | |   +-- core-util-is@1.0.2
+429 silly idealTree |   | |   +-- inherits@2.0.3
+429 silly idealTree |   | |   +-- isarray@1.0.0
+429 silly idealTree |   | |   +-- process-nextick-args@1.0.7
+429 silly idealTree |   | |   +-- string_decoder@0.10.31
+429 silly idealTree |   | |   `-- util-deprecate@1.0.2
+429 silly idealTree |   | +-- console-control-strings@1.1.0
+429 silly idealTree |   | +-- gauge@2.7.2
+429 silly idealTree |   | | +-- aproba@1.0.4
+429 silly idealTree |   | | +-- has-unicode@2.0.1
+429 silly idealTree |   | | +-- object-assign@4.1.0
+429 silly idealTree |   | | +-- signal-exit@3.0.2
+429 silly idealTree |   | | +-- string-width@1.0.2
+429 silly idealTree |   | | | +-- code-point-at@1.1.0
+429 silly idealTree |   | | | `-- is-fullwidth-code-point@1.0.0
+429 silly idealTree |   | | |   `-- number-is-nan@1.0.1
+429 silly idealTree |   | | +-- strip-ansi@3.0.1
+429 silly idealTree |   | | | `-- ansi-regex@2.0.0
+429 silly idealTree |   | | +-- supports-color@0.2.0
+429 silly idealTree |   | | `-- wide-align@1.1.0
+429 silly idealTree |   | `-- set-blocking@2.0.0
+429 silly idealTree |   +-- rc@1.1.6
+429 silly idealTree |   | +-- deep-extend@0.4.1
+429 silly idealTree |   | +-- ini@1.3.4
+429 silly idealTree |   | +-- minimist@1.2.0
+429 silly idealTree |   | `-- strip-json-comments@1.0.4
+429 silly idealTree |   +-- request@2.79.0
+429 silly idealTree |   | +-- aws-sign2@0.6.0
+429 silly idealTree |   | +-- aws4@1.5.0
+429 silly idealTree |   | +-- caseless@0.11.0
+429 silly idealTree |   | +-- combined-stream@1.0.5
+429 silly idealTree |   | | `-- delayed-stream@1.0.0
+429 silly idealTree |   | +-- extend@3.0.0
+429 silly idealTree |   | +-- forever-agent@0.6.1
+429 silly idealTree |   | +-- form-data@2.1.2
+429 silly idealTree |   | | `-- asynckit@0.4.0
+429 silly idealTree |   | +-- har-validator@2.0.6
+429 silly idealTree |   | | +-- chalk@1.1.3
+429 silly idealTree |   | | | +-- ansi-styles@2.2.1
+429 silly idealTree |   | | | +-- escape-string-regexp@1.0.5
+429 silly idealTree |   | | | +-- has-ansi@2.0.0
+429 silly idealTree |   | | | | `-- ansi-regex@2.0.0
+429 silly idealTree |   | | | +-- strip-ansi@3.0.1
+429 silly idealTree |   | | | | `-- ansi-regex@2.0.0
+429 silly idealTree |   | | | `-- supports-color@2.0.0
+429 silly idealTree |   | | +-- is-my-json-valid@2.15.0
+429 silly idealTree |   | | | +-- generate-function@2.0.0
+429 silly idealTree |   | | | +-- generate-object-property@1.2.0
+429 silly idealTree |   | | | | `-- is-property@1.0.2
+429 silly idealTree |   | | | +-- jsonpointer@4.0.0
+429 silly idealTree |   | | | `-- xtend@4.0.1
+429 silly idealTree |   | | `-- pinkie-promise@2.0.1
+429 silly idealTree |   | |   `-- pinkie@2.0.4
+429 silly idealTree |   | +-- hawk@3.1.3
+429 silly idealTree |   | | +-- boom@2.10.1
+429 silly idealTree |   | | +-- cryptiles@2.0.5
+429 silly idealTree |   | | +-- hoek@2.16.3
+429 silly idealTree |   | | `-- sntp@1.0.9
+429 silly idealTree |   | +-- http-signature@1.1.1
+429 silly idealTree |   | | +-- assert-plus@0.2.0
+429 silly idealTree |   | | +-- jsprim@1.3.1
+429 silly idealTree |   | | | +-- extsprintf@1.0.2
+429 silly idealTree |   | | | +-- json-schema@0.2.3
+429 silly idealTree |   | | | `-- verror@1.3.6
+429 silly idealTree |   | | `-- sshpk@1.10.1
+429 silly idealTree |   | |   +-- asn1@0.2.3
+429 silly idealTree |   | |   +-- assert-plus@1.0.0
+429 silly idealTree |   | |   +-- bcrypt-pbkdf@1.0.0
+429 silly idealTree |   | |   +-- dashdash@1.14.1
+429 silly idealTree |   | |   +-- ecc-jsbn@0.1.1
+429 silly idealTree |   | |   +-- getpass@0.1.6
+429 silly idealTree |   | |   +-- jodid25519@1.0.2
+429 silly idealTree |   | |   +-- jsbn@0.1.0
+429 silly idealTree |   | |   `-- tweetnacl@0.14.4
+429 silly idealTree |   | +-- is-typedarray@1.0.0
+429 silly idealTree |   | +-- isstream@0.1.2
+429 silly idealTree |   | +-- json-stringify-safe@5.0.1
+429 silly idealTree |   | +-- mime-types@2.1.13
+429 silly idealTree |   | | `-- mime-db@1.25.0
+429 silly idealTree |   | +-- oauth-sign@0.8.2
+429 silly idealTree |   | +-- qs@6.3.0
+429 silly idealTree |   | +-- stringstream@0.0.5
+429 silly idealTree |   | +-- tough-cookie@2.3.2
+429 silly idealTree |   | | `-- punycode@1.4.1
+429 silly idealTree |   | +-- tunnel-agent@0.4.3
+429 silly idealTree |   | `-- uuid@3.0.1
+429 silly idealTree |   +-- rimraf@2.5.4
+429 silly idealTree |   | `-- glob@7.1.1
+429 silly idealTree |   |   +-- fs.realpath@1.0.0
+429 silly idealTree |   |   +-- inflight@1.0.6
+429 silly idealTree |   |   | `-- wrappy@1.0.2
+429 silly idealTree |   |   +-- inherits@2.0.3
+429 silly idealTree |   |   +-- minimatch@3.0.3
+429 silly idealTree |   |   | `-- brace-expansion@1.1.6
+429 silly idealTree |   |   |   +-- balanced-match@0.4.2
+429 silly idealTree |   |   |   `-- concat-map@0.0.1
+429 silly idealTree |   |   +-- once@1.4.0
+429 silly idealTree |   |   | `-- wrappy@1.0.2
+429 silly idealTree |   |   `-- path-is-absolute@1.0.1
+429 silly idealTree |   +-- semver@5.3.0
+429 silly idealTree |   +-- tar-pack@3.3.0
+429 silly idealTree |   | +-- debug@2.2.0
+429 silly idealTree |   | | `-- ms@0.7.1
+429 silly idealTree |   | +-- fstream-ignore@1.0.5
+429 silly idealTree |   | | +-- inherits@2.0.3
+429 silly idealTree |   | | `-- minimatch@3.0.3
+429 silly idealTree |   | |   `-- brace-expansion@1.1.6
+429 silly idealTree |   | |     +-- balanced-match@0.4.2
+429 silly idealTree |   | |     `-- concat-map@0.0.1
+429 silly idealTree |   | +-- fstream@1.0.10
+429 silly idealTree |   | | +-- graceful-fs@4.1.11
+429 silly idealTree |   | | `-- inherits@2.0.3
+429 silly idealTree |   | +-- once@1.3.3
+429 silly idealTree |   | | `-- wrappy@1.0.2
+429 silly idealTree |   | +-- readable-stream@2.1.5
+429 silly idealTree |   | | +-- buffer-shims@1.0.0
+429 silly idealTree |   | | +-- core-util-is@1.0.2
+429 silly idealTree |   | | +-- inherits@2.0.3
+429 silly idealTree |   | | +-- isarray@1.0.0
+429 silly idealTree |   | | +-- process-nextick-args@1.0.7
+429 silly idealTree |   | | +-- string_decoder@0.10.31
+429 silly idealTree |   | | `-- util-deprecate@1.0.2
+429 silly idealTree |   | `-- uid-number@0.0.6
+429 silly idealTree |   `-- tar@2.2.1
+429 silly idealTree |     +-- block-stream@0.0.9
+429 silly idealTree |     +-- fstream@1.0.10
+429 silly idealTree |     | `-- graceful-fs@4.1.11
+429 silly idealTree |     `-- inherits@2.0.3
+429 silly idealTree +-- serve-favicon@2.3.2
+429 silly idealTree | +-- etag@1.7.0
+429 silly idealTree | `-- fresh@0.3.0
+429 silly idealTree +-- serve-static@1.12.1
+429 silly idealTree +-- set-immediate-shim@1.0.1
+429 silly idealTree +-- setprototypeof@1.0.3
+429 silly idealTree +-- slide@1.1.6
+429 silly idealTree +-- socket.io-adapter@0.5.0
+429 silly idealTree | `-- debug@2.3.3
+429 silly idealTree +-- socket.io-client@1.7.3
+429 silly idealTree | +-- component-emitter@1.2.1
+429 silly idealTree | `-- debug@2.3.3
+429 silly idealTree +-- socket.io-parser@2.3.1
+429 silly idealTree +-- socket.io@1.7.3
+429 silly idealTree | +-- debug@2.3.3
+429 silly idealTree | `-- object-assign@4.1.0
+429 silly idealTree +-- source-map@0.4.4
+429 silly idealTree +-- split@0.3.3
+429 silly idealTree +-- sprintf-js@1.0.3
+429 silly idealTree +-- sqlstring@2.2.0
+429 silly idealTree +-- statuses@1.3.1
+429 silly idealTree +-- stream-combiner@0.0.4
+429 silly idealTree +-- stream-shift@1.0.0
+429 silly idealTree +-- string_decoder@0.10.31
+429 silly idealTree +-- string-length@1.0.1
+429 silly idealTree +-- strip-ansi@3.0.1
+429 silly idealTree +-- strip-json-comments@2.0.1
+429 silly idealTree +-- supports-color@2.0.0
+429 silly idealTree +-- taskgroup@4.3.1
+429 silly idealTree +-- through@2.3.8
+429 silly idealTree +-- timed-out@2.0.0
+429 silly idealTree +-- to-array@0.1.4
+429 silly idealTree +-- touch@1.0.0
+429 silly idealTree | `-- nopt@1.0.10
+429 silly idealTree +-- type-is@1.6.14
+429 silly idealTree +-- typechecker@2.1.0
+429 silly idealTree +-- uglify-js
+429 silly idealTree +-- uglify-to-browserify@1.0.2
+429 silly idealTree +-- uid-safe@2.1.4
+429 silly idealTree +-- ultron@1.0.2
+429 silly idealTree +-- undefsafe@0.0.3
+429 silly idealTree +-- unpipe@1.0.0
+429 silly idealTree +-- update-notifier@0.5.0
+429 silly idealTree +-- util-deprecate@1.0.2
+429 silly idealTree +-- utils-merge@1.0.0
+429 silly idealTree +-- uuid@2.0.3
+429 silly idealTree +-- validator@6.2.1
+429 silly idealTree +-- vary@1.1.0
+429 silly idealTree +-- watchr@2.4.13
+429 silly idealTree +-- window-size@0.1.0
+429 silly idealTree +-- wordwrap@0.0.3
+429 silly idealTree +-- wrappy@1.0.2
+429 silly idealTree +-- write-file-atomic@1.3.1
+429 silly idealTree +-- ws@1.1.2
+429 silly idealTree +-- wtf-8@1.0.0
+429 silly idealTree +-- xdg-basedir@2.0.0
+429 silly idealTree +-- xmlhttprequest-ssl@1.5.3
+429 silly idealTree +-- xregexp@2.0.0
+429 silly idealTree +-- yargs@3.10.0
+429 silly idealTree `-- yeast@0.1.2
+430 silly generateActionsToTake Starting
+431 silly install generateActionsToTake
+432 silly generateActionsToTake Finishing
+433 silly diffTrees action count 8
+434 silly diffTrees add double-ended-queue@2.1.0-0
+435 silly diffTrees add epoll@0.1.21
+436 silly diffTrees add redis-commands@1.3.1
+437 silly diffTrees add redis-parser@2.5.0
+438 silly diffTrees add redis@2.7.1
+439 silly diffTrees add connect-redis@3.2.0
+440 silly diffTrees add fs@0.0.1-security
+441 silly diffTrees add rpi-gpio@0.7.0
+442 silly decomposeActions action count 64
+443 silly decomposeActions fetch double-ended-queue@2.1.0-0
+444 silly decomposeActions extract double-ended-queue@2.1.0-0
+445 silly decomposeActions test double-ended-queue@2.1.0-0
+446 silly decomposeActions preinstall double-ended-queue@2.1.0-0
+447 silly decomposeActions build double-ended-queue@2.1.0-0
+448 silly decomposeActions install double-ended-queue@2.1.0-0
+449 silly decomposeActions postinstall double-ended-queue@2.1.0-0
+450 silly decomposeActions finalize double-ended-queue@2.1.0-0
+451 silly decomposeActions fetch epoll@0.1.21
+452 silly decomposeActions extract epoll@0.1.21
+453 silly decomposeActions test epoll@0.1.21
+454 silly decomposeActions preinstall epoll@0.1.21
+455 silly decomposeActions build epoll@0.1.21
+456 silly decomposeActions install epoll@0.1.21
+457 silly decomposeActions postinstall epoll@0.1.21
+458 silly decomposeActions finalize epoll@0.1.21
+459 silly decomposeActions fetch redis-commands@1.3.1
+460 silly decomposeActions extract redis-commands@1.3.1
+461 silly decomposeActions test redis-commands@1.3.1
+462 silly decomposeActions preinstall redis-commands@1.3.1
+463 silly decomposeActions build redis-commands@1.3.1
+464 silly decomposeActions install redis-commands@1.3.1
+465 silly decomposeActions postinstall redis-commands@1.3.1
+466 silly decomposeActions finalize redis-commands@1.3.1
+467 silly decomposeActions fetch redis-parser@2.5.0
+468 silly decomposeActions extract redis-parser@2.5.0
+469 silly decomposeActions test redis-parser@2.5.0
+470 silly decomposeActions preinstall redis-parser@2.5.0
+471 silly decomposeActions build redis-parser@2.5.0
+472 silly decomposeActions install redis-parser@2.5.0
+473 silly decomposeActions postinstall redis-parser@2.5.0
+474 silly decomposeActions finalize redis-parser@2.5.0
+475 silly decomposeActions fetch redis@2.7.1
+476 silly decomposeActions extract redis@2.7.1
+477 silly decomposeActions test redis@2.7.1
+478 silly decomposeActions preinstall redis@2.7.1
+479 silly decomposeActions build redis@2.7.1
+480 silly decomposeActions install redis@2.7.1
+481 silly decomposeActions postinstall redis@2.7.1
+482 silly decomposeActions finalize redis@2.7.1
+483 silly decomposeActions fetch connect-redis@3.2.0
+484 silly decomposeActions extract connect-redis@3.2.0
+485 silly decomposeActions test connect-redis@3.2.0
+486 silly decomposeActions preinstall connect-redis@3.2.0
+487 silly decomposeActions build connect-redis@3.2.0
+488 silly decomposeActions install connect-redis@3.2.0
+489 silly decomposeActions postinstall connect-redis@3.2.0
+490 silly decomposeActions finalize connect-redis@3.2.0
+491 silly decomposeActions fetch fs@0.0.1-security
+492 silly decomposeActions extract fs@0.0.1-security
+493 silly decomposeActions test fs@0.0.1-security
+494 silly decomposeActions preinstall fs@0.0.1-security
+495 silly decomposeActions build fs@0.0.1-security
+496 silly decomposeActions install fs@0.0.1-security
+497 silly decomposeActions postinstall fs@0.0.1-security
+498 silly decomposeActions finalize fs@0.0.1-security
+499 silly decomposeActions fetch rpi-gpio@0.7.0
+500 silly decomposeActions extract rpi-gpio@0.7.0
+501 silly decomposeActions test rpi-gpio@0.7.0
+502 silly decomposeActions preinstall rpi-gpio@0.7.0
+503 silly decomposeActions build rpi-gpio@0.7.0
+504 silly decomposeActions install rpi-gpio@0.7.0
+505 silly decomposeActions postinstall rpi-gpio@0.7.0
+506 silly decomposeActions finalize rpi-gpio@0.7.0
+507 silly runTopLevelLifecycles Starting
+508 silly install runPreinstallTopLevelLifecycles
+509 silly preinstall smarthouse@0.0.0
+510 info lifecycle smarthouse@0.0.0~preinstall: smarthouse@0.0.0
+511 silly lifecycle smarthouse@0.0.0~preinstall: no script for preinstall, continuing
+512 silly executeActions Starting
+513 silly install executeActions
+514 silly doSerial global-install 0
+515 silly doParallel fetch 8
+516 verbose correctMkdir C:\Users\Anbor\AppData\Roaming\npm-cache\_locks correctMkdir not in flight; initializing
+517 verbose lock using C:\Users\Anbor\AppData\Roaming\npm-cache\_locks\staging-7541c0fc8cada70d.lock for C:\Bachelor\Smarthouse\node_modules\.staging
+518 silly doParallel extract 8
+519 silly extract double-ended-queue@2.1.0-0
+520 silly extract epoll@0.1.21
+521 silly extract redis-commands@1.3.1
+522 silly extract redis-parser@2.5.0
+523 silly extract redis@2.7.1
+524 silly extract connect-redis@3.2.0
+525 silly extract fs@0.0.1-security
+526 silly extract rpi-gpio@0.7.0
+527 verbose unbuild node_modules\.staging\epoll-b01fff1d
+528 verbose unbuild node_modules\.staging\redis-commands-2d9e2940
+529 verbose unbuild node_modules\.staging\double-ended-queue-5d4ee883
+530 verbose unbuild node_modules\.staging\redis-parser-08e20bea
+531 verbose unbuild node_modules\.staging\redis-b21d18d4
+532 verbose unbuild node_modules\.staging\connect-redis-0c4656f3
+533 verbose unbuild node_modules\.staging\fs-ac87c846
+534 verbose unbuild node_modules\.staging\rpi-gpio-d06d9fc8
+535 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d is being purged from base C:\Bachelor\Smarthouse
+536 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d
+537 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940 is being purged from base C:\Bachelor\Smarthouse
+538 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940
+539 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883 is being purged from base C:\Bachelor\Smarthouse
+540 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883
+541 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea is being purged from base C:\Bachelor\Smarthouse
+542 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea
+543 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4 is being purged from base C:\Bachelor\Smarthouse
+544 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4
+545 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3 is being purged from base C:\Bachelor\Smarthouse
+546 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3
+547 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846 is being purged from base C:\Bachelor\Smarthouse
+548 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846
+549 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\epoll\0.1.21\package.tgz
+550 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d
+551 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d is being purged
+552 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d
+553 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\redis-commands\1.3.1\package.tgz
+554 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940
+555 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940 is being purged
+556 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940
+557 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8 is being purged from base C:\Bachelor\Smarthouse
+558 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8
+559 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\double-ended-queue\2.1.0-0\package.tgz
+560 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883
+561 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883 is being purged
+562 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883
+563 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\redis-parser\2.5.0\package.tgz
+564 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea
+565 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea is being purged
+566 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea
+567 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\redis\2.7.1\package.tgz
+568 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4
+569 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4 is being purged
+570 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4
+571 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\connect-redis\3.2.0\package.tgz
+572 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3
+573 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3 is being purged
+574 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3
+575 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\fs\0.0.1-security\package.tgz
+576 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846
+577 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846 is being purged
+578 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846
+579 silly gunzTarPerm modes [ '777', '666' ]
+580 silly gunzTarPerm modes [ '777', '666' ]
+581 verbose tar unpack C:\Users\Anbor\AppData\Roaming\npm-cache\rpi-gpio\0.7.0\package.tgz
+582 verbose tar unpacking to C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8
+583 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8 is being purged
+584 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8
+585 silly gunzTarPerm modes [ '777', '666' ]
+586 silly gunzTarPerm modes [ '777', '666' ]
+587 silly gunzTarPerm modes [ '777', '666' ]
+588 silly gunzTarPerm modes [ '777', '666' ]
+589 silly gunzTarPerm modes [ '777', '666' ]
+590 silly gunzTarPerm modes [ '777', '666' ]
+591 silly gunzTarPerm extractEntry package.json
+592 silly gunzTarPerm modified mode [ 'package.json', 436, 438 ]
+593 silly gunzTarPerm extractEntry package.json
+594 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+595 silly gunzTarPerm extractEntry package.json
+596 silly gunzTarPerm extractEntry package.json
+597 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+598 silly gunzTarPerm extractEntry package.json
+599 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+600 silly gunzTarPerm extractEntry package.json
+601 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+602 silly gunzTarPerm extractEntry package.json
+603 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+604 silly gunzTarPerm extractEntry package.json
+605 silly gunzTarPerm modified mode [ 'package.json', 436, 438 ]
+606 silly gunzTarPerm extractEntry .npmignore
+607 silly gunzTarPerm modified mode [ '.npmignore', 436, 438 ]
+608 silly gunzTarPerm extractEntry README.md
+609 silly gunzTarPerm modified mode [ 'README.md', 436, 438 ]
+610 silly gunzTarPerm extractEntry .npmignore
+611 silly gunzTarPerm extractEntry README.md
+612 silly gunzTarPerm extractEntry .npmignore
+613 silly gunzTarPerm modified mode [ '.npmignore', 436, 438 ]
+614 silly gunzTarPerm extractEntry README.md
+615 silly gunzTarPerm modified mode [ 'README.md', 436, 438 ]
+616 silly gunzTarPerm extractEntry .npmignore
+617 silly gunzTarPerm modified mode [ '.npmignore', 436, 438 ]
+618 silly gunzTarPerm extractEntry README.md
+619 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+620 silly gunzTarPerm extractEntry .npmignore
+621 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+622 silly gunzTarPerm extractEntry index.js
+623 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+624 silly gunzTarPerm extractEntry .npmignore
+625 silly gunzTarPerm modified mode [ '.npmignore', 420, 438 ]
+626 silly gunzTarPerm extractEntry README.md
+627 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+628 silly gunzTarPerm extractEntry README.md
+629 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+630 silly gunzTarPerm extractEntry .npmignore
+631 silly gunzTarPerm modified mode [ '.npmignore', 509, 511 ]
+632 silly gunzTarPerm extractEntry README.md
+633 silly gunzTarPerm modified mode [ 'README.md', 509, 511 ]
+634 silly gunzTarPerm extractEntry LICENSE
+635 silly gunzTarPerm modified mode [ 'LICENSE', 436, 438 ]
+636 silly gunzTarPerm extractEntry index.js
+637 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+638 silly gunzTarPerm extractEntry LICENSE
+639 silly gunzTarPerm extractEntry Gruntfile.js
+640 silly gunzTarPerm extractEntry LICENSE
+641 silly gunzTarPerm modified mode [ 'LICENSE', 436, 438 ]
+642 silly gunzTarPerm extractEntry epoll.js
+643 silly gunzTarPerm modified mode [ 'epoll.js', 436, 438 ]
+644 silly gunzTarPerm extractEntry LICENSE
+645 silly gunzTarPerm modified mode [ 'LICENSE', 436, 438 ]
+646 silly gunzTarPerm extractEntry index.js
+647 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+648 silly gunzTarPerm extractEntry Readme.md
+649 silly gunzTarPerm modified mode [ 'Readme.md', 420, 438 ]
+650 silly gunzTarPerm extractEntry bench/redisbench.js
+651 silly gunzTarPerm modified mode [ 'bench/redisbench.js', 420, 438 ]
+652 silly gunzTarPerm extractEntry rpi-gpio.js
+653 silly gunzTarPerm modified mode [ 'rpi-gpio.js', 509, 511 ]
+654 silly gunzTarPerm extractEntry .travis.yml
+655 silly gunzTarPerm modified mode [ '.travis.yml', 509, 511 ]
+656 silly gunzTarPerm extractEntry MIT-LICENSE.txt
+657 silly gunzTarPerm modified mode [ 'MIT-LICENSE.txt', 436, 438 ]
+658 silly gunzTarPerm extractEntry test/main.js
+659 silly gunzTarPerm modified mode [ 'test/main.js', 509, 511 ]
+660 silly gunzTarPerm extractEntry test/integration/main.js
+661 silly gunzTarPerm modified mode [ 'test/integration/main.js', 436, 438 ]
+662 silly gunzTarPerm extractEntry LICENSE
+663 silly gunzTarPerm modified mode [ 'LICENSE', 436, 438 ]
+664 silly gunzTarPerm extractEntry History.md
+665 silly gunzTarPerm modified mode [ 'History.md', 436, 438 ]
+666 silly gunzTarPerm extractEntry binding.gyp
+667 silly gunzTarPerm modified mode [ 'binding.gyp', 436, 438 ]
+668 silly gunzTarPerm extractEntry example/interrupts-per-second/interrupts-per-second.js
+669 silly gunzTarPerm modified mode [ 'example/interrupts-per-second/interrupts-per-second.js',
+669 silly gunzTarPerm   436,
+669 silly gunzTarPerm   438 ]
+670 silly gunzTarPerm extractEntry example/interrupts-per-second/export
+671 silly gunzTarPerm modified mode [ 'example/interrupts-per-second/export', 509, 511 ]
+672 silly gunzTarPerm extractEntry example/interrupts-per-second/unexport
+673 silly gunzTarPerm modified mode [ 'example/interrupts-per-second/unexport', 509, 511 ]
+674 silly gunzTarPerm extractEntry example/watch-button/watch-button.js
+675 silly gunzTarPerm modified mode [ 'example/watch-button/watch-button.js', 436, 438 ]
+676 silly gunzTarPerm extractEntry example/watch-button/export
+677 silly gunzTarPerm modified mode [ 'example/watch-button/export', 509, 511 ]
+678 silly gunzTarPerm extractEntry example/watch-button/unexport
+679 silly gunzTarPerm modified mode [ 'example/watch-button/unexport', 509, 511 ]
+680 silly gunzTarPerm extractEntry src/epoll.cc
+681 silly gunzTarPerm modified mode [ 'src/epoll.cc', 436, 438 ]
+682 silly gunzTarPerm extractEntry src/epoll.h
+683 silly gunzTarPerm modified mode [ 'src/epoll.h', 436, 438 ]
+684 silly gunzTarPerm extractEntry test/brute-force-leak-check.js
+685 silly gunzTarPerm modified mode [ 'test/brute-force-leak-check.js', 436, 438 ]
+686 silly gunzTarPerm extractEntry test/do-almost-nothing.js
+687 silly gunzTarPerm modified mode [ 'test/do-almost-nothing.js', 436, 438 ]
+688 silly gunzTarPerm extractEntry test/do-nothing.js
+689 silly gunzTarPerm modified mode [ 'test/do-nothing.js', 436, 438 ]
+690 silly gunzTarPerm extractEntry test/no-gc-allowed.js
+691 silly gunzTarPerm modified mode [ 'test/no-gc-allowed.js', 436, 438 ]
+692 silly gunzTarPerm extractEntry test/closed.js
+693 silly gunzTarPerm modified mode [ 'test/closed.js', 436, 438 ]
+694 silly gunzTarPerm extractEntry test/performance-check.js
+695 silly gunzTarPerm modified mode [ 'test/performance-check.js', 436, 438 ]
+696 silly gunzTarPerm extractEntry test/util.js
+697 silly gunzTarPerm modified mode [ 'test/util.js', 436, 438 ]
+698 silly gunzTarPerm extractEntry test/two-shot.js
+699 silly gunzTarPerm modified mode [ 'test/two-shot.js', 436, 438 ]
+700 silly gunzTarPerm extractEntry test/verify-events.js
+701 silly gunzTarPerm modified mode [ 'test/verify-events.js', 436, 438 ]
+702 silly gunzTarPerm extractEntry test/one-shot.js
+703 silly gunzTarPerm modified mode [ 'test/one-shot.js', 436, 438 ]
+704 silly gunzTarPerm extractEntry test/run-tests
+705 silly gunzTarPerm modified mode [ 'test/run-tests', 509, 511 ]
+706 silly gunzTarPerm extractEntry js/deque.js
+707 silly gunzTarPerm extractEntry commands.json
+708 silly gunzTarPerm modified mode [ 'commands.json', 436, 438 ]
+709 silly gunzTarPerm extractEntry .travis.yml
+710 silly gunzTarPerm modified mode [ '.travis.yml', 436, 438 ]
+711 silly gunzTarPerm extractEntry test/index.js
+712 silly gunzTarPerm modified mode [ 'test/index.js', 436, 438 ]
+713 silly gunzTarPerm extractEntry changelog.md
+714 silly gunzTarPerm modified mode [ 'changelog.md', 436, 438 ]
+715 silly gunzTarPerm extractEntry tools/build.js
+716 silly gunzTarPerm modified mode [ 'tools/build.js', 436, 438 ]
+717 silly gunzTarPerm extractEntry changelog.md
+718 silly gunzTarPerm modified mode [ 'changelog.md', 420, 438 ]
+719 silly gunzTarPerm extractEntry lib/hiredis.js
+720 silly gunzTarPerm modified mode [ 'lib/hiredis.js', 420, 438 ]
+721 silly gunzTarPerm extractEntry lib/parser.js
+722 silly gunzTarPerm modified mode [ 'lib/parser.js', 420, 438 ]
+723 silly gunzTarPerm extractEntry lib/parserError.js
+724 silly gunzTarPerm modified mode [ 'lib/parserError.js', 420, 438 ]
+725 silly gunzTarPerm extractEntry lib/redisError.js
+726 silly gunzTarPerm modified mode [ 'lib/redisError.js', 420, 438 ]
+727 silly gunzTarPerm extractEntry lib/replyError.js
+728 silly gunzTarPerm modified mode [ 'lib/replyError.js', 420, 438 ]
+729 silly gunzTarPerm extractEntry .eslintrc
+730 silly gunzTarPerm modified mode [ '.eslintrc', 420, 438 ]
+731 silly gunzTarPerm extractEntry lib/connect-redis.js
+732 silly gunzTarPerm modified mode [ 'lib/connect-redis.js', 420, 438 ]
+733 silly gunzTarPerm extractEntry index.js
+734 silly gunzTarPerm modified mode [ 'index.js', 420, 438 ]
+735 silly gunzTarPerm extractEntry .github/ISSUE_TEMPLATE.md
+736 silly gunzTarPerm modified mode [ '.github/ISSUE_TEMPLATE.md', 436, 438 ]
+737 silly gunzTarPerm extractEntry .github/PULL_REQUEST_TEMPLATE.md
+738 silly gunzTarPerm modified mode [ '.github/PULL_REQUEST_TEMPLATE.md', 436, 438 ]
+739 silly gunzTarPerm extractEntry .eslintrc
+740 silly gunzTarPerm modified mode [ '.eslintrc', 420, 438 ]
+741 silly gunzTarPerm extractEntry changelog.md
+742 silly gunzTarPerm modified mode [ 'changelog.md', 420, 438 ]
+743 silly gunzTarPerm extractEntry History.md
+744 silly gunzTarPerm modified mode [ 'History.md', 420, 438 ]
+745 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846\node_modules is being purged
+746 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\fs-ac87c846\node_modules
+747 silly gunzTarPerm extractEntry test/connect-redis-test.js
+748 silly gunzTarPerm modified mode [ 'test/connect-redis-test.js', 420, 438 ]
+749 silly gunzTarPerm extractEntry test/redis-server.js
+750 silly gunzTarPerm modified mode [ 'test/redis-server.js', 420, 438 ]
+751 silly gunzTarPerm extractEntry .eslintignore
+752 silly gunzTarPerm modified mode [ '.eslintignore', 436, 438 ]
+753 silly gunzTarPerm extractEntry lib/command.js
+754 silly gunzTarPerm modified mode [ 'lib/command.js', 420, 438 ]
+755 silly gunzTarPerm extractEntry lib/commands.js
+756 silly gunzTarPerm modified mode [ 'lib/commands.js', 420, 438 ]
+757 silly gunzTarPerm extractEntry lib/createClient.js
+758 silly gunzTarPerm modified mode [ 'lib/createClient.js', 420, 438 ]
+759 silly gunzTarPerm extractEntry lib/customErrors.js
+760 silly gunzTarPerm modified mode [ 'lib/customErrors.js', 420, 438 ]
+761 silly gunzTarPerm extractEntry lib/debug.js
+762 silly gunzTarPerm modified mode [ 'lib/debug.js', 420, 438 ]
+763 silly gunzTarPerm extractEntry lib/extendedApi.js
+764 silly gunzTarPerm modified mode [ 'lib/extendedApi.js', 420, 438 ]
+765 silly gunzTarPerm extractEntry lib/individualCommands.js
+766 silly gunzTarPerm modified mode [ 'lib/individualCommands.js', 420, 438 ]
+767 silly gunzTarPerm extractEntry lib/multi.js
+768 silly gunzTarPerm modified mode [ 'lib/multi.js', 420, 438 ]
+769 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883\node_modules is being purged
+770 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\double-ended-queue-5d4ee883\node_modules
+771 silly gunzTarPerm extractEntry lib/utils.js
+772 silly gunzTarPerm modified mode [ 'lib/utils.js', 420, 438 ]
+773 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940\node_modules is being purged
+774 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-commands-2d9e2940\node_modules
+775 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3\node_modules is being purged
+776 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\connect-redis-0c4656f3\node_modules
+777 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8\node_modules is being purged
+778 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\rpi-gpio-d06d9fc8\node_modules
+779 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea\node_modules is being purged
+780 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-parser-08e20bea\node_modules
+781 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d\node_modules is being purged
+782 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\epoll-b01fff1d\node_modules
+783 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4\node_modules is being purged
+784 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\.staging\redis-b21d18d4\node_modules
+785 silly doParallel preinstall 8
+786 silly preinstall double-ended-queue@2.1.0-0
+787 info lifecycle double-ended-queue@2.1.0-0~preinstall: double-ended-queue@2.1.0-0
+788 silly preinstall epoll@0.1.21
+789 info lifecycle epoll@0.1.21~preinstall: epoll@0.1.21
+790 silly preinstall redis-commands@1.3.1
+791 info lifecycle redis-commands@1.3.1~preinstall: redis-commands@1.3.1
+792 silly preinstall redis-parser@2.5.0
+793 info lifecycle redis-parser@2.5.0~preinstall: redis-parser@2.5.0
+794 silly preinstall redis@2.7.1
+795 info lifecycle redis@2.7.1~preinstall: redis@2.7.1
+796 silly preinstall connect-redis@3.2.0
+797 info lifecycle connect-redis@3.2.0~preinstall: connect-redis@3.2.0
+798 silly preinstall fs@0.0.1-security
+799 info lifecycle fs@0.0.1-security~preinstall: fs@0.0.1-security
+800 silly preinstall rpi-gpio@0.7.0
+801 info lifecycle rpi-gpio@0.7.0~preinstall: rpi-gpio@0.7.0
+802 silly lifecycle double-ended-queue@2.1.0-0~preinstall: no script for preinstall, continuing
+803 silly lifecycle epoll@0.1.21~preinstall: no script for preinstall, continuing
+804 silly lifecycle redis-commands@1.3.1~preinstall: no script for preinstall, continuing
+805 silly lifecycle redis-parser@2.5.0~preinstall: no script for preinstall, continuing
+806 silly lifecycle redis@2.7.1~preinstall: no script for preinstall, continuing
+807 silly lifecycle connect-redis@3.2.0~preinstall: no script for preinstall, continuing
+808 silly lifecycle fs@0.0.1-security~preinstall: no script for preinstall, continuing
+809 silly lifecycle rpi-gpio@0.7.0~preinstall: no script for preinstall, continuing
+810 silly doReverseSerial remove 0
+811 silly doSerial move 0
+812 silly doSerial finalize 8
+813 silly finalize C:\Bachelor\Smarthouse\node_modules\double-ended-queue
+814 silly finalize C:\Bachelor\Smarthouse\node_modules\epoll
+815 silly finalize C:\Bachelor\Smarthouse\node_modules\redis-commands
+816 silly finalize C:\Bachelor\Smarthouse\node_modules\redis-parser
+817 silly finalize C:\Bachelor\Smarthouse\node_modules\redis
+818 silly finalize C:\Bachelor\Smarthouse\node_modules\connect-redis
+819 silly finalize C:\Bachelor\Smarthouse\node_modules\fs
+820 silly finalize C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+821 silly doSerial build 8
+822 silly build double-ended-queue@2.1.0-0
+823 info linkStuff double-ended-queue@2.1.0-0
+824 silly linkStuff double-ended-queue@2.1.0-0 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+825 verbose linkBins double-ended-queue@2.1.0-0
+826 verbose linkMans double-ended-queue@2.1.0-0
+827 silly build epoll@0.1.21
+828 info linkStuff epoll@0.1.21
+829 silly linkStuff epoll@0.1.21 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+830 verbose linkBins epoll@0.1.21
+831 verbose linkMans epoll@0.1.21
+832 silly build redis-commands@1.3.1
+833 info linkStuff redis-commands@1.3.1
+834 silly linkStuff redis-commands@1.3.1 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+835 verbose linkBins redis-commands@1.3.1
+836 verbose linkMans redis-commands@1.3.1
+837 silly build redis-parser@2.5.0
+838 info linkStuff redis-parser@2.5.0
+839 silly linkStuff redis-parser@2.5.0 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+840 verbose linkBins redis-parser@2.5.0
+841 verbose linkMans redis-parser@2.5.0
+842 silly build redis@2.7.1
+843 info linkStuff redis@2.7.1
+844 silly linkStuff redis@2.7.1 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+845 verbose linkBins redis@2.7.1
+846 verbose linkMans redis@2.7.1
+847 silly build connect-redis@3.2.0
+848 info linkStuff connect-redis@3.2.0
+849 silly linkStuff connect-redis@3.2.0 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+850 verbose linkBins connect-redis@3.2.0
+851 verbose linkMans connect-redis@3.2.0
+852 silly build fs@0.0.1-security
+853 info linkStuff fs@0.0.1-security
+854 silly linkStuff fs@0.0.1-security has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+855 verbose linkBins fs@0.0.1-security
+856 verbose linkMans fs@0.0.1-security
+857 silly build rpi-gpio@0.7.0
+858 info linkStuff rpi-gpio@0.7.0
+859 silly linkStuff rpi-gpio@0.7.0 has C:\Bachelor\Smarthouse\node_modules as its parent node_modules
+860 verbose linkBins rpi-gpio@0.7.0
+861 verbose linkMans rpi-gpio@0.7.0
+862 silly doSerial global-link 0
+863 silly doParallel update-linked 0
+864 silly doSerial install 8
+865 silly install double-ended-queue@2.1.0-0
+866 info lifecycle double-ended-queue@2.1.0-0~install: double-ended-queue@2.1.0-0
+867 silly lifecycle double-ended-queue@2.1.0-0~install: no script for install, continuing
+868 silly install epoll@0.1.21
+869 info lifecycle epoll@0.1.21~install: epoll@0.1.21
+870 verbose lifecycle epoll@0.1.21~install: unsafe-perm in lifecycle true
+871 verbose lifecycle epoll@0.1.21~install: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Bachelor\Smarthouse\node_modules\epoll\node_modules\.bin;C:\Bachelor\Smarthouse\node_modules\.bin;C:\Program Files\Java\jdk1.8.0_51\bin;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\;C:\Program Files\nodejs\;C:\Users\Anbor\AppData\Local\atom\bin;C:\Users\Anbor\AppData\Local\Microsoft\WindowsApps;C:\Program Files\apache-maven-3.3.9\bin;C:\Users\Anbor\AppData\Roaming\npm
+872 verbose lifecycle epoll@0.1.21~install: CWD: C:\Bachelor\Smarthouse\node_modules\epoll
+873 silly lifecycle epoll@0.1.21~install: Args: [ '/d /s /c', 'node-gyp rebuild' ]
+874 silly lifecycle epoll@0.1.21~install: Returned: code: 1  signal: null
+875 info lifecycle epoll@0.1.21~install: Failed to exec install script
+876 verbose unlock done using C:\Users\Anbor\AppData\Roaming\npm-cache\_locks\staging-7541c0fc8cada70d.lock for C:\Bachelor\Smarthouse\node_modules\.staging
+877 silly rollbackFailedOptional Starting
+878 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+879 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+880 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+881 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+882 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+883 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+884 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+885 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+886 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+887 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+888 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+889 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+890 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+891 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+892 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\epoll is being purged from base C:\Bachelor\Smarthouse
+893 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\epoll
+894 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+895 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+896 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+897 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+898 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+899 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+900 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+901 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+902 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+903 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+904 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+905 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+906 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+907 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+908 silly gentlyRm C:\Bachelor\Smarthouse\node_modules\rpi-gpio is being purged from base C:\Bachelor\Smarthouse
+909 verbose gentlyRm don't care about contents; nuking C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+910 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+911 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+912 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+913 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+914 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+915 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+916 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+917 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\epoll
+918 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+919 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+920 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+921 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+922 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+923 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+924 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+925 silly vacuum-fs purging C:\Bachelor\Smarthouse\node_modules\rpi-gpio
+926 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+927 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+928 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+929 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+930 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+931 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+932 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+933 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+934 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+935 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+936 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+937 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+938 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+939 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+940 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+941 silly vacuum-fs quitting because other entries in C:\Bachelor\Smarthouse\node_modules
+942 silly rollbackFailedOptional Finishing
+943 silly runTopLevelLifecycles Finishing
+944 silly install printInstalled
+945 warn optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\chokidar\node_modules\fsevents):
+946 warn notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.1: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+947 verbose notsup SKIPPING OPTIONAL DEPENDENCY: Valid OS:    darwin
+947 verbose notsup SKIPPING OPTIONAL DEPENDENCY: Valid Arch:  any
+947 verbose notsup SKIPPING OPTIONAL DEPENDENCY: Actual OS:   win32
+947 verbose notsup SKIPPING OPTIONAL DEPENDENCY: Actual Arch: x64
+948 warn enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\handlebars\package.json'
+949 verbose enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\handlebars\package.json'
+949 verbose enoent This is most likely not a problem with npm itself
+949 verbose enoent and is related to npm not being able to find a file.
+950 warn enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\mime\package.json'
+951 verbose enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\mime\package.json'
+951 verbose enoent This is most likely not a problem with npm itself
+951 verbose enoent and is related to npm not being able to find a file.
+952 warn enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\optimist\package.json'
+953 verbose enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\optimist\package.json'
+953 verbose enoent This is most likely not a problem with npm itself
+953 verbose enoent and is related to npm not being able to find a file.
+954 warn enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\uglify-js\package.json'
+955 verbose enoent ENOENT: no such file or directory, open 'C:\Bachelor\Smarthouse\node_modules\uglify-js\package.json'
+955 verbose enoent This is most likely not a problem with npm itself
+955 verbose enoent and is related to npm not being able to find a file.
+956 verbose stack Error: epoll@0.1.21 install: `node-gyp rebuild`
+956 verbose stack Exit status 1
+956 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:279:16)
+956 verbose stack     at emitTwo (events.js:106:13)
+956 verbose stack     at EventEmitter.emit (events.js:191:7)
+956 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+956 verbose stack     at emitTwo (events.js:106:13)
+956 verbose stack     at ChildProcess.emit (events.js:191:7)
+956 verbose stack     at maybeClose (internal/child_process.js:885:16)
+956 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+957 verbose pkgid epoll@0.1.21
+958 verbose cwd C:\Bachelor\Smarthouse
+959 error Windows_NT 10.0.14393
+960 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+961 error node v7.4.0
+962 error npm  v4.0.5
+963 error code ELIFECYCLE
+964 error epoll@0.1.21 install: `node-gyp rebuild`
+964 error Exit status 1
+965 error Failed at the epoll@0.1.21 install script 'node-gyp rebuild'.
+965 error Make sure you have the latest version of node.js and npm installed.
+965 error If you do, this is most likely a problem with the epoll package,
+965 error not with npm itself.
+965 error Tell the author that this fails on your system:
+965 error     node-gyp rebuild
+965 error You can get information on how to open an issue for this project with:
+965 error     npm bugs epoll
+965 error Or if that isn't available, you can get their info via:
+965 error     npm owner ls epoll
+965 error There is likely additional logging output above.
+966 verbose exit [ 1, true ]

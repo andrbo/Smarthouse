@@ -26,6 +26,7 @@
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-local": "*",
+    "qs": "^6.4.0",
     "redis": "^2.7.1",
     "rpi-gpio": "^0.7.0",
     "serialport": "^4.0.7",
