@@ -61,15 +61,10 @@
 
 <script>
     var socket = io();
-    var tempVal = document.getElementById('test');
     socket.on('serialEvent', function(data){
-        tempRead(data);
+        $('#test').innerHTML = data.Temperature;
     });
 
-    function tempRead(data){
-        var sensorVal = data.Temperature;
-        tempVal.innerHTML = sensorVal;
-    }
 </script>
 <div class="container">
 
