@@ -80,12 +80,12 @@ router.post('/login', function (req, res) {
                     console.log('Pass ok!');
                     session.email = loginUsername;
                     console.log(session.email);
-                    res.redirect('secret');
+                    res.redirect('http://localhost:3000/home');
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
                     console.log("res: " + result)
                     console.log('Pass ikke ok!')
-                    res.redirect('secret');
+                    res.redirect('http://localhost:3000/home');
 
                 }
             })
@@ -102,7 +102,7 @@ router.get('/logout', function (req, res) {
     });
 });
 
-function checkAuth(req, res, next) {
+/*function checkAuth(req, res, next) {
     if(!session.email){
         console.log("bruker ikke logget inn");
         res.render('home', {
@@ -122,6 +122,6 @@ router.get('/secret', checkAuth, function (req, res) {
     });
     console.log("GODKJENT");
 });
-
+*/
 
 module.exports = router;

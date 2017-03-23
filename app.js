@@ -43,13 +43,11 @@ app.get('/', function (req, res) {
 //New pages goes here
 var home = require('./router/home');
 var about = require('./router/about');
-var products = require('./router/products');
 var security = require('./router/security');
 var users = require('./router/users');
 
 app.use('/home', home);
 app.use('/about', about);
-app.use('/products', products);
 app.use('/security', security);
 app.use('/users', users);
 app.use('/users/register', users);
