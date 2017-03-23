@@ -33,6 +33,8 @@
     "Vibe-Detection": "Vibrations detected!",
     "Laser-Trip": "Laser broken!",
     "Gas-Detection": "Gas detected!",
-    "Leak-Detection": "Leak detected!"
+    "Leak-Detection": "Leak detected!",
+
+    "Calendar-Event": "Activities"
 
 }
