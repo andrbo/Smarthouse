@@ -63,14 +63,8 @@
 
     socket.on('serialEvent', function (data) {
 
-        var tempValue = document.getElementById('flameValue');
-        tempReading(data);
-
-        function tempReading(data) {
-            var tempSensValue = data.Tempreature;
-            tempValue.innerHTML=tempSensValue;
-        }
-        ;
+        var tempValue = document.getElementById('tempValue');
+        tempValue.innerHTML=data.Temperature;
     });
 
 
