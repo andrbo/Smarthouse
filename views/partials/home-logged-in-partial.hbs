@@ -1,9 +1,9 @@
-<link rel='stylesheet' href='calendar/fullcalendar/dist/fullcalendar.css' />
+<link rel='stylesheet' href='calendar/fullcalendar/dist/fullcalendar.css'/>
 <script src='/calendar/moment/min/moment.min.js'></script>
 <script src='/calendar/fullcalendar/dist/fullcalendar.js'></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         // page is now ready, initialize the calendar...
 
@@ -29,7 +29,6 @@
         margin-right: auto;
         margin-left: auto;
     }
-
 
     .col-xs-1, .col-sm-1, .col-md-1, .col-sm-1,
     .col-xs-2, .col-sm-2, .col-md-2, .col-sm-2,
@@ -61,9 +60,25 @@
 
 <script>
     var socket = io();
-    socket.on('serialEvent', function(data){
-        $('#test').innerHTML = data.Temperature;
+
+    socket.on('serialEvent', function (data) {
+
+        var flameValue = document.getElementById('flameValue');
+        flameReading(data);
+
+        function flameReading(data) {
+            var flameSensorValue = data.Flame;
+            if (flameSensorValue == 1) {
+                flameValue.innerHTML = "OK"
+                flameValue.style.color = "green";
+            } else {
+                flameValue.innerHTML = "{{__ "Visible-Flame"}}";
+                flameValue.style.color = "red";
+            }
+        }
+        ;
     });
+
 
 </script>
 <div class="container">
@@ -73,7 +88,7 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h1 id="test"></h1>
+                        <h1 id="flameValue"></h1>
                     </div>
 
 
