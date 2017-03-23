@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
+
 var session = require('../session');
 
 
@@ -18,6 +19,7 @@ router.get('/', function(req, res, next) {
             loginUsername: session.email
         });
     }
+    //var calendar = require('../calendar');
 });
 
 module.exports = router;

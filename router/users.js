@@ -54,7 +54,7 @@ router.post('/register', function (req, res) {
                 else {
                     dbModel.createUser(password, email, firstname, surname);
                     session.flash('success_msg', 'Du er nå registrert');
-                    res.redirect('/users/register');
+                    res.redirect('http://localhost:3000/home#');
                 }
             })
         });
@@ -80,13 +80,20 @@ router.post('/login', function (req, res) {
                     console.log('Pass ok!');
                     session.email = loginUsername;
                     console.log(session.email);
-                    res.redirect('secret');
+                    res.redirect('http://localhost:3000/home');
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
                     console.log("res: " + result)
                     console.log('Pass ikke ok!')
-                    res.redirect('secret');
+                    res.redirect('http://localhost:3000/home');
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
                 }
             })
         })
@@ -97,12 +104,10 @@ router.post('/login', function (req, res) {
 router.get('/logout', function (req, res) {
     //TODO: Lag heller en destroy-metode, tror ikke dette er veldig sikkert.
     session.email = null;
-    res.render('home', {
-        login: false
-    });
+    res.redirect('http://localhost:3000/home');
 });
 
-function checkAuth(req, res, next) {
+/*function checkAuth(req, res, next) {
     if(!session.email){
         console.log("bruker ikke logget inn");
         res.render('home', {
@@ -114,14 +119,12 @@ function checkAuth(req, res, next) {
     }
 };
 
-router.get('/secret', checkAuth, function (req, res) {
+router.get('/secret', function (req, res) {
 
-    res.render('home', {
-        login: true,
-        loginUsername: session.email
-    });
+    res.redirect('http://localhost:3000/home');
+
     console.log("GODKJENT");
 });
-
+*/
 
 module.exports = router;
