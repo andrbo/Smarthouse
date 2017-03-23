@@ -1,3 +1,7 @@
 {{#unless login}}
     {{> menubar-not-logged-in}}
 {{/unless}}
+
+{{#if login}}
+    {{> home-logged-in-partial}}
+{{/if}}

@@ -1,1 +1,17 @@
-<h1>ADMIN-VIEW</h1>
+<link rel='stylesheet' href='calendar/fullcalendar/dist/fullcalendar.css' />
+<script src='/calendar/moment/min/moment.min.js'></script>
+<script src='/calendar/fullcalendar/dist/fullcalendar.js'></script>
+
+<script>
+    $(document).ready(function() {
+
+        // page is now ready, initialize the calendar...
+
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+        })
+
+    });
+</script>
+
+<div id='calendar'></div>

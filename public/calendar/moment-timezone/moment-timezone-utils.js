@@ -11,7 +11,7 @@
 	if (typeof define === 'function' && define.amd) {
 		define(['moment'], factory);                 // AMD
 	} else if (typeof module === 'object' && module.exports) {
-		module.exports = factory(require('./'));     // Node
+		module.exports = factory(require('./index'));     // Node
 	} else {
 		factory(root.moment);                        // Browser
 	}
