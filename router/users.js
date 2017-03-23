@@ -80,12 +80,12 @@ router.post('/login', function (req, res) {
                     console.log('Pass ok!');
                     session.email = loginUsername;
                     console.log(session.email);
-                    res.redirect('http://localhost:3000/home');
+                    res.redirect('/home');
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
                     console.log("res: " + result)
                     console.log('Pass ikke ok!')
-                    res.redirect('http://localhost:3000/home');
+                    res.redirect('/home');
                 }
             })
         })
@@ -96,7 +96,7 @@ router.post('/login', function (req, res) {
 router.get('/logout', function (req, res) {
     //TODO: Lag heller en destroy-metode, tror ikke dette er veldig sikkert.
     session.email = null;
-    res.redirect('http://localhost:3000/home');
+    res.redirect('/home');
 });
 
 /*function checkAuth(req, res, next) {
