@@ -81,12 +81,19 @@ router.post('/login', function (req, res) {
                     session.email = loginUsername;
                     console.log(session.email);
                     res.redirect('http://localhost:3000/home');
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
                 } else {
                     console.log("Res === false: " + loginPassword, pwordfromDB);
                     console.log("res: " + result)
                     console.log('Pass ikke ok!')
                     res.redirect('http://localhost:3000/home');
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
                 }
             })
         })
