@@ -63,18 +63,12 @@
 
     socket.on('serialEvent', function (data) {
 
-        var flameValue = document.getElementById('flameValue');
-        flameReading(data);
+        var tempValue = document.getElementById('flameValue');
+        tempReading(data);
 
-        function flameReading(data) {
-            var flameSensorValue = data.Flame;
-            if (flameSensorValue == 1) {
-                flameValue.innerHTML = "OK"
-                flameValue.style.color = "green";
-            } else {
-                flameValue.innerHTML = "{{__ "Visible-Flame"}}";
-                flameValue.style.color = "red";
-            }
+        function tempReading(data) {
+            var tempSensValue = data.Tempreature;
+            tempValue.innerHTML=tempSensValue;
         }
         ;
     });
@@ -88,7 +82,7 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h1 id="flameValue"></h1>
+                        <h1 id="tempValue"></h1>
                     </div>
 
 
