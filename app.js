@@ -10,21 +10,20 @@ var i18n = require('i18n');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 
-//var session = require('express-session');
-//var fs = require('fs');
+var fs = require('fs');
 
 
-//var v4l2camera = require("v4l2camera");
+var v4l2camera = require("v4l2camera");
 
 // Serial communication with Arduino
-/*var serialport = require('serialport');// include the library
+var serialport = require('serialport');// include the library
 var SerialPort = serialport; // make a local instance of it
 var arduinoPort = '/dev/ttyACM0';
-*/
+
 
 // Webcam used for live video, connected to usb port on raspberry pi
-/*var webcam = new v4l2camera.Camera("/dev/video0");
-webcam.start();*/
+var webcam = new v4l2camera.Camera("/dev/video0");
+webcam.start();
 
 
 //Uses the db.js file
@@ -165,13 +164,13 @@ app.use(function (err, req, res, next) {
 });
 
 // Setting up serial communication port with Arduino
-/*var arduinoSerial = new SerialPort(arduinoPort, {
+var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
-});*/
+});
 
 // Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
-/*function stopStreaming() {
+function stopStreaming() {
     if (Object.keys(sockets).length == 0) {
         app.set('watchingFile', false);
         if (proc) proc.kill();
@@ -229,5 +228,5 @@ app.io.on('connection', function (socket) {
     socket.on('streamCam', function() {
        startWebcamStream(app.io);
     });
-});*/
+});
 module.exports = app;
