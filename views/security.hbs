@@ -1,18 +1,56 @@
 <!-- include bootstrap, jquery for easy div manipulation -->
-
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
 <style type="text/css">
-    body {
+
+    html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
         background: #525252;
         color: #ffffff;
+        font-family: 'Fjalla One', sans-serif;
+    }
+
+    h6{
+        size:48px;
+    }
+
+    .container {
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .col-xs-1, .col-sm-1, .col-md-1, .col-sm-1,
+    .col-xs-2, .col-sm-2, .col-md-2, .col-sm-2,
+    .col-xs-3, .col-sm-3, .col-md-3, .col-sm-3,
+    .col-xs-4, .col-sm-4, .col-md-4, .col-sm-4,
+    .col-xs-5, .col-sm-5, .col-md-5, .col-sm-5,
+    .col-xs-6, .col-sm-6, .col-md-6, .col-sm-6,
+    .col-xs-7, .col-sm-7, .col-md-7, .col-sm-7,
+    .col-xs-8, .col-sm-8, .col-md-8, .col-sm-8,
+    .col-xs-9, .col-sm-9, .col-md-9, .col-sm-9,
+    .col-xs-10, .col-sm-10, .col-md-10, .col-sm-10,
+    .col-xs-11, .col-sm-11, .col-md-11, .col-sm-11,
+    .col-xs-12, .col-sm-12, .col-md-12, .col-sm-12 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 0;
+        padding-left: 0;
+        margin-top: 3px;
+        margin-bottom: 7px;
+    }
+
+    .row {
+        margin-right: 0;
+        margin-left: 0;
     }
 
     .glyphicon {
         font-size: 50px;
         opacity: 0.8;
-    }
-
-    .glyphicon:hover {
-        opacity: 1.0;
     }
 
     .glyphicon.glyphicon-fire {
@@ -41,65 +79,6 @@
         font-size: 20px;
     }
 
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-
-    /*
-
-    .switch input {display:none;}
-
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    input:checked + .slider {
-        background-color: #2196F3;
-    }
-
-    input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-    }
-
-    input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
-
-
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-*/
     #webCam {
         width: 100%;
         max-width: 640px;
@@ -216,72 +195,125 @@
 </head>
 
 <div class="container" id="sensordata">
-    <div class="col-md-6 col-xs-4">
+
+    <div class="col-md-6">
+
         <div class="row" id="flameSensor">
-            <div class="col-md-4 col-xs-2">
+            <div class="col-md-4">
                 <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
                 <h6>Flammesensor</h6>
             </div>
-            <div class="col-md-8 col-xs-10">
+            <div class="col-md-8">
                 <h3 id="flameValue"></h3>
             </div>
         </div>
+
         <div class="row" id="gasSensor">
-            <div class="col-md-4 col-xs-2">
-                <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span
-                    class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
                 <h6>Gass sensor</h6>
             </div>
-            <div class="col-md-8 col-xs-10">
+            <div class="col-md-8">
                 <h3 id="gasValue"></h3>
             </div>
         </div>
 
         <div class="row" id="leakSensor">
-            <div class="col-md-4 col-xs-2">
+            <div class="col-md-4">
                 <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
                 <h6>Lekasjesensor</h6>
             </div>
-            <div class="col-md-8 col-xs-10">
+            <div class="col-md-8">
                 <h3 id="leakValue"></h3>
             </div>
         </div>
 
         <div class="row" id="laserSensor">
-            <div class="col-md-4 col-xs-2">
-                </span><span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk"
-                                                                            aria-hidden="true"></span>
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                 <h6>Laserbarriere</h6>
             </div>
-            <div class="col-md-8 col-xs-10">
+            <div class="col-md-8">
                 <h3 id="laserValue"></h3>
             </div>
         </div>
 
         <div class="row" id="IRbarrier">
-            <div class="col-md-4 col-xs-2">
+            <div class="col-md-4">
                 <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
                 <h6>IR barriere</h6>
             </div>
-            <div class="col-md-8 col-xs-10">
+            <div class="col-md-8">
                 <h3 id="irValue"></h3>
             </div>
         </div>
 
         <div class="row" id="vibeSensor">
-            <div class="col-md-4 col-xs-2">
+            <div class="col-md-4">
                 <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
                 <h6>Vibrasjon</h6>
             </div>
-            <div class="col-md-8 col-xs-10">
+            <div class="col-md-8">
                 <h3 id="vibeValue"></h3>
             </div>
         </div>
+
     </div>
-    <div class="col-md-6 col-xs-8">
+
+    <div class="col-md-6">
         <img src="" id="webCam">
     </div>
-</div>
 
+</div>
+<div class="container">
+    <div class = col-md-12>
+    <div class="row">
+        <div class="col-md-3">
+            <button  type="button" id="alarmBtn" class="btn btn-primary" data-toggle="modal" data-target="#alarmPw">
+                Aktiver alarm
+            </button>
+            <div class="modal fade" id="alarmPw">
+                <div class="model-dialog">
+                    <div class="model-content">
+                        <div class="model-header">
+                            <h4><span class="glyphicon glyphicon-lock"></span> Aktiver alarm</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p> Skriv inn passord for å aktivere alarmen</p>
+                            <input id="pw" type="password" placeholder="*******" style="color: #0f0f0f">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
+                            <button type="button" id="btnActivateAlarm" class="btn btn-save">Aktiver</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<script>
+    $('#btnActivateAlarm').click(function () {
+        var pwInput = $('#pw').val();
+        $('#alarmPw').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        console.log(pwInput);
+        // bytt ut med sjekk av kryptert passord lagret i database
+        if (pwInput == 1234) {
+            console.log("passord korrekt kjør funksjon");
+            alarmaktivert();
+        }
+    })
+
+    function alarmaktivert() {
+        console.log("alarmen er aktivert ")
+        $('#alarmBtn').innerHTML = "Deaktiver alarm";
+        $('#alarmBtn').removeClass('btn-primary').addClass('btn-danger').text('Deaktiver alarm');
+        socket.emit('alarmActivated');
+    }
+</script>
 
 
