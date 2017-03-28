@@ -64,7 +64,16 @@
     socket.on('serialEvent', function (data) {
 
         var tempValue = document.getElementById('tempValue');
-        tempValue.innerHTML=data.Temperature;
+        tempValue.innerHTML=data.Temperature+'&#8451;';
+        if(tempValue<5){
+            tempValue.style.color="#42a7f4";
+        }
+        if(tempValue>5 && tempValue < 30) {
+            tempValue.style.color = "#40bf43";
+        }
+        if(tempValue>30){
+            tempValue.style.color="#f46e41";
+        }
     });
 
 
