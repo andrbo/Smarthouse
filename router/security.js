@@ -3,6 +3,7 @@
  */
 
 var express = require('express');
+var session = require('../session');
 var router = express.Router();
 
 /* GET users listing. */
