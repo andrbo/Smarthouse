@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 //var gpio = require('rpi-gpio');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,9 +9,11 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var i18n = require('i18n');
 var expressValidator = require('express-validator');
+var passport = require('passport');
+var session = require('express-session');
 var flash = require('connect-flash');
 
-var fs = require('fs');
+/*var fs = require('fs');
 
 
 var v4l2camera = require("v4l2camera");
@@ -23,13 +26,13 @@ var arduinoPort = '/dev/ttyACM0';
 
 // Webcam used for live video, connected to usb port on raspberry pi
 var webcam = new v4l2camera.Camera("/dev/video0");
-webcam.start();
+webcam.start();*/
 
 
 //Uses the db.js file
-var db = require('./db');
-var session = require('./session');
-var app = express();
+
+require('./db');
+require('./passport')(passport);
 
 // call socket.io to the app
 app.io = require('socket.io')();
@@ -38,19 +41,6 @@ app.io = require('socket.io')();
 app.get('/', function (req, res) {
     res.render('home');
 });
-
-//New pages goes here
-var home = require('./router/home');
-var about = require('./router/about');
-var security = require('./router/security');
-var users = require('./router/users');
-
-app.use('/home', home);
-app.use('/about', about);
-app.use('/security', security);
-app.use('/users', users);
-app.use('/users/register', users);
-app.use('/users/logout', users);
 
 
 // CONFIGURE HANDLEBARS
@@ -76,6 +66,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+//Router controller. Uses passport as authentication.
+require('./router/routes')(app,passport);
 
 
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
@@ -119,8 +121,6 @@ app.use(expressValidator({
     }
 }));
 
-//Connect flash
-app.use(flash());
 
 //Global vars
 app.use(function (req, res, next) {
@@ -164,7 +164,7 @@ app.use(function (err, req, res, next) {
 });
 
 // Setting up serial communication port with Arduino
-var arduinoSerial = new SerialPort(arduinoPort, {
+/*var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
 });
@@ -228,5 +228,6 @@ app.io.on('connection', function (socket) {
     socket.on('streamCam', function() {
        startWebcamStream(app.io);
     });
-});
+});*/
+
 module.exports = app;

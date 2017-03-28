@@ -5,7 +5,7 @@
 
 var mysql = require('mysql');
 
-//DATABASE CONNECTION STARTS HERE
+//Database connection. Uses pool for multiple users.
 var pool = mysql.createPool({
     host: 'mysql.stud.iie.ntnu.no',
     user: 'markuma',
@@ -18,7 +18,5 @@ pool.getConnection(function (err){
     console.log('connected to database from db.js');
 });
 
-
 module.exports = pool;
 exports.connection = pool;
-//DATABASE CONNECTION ENDS HERE

@@ -1,113 +1,114 @@
-var express = require('express');
-var router = express();
-var session = require('express-session');
-var passport = require('passport');
-var mysql = require('./db.js');
+var mysql = require('mysql');
+var LocalStrategy = require('passport-local').Strategy;
+var db = require('./db.js');
+var User = require('./models/User');
+var bcrypt = require('bcryptjs');
 
-var flash = require('connect-flash');
-
-exports.flash = function () {
-    router.use(flash());
-};
-
-router.use(passports.initialize());
-router.use(passport.session())
 
 module.exports = function (passport) {
+    console.log("Bruker passport.js");
 
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
-
-    // used to serialize the user for the session
+    //Used to serialize the user for the session
     passport.serializeUser(function (user, done) {
-        done(null, user.id);
+        console.log("Serialiserer");
+        done(null, user.email);
     });
 
-    // used to deserialize the user
+    //Used to deserialize the user
     passport.deserializeUser(function (email, done) {
-        mysql.connection.query("select * from users where id = " + email, function (err, rows) {
+        console.log("Deserialiserer");
+        db.query("SELECT * FROM users WHERE email = ?", [email], function (err, rows) {
             done(err, rows[0]);
         });
     });
 
 
-    // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
     passport.use('local-signup', new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
             usernameField: 'email',
             passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
+            passReqToCallback: true
         },
         function (req, email, password, done) {
 
-            // find a user whose email is the same as the forms email
-            // we are checking to see if the user trying to login already exists
-            mysql.connection.query("select * from users where email = '" + email + "'", function (err, rows) {
-                console.log(rows);
-                console.log("above row object");
+            User.getUser(email, function (err, result) {
+                console.log(result);
                 if (err)
-                    return done(err);
-                if (rows.length) {
-                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    done(err);
+                if (result.length) { //Check if email already exist.
+                    console.log("MAIL FINNES");
+                    done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 } else {
 
-                    // if there is no user with that email
-                    // create the user
-                    var newUserMysql = new Object();
+                    var newUser = new Object();
 
-                    newUserMysql.email = email;
-                    newUserMysql.password = password; // use the generateHash function in our user model
+                    var firstname = req.body.firstname;
+                    var surname = req.body.surname;
+                    var password = req.body.password;
+                    var email = req.body.email;
 
-                    var insertQuery = "INSERT INTO users ( email, password ) values ('" + email + "','" + password + "')";
-                    console.log(insertQuery);
-                    mysql.connection.query(insertQuery, function (err, rows) {
-                        newUserMysql.id = rows.insertId;
+                    //Hashing password.
+                    bcrypt.genSalt(10, function (err, salt) {
+                        bcrypt.hash(password, salt, function (err, hash) {
+                            password = hash;
+                            console.log("Ferdig hash: " + password);
+                            if (err) {
+                                console.log(err)
+                            }
+                            else { //Creating new user.
+                                User.createUser(password, email, firstname, surname, function(err, result){
+                                    newUser = User.getUser(email, function(err, result){
+                                        var string = JSON.stringify(result);
+                                        var parse = JSON.parse(string);
+                                        var retur = parse[0];
+                                        done(null, retur); //Have to return JSON data to serialize.
+                                    })
 
-                        return done(null, newUserMysql);
+                                });
+                            };
+                        });
                     });
-                }
+                };
             });
-        }));
+        }
+    ));
 
-    // =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
 
     passport.use('local-login', new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
             usernameField: 'email',
             passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
+            passReqToCallback: true
         },
-        function (req, email, password, done) { // callback with email and password from our form
+        function (req, email, password, done) {//Callback with email and password from our form
 
-            mysql.connection.query("SELECT * FROM `users` WHERE `email` = '" + email + "'", function (err, rows) {
-                if (err)
-                    return done(err);
-                if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+            User.getUser(email, function (err, userFromDb) {
+                if(err){
+                    done(err);
+                }else if(userFromDb.length){ //Check if user not NULL.
+                    var string = JSON.stringify(userFromDb);
+                    var parse = JSON.parse(string);
+                    var pwordfromDB = parse[0].password;
+
+                    crypt(password, pwordfromDB, function (err, result) {
+                        if (result === false) {
+                            console.log("false");
+                           done(null, false);
+                        } else {
+                            console.log(userFromDb[0]);
+                            done(null, userFromDb[0]);
+                        }
+                    });
+                }else{
+                    console.log("Bruker finnes ikke");
+                    done(null, false);
                 }
-
-                // if the user is found but the password is wrong
-                if (!( rows[0].password == password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-
-                // all is well, return successful user
-                return done(null, rows[0]);
-
             });
-
-
-        }));
-
+        }
+    ));
+    function crypt(pw, pwFromDb, callback) {
+        bcrypt.compare(pw, pwFromDb, function (err, result) { //Returns true if pw is ok.
+            if (callback) {
+                callback(err, result);
+            }
+        })
+    };
 };
