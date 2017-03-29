@@ -1,5 +1,6 @@
 <!-- include bootstrap, jquery for easy div manipulation -->
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <style type="text/css">
 
     html, body {
@@ -11,8 +12,16 @@
         font-family: 'Fjalla One', sans-serif;
     }
 
-    h6{
-        size:48px;
+    h6 {
+        size: 48px;
+    }
+
+    .modal-header {
+        color: black;
+    }
+
+    .modal-body {
+        color: black;
     }
 
     .container {
@@ -94,6 +103,7 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script>
     var socket = io();
+    var socketAlarmTrig = false;
 
     socket.on('serialEvent', function (data) {
 
@@ -191,6 +201,8 @@
         }
     }
     ;
+    $()
+
 </script>
 </head>
 
@@ -210,7 +222,8 @@
 
         <div class="row" id="gasSensor">
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span
+                    class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
                 <h6>Gass sensor</h6>
             </div>
             <div class="col-md-8">
@@ -230,7 +243,8 @@
 
         <div class="row" id="laserSensor">
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk"
+                                                                     aria-hidden="true"></span>
                 <h6>Laserbarriere</h6>
             </div>
             <div class="col-md-8">
@@ -257,63 +271,162 @@
                 <h3 id="vibeValue"></h3>
             </div>
         </div>
-
     </div>
-
     <div class="col-md-6">
         <img src="" id="webCam">
     </div>
-
 </div>
 <div class="container">
-    <div class = col-md-12>
-    <div class="row">
-        <div class="col-md-3">
-            <button  type="button" id="alarmBtn" class="btn btn-primary" data-toggle="modal" data-target="#alarmPw">
-                Aktiver alarm
-            </button>
-            <div class="modal fade" id="alarmPw">
-                <div class="model-dialog">
-                    <div class="model-content">
-                        <div class="model-header">
-                            <h4><span class="glyphicon glyphicon-lock"></span> Aktiver alarm</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p> Skriv inn passord for å aktivere alarmen</p>
-                            <input id="pw" type="password" placeholder="*******" style="color: #0f0f0f">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-                            <button type="button" id="btnActivateAlarm" class="btn btn-save">Aktiver</button>
+    <div class=col-md-12>
+        <div class="row">
+            <div class="col-md-3">
+                <!--
+                <input type="checkbox" id="toggle" data-toggle="toggle" data-on="Deaktiver alarm"
+                       data-off="Aktiver alarm" onclick=alarmToggle()>
+
+                <input type="checkbox" id="toggle" onclick="alarmToggle()">
+                -->
+                <button id="toggle" type="button" onclick="alarmToggle()">Aktiver Alarm</button>
+                <div class="modal fade" id="activateAlarmPw">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4><span class="glyphicon glyphicon-lock"></span> Aktiver alarm</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Skriv inn passord for å aktivere alarmen</p>
+                                <input id="pw" type="password" placeholder="*******" style="color: #0f0f0f">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelAcAlarm" class="btn btn-default">Avbryt</button>
+                                <button type="button" id="btnActivateAlarm" class="btn btn-save">Aktiver</button>
+                            </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="modal fade" id="deactivateAlarmPw">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4><span class="glyphicon glyphicon-home"></span> Deaktiver alarm</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Skriv inn passord for å deaktivere alarmen</p>
+                                <input id="pw" type="password" placeholder="*******" style="color: #0f0f0f">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelDeacAlarm" class="btn btn-default">Avbryt</button>
+                                <button type="button" id="btnDeactivateAlarm" class="btn btn-save">Deaktiver</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </div>
 <script>
+    // Script for aktivering/deaktivering av alarm, skal sørge for at slideren holdes oppdatert
+    var toggleState = false;
+
+    function alarmToggle() {
+        if(!toggleState){
+            toggleState = true;
+            $('#activateAlarmPw').modal('show');
+        }else{
+            $('#deactivateAlarmPw').modal('show');
+            toggleState = false;
+        }
+        /*
+        console.log('alarmToggle aktivert')
+        if ($('#toggle').prop('checked') == true) {
+            toggleState = true;
+            console.log('Togglestate : '+toggleState);
+            $('#activateAlarmPw').modal('show');
+        } else {
+            toggleState = false;
+            $('#deactivateAlarmPw').modal('show');
+            console.log('Togglestate : '+toggleState);
+        }
+        */
+    };
+
+
     $('#btnActivateAlarm').click(function () {
         var pwInput = $('#pw').val();
-        $('#alarmPw').modal('hide');
+        if (pwInput == 1234) {
+            $('#activateAlarmPw').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            //$('#toggle').button('Deaktiver alarm')
+            //$('#toggle').button('reset').addClass='btn btn-danger';
+            $('#toggle').html ('Deaktiver alarm ');
+            $('#toggle').css("background-color","red");
+        } else {
+            console.log('Kan ikke aktivere alarm - feil passord')
+        }
+    });
+
+    // Cancel knapp i aktiver alarm modal
+    $('#btnCancelAcAlarm').click(function () {
+        toggleState=false;
+        //$('#toggle').bootstrapToggle('off');
+        $('#activateAlarmPw').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-        console.log(pwInput);
-        // bytt ut med sjekk av kryptert passord lagret i database
-        if (pwInput == 1234) {
-            console.log("passord korrekt kjør funksjon");
-            alarmaktivert();
-        }
-    })
+    });
 
-    function alarmaktivert() {
+    // Deaktiver alarm knapp i deaktiver alarm modal
+    $('#btnDeactivateAlarm').click(function () {
+        var pwInput = $('#pw').val();
+        if (pwInput == 1234) {
+            $('#deactivateAlarmPw').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        }else{
+            console.log('kan ikke deaktivere alarm - feil passord')
+        }
+    });
+
+    // Cancel knapp i deaktiver alarm modal
+    $('#btnCancelDeacAlarm').click(function () {
+        toggleState = true;
+        //$('#toggle').bootstrapToggle('on');
+        $('#deactivateAlarmPw').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    });
+
+    function activateAlarm() {
         console.log("alarmen er aktivert ")
-        $('#alarmBtn').innerHTML = "Deaktiver alarm";
-        $('#alarmBtn').removeClass('btn-primary').addClass('btn-danger').text('Deaktiver alarm');
         socket.emit('alarmActivated');
     }
+
+
+    $('#alarmToggle').change(function () {
+
+        if (!socketAlarmTrig) {
+            if ($("#alarmToggle").prop("checked") == true) {
+                socket.emit('alarmOn', 'on\n');
+            } else {
+                socket.emit('alarmOff', 'off\n');
+            }
+        } else {
+            socketAlarmTrig = false;
+        }
+    });
+
+    socket.on('alarmOn', function () {
+        socketAlarmTrig = true;
+        $('#alarmToggle').prop('checked');
+    });
+    socket.on('alarmOff', function () {
+        socketAlarmTrig = true;
+        $('#alarmToggle').prop('checked');
+
+    });
+
+*/
 </script>
 
 

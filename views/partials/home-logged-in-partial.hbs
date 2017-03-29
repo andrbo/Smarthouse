@@ -2,6 +2,7 @@
 <script src='/calendar/moment/min/moment.min.js'></script>
 <script src='/calendar/fullcalendar/dist/fullcalendar.js'></script>
 
+
 <script>
     $(document).ready(function () {
 
@@ -57,7 +58,6 @@
 </style>
 
 <script src="/socket.io/socket.io.js"></script>
-
 <script>
     var socket = io();
 
@@ -85,10 +85,10 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <script src="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/ekstern_boks_stripe.js"></script>
+                        <noscript><a href="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/">yr.no: Værvarsel for Trondheim</a></noscript>
                         <h1 id="tempValue"></h1>
                     </div>
-
-
                     <div class="panel panel-default">
                         <div class="panel-body"> {{__ "Calendar-Event"}}</div>
                     </div>
