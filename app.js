@@ -213,38 +213,44 @@ var sockets = {}; // Variable used to define if videostream should bi stopped
 */
 
 app.io.on('connection', function (socket) {
-// Test av alarm knapp
-    socket.on('alarmActivated',function(){
-    console.log("Aktiver script i app.js");
+
+    socket.on('alarmActivated', function () {
+        socket.broadcast.emit('alarmAct');
     });
 
-/*   console.log('a user connected');
-   sockets[socket.id] = socket;
-   console.log("Total clients connected : ", Object.keys(sockets).length);
-
-
-   socket.on('disconnect', function () {
-       delete sockets[socket.id];
-
-        // no more sockets, kill the stream
-      if (Object.keys(sockets).length == 0) {
-          app.set('watchingFile', false);
-          fs.unwatchFile('./stream/image_stream.jpg');
-      }
-    });
-    // Serving sensor readings from Arduino as a JSON object
-    arduinoSerial.on('data', function (data) {
-        var serialData = JSON.parse(data);
-        console.log(data);
-       // send a serial event to the web client with the data:
-        socket.emit('serialEvent', serialData);
+    socket.on('alarmDeactivated', function () {
+        socket.broadcast.emit('alarmDeac');
     });
 
-    socket.on('streamCam', function() {
-       startWebcamStream(app.io);
-    });
 
-    */
+    /*   console.log('a user connected');
+     sockets[socket.id] = socket;
+     console.log("Total clients connected : ", Object.keys(sockets).length);
+
+
+     socket.on('disconnect', function () {
+     delete sockets[socket.id];
+
+     // no more sockets, kill the stream
+     if (Object.keys(sockets).length == 0) {
+     app.set('watchingFile', false);
+     fs.unwatchFile('./stream/image_stream.jpg');
+     }
+     });
+     // Serving sensor readings from Arduino as a JSON object
+     arduinoSerial.on('data', function (data) {
+     var serialData = JSON.parse(data);
+     console.log(data);
+     // send a serial event to the web client with the data:
+     socket.emit('serialEvent', serialData);
+     });
+
+     socket.on('streamCam', function() {
+     startWebcamStream(app.io);
+     });
+
+     */
+
 });
 
 

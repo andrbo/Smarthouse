@@ -34,7 +34,11 @@
     "Laser-Trip": "Laser broken!",
     "Gas-Detection": "Gas detected!",
     "Leak-Detection": "Leak detected!",
+    "Act-Alarmbtn": "Activate",
+    "Deac-Alarmbtn": "Deactivate",
+    "ActAlarm-Modal": "turn on the alarm",
 
     "Calendar-Event": "Activities"
+
 
 }

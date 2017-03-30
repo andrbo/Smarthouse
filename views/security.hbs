@@ -1,6 +1,8 @@
 <!-- include bootstrap, jquery for easy div manipulation -->
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<!--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  CDN -->
+<link rel="stylesheet" href="/public/css/font-awesome.min.css">
 <style type="text/css">
 
     html, body {
@@ -9,7 +11,17 @@
         padding: 0px;
         background: #525252;
         color: #ffffff;
-        font-family: 'Fjalla One', sans-serif;
+    }
+
+    @font-face {
+        font-family: "FontAwesome";
+        src: url("/public/fonts/fontawesome-webfont.eot");
+        src: url("/public/fonts/fontawesome-webfont.eot?#iefix") format('eot'),
+        url("/public/fonts/fontawesome-webfont.woff") format('woff'),
+        url("/public/fonts/fontawesome-webfont.ttf") format('truetype'),
+        url("/public/fonts/fontawesome-webfont.svg#FontAwesome") format('svg');
+        font-weight: normal;
+        font-style: normal;
     }
 
     h6 {
@@ -95,15 +107,26 @@
         display: block;
         margin-top: 20px;
     }
+
+    <!-- Test av knapp -->
+    section {
+        margin: 150px auto 0;
+        width: 75px;
+        height: 95px;
+        position: relative;
+        text-align: center;
+    }
+    :active, :focus {
+        outline: 0;
+    }
 </style>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<!--<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
 <script>
     var socket = io();
-    var socketAlarmTrig = false;
 
     socket.on('serialEvent', function (data) {
 
@@ -119,6 +142,16 @@
         vibeReading(data);
         var irValue = document.getElementById('irValue');
         irReading(data);
+    });
+
+    socket.on('alarmDeac', function () {
+        toggleState = false;
+        buttonState();
+    });
+
+    socket.on('alarmAct', function () {
+        toggleState = true;
+        buttonState();
     });
 
     socket.on('streamCam', function (url) {
@@ -139,6 +172,7 @@
         }
     }
     ;
+
 
     // Må kalibreres mot en gass
     function gasReading(data) {
@@ -201,7 +235,7 @@
         }
     }
     ;
-    $()
+
 
 </script>
 </head>
@@ -280,18 +314,13 @@
     <div class=col-md-12>
         <div class="row">
             <div class="col-md-3">
-                <!--
-                <input type="checkbox" id="toggle" data-toggle="toggle" data-on="Deaktiver alarm"
-                       data-off="Aktiver alarm" onclick=alarmToggle()>
-
-                <input type="checkbox" id="toggle" onclick="alarmToggle()">
-                -->
-                <button id="toggle" type="button" onclick="alarmToggle()">Aktiver Alarm</button>
+                <h3>Alarm:</h3>
+                <button id="toggle" type="button" onclick="alarmToggle()">"{{__ "Act-Alarmbtn"}}"</button>
                 <div class="modal fade" id="activateAlarmPw">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4><span class="glyphicon glyphicon-lock"></span> Aktiver alarm</h4>
+                                <h4><span class="glyphicon glyphicon-lock"></span>"{{__ "ActAlarm-Modal"}}"</h4>
                             </div>
                             <div class="modal-body">
                                 <p>Skriv inn passord for å aktivere alarmen</p>
@@ -308,7 +337,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4><span class="glyphicon glyphicon-home"></span> Deaktiver alarm</h4>
+                                <h4><i class="fa fa-key" style="font-size:50px;"></i></span> Deaktiver alarm</h4>
                             </div>
                             <div class="modal-body">
                                 <p>Skriv inn passord for å deaktivere alarmen</p>
@@ -329,27 +358,29 @@
     // Script for aktivering/deaktivering av alarm, skal sørge for at slideren holdes oppdatert
     var toggleState = false;
 
+    $(function () {
+        buttonState();
+    });
+
     function alarmToggle() {
-        if(!toggleState){
-            toggleState = true;
-            $('#activateAlarmPw').modal('show');
-        }else{
-            $('#deactivateAlarmPw').modal('show');
-            toggleState = false;
-        }
-        /*
-        console.log('alarmToggle aktivert')
-        if ($('#toggle').prop('checked') == true) {
-            toggleState = true;
-            console.log('Togglestate : '+toggleState);
+        if (!toggleState) {
             $('#activateAlarmPw').modal('show');
         } else {
-            toggleState = false;
             $('#deactivateAlarmPw').modal('show');
-            console.log('Togglestate : '+toggleState);
         }
-        */
-    };
+    }
+    ;
+
+    function buttonState() {
+        if (toggleState) {
+            $('#toggle').html("{{__ "Deac-Alarmbtn"}}");
+            $('#toggle').css("background-color", "red");
+        } else {
+            $('#toggle').html('{{__ "Act-Alarmbtn"}}');
+            $('#toggle').css("background-color", "green");
+        }
+    }
+    ;
 
 
     $('#btnActivateAlarm').click(function () {
@@ -358,10 +389,9 @@
             $('#activateAlarmPw').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            //$('#toggle').button('Deaktiver alarm')
-            //$('#toggle').button('reset').addClass='btn btn-danger';
-            $('#toggle').html ('Deaktiver alarm ');
-            $('#toggle').css("background-color","red");
+            toggleState = true;
+            buttonState();
+            socket.emit('alarmActivated');
         } else {
             console.log('Kan ikke aktivere alarm - feil passord')
         }
@@ -369,7 +399,7 @@
 
     // Cancel knapp i aktiver alarm modal
     $('#btnCancelAcAlarm').click(function () {
-        toggleState=false;
+
         //$('#toggle').bootstrapToggle('off');
         $('#activateAlarmPw').modal('hide');
         $('body').removeClass('modal-open');
@@ -380,53 +410,27 @@
     $('#btnDeactivateAlarm').click(function () {
         var pwInput = $('#pw').val();
         if (pwInput == 1234) {
+            toggleState = false;
+            buttonState();
             $('#deactivateAlarmPw').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-        }else{
+            socket.emit('alarmDeactivated');
+
+        } else {
+            // TODO: fiks feilmelding i modal
             console.log('kan ikke deaktivere alarm - feil passord')
         }
     });
 
     // Cancel knapp i deaktiver alarm modal
     $('#btnCancelDeacAlarm').click(function () {
-        toggleState = true;
-        //$('#toggle').bootstrapToggle('on');
         $('#deactivateAlarmPw').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     });
 
-    function activateAlarm() {
-        console.log("alarmen er aktivert ")
-        socket.emit('alarmActivated');
-    }
 
-
-    $('#alarmToggle').change(function () {
-
-        if (!socketAlarmTrig) {
-            if ($("#alarmToggle").prop("checked") == true) {
-                socket.emit('alarmOn', 'on\n');
-            } else {
-                socket.emit('alarmOff', 'off\n');
-            }
-        } else {
-            socketAlarmTrig = false;
-        }
-    });
-
-    socket.on('alarmOn', function () {
-        socketAlarmTrig = true;
-        $('#alarmToggle').prop('checked');
-    });
-    socket.on('alarmOff', function () {
-        socketAlarmTrig = true;
-        $('#alarmToggle').prop('checked');
-
-    });
-
-*/
 </script>
 
 

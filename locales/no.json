@@ -34,6 +34,10 @@
 	"Laser-Trip": "Laser brutt!",
 	"Gas-Detection": "Gass detektert!",
 	"Leak-Detection": "Lekasje detektert",
+	"Act-Alarmbtn": "Aktiver",
+	"Deac-Alarmbtn": "Deaktiver",
+	"ActAlarm-Modal": "Aktiver alarm",
 
 	"Calendar-Event": "Hendelser"
+
 }
