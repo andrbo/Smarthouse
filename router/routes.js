@@ -1,5 +1,7 @@
 module.exports = function (app, passport) {
 
+    var db = require('../db');
+
     app.get('/', function (req, res) {
         res.render('home');
     });
@@ -55,4 +57,47 @@ module.exports = function (app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    // alarm
+    app.post('/alarmToggle', function(req,res){
+        var activated = req.body.alarm;
+        console.log('test'+activated);
+        function toggleAlarm(id, callback){
+
+            if(activated){
+                db.query('UPDATE sensors SET value=1 WHERE id=?', id , function (err, result) {
+                    if(callback){
+                        callback(err, result);
+                    };
+                });
+            }else{
+                db.query('UPDATE sensors SET value=0 WHERE id=?', id , function (err, result) {
+                    if(callback){
+                        callback(err, result);
+                    };
+                });
+            }
+        }
+        toggleAlarm(1, function(err, result){
+        })
+    });
+
+    app.get("/alarmState", function(req, res){
+        function getState(id, callback){
+            db.query("SELECT * FROM sensors WHERE id = ?", id, function(err, result){
+                if(callback){
+                    console.log("ERROR ALARM STATE: " + err);
+
+                    var string = JSON.stringify(result);
+                    var parse = JSON.parse(string);
+                    var retur = parse[0].value;
+                    console.log("RETUR: " + retur);
+                    callback(err, result);
+                    return result;
+                }
+            });
+        };
+        getState(1, function(err, result){
+        })
+    })
 };

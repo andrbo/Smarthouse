@@ -2,7 +2,7 @@
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
 <!--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  CDN -->
-<link rel="stylesheet" href="/public/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 <style type="text/css">
 
     html, body {
@@ -15,11 +15,11 @@
 
     @font-face {
         font-family: "FontAwesome";
-        src: url("/public/fonts/fontawesome-webfont.eot");
-        src: url("/public/fonts/fontawesome-webfont.eot?#iefix") format('eot'),
-        url("/public/fonts/fontawesome-webfont.woff") format('woff'),
-        url("/public/fonts/fontawesome-webfont.ttf") format('truetype'),
-        url("/public/fonts/fontawesome-webfont.svg#FontAwesome") format('svg');
+        src: url("/fonts/fontawesome-webfont.eot");
+        src: url("/fonts/fontawesome-webfont.eot?#iefix") format('eot'),
+        url("/fonts/fontawesome-webfont.woff") format('woff'),
+        url("/fonts/fontawesome-webfont.ttf") format('truetype'),
+        url("/fonts/fontawesome-webfont.svg#FontAwesome") format('svg');
         font-weight: normal;
         font-style: normal;
     }
@@ -122,9 +122,7 @@
 </style>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
+
 <script>
     var socket = io();
 
@@ -145,12 +143,10 @@
     });
 
     socket.on('alarmDeac', function () {
-        toggleState = false;
         buttonState();
     });
 
     socket.on('alarmAct', function () {
-        toggleState = true;
         buttonState();
     });
 
@@ -356,13 +352,20 @@
 </div>
 <script>
     // Script for aktivering/deaktivering av alarm, skal sørge for at slideren holdes oppdatert
-    var toggleState = false;
+
+var toggleState;
 
     $(function () {
+        toggleState = $.get('/alarmState',{success: function(data){console.log('lol '+data)}});
+        console.log("klient ALARM STATE: " + JSON.stringify(toggleState));
+
         buttonState();
     });
 
     function alarmToggle() {
+       // var toggleState = $.post('/alarmState');
+
+
         if (!toggleState) {
             $('#activateAlarmPw').modal('show');
         } else {
@@ -372,6 +375,7 @@
     ;
 
     function buttonState() {
+        console.log("ALARM STATE: " + toggleState);
         if (toggleState) {
             $('#toggle').html("{{__ "Deac-Alarmbtn"}}");
             $('#toggle').css("background-color", "red");
@@ -389,7 +393,7 @@
             $('#activateAlarmPw').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            toggleState = true;
+            $.post('/alarmToggle',{alarm: true});
             buttonState();
             socket.emit('alarmActivated');
         } else {
@@ -410,7 +414,7 @@
     $('#btnDeactivateAlarm').click(function () {
         var pwInput = $('#pw').val();
         if (pwInput == 1234) {
-            toggleState = false;
+            $.post('/alarmToggle',{alarm: false});
             buttonState();
             $('#deactivateAlarmPw').modal('hide');
             $('body').removeClass('modal-open');
