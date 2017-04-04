@@ -21,6 +21,14 @@
     "Register-Confirm-Password": "Confirm password",
     "Register-Button": "Register",
 
+    "Event-Add": "New event",
+    "Event-Description":"Description",
+    "Event-Title":"Title",
+
+    "Delete":"Delete",
+    "Close": "Close",
+    "Add": "Add",
+
     "Firstname-Required": "Firstname is required",
     "Surname-Required": "Surname is required",
     "Email-Required": "Email is required",
@@ -38,7 +46,7 @@
     "Deac-Alarmbtn": "Deactivate",
     "ActAlarm-Modal": "turn on the alarm",
 
-    "Calendar-Event": "Activities"
+    "Calendar-Events": "Activities"
 
 
 }

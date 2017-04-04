@@ -75,6 +75,7 @@ module.exports = function (app, passport) {
             calModal.getEvents(email, function(err, result){
                 if(callback){
                     callback(err, result);
+                    console.log(result)
                     res.send(result);
                 }
             })
@@ -93,12 +94,7 @@ module.exports = function (app, passport) {
         function addEvent(callback){
             calModal.addEvent(email, title,description, start, end, function(err, result){
                 if(callback){
-                    var string = JSON.stringify(result);
-                    var parse = JSON.parse(string);
-
                     callback(err, result);
-                    res.send(parse);
-                    console.log("ID FRA DB" + parse.insertId);
                 }
             })
         }
@@ -106,7 +102,28 @@ module.exports = function (app, passport) {
     });
 
     app.post("/deleteEvent", function(req, res){
+        var id = req.body.id;
+
+        function deleteEvent(callback){
+            calModal.deleteEvent(id, function(err, result){
+                callback(err,result);
+            })
+        }
+        deleteEvent(function (err,res) {})
     });
+
+    app.post("/updateEvent", function(req, res){
+        var id = req.body.id;
+        var start = req.body.start;
+        var end = req.body.end;
+
+        function updateEvent(callback){
+            calModal.updateEvent(start, end, id, function(err, result){
+                callback(err, result);
+            });
+        };
+        updateEvent(function(err, res){});
+    })
 
     // alarm
     app.post('/alarmToggle', function (req, res) {

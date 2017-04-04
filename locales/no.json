@@ -21,6 +21,15 @@
 	"Register-Confirm-Password": "Bekreft passord",
 	"Register-Button": "Registrer",
 
+	"Event-Add": "Ny hendelse",
+	"Event-Description":"Beskrivelse",
+	"Event-Title":"Tittel",
+
+	"Delete":"Slett",
+	"Close": "Lukk",
+	"Add": "Legg til",
+
+
 	"Firstname-Required": "Fornavn er påkrevd",
 	"Surname-Required": "Etternavn er påkrevd",
 	"Email-Required": "Email er påkrevd",
@@ -38,6 +47,6 @@
 	"Deac-Alarmbtn": "Deaktiver",
 	"ActAlarm-Modal": "Aktiver alarm",
 
-	"Calendar-Event": "Hendelser"
+	"Calendar-Events": "Hendelser"
 
 }

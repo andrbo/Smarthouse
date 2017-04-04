@@ -94,16 +94,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add event</h4>
+                    <h4 class="modal-title">{{__ "Event-Add"}}</h4>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input type="text" name="eventTitle" id="eventTitle"  class="form-control" placeholder="Title">
+                        <input type="text" name="eventTitle" id="eventTitle"  class="form-control" placeholder="{{__ "Event-Title"}}">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="eventDescription" id="eventDescription"  class="form-control" placeholder="Description">
+                        <input type="text" name="eventDescription" id="eventDescription"  class="form-control" placeholder="{{__ "Event-Description"}}">
                     </div>
 
                     <div class='input-group date form-group'>
@@ -122,7 +122,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">Add</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">{{__ "Add"}}</button>
                 </div>
             </div>
 
@@ -136,14 +136,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Description</h4>
+                    <h4 class="modal-title">{{__ "Event-Description"}}</h4>
                 </div>
                 <div class="modal-body">
                     <p class="form-group" name="description" id="description"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button id="deleteEventButton" type="button" class="btn btn-danger" data-dismiss="modal">{{__ "Delete"}}</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">{{__ "Close"}}</button>
                 </div>
             </div>
 
@@ -167,7 +167,7 @@
 
             customButtons:{
                 addEvent :{
-                    text:"Add event",
+                    text:"{{__ "Event-Add"}}",
                     click: function(){
                         $("#addEventModal").modal('show');
                     }
@@ -177,11 +177,17 @@
             eventClick: function(calEvent){
                 $("#viewDescriptionModal").modal("show");
                 $("#description").html(calEvent.description);
-                calEvent._id = eventId;
-                alert(calEvent._id);
+                $("#deleteEventButton").click(function () {
+                    deleteEvent(calEvent.id)
+                });
+            },
 
-                console.log("EVENT ID: " + eventId);
+            editable: true,
+            eventDrop: function(event){
+                var start = event.start.format("YYYY-MM-DD HH:MM");
+                var end = event.end.format("YYYY-MM-DD HH:MM") || start;
 
+                updateEvent(event.id, start, end);
             }
         });
         $("#eventStart, #eventEnd").datetimepicker({
@@ -189,7 +195,7 @@
         });
     });
 
-    var eventId;
+
 
     function addEvent(){
         $.post("/addEvent", {
@@ -197,16 +203,24 @@
             start:$("#eventStart").val(),
             end:$("#eventEnd").val(),
             description:$("#eventDescription").val()
-        }).done(function(data){
-            var retur = JSON.stringify(data.insertId);
-            eventId = retur;
-            console.log("RESULTAT: " + retur);
-        });
+        })
     window.location.reload(true);
     };
 
-    function deleteEvent(){
+    function deleteEvent(eventId){
+        $.post("/deleteEvent",{
+            id: eventId
+        })
+        window.location.reload(true);
+    };
 
+    function updateEvent(eventId, eventStart, eventEnd){
+        $.post("/updateEvent", {
+            id: eventId,
+            start: eventStart,
+            end: eventEnd
+        });
+        window.location.reload(true);
     };
 
 </script>
