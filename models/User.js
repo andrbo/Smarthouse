@@ -11,7 +11,6 @@ exports.createUser = function (password, email, firstname, surname, callback) {
             callback(err, results);
         }
     });
-
 };
 
 exports.getUser = function(email, callback){
@@ -20,6 +19,19 @@ exports.getUser = function(email, callback){
         if(callback){
             callback(err, res);
         };
+    })
+};
+
+exports.forgotPassword=function(password, email, callback){
+    var values = [password, email];
+console.log("values " + values);
+    var sql = 'UPDATE users SET password = ? WHERE email = ?';
+    db.query(sql,values, function (err, res) {
+        if(callback){
+            callback(err, res);
+            console.log("ERR " + err);
+        };
+
     })
 };
 //TODO: opprett en exist-funksjon.

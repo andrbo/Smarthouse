@@ -14,6 +14,8 @@ var session = require('express-session');
 var flash = require('connect-flash');
 
 
+
+
 //var fs = require('fs');
 
 /*var fs = require('fs');
@@ -84,6 +86,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+
 
 //Router controller. Uses passport as authentication.
 require('./router/routes')(app,passport);
