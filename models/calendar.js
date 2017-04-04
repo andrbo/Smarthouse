@@ -1,0 +1,31 @@
+var db = require('../db');
+
+exports.addEvent = function (email, title, description, start, end, callback) {
+    var values = [email, title, description, start, end];
+    var sql = 'INSERT INTO events (email, title, description, start, end) VALUES (?, ?, ?, ?, ?)';
+
+    db.query(sql, values, function (err, result) {
+        if (callback) {
+            callback(err, result);
+        };
+    });
+};
+
+
+exports.getEvents = function (email, callback) {
+    var sql = 'SELECT title, start, end, description FROM events WHERE email = ?';
+    db.query(sql, email, function(err, res){
+        if(callback){
+            callback(err, res);
+        };
+    });
+};
+
+exports.deleteEvent = function (id, callback) {
+    var sql = 'DELETE FROM events WHERE id = ?';
+    db.query(sql, id, function(err, res){
+        if(callback){
+            callback(err, res);
+        };
+    });
+};

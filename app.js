@@ -85,6 +85,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+//Global vars
+app.use(function (req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
 //Router controller. Uses passport as authentication.
 require('./router/routes')(app,passport);
 
@@ -130,14 +138,6 @@ app.use(expressValidator({
     }
 }));
 
-
-//Global vars
-app.use(function (req, res, next) {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-    next();
-});
 // ******** END LOG IN ********
 
 

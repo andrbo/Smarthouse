@@ -1,20 +1,3 @@
-<link rel='stylesheet' href='calendar/fullcalendar/dist/fullcalendar.css'/>
-<script src='/calendar/moment/min/moment.min.js'></script>
-<script src='/calendar/fullcalendar/dist/fullcalendar.js'></script>
-
-
-<script>
-    $(document).ready(function () {
-
-        // page is now ready, initialize the calendar...
-
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-        })
-
-    });
-</script>
-
 <style type="text/css">
 
     html, body {
@@ -99,10 +82,130 @@
         <div class="col-md-1">
         </div>
 
-        <div class="col-md-7 panel panel-default">
+        <div class="col-md-7">
             <div id='calendar'></div>
         </div>
+    </div>
 
+    <div id="addEventModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add event</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="text" name="eventTitle" id="eventTitle"  class="form-control" placeholder="Title">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="eventDescription" id="eventDescription"  class="form-control" placeholder="Description">
+                    </div>
+
+                    <div class='input-group date form-group'>
+                        <input type='text' class="form-control" id='eventStart' />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                    <div class='input-group date form-group'>
+                        <input type='text' class="form-control" id='eventEnd'/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">Add</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="viewDescriptionModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Description</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="form-group" name="description" id="description"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        // page is now ready, initialize the calendar...
+
+        $('#calendar').fullCalendar({
+            header:{
+                left: 'addEvent',
+                center: 'title',
+                right: 'today, prev, next'
+            },
+            events: '/getEvents',
+
+            customButtons:{
+                addEvent :{
+                    text:"Add event",
+                    click: function(){
+                        $("#addEventModal").modal('show');
+                    }
+                }
+            },
+
+            eventClick: function(calEvent){
+                $("#viewDescriptionModal").modal("show");
+                $("#description").html(calEvent.description);
+                alert(calEvent.id);
+                calEvent.id == eventId;
+                console.log("EVENT ID: " + eventId);
+
+            }
+        });
+        $("#eventStart, #eventEnd").datetimepicker({
+            format: "YYYY-MM-DD HH:MM"
+        });
+    });
+
+    var eventId;
+
+    function addEvent(){
+        $.post("/addEvent", {
+            title: $("#eventTitle").val(),
+            start:$("#eventStart").val(),
+            end:$("#eventEnd").val(),
+            description:$("#eventDescription").val()
+        }).done(function(data){
+            var retur = JSON.stringify(data.insertId);
+            eventId = retur;
+            console.log("RESULTAT: " + retur);
+        });
+    window.location.reload(true);
+    };
+
+    function deleteEvent(){
+
+    };
+
+</script>
