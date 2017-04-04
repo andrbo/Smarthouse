@@ -177,8 +177,9 @@
             eventClick: function(calEvent){
                 $("#viewDescriptionModal").modal("show");
                 $("#description").html(calEvent.description);
-                alert(calEvent.id);
-                calEvent.id == eventId;
+                calEvent._id = eventId;
+                alert(calEvent._id);
+
                 console.log("EVENT ID: " + eventId);
 
             }

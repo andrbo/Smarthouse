@@ -23,10 +23,10 @@ var flash = require('connect-flash');
 //var v4l2camera = require("v4l2camera");
 
 // Serial communication with Arduino
-var serialport = require('serialport');// include the library
-var SerialPort = serialport; // make a local instance of it
+//var serialport = require('serialport');// include the library
+//var SerialPort = serialport; // make a local instance of it
 //var arduinoPort = '/dev/ttyACM0';
-var arduinoPort = 'COM3';
+//var arduinoPort = 'COM3';
 
 
 // Webcam used for live video, connected to usb port on raspberry pi
@@ -175,10 +175,10 @@ app.use(function (err, req, res, next) {
 
 
 // Setting up serial communication port with Arduino
-var arduinoSerial = new SerialPort(arduinoPort, {
+//var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
-    parser: serialport.parsers.readline("\r\n")
-});
+    //parser: serialport.parsers.readline("\r\n")
+//});
 
  /*
 
@@ -256,12 +256,12 @@ app.io.on('connection', function (socket) {
      });
     */
      // Serving sensor readings from Arduino as a JSON object
-     arduinoSerial.on('data', function (data) {
-     var serialData = JSON.parse(data);
+     //arduinoSerial.on('data', function (data) {
+     //var serialData = JSON.parse(data);
      //console.log(data);
      // send a serial event to the web client with the data:
-     socket.emit('serialEvent', serialData);
-     });
+     //socket.emit('serialEvent', serialData);
+     //});
 /*
      socket.on('streamCam', function() {
      startWebcamStream(app.io);
