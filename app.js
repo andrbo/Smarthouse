@@ -16,23 +16,24 @@ var flash = require('connect-flash');
 
 //var fs = require('fs');
 
-/*var fs = require('fs');
+//var fs = require('fs');
 
 
 
 //var v4l2camera = require("v4l2camera");
 
 // Serial communication with Arduino
-//var serialport = require('serialport');// include the library
-//var SerialPort = serialport; // make a local instance of it
+var serialport = require('serialport');// include the library
+var SerialPort = serialport; // make a local instance of it
 //var arduinoPort = '/dev/ttyACM0';
+var arduinoPort = 'COM3';
 
 
 // Webcam used for live video, connected to usb port on raspberry pi
 
 //var webcam = new v4l2camera.Camera("/dev/video0");
 //webcam.start();
-
+ /*
 var webcam = new v4l2camera.Camera("/dev/video0");
 webcam.start();*/
 
@@ -172,12 +173,14 @@ app.use(function (err, req, res, next) {
     });
 });
 
-/*
+
 // Setting up serial communication port with Arduino
-/*var arduinoSerial = new SerialPort(arduinoPort, {
+var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
 });
+
+ /*
 
 // Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
 function stopStreaming() {
@@ -216,10 +219,24 @@ app.io.on('connection', function (socket) {
 
     socket.on('alarmActivated', function () {
         socket.broadcast.emit('alarmAct');
+       // arduinoSerial.on('data', function (data) {
+       //     var serialData = JSON.parse(data);
+       //     var laser = serialData.Laser;
+       //     if(laser == 1){
+       //         console.log('LASER BRUTT');
+       //     }
+            //console.log(serialData.Laser);
+       // });
     });
 
     socket.on('alarmDeactivated', function () {
         socket.broadcast.emit('alarmDeac');
+        //arduinoSerial.on('data', function (data) {
+        //    var serialData = JSON.parse(data);
+        //    console.log(data);
+            // send a serial event to the web client with the data:
+        //    socket.emit('serialEvent', serialData);
+        //});
     });
 
 
@@ -237,14 +254,15 @@ app.io.on('connection', function (socket) {
      fs.unwatchFile('./stream/image_stream.jpg');
      }
      });
+    */
      // Serving sensor readings from Arduino as a JSON object
      arduinoSerial.on('data', function (data) {
      var serialData = JSON.parse(data);
-     console.log(data);
+     //console.log(data);
      // send a serial event to the web client with the data:
      socket.emit('serialEvent', serialData);
      });
-
+/*
      socket.on('streamCam', function() {
      startWebcamStream(app.io);
      });

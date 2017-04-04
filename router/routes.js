@@ -1,6 +1,7 @@
 module.exports = function (app, passport) {
 
     var db = require('../db');
+    var bcrypt = require('bcryptjs');
 
     app.get('/', function (req, res) {
         res.render('home');
@@ -14,7 +15,8 @@ module.exports = function (app, passport) {
             });
         } else {
             res.render("home", {login: false});
-        };
+        }
+        ;
     });
 
     app.get('/about', function (req, res) {
@@ -25,7 +27,8 @@ module.exports = function (app, passport) {
             });
         } else {
             res.render("about", {login: false});
-        };
+        }
+        ;
     });
 
     app.get('/security', function (req, res) {
@@ -36,7 +39,8 @@ module.exports = function (app, passport) {
             });
         } else {
             res.render("security", {login: false});
-        };
+        }
+        ;
     });
 
     // process the login form
@@ -58,46 +62,86 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
-    // alarm
-    app.post('/alarmToggle', function(req,res){
-        var activated = req.body.alarm;
-        console.log('test'+activated);
-        function toggleAlarm(id, callback){
 
-            if(activated){
-                db.query('UPDATE sensors SET value=1 WHERE id=?', id , function (err, result) {
-                    if(callback){
+    // alarm
+    app.post('/alarmToggle', function (req, res) {
+        var activated = req.body.alarm;
+        console.log('test' + activated);
+        function toggleAlarm(id, callback) {
+            if (activated == "on") {
+                console.log('skal skrive 1 til db');
+                db.query('UPDATE sensors SET value=1 WHERE id=?', id, function (err, result) {
+                    if (callback) {
+                        console.log(err);
                         callback(err, result);
-                    };
+                    }
+                    ;
                 });
-            }else{
-                db.query('UPDATE sensors SET value=0 WHERE id=?', id , function (err, result) {
-                    if(callback){
+            } else {
+                console.log("KJØRER ELSE.");
+                db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
+                    if (callback) {
                         callback(err, result);
-                    };
+                    }
+                    ;
                 });
             }
         }
-        toggleAlarm(1, function(err, result){
+
+        toggleAlarm(1, function (err, result) {
         })
     });
 
-    app.get("/alarmState", function(req, res){
-        function getState(id, callback){
-            db.query("SELECT * FROM sensors WHERE id = ?", id, function(err, result){
-                if(callback){
+    app.post("/alarmState", function (req, res) {
+        function getState(id, callback) {
+            db.query("SELECT * FROM sensors WHERE id = ?", id, function (err, result) {
+                if (callback) {
                     console.log("ERROR ALARM STATE: " + err);
-
                     var string = JSON.stringify(result);
                     var parse = JSON.parse(string);
-                    var retur = parse[0].value;
-                    console.log("RETUR: " + retur);
                     callback(err, result);
-                    return result;
+                    res.send(parse);
                 }
             });
         };
-        getState(1, function(err, result){
+        getState(1, function (err, result) {
+        });
+    });
+
+    app.post('/alarmPw', function (req, res) {
+        var input = req.body.pw;
+        console.log('PWINPUT: ' + input);
+        function getPassword(id, callback) {
+            db.query("SELECT * FROM alarm WHERE id = ?", id, function (err, result) {
+                if (callback) {
+                    console.log("ERROR ALARM PW: " + err);
+                    var string = JSON.stringify(result);
+                    var parse = JSON.parse(string);
+                    var pwFromdb = parse[0].alarmpw;
+                    console.log('parse' + pwFromdb);
+                    crypt(input, pwFromdb, function (err, result) {
+                        if (result === true) {
+                            console.log('PW rett');
+                            res.send('ok');
+                        } else {
+                            console.log("PW feil");
+                            res.send('error');
+                        }
+                    });
+                }
+                ;
+            });
+        };
+        getPassword(1, function (err, result) {
+        });
+    });
+
+
+    function crypt(pw, pwFromDb, callback) {
+        bcrypt.compare(pw, pwFromDb, function (err, result) { //Returns true if pw is ok.
+            if (callback) {
+                callback(err, result);
+            }
         })
-    })
+    };
 };
