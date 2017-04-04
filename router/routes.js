@@ -1,7 +1,12 @@
 module.exports = function (app, passport) {
 
     var db = require('../db');
+
     var bcrypt = require('bcryptjs');
+
+    var calModal = require('../models/calendar');
+
+
 
     app.get('/', function (req, res) {
         res.render('home');
@@ -62,6 +67,46 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
+    //CALENDAR BEGINS HERE
+    app.get("/getEvents", function(req, res){
+        var email = req.user.email;
+        console.log("EMAIL: " + email);
+        function getEvents(callback){
+            calModal.getEvents(email, function(err, result){
+                if(callback){
+                    callback(err, result);
+                    res.send(result);
+                }
+            })
+        }
+        getEvents(function(err, result){
+        });
+    });
+
+    app.post("/addEvent", function(req, res){
+        var email = req.user.email;
+        var title = req.body.title;
+        var description = req.body.description;
+        var start = req.body.start;
+        var end = req.body.end;
+
+        function addEvent(callback){
+            calModal.addEvent(email, title,description, start, end, function(err, result){
+                if(callback){
+                    var string = JSON.stringify(result);
+                    var parse = JSON.parse(string);
+
+                    callback(err, result);
+                    res.send(parse);
+                    console.log("ID FRA DB" + parse.insertId);
+                }
+            })
+        }
+        addEvent(function(err,res){});
+    });
+
+    app.post("/deleteEvent", function(req, res){
+    });
 
     // alarm
     app.post('/alarmToggle', function (req, res) {
