@@ -29,6 +29,8 @@
     "Close": "Close",
     "Add": "Add",
 
+    "Email-Exist": "The mail does already exist",
+    "Login-Required": "Please log in",
     "Firstname-Required": "Firstname is required",
     "Surname-Required": "Surname is required",
     "Email-Required": "Email is required",

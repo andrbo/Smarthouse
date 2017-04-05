@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var LocalStrategy = require('passport-local').Strategy;
-var db = require('./db.js');
-var User = require('./models/User');
+var db = require('../middlewares/db');
+var User = require('../models/User');
 var bcrypt = require('bcryptjs');
 
 
@@ -35,8 +35,7 @@ module.exports = function (passport) {
                 if (err)
                     done(err);
                 if (result.length) { //Check if email already exist.
-                    console.log("MAIL FINNES");
-                    done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    done(null, false, req.flash('error_msg', req.__("Email-Exist")));
                 } else {
 
                     var newUser = new Object();

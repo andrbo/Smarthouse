@@ -15,18 +15,18 @@ var flash = require('connect-flash');
 
 //Uses the db.js file
 
-require('./db');
-require('./passport')(passport);
+require('./middlewares/db');
+require('./middlewares/passport')(passport);
 
 // call socket.io to the app
-app.io = require('socket.io')();
-app.io.alarmActivated = require('./alarmActivated')(app.io);
-app.io.videoStream = require('./videoStream')(app, app.io);
+//app.io = require('socket.io')();
+//app.io.alarmActivated = require('./middlewares/alarmActivated')(app.io);
+//app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 
 
 app.get('/', function (req, res) {
-    res.render('home');
+    res.redirect('home');
 });
 
 
@@ -71,16 +71,12 @@ app.use(function (req, res, next) {
     next();
 });
 
-//Router controller. Uses passport as authentication.
-require('./router/routes')(app,passport);
-
 
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
 i18n.configure({
     locales: ['no', 'en'],
     fallbacks: {'no': 'en'},
     cookie: 'locale',
-    defaultLocale: 'no',
     directoryPermissions: '755',
     directory: __dirname + "/locales",
     autoReload: false,
@@ -89,6 +85,8 @@ i18n.configure({
     queryParameter: 'lang'
 });
 
+app.use(i18n.init)
+
 // register hbs helpers in res.locals' context which provides this.locale
 hbs.handlebars.registerHelper('__', function () {
     return i18n.__.apply(this, arguments);
@@ -96,7 +94,9 @@ hbs.handlebars.registerHelper('__', function () {
 hbs.handlebars.registerHelper('__n', function () {
     return i18n.__n.apply(this, arguments);
 });
-//INTERNATIONALIZATION ENDS HERE.
+
+//Router controller. Uses passport as authentication.
+require('./router/routes')(app,passport);
 
 //Express Validator
 app.use(expressValidator({
@@ -115,8 +115,6 @@ app.use(expressValidator({
         };
     }
 }));
-
-// ******** END LOG IN ********
 
 
 // catch 404 and forward to error handler

@@ -29,7 +29,8 @@
 	"Close": "Lukk",
 	"Add": "Legg til",
 
-	"Login-Reqiured": "Vennligst logg inn",
+	"Email-Exist": "Mailen finnes allerede",
+	"Login-Required": "Vennligst logg inn",
 	"Firstname-Required": "Fornavn er påkrevd",
 	"Surname-Required": "Etternavn er påkrevd",
 	"Email-Required": "Email er påkrevd",

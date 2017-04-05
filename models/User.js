@@ -1,7 +1,7 @@
 /**
  * Created by Mikael on 15.02.2017.
  */
-var db = require('../db');
+var db = require('../middlewares/db');
 
 
 exports.createUser = function (password, email, firstname, surname, callback) {

@@ -1,4 +1,4 @@
-var db = require('../db');
+var db = require('../middlewares/db');
 
 exports.addEvent = function (email, title, description, start, end, callback) {
     var values = [email, title, description, start, end];
@@ -12,7 +12,7 @@ exports.addEvent = function (email, title, description, start, end, callback) {
 };
 
 
-exports.getEvents = function (email, callback) {
+exports.getEventsFromUser = function (email, callback) {
     var sql = 'SELECT * FROM events WHERE email = ?';
     db.query(sql, email, function(err, res){
         if(callback){

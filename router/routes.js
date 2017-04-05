@@ -1,12 +1,8 @@
 module.exports = function (app, passport) {
 
-    var db = require('../db');
-
+    var db = require('../middlewares/db');
     var bcrypt = require('bcryptjs');
-
     var calModal = require('../models/calendar');
-
-
 
     app.get('/', function (req, res) {
         res.render('home');
@@ -19,9 +15,8 @@ module.exports = function (app, passport) {
                 loginUsername: req.user.email
             });
         } else {
-            res.render("home", {login: false});
-        }
-        ;
+            res.render("home");
+        };
     });
 
     app.get('/about', function (req, res) {
@@ -31,7 +26,8 @@ module.exports = function (app, passport) {
                 loginUsername: req.user.email
             });
         } else {
-            res.render("about", {login: false});
+            req.flash("error_msg", res.__('Login-Required'));
+            res.redirect("home");
         }
         ;
     });
@@ -43,9 +39,9 @@ module.exports = function (app, passport) {
                 loginUsername: req.user.email
             });
         } else {
-            res.render("security", {login: false});
-        }
-        ;
+            req.flash("error_msg", res.__('Login-Required'));
+            res.redirect("home");
+        };
     });
 
     // process the login form
@@ -57,7 +53,7 @@ module.exports = function (app, passport) {
 
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect: '/home',
-        failureRedirect: '/about',
+        failureRedirect: '/home',
         failureFlash: true
     }));
 
@@ -72,7 +68,7 @@ module.exports = function (app, passport) {
         var email = req.user.email;
         console.log("EMAIL: " + email);
         function getEvents(callback){
-            calModal.getEvents(email, function(err, result){
+            calModal.getEventsFromUser(email, function(err, result){
                 if(callback){
                     callback(err, result);
                     console.log(result)
