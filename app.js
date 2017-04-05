@@ -14,31 +14,6 @@ var session = require('express-session');
 var flash = require('connect-flash');
 
 
-//var fs = require('fs');
-
-//var fs = require('fs');
-
-
-
-//var v4l2camera = require("v4l2camera");
-
-// Serial communication with Arduino
-var serialport = require('serialport');// include the library
-var SerialPort = serialport; // make a local instance of it
-//var arduinoPort = '/dev/ttyACM0';
-var arduinoPort = 'COM3';
-
-
-// Webcam used for live video, connected to usb port on raspberry pi
-
-//var webcam = new v4l2camera.Camera("/dev/video0");
-//webcam.start();
- /*
-var webcam = new v4l2camera.Camera("/dev/video0");
-webcam.start();*/
-
-
-
 //Uses the db.js file
 
 require('./db');
@@ -46,6 +21,9 @@ require('./passport')(passport);
 
 // call socket.io to the app
 app.io = require('socket.io')();
+app.io.alarmActivated = require('./alarmActivated')(app.io);
+app.io.videoStream = require('./videoStream')(app, app.io);
+
 
 
 app.get('/', function (req, res) {
@@ -174,100 +152,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-// Setting up serial communication port with Arduino
-var arduinoSerial = new SerialPort(arduinoPort, {
-    // look for return and newline at the end of each data packet:
-    parser: serialport.parsers.readline("\r\n")
-});
-
- /*
-
-// Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
-function stopStreaming() {
-    if (Object.keys(sockets).length == 0) {
-        app.set('watchingFile', false);
-        if (proc) proc.kill();
-        fs.unwatchFile('./stream/image_stream.jpg');
-        webcam.stop();
-    }
-}
-function startWebcamStream(io) {
-    if (app.get('watchingFile')) {
-        io.sockets.emit('streamCam', 'image_stream.jpg?_t=' + (Math.random() * 100000));
-        return;
-    }
-    Capture();
-    app.set('watchingFile', true);
-   console.log('Start watching......');
-}
-// Capture function 200 means 30fps
-function Capture(){
-   setInterval(function(){
-      webcam.capture(function (success) {
-           var frame = webcam.frameRaw();
-            app.io.emit('streamCam', "data:image/png;base64," + Buffer(frame).toString('base64'));
-        });
-   }, 50);
-}
-
-// start listen with socket.io Muligens flyttes til .js for aktuelle views?
-
-var sockets = {}; // Variable used to define if videostream should bi stopped
-*/
-
 app.io.on('connection', function (socket) {
-
-    socket.on('alarmActivated', function () {
-        socket.broadcast.emit('alarmAct');
-       // arduinoSerial.on('data', function (data) {
-       //     var serialData = JSON.parse(data);
-       //     var laser = serialData.Laser;
-       //     if(laser == 1){
-       //         console.log('LASER BRUTT');
-       //     }
-            //console.log(serialData.Laser);
-       // });
-    });
-
-    socket.on('alarmDeactivated', function () {
-        socket.broadcast.emit('alarmDeac');
-        //arduinoSerial.on('data', function (data) {
-        //    var serialData = JSON.parse(data);
-        //    console.log(data);
-            // send a serial event to the web client with the data:
-        //    socket.emit('serialEvent', serialData);
-        //});
-    });
-
-
-    /*   console.log('a user connected');
-     sockets[socket.id] = socket;
-     console.log("Total clients connected : ", Object.keys(sockets).length);
-
-
-     socket.on('disconnect', function () {
-     delete sockets[socket.id];
-
-     // no more sockets, kill the stream
-     if (Object.keys(sockets).length == 0) {
-     app.set('watchingFile', false);
-     fs.unwatchFile('./stream/image_stream.jpg');
-     }
-     });
-    */
-     // Serving sensor readings from Arduino as a JSON object
-     arduinoSerial.on('data', function (data) {
-     var serialData = JSON.parse(data);
-     //console.log(data);
-     // send a serial event to the web client with the data:
-     socket.emit('serialEvent', serialData);
-     });
-/*
-     socket.on('streamCam', function() {
-     startWebcamStream(app.io);
-     });
-
-     */
 
 });
 

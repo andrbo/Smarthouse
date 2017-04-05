@@ -46,8 +46,11 @@
 
     socket.on('serialEvent', function (data) {
 
-        var tempValue = document.getElementById('tempValue');
-        tempValue.innerHTML=data.Temperature+'&#8451;';
+        var soilValue = $('#soilValue');
+        soilReading(data);
+
+        var tempValue = $('#tempValue');
+        $('#tempValue').html(data.Temperature+'&#8451;');
         if(tempValue<5){
             tempValue.style.color="#42a7f4";
         }
@@ -58,7 +61,13 @@
             tempValue.style.color="#f46e41";
         }
     });
+function soilReading(data){
+    var dry = 500;
+    var soil = data.moistureValue;
+    if(soil > dry){
 
+    }
+}
 
 </script>
 <div class="container">
