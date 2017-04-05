@@ -13,7 +13,6 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 
-
 //Uses the db.js file
 
 require('./db');
@@ -150,11 +149,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-
-app.io.on('connection', function (socket) {
-
-});
-
 
 module.exports = app;

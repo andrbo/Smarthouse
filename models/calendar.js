@@ -13,7 +13,7 @@ exports.addEvent = function (email, title, description, start, end, callback) {
 
 
 exports.getEvents = function (email, callback) {
-    var sql = 'SELECT title, start, end, description FROM events WHERE email = ?';
+    var sql = 'SELECT * FROM events WHERE email = ?';
     db.query(sql, email, function(err, res){
         if(callback){
             callback(err, res);
@@ -29,3 +29,14 @@ exports.deleteEvent = function (id, callback) {
         };
     });
 };
+
+exports.updateEvent = function(start, end, id, callback){
+    var values = [start, end, id];
+    var sql = 'UPDATE events SET start = ?, end = ? WHERE id = ?';
+
+    db.query(sql, values, function(err, res){
+        if(callback){
+            callback(err, res);
+        };
+    });
+}

@@ -104,6 +104,7 @@ module.exports = function (passport) {
             });
         }
     ));
+    
     function crypt(pw, pwFromDb, callback) {
         bcrypt.compare(pw, pwFromDb, function (err, result) { //Returns true if pw is ok.
             if (callback) {
