@@ -1,5 +1,10 @@
 module.exports = function (app, passport) {
 
+    var generator = require('generate-password');
+    var nodemailer = require('nodemailer');
+    var User = require('../models/User');
+    var validator = require('validator');
+    var flash = require('connect-flash');
     var db = require('../middlewares/db');
     var bcrypt = require('bcryptjs');
     var calModal = require('../models/calendar');
@@ -63,21 +68,150 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
+    app.get('/forgot', function (req, res) {
+        res.render('forgot');
+    });
+
+    app.post('/forgot', function (req, res) {
+
+        var email = req.body.email;
+
+        var val = validator.isEmail(email);
+
+        var randomPassword = generator.generate({
+            length: 10,
+            numbers: true
+
+        });
+
+        function hashPassword(password, callback) {
+            bcrypt.genSalt(10, function (err, salt) {
+                bcrypt.hash(password, salt, function (err, hash) {
+                    password = hash;
+                    callback(err, password);
+
+                });
+            });
+        }
+
+        function forgotPassword(password, email) {
+            User.forgotPassword(password, email, function (err, result) {
+                console.log(password);
+                if (err)
+                    return err;
+                else {
+                    sendMail(email, randomPassword);
+                }
+            })
+        }
+
+        hashPassword(randomPassword, function (err, res) {
+            if(err){
+                console.log("ERR;" + err);
+                return err
+            }else{
+                forgotPassword(res, email);
+                console.log("RES: " + res);
+                return res
+            };
+        });
+
+
+        function sendMail(email, password) {
+
+            var smtpTransport = nodemailer.createTransport({
+                service: "Gmail",  // sets automatically host, port and connection security settings
+                auth: {
+                    user: "Smarthus2017@gmail.com",
+                    pass: "Smarthus"
+                }
+            });
+            smtpTransport.sendMail({  //email options
+                from: "<Smarthus2017@gmail.com>", // sender address.  Must be the same as authenticated user if using Gmail.
+                to: email, // receiver
+                subject: "Emailing with nodemailer", // subject
+                text: "Hei! Ditt nye passord er " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
+            }, function (error, response) {  //callback
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Message sent: " + response.message);
+                    res.redirect('/home');
+                }
+                smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
+            });
+        }
+
+    });
+
+    app.get('/profile', function (req, res) {
+        res.render('profile');
+        /*if (req.isAuthenticated()) {
+            res.render("profile", {
+                login: true,
+                loginUsername: req.user.email
+            });
+        } else {
+            res.render("profile", {login: false});
+        };*/
+        var email = req.user.email;
+
+        function getUser(epost, callback){
+            User.getUser(epost, function (err, res) {
+                var string = JSON.stringify(res);
+                var parse = JSON.parse(string);
+                var retur = parse[0];
+                callback(err, retur);
+            })
+        }
+
+        getUser(email, function(err, res){
+            if(err){
+                console.log("Err: " + err);
+                return err
+            }else{
+                console.log("RES: " + res.firstname);
+                console.log("RES: " + res.surname);
+                console.log("RES: " + res.email);
+                console.log("RES: " + res.address);
+                console.log("RES: " + res.postalCode);
+                console.log("RES: " + res.city);
+                console.log("RES: " + res.country);
+                console.log("RES: " + res.surname);
+                return res;
+            }
+        });
+    });
+
+    app.post('/profile', function (req, res) {
+
+    });
     //CALENDAR BEGINS HERE
-    app.get("/getEvents", function(req, res){
+    app.get("/getUserEvents", function(req, res){
         var email = req.user.email;
         console.log("EMAIL: " + email);
         function getEvents(callback){
-            calModal.getEventsFromUser(email, function(err, result){
+            calModal.getUserEvents(email, function(err, result){
                 if(callback){
-                    callback(err, result);
-                    console.log(result)
                     res.send(result);
+                    callback(err, result);
                 }
             })
         }
         getEvents(function(err, result){
         });
+    });
+
+    app.get("/getAllEvents", function(req, res){
+        function getAllEvents(callback){
+            calModal.getAllEvents(function (err, result) {
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+        getAllEvents(function(err, res){});
     });
 
     app.post("/addEvent", function(req, res){
@@ -112,14 +246,29 @@ module.exports = function (app, passport) {
         var id = req.body.id;
         var start = req.body.start;
         var end = req.body.end;
+        var title = req.body.title;
+        var description = req.body.description
 
         function updateEvent(callback){
-            calModal.updateEvent(start, end, id, function(err, result){
+            calModal.updateEvent(title, description, start, end, id, function(err, result){
                 callback(err, result);
             });
         };
         updateEvent(function(err, res){});
-    })
+    });
+
+    app.post("/updateDate", function(req, res){
+        var id = req.body.id;
+        var start = req.body.start;
+        var end = req.body.end;
+
+        function updateDate(callback){
+            calModal.updateDate(start, end, id, function(err, result){
+                callback(err, result);
+            });
+        };
+        updateDate(function(err, res){});
+    });
 
     // alarm
     app.post('/alarmToggle', function (req, res) {
@@ -140,8 +289,7 @@ module.exports = function (app, passport) {
                 db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
                     if (callback) {
                         callback(err, result);
-                    }
-                    ;
+                    };
                 });
             }
         }

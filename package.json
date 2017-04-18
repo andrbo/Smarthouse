@@ -31,6 +31,11 @@
     "rpi-gpio": "^0.7.0",
     "serialport": "^4.0.7",
     "serve-favicon": "~2.3.0",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "generate-password": "*",
+    "nodemailer": "*",
+    "validator": "*"
+
+
   }
 }

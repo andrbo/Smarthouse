@@ -4,14 +4,13 @@
 var db = require('../middlewares/db');
 
 
-exports.createUser = function (password, email, firstname, surname, callback) {
-    var values = [password, email, firstname, surname];
-    db.query('INSERT INTO users (password, email, firstname, surname) VALUES (?, ?, ?, ?)', values, function (err, results) {
+exports.createUser = function (password, email, firstname, surname, address, postalCode, city, country, callback) {
+    var values = [password, email, firstname, surname, address, postalCode, city, country];
+    db.query('INSERT INTO users (password, email, firstname, surname, address, postalCode, city, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', values, function (err, results) {
         if (callback){
             callback(err, results);
         }
     });
-
 };
 
 exports.getUser = function(email, callback){
@@ -22,4 +21,17 @@ exports.getUser = function(email, callback){
         };
     })
 };
+
+exports.forgotPassword=function(password, email, callback){
+    var values = [password, email];
+console.log("values " + values);
+    var sql = 'UPDATE users SET password = ? WHERE email = ?';
+    db.query(sql,values, function (err, res) {
+        if(callback){
+            callback(err, res);
+            console.log("ERR " + err);
+        };
+    })
+};
+
 //TODO: opprett en exist-funksjon.

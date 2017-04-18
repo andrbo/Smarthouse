@@ -13,6 +13,31 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 
+
+
+
+//var fs = require('fs');
+
+/*var fs = require('fs');
+
+
+
+//var v4l2camera = require("v4l2camera");
+
+// Serial communication with Arduino
+//var serialport = require('serialport');// include the library
+//var SerialPort = serialport; // make a local instance of it
+//var arduinoPort = '/dev/ttyACM0';
+
+
+// Webcam used for live video, connected to usb port on raspberry pi
+
+//var webcam = new v4l2camera.Camera("/dev/video0");
+//webcam.start();
+
+var webcam = new v4l2camera.Camera("/dev/video0");
+webcam.start();*/
+
 //Uses the db.js file
 
 require('./middlewares/db');
@@ -62,6 +87,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+
+
+//Router controller. Uses passport as authentication. //////HEAD?
+require('./router/routes')(app,passport);
 
 //Global vars
 app.use(function (req, res, next) {

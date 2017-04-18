@@ -44,6 +44,10 @@ module.exports = function (passport) {
                     var surname = req.body.surname;
                     var password = req.body.password;
                     var email = req.body.email;
+                    var address = req.body.address;
+                    var postalCode = req.body.postalCode;
+                    var city = req.body.city;
+                    var country = req.body.country;
 
                     //Hashing password.
                     bcrypt.genSalt(10, function (err, salt) {
@@ -54,7 +58,7 @@ module.exports = function (passport) {
                                 console.log(err)
                             }
                             else { //Creating new user.
-                                User.createUser(password, email, firstname, surname, function(err, result){
+                                User.createUser(password, email, firstname, surname, address, postalCode, city, country, function(err, result){
                                     newUser = User.getUser(email, function(err, result){
                                         var string = JSON.stringify(result);
                                         var parse = JSON.parse(string);
@@ -83,9 +87,7 @@ module.exports = function (passport) {
                 if(err){
                     done(err);
                 }else if(userFromDb.length){ //Check if user not NULL.
-                    var string = JSON.stringify(userFromDb);
-                    var parse = JSON.parse(string);
-                    var pwordfromDB = parse[0].password;
+                    var pwordfromDB = userFromDb[0].password;
 
                     crypt(password, pwordfromDB, function (err, result) {
                         if (result === false) {

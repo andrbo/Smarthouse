@@ -31,8 +31,11 @@
 	"Event-Title":"Tittel",
 
 	"Delete":"Slett",
+	"Update": "Oppdater",
 	"Close": "Lukk",
 	"Add": "Legg til",
+
+	"Confirm-Delete": "Er du sikker på at du vil slette hendelsen?",
 
 	"Email-Exist": "Mailen finnes allerede",
 	"Login-Required": "Vennligst logg inn",
