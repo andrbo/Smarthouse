@@ -21,6 +21,11 @@
     "Register-Confirm-Password": "Confirm password",
     "Register-Button": "Register",
 
+    "Inside": "Inside",
+    "Hum-Inside": "Humidity: ",
+    "Temp-Inside": "Temperature: ",
+    "Water-Plant": "Give the plants some water",
+
     "Event-Add": "New event",
     "Event-Description":"Description",
     "Event-Title":"Title",
@@ -38,15 +43,35 @@
     "Password-Required": "Password is required",
     "Password-Not-Match": "Passwords need to match",
 
+
+    "Flame-Sensor": "Flame sensor",
+    "Gas-Sensor":	"Gas sensor",
+    "Leak-Sensor":	"Leak sensor",
+    "Laser-Trip":   "Laser tripwire",
+    "IR-Barrier":	"IR barrier",
+    "Vibe-Sensor":  "Vibration sensor",
+    "Act-Alarmbtn": "Activate",
+    "Deac-Alarmbtn": "Deactivate",
+
+
     "Visible-Flame": "Visible flame!",
     "IR-Detection": "IR barrier broken!",
     "Vibe-Detection": "Vibrations detected!",
-    "Laser-Trip": "Laser broken!",
+    "Laser-Detection": "Laser broken!",
     "Gas-Detection": "Gas detected!",
     "Leak-Detection": "Leak detected!",
-    "Act-Alarmbtn": "Activate",
-    "Deac-Alarmbtn": "Deactivate",
-    "ActAlarm-Modal": "turn on the alarm",
+
+    "Deac-Alarm": "Deactivate the alarm",
+    "DeacAlarm-Pw": "Type in your password to deavtivate the alarm",
+    "Alarm-PwErr": "Incorrect password, try again",
+    "Act-Alarm": "Activate the alarm",
+    "ActAlarm-Pw": "Type in your password to activate the alarm",
+    "Cancel-ActAlarm": "Cancel",
+    "Activate-ActAlarm": "Activate",
+    "Cancel-DeacAlarm": "Cancel",
+    "Activate-DeacAlarm":"Deactivate",
+
+
 
     "Calendar-Events": "Activities"
 

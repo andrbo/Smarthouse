@@ -1,3 +1,5 @@
+<!-- <link rel="stylesheet" href="/css/home.css"> -->
+
 <style type="text/css">
 
     html, body {
@@ -39,37 +41,6 @@
     }
 
 </style>
-
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    var socket = io();
-
-    socket.on('serialEvent', function (data) {
-
-        var soilValue = $('#soilValue');
-        soilReading(data);
-
-        var tempValue = $('#tempValue');
-        $('#tempValue').html(data.Temperature+'&#8451;');
-        if(tempValue<5){
-            tempValue.style.color="#42a7f4";
-        }
-        if(tempValue>5 && tempValue < 30) {
-            tempValue.style.color = "#40bf43";
-        }
-        if(tempValue>30){
-            tempValue.style.color="#f46e41";
-        }
-    });
-function soilReading(data){
-    var dry = 500;
-    var soil = data.moistureValue;
-    if(soil > dry){
-
-    }
-}
-
-</script>
 <div class="container">
 
     <div class="row">
@@ -78,8 +49,25 @@ function soilReading(data){
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <script src="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/ekstern_boks_stripe.js"></script>
-                        <noscript><a href="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/">yr.no: Værvarsel for Trondheim</a></noscript>
-                        <h1 id="tempValue"></h1>
+                        <noscript><a href="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/">yr.no:
+                            Værvarsel for Trondheim</a></noscript>
+                        <div class="row">
+                            <div id="insideTemp" class=" col-md-12">
+                                <h3>{{__ "Inside"}}</h3>
+                                <div id="temp" class="col-md-6">
+                                    <h6>{{__ "Temp-Inside"}}</h6>
+                                    <h6 id="tempValue"></h6>
+                                </div>
+                                <div id="hum" class="col-md-6">
+                                    <h6>{{__ "Hum-Inside"}}</h6>
+                                    <h6 id="humValue"></h6>
+                                </div>
+                            </div>
+                            <div id="soilWarning" style="display: none;">
+                                <h4><i class="fa fa-leaf" style="font-size:50px;"></i></span>{{__ "Water-Plant"}}</h4>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-body"> {{__ "Calendar-Event"}}</div>
@@ -108,15 +96,17 @@ function soilReading(data){
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input type="text" name="eventTitle" id="eventTitle"  class="form-control" placeholder="{{__ "Event-Title"}}">
+                        <input type="text" name="eventTitle" id="eventTitle" class="form-control"
+                               placeholder="{{__ "Event-Title"}}">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="eventDescription" id="eventDescription"  class="form-control" placeholder="{{__ "Event-Description"}}">
+                        <input type="text" name="eventDescription" id="eventDescription" class="form-control"
+                               placeholder="{{__ "Event-Description"}}">
                     </div>
 
                     <div class='input-group date form-group'>
-                        <input type='text' class="form-control" id='eventStart' />
+                        <input type='text' class="form-control" id='eventStart'/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -131,7 +121,8 @@ function soilReading(data){
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">{{__ "Add"}}</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">{{__
+                            "Add"}}</button>
                 </div>
             </div>
 
@@ -151,16 +142,17 @@ function soilReading(data){
                     <p class="form-group" name="description" id="description"></p>
                 </div>
                 <div class="modal-footer">
-                    <button id="deleteEventButton" type="button" class="btn btn-danger" data-dismiss="modal">{{__ "Delete"}}</button>
+                    <button id="deleteEventButton" type="button" class="btn btn-danger" data-dismiss="modal">{{__
+                            "Delete"}}</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">{{__ "Close"}}</button>
                 </div>
             </div>
 
         </div>
     </div>
-
 </div>
-
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/homeScript.js"></script>
 <script>
     $(document).ready(function () {
 

@@ -1,7 +1,7 @@
 /*
  *  Script used in security.hbs
-  * Most of its functionality is based around the fetching and updating of the sensor values coming from the arduino.
-  * The rest is based on the updating of the alarm status for all the connected users, and activating/ deactivating the alarm.
+ * Most of its functionality is based around the fetching and updating of the sensor values coming from the arduino.
+ * The rest is based on the updating of the alarm status for all the connected users, and activating/ deactivating the alarm.
  */
 
 var socket = io();
@@ -9,17 +9,17 @@ var socket = io();
 // Socket functions
 socket.on('serialEvent', function (data) {
 
-    var flameValue = document.getElementById('flameValue');
+    var flameValue = $('#flameValue');
     flameReading(data);
-    var gasValue = document.getElementById('gasValue');
+    var gasValue = $('#gasValue');
     gasReading(data);
-    var leakValue = document.getElementById('leakValue');
+    var leakValue = $('#leakValue');
     leakReading(data);
-    var laserValue = document.getElementById('laserValue');
+    var laserValue = $('#laserValue');
     laserReading(data);
-    var vibeValue = document.getElementById('vibeValue');
+    var vibeValue = $('#vibeValue');
     vibeReading(data);
-    var irValue = document.getElementById('irValue');
+    var irValue = $('#irValue');
     irReading(data);
 });
 
@@ -42,11 +42,11 @@ socket.emit('streamCam');
 function flameReading(data) {
     var flameSensorValue = data.Flame;
     if (flameSensorValue == 1) {
-        flameValue.innerHTML = "OK";
-        flameValue.style.color = "green";
+        $('#flameValue').html("OK");
+        $('#flameValue').css("color", "green");
     } else {
-        flameValue.innerHTML = 'Synlig flamme';//"{{__ "Visible-Flame"}}";
-        flameValue.style.color = "red";
+        $('#flameValue').html("Synlig flamme");
+        $('#flameValue').css("color", "red");
     }
 }
 ;
@@ -55,23 +55,23 @@ function flameReading(data) {
 function gasReading(data) {
     var gasSensorValue = data.Gas;
     if (gasSensorValue <= 300) {
-        gasValue.innerHTML = "OK";
-        gasValue.style.color = "green";
+        $('#gasValue').html("OK");
+        $('#gasValue').css("color", "green");
     } else {
-        gasValue.innerHTML = 'Gas detektert';//"{{__ "Gas-Detection"}}";
-        gasValue.style.color = "red";
+        $('#gasValue').html("Gas detektert");//"{{__ "Gas-Detection"}}";
+        $('#gasValue').css("color", "red");
     }
 }
 ;
 // Function for reading the value of the leak sensor
 function leakReading(data) {
     var leakSensorValue = data.LeakValue;
-    if (leakSensorValue > 970) {
-        leakValue.innerHTML = "OK";
-        leakValue.style.color = "green";
+    if (leakSensorValue < 800) {
+        $('#leakValue').html("OK");
+        $('#leakValue').css("color", "green");
     } else {
-        leakValue.innerHTML = 'Lekasje detektert';//"{{__ "Leak-Detection"}}";
-        leakValue.style.color = "red";
+        $('#leakValue').html("Lekasje detektert");//"{{__ "Leak-Detection"}}";
+        $('#leakValue').css("color", "red");
     }
 }
 ;
@@ -80,24 +80,25 @@ function leakReading(data) {
 function laserReading(data) {
     var laserSensorValue = data.Laser;
     if (laserSensorValue == 0) {
-        laserValue.innerHTML = "OK";
-        laserValue.style.color = "green";
+        $('#laserValue').html("OK");
+        $('#laserValue').css("color", "green");
     } else {
-        laserValue.innerHTML = 'Laser brutt';//"{{__ "Laser-Trip"}}";
-        laserValue.style.color = "red";
+        $('#laserValue').html("Laser brutt");//"{{__ "Laser-Trip"}}";
+        $('#laserValue').css("color", "green");
     }
 }
 ;
+
 
 // Function for reading the value of the vibration sensor
 function vibeReading(data) {
     var vibeSensorValue = data.VibeValue;
     if (vibeSensorValue == 0) {
-        vibeValue.innerHTML = "OK";
-        vibeValue.style.color = "green";
+        $('#vibeValue').html("OK");
+        $('#vibeValue').css("color", "green");
     } else {
-        vibeValue.innerHTML = 'vibrasjon detektert';//"{{__ "Vibe-Detection"}}";
-        vibeValue.style.color = "red";
+        $('#vibeValue').html("__", "Vibe-Detection");
+        $('#vibeValue').css("color", "red");
     }
 
 }
@@ -107,11 +108,11 @@ function vibeReading(data) {
 function irReading(data) {
     var irSensorValue = data.IRBarrierValue;
     if (irSensorValue == 1) {
-        irValue.innerHTML = "OK";
-        irValue.style.color = "green";
+        $('#irValue').html("OK");
+        $('#irValue').css("color", "green");
     } else {
-        irValue.innerHTML = 'IR brutt';//"{{__ "IR-Detection"}}";
-        irValue.style.color = "red";
+        $('#irValue').html("{{__(IR-Detection)}}");
+        $('#irValue').css("color", "red");
     }
 }
 ;
@@ -128,9 +129,9 @@ $(function () { // on load function makes the connected users get the correct va
 function updateToggleState() {
     $.post('/alarmState').done(function (data) {
         var state = JSON.stringify(data[0].value);
-        if(state == 1){
+        if (state == 1) {
             socket.emit('alarmActivated');
-        }else{
+        } else {
             socket.emit('alarmDeactivated');
         }
         buttonState(state);

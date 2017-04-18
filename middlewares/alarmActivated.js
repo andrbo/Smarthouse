@@ -10,8 +10,9 @@ var arduinoSerial = new SerialPort(arduinoPort, {
 
 module.exports = function(io){
 
+
     io.sockets.on('connection', function (socket) {
-        socket.on('alarmActivated', function () {
+    /*    socket.on('alarmActivated', function () {
             console.log('alarmActivated.js triggered .....Alarm på server aktiveres');
             socket.broadcast.emit('alarmAct');
             arduinoSerial.on('data', function (data) {
@@ -32,7 +33,13 @@ module.exports = function(io){
                 socket.emit('serialEvent', serialData);
             });
         });
+        */
 
+        arduinoSerial.on('data', function (data) {
+            var serialData = JSON.parse(data);
+            console.log(data);
+            socket.emit('serialEvent', serialData);
+        });
     });
 };
 
