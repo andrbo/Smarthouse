@@ -8,6 +8,7 @@
 	"Login-Button": "Logg inn",
 	"Login-Password": "Passord",
 	"Login-Forgot-Password": "Glemt passordet?",
+	"Login-Back": "Tilbake til login",
 
 	"User-Settings":"Innstillinger",
 	"User-Profile": "Profil",
@@ -20,6 +21,9 @@
 	"Register-Password": "Passord",
 	"Register-Confirm-Password": "Bekreft passord",
 	"Register-Button": "Registrer",
+
+	"Forgot-Password-Header": "Glemt passordet?",
+	"Forgot-Password-Info": "Skriv inn din email så sender vi et nytt passord til deg",
 
 	"Event-Add": "Ny hendelse",
 	"Event-Description":"Beskrivelse",

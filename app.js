@@ -89,10 +89,6 @@ app.use(passport.session());
 app.use(flash());
 
 
-
-//Router controller. Uses passport as authentication. //////HEAD?
-require('./router/routes')(app,passport);
-
 //Global vars
 app.use(function (req, res, next) {
     res.locals.success_msg = req.flash('success_msg');

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-login">
-                <div class="panel-heading">
+                <div class="panel-heading" id="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
                             <a href="#" class="active" id="login-form-link">Login</a>
@@ -18,11 +18,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form id="login-form" action="/login" method="post" role="form" style="display: block;">
-                                <div class="form-group">
-                                    <input type="text" name="email" id="email"  class="form-control" placeholder="Username" value="">
+                                <div class="form-group input-group"><span class="input-group-addon">@</span>
+                                    <input class="form-control" placeholder="Email" name="email" id="email" type="email" autofocus>
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" id="password"  class="form-control" placeholder="Password">
+                                <div class="form-group input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input class="form-control" placeholder="Password" name="password" id="password" type="password" value="" required="">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
@@ -34,15 +34,13 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div class="text-center">
-                                                <a href="/forgot" class="forgot-password">Forgot Password?</a>
-                                            </div>
+                                            <div class="pull-right"> <a href="#" id="forgotPasswordButton">{{__ "Login-Forgot-Password"}}</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
 
-
+                            <!-- REGISTER FORM BEGIN -->
                             <form id="register-form" action="register" method="post" role="form" style="display: none;">
 
                                 <div class="form-group">
@@ -69,13 +67,6 @@
                                     <input type="text" name="country" id="country" class="form-control" placeholder="{{__ "Register-Country"}}">
                                 </div>
 
-
-                                <!--
-                                <div class="form-group">
-                                    <input type="text" id="surname" class="form-control" placeholder="{{__ "Register-Verification"}}">
-                                </div>
-                                -->
-
                                 <div class="form-group">
                                     <input type="email" name="email" id="email" class="form-control" placeholder="{{__ "Register-Email"}}">
                                 </div>
@@ -91,13 +82,45 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" id="register-submit" class="form-control btn btn-register" value="{{__ "Register-Button"}}">
+                                            <input type="submit" id="register-submit" class="form-control btn btn-login btn-primary" value="{{__ "Register-Button"}}">
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <!-- REGISTER FORM END -->
+
+
+                    <!-- FORGOT PASSWORD FORM -->
+                    <div style=" display: none;" id="form-forgotPassword">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{__ "Forgot-Password-Header"}}</h3>
+                            </div>
+                            <h6 class="panel-body">{{__ "Forgot-Password-Info"}}</h6>
+                        </div>
+                        <form id="forgotPassword-form" action="/forgot" method="post" role="form" style="display: block;">
+                            <div class="form-group input-group"><span class="input-group-addon">@</span>
+                                <input class="form-control" placeholder="Email" name="forgotEmail" id="forgotEmail" type="email">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input type="submit"  id="login-submit" class="form-control btn btn-login btn-primary" value="Send">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="pull-left"> <a href="#" id="backToLoginForm">{{__ "Login-Back"}}</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- FORGOT PASSWORD FORM END-->
                 </div>
             </div>
         </div>
@@ -120,6 +143,20 @@
             $('#login-form-link').removeClass('active');
             $(this).addClass('active');
             e.preventDefault();
+        });
+
+        $('#forgotPasswordButton').click(function(e) {
+            e.preventDefault();
+            $('div#form-forgotPassword').toggle('500');
+            $("#login-form").fadeOut(100);
+            $("#panel-heading").fadeOut(100);
+        });
+
+        $('#backToLoginForm').click(function(e) {
+            e.preventDefault();
+            $("#login-form").toggle("500");
+            $("#panel-heading").toggle("500");
+            $('div#form-forgotPassword').fadeOut(100);
         });
 
         //Fikse bootstrap validator her.
