@@ -93,8 +93,6 @@ module.exports = function (app, passport) {
             });
         }
 
-
-
         function forgotPassword(password, email) {
             User.forgotPassword(password, email, function (err, result) {
                 console.log(password);
@@ -142,6 +140,49 @@ module.exports = function (app, passport) {
                 smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
             });
         }
+
+    });
+
+    app.get('/profile', function (req, res) {
+        res.render('profile');
+        /*if (req.isAuthenticated()) {
+            res.render("profile", {
+                login: true,
+                loginUsername: req.user.email
+            });
+        } else {
+            res.render("profile", {login: false});
+        };*/
+        var email = req.user.email;
+
+        function getUser(epost, callback){
+            User.getUser(epost, function (err, res) {
+                var string = JSON.stringify(res);
+                var parse = JSON.parse(string);
+                var retur = parse[0];
+                callback(err, retur);
+            })
+        }
+
+        getUser(email, function(err, res){
+            if(err){
+                console.log("Err: " + err);
+                return err
+            }else{
+                console.log("RES: " + res.firstname);
+                console.log("RES: " + res.surname);
+                console.log("RES: " + res.email);
+                console.log("RES: " + res.address);
+                console.log("RES: " + res.postalCode);
+                console.log("RES: " + res.city);
+                console.log("RES: " + res.country);
+                console.log("RES: " + res.surname);
+                return res;
+            }
+        });
+    });
+
+    app.post('/profile', function (req, res) {
 
     });
 };

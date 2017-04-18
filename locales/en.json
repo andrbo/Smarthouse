@@ -15,6 +15,10 @@
 
     "Register-Firstname": "First name",
     "Register-Surname": "Surname",
+    "Register-Address": "Address",
+    "Register-PostalCode": "Postal code",
+    "Register-City": "City",
+    "Register-Country": "Country",
     "Register-Verification": "Verification code",
     "Register-Email": "Email",
     "Register-Password": "Password",
