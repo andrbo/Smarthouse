@@ -33,8 +33,7 @@ module.exports = function (app, passport) {
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        }
-        ;
+        };
     });
 
     app.get('/security', function (req, res) {
@@ -68,14 +67,8 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 
-    app.get('/forgot', function (req, res) {
-        res.render('forgot');
-    });
-
     app.post('/forgot', function (req, res) {
-
-        var email = req.body.email;
-
+        var email = req.body.forgotEmail;
         var val = validator.isEmail(email);
 
         var randomPassword = generator.generate({
@@ -107,11 +100,9 @@ module.exports = function (app, passport) {
 
         hashPassword(randomPassword, function (err, res) {
             if(err){
-                console.log("ERR;" + err);
                 return err
             }else{
                 forgotPassword(res, email);
-                console.log("RES: " + res);
                 return res
             };
         });
@@ -120,17 +111,17 @@ module.exports = function (app, passport) {
         function sendMail(email, password) {
 
             var smtpTransport = nodemailer.createTransport({
-                service: "Gmail",  // sets automatically host, port and connection security settings
+                service: "Gmail",  //Automatically sets host, port and connection security settings
                 auth: {
                     user: "Smarthus2017@gmail.com",
                     pass: "Smarthus"
                 }
             });
-            smtpTransport.sendMail({  //email options
-                from: "<Smarthus2017@gmail.com>", // sender address.  Must be the same as authenticated user if using Gmail.
+            smtpTransport.sendMail({
+                from: "<Smarthus2017@gmail.com>", //Sender address. Must be the same as authenticated user if using Gmail.
                 to: email, // receiver
-                subject: "Emailing with nodemailer", // subject
-                text: "Hei! Ditt nye passord er " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
+                subject: "Emailing with nodemailer",
+                text: "Hei! Ditt nye passord er: " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
             }, function (error, response) {  //callback
                 if (error) {
                     console.log(error);
@@ -138,49 +129,22 @@ module.exports = function (app, passport) {
                     console.log("Message sent: " + response.message);
                     res.redirect('/home');
                 }
-                smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
+                smtpTransport.close(); //Shut down the connection, no more messages.
             });
         }
 
     });
 
     app.get('/profile', function (req, res) {
-        res.render('profile');
-        /*if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             res.render("profile", {
                 login: true,
                 loginUsername: req.user.email
             });
         } else {
-            res.render("profile", {login: false});
-        };*/
-        var email = req.user.email;
-
-        function getUser(epost, callback){
-            User.getUser(epost, function (err, res) {
-                var string = JSON.stringify(res);
-                var parse = JSON.parse(string);
-                var retur = parse[0];
-                callback(err, retur);
-            })
-        }
-
-        getUser(email, function(err, res){
-            if(err){
-                console.log("Err: " + err);
-                return err
-            }else{
-                console.log("RES: " + res.firstname);
-                console.log("RES: " + res.surname);
-                console.log("RES: " + res.email);
-                console.log("RES: " + res.address);
-                console.log("RES: " + res.postalCode);
-                console.log("RES: " + res.city);
-                console.log("RES: " + res.country);
-                console.log("RES: " + res.surname);
-                return res;
-            }
-        });
+            req.flash("error_msg", res.__('Login-Required'));
+            res.redirect("home");
+        };
     });
 
     app.post('/profile', function (req, res) {

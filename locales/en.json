@@ -8,6 +8,7 @@
     "Login-Button": "Login",
     "Login-Password": "Password",
     "Login-Forgot-Password": "Forgot password?",
+    "Login-Back": "Back to login",
 
     "User-Settings":"Settings",
     "User-Profile": "Profile",
@@ -25,10 +26,15 @@
     "Register-Confirm-Password": "Confirm password",
     "Register-Button": "Register",
 
+
     "Inside": "Inside",
     "Hum-Inside": "Humidity: ",
     "Temp-Inside": "Temperature: ",
     "Water-Plant": "Give the plants some water",
+
+    "Forgot-Password-Header": "Forgot your password?",
+    "Forgot-Password-Info": "Write your email and we will send you a new password",
+
 
     "Event-Add": "New event",
     "Event-Description":"Description",
