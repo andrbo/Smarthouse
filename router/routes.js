@@ -64,20 +64,31 @@ module.exports = function (app, passport) {
     });
 
     //CALENDAR BEGINS HERE
-    app.get("/getEvents", function(req, res){
+    app.get("/getUserEvents", function(req, res){
         var email = req.user.email;
         console.log("EMAIL: " + email);
         function getEvents(callback){
-            calModal.getEventsFromUser(email, function(err, result){
+            calModal.getUserEvents(email, function(err, result){
                 if(callback){
-                    callback(err, result);
-                    console.log(result)
                     res.send(result);
+                    callback(err, result);
                 }
             })
         }
         getEvents(function(err, result){
         });
+    });
+
+    app.get("/getAllEvents", function(req, res){
+        function getAllEvents(callback){
+            calModal.getAllEvents(function (err, result) {
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+        getAllEvents(function(err, res){});
     });
 
     app.post("/addEvent", function(req, res){
@@ -112,14 +123,29 @@ module.exports = function (app, passport) {
         var id = req.body.id;
         var start = req.body.start;
         var end = req.body.end;
+        var title = req.body.title;
+        var description = req.body.description
 
         function updateEvent(callback){
-            calModal.updateEvent(start, end, id, function(err, result){
+            calModal.updateEvent(title, description, start, end, id, function(err, result){
                 callback(err, result);
             });
         };
         updateEvent(function(err, res){});
-    })
+    });
+
+    app.post("/updateDate", function(req, res){
+        var id = req.body.id;
+        var start = req.body.start;
+        var end = req.body.end;
+
+        function updateDate(callback){
+            calModal.updateDate(start, end, id, function(err, result){
+                callback(err, result);
+            });
+        };
+        updateDate(function(err, res){});
+    });
 
     // alarm
     app.post('/alarmToggle', function (req, res) {
@@ -140,8 +166,7 @@ module.exports = function (app, passport) {
                 db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
                     if (callback) {
                         callback(err, result);
-                    }
-                    ;
+                    };
                 });
             }
         }

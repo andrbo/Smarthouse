@@ -83,9 +83,7 @@ module.exports = function (passport) {
                 if(err){
                     done(err);
                 }else if(userFromDb.length){ //Check if user not NULL.
-                    var string = JSON.stringify(userFromDb);
-                    var parse = JSON.parse(string);
-                    var pwordfromDB = parse[0].password;
+                    var pwordfromDB = userFromDb[0].password;
 
                     crypt(password, pwordfromDB, function (err, result) {
                         if (result === false) {

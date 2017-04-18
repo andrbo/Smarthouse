@@ -26,8 +26,11 @@
     "Event-Title":"Title",
 
     "Delete":"Delete",
+    "Update": "Update",
     "Close": "Close",
     "Add": "Add",
+
+    "Confirm-Delete": "Are you sure you want to delete the event?",
 
     "Email-Exist": "The mail does already exist",
     "Login-Required": "Please log in",
