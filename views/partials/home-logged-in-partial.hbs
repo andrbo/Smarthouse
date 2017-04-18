@@ -1,99 +1,323 @@
-<link rel='stylesheet' href='calendar/fullcalendar/dist/fullcalendar.css'/>
-<script src='/calendar/moment/min/moment.min.js'></script>
-<script src='/calendar/fullcalendar/dist/fullcalendar.js'></script>
-
-<script>
-    $(document).ready(function () {
-
-        // page is now ready, initialize the calendar...
-
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-        })
-
-    });
-</script>
-
-<style type="text/css">
-
-    html, body {
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .container {
-        width: 100%;
-        padding-right: 0;
-        padding-left: 0;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .col-xs-1, .col-sm-1, .col-md-1, .col-sm-1,
-    .col-xs-2, .col-sm-2, .col-md-2, .col-sm-2,
-    .col-xs-3, .col-sm-3, .col-md-3, .col-sm-3,
-    .col-xs-4, .col-sm-4, .col-md-4, .col-sm-4,
-    .col-xs-5, .col-sm-5, .col-md-5, .col-sm-5,
-    .col-xs-6, .col-sm-6, .col-md-6, .col-sm-6,
-    .col-xs-7, .col-sm-7, .col-md-7, .col-sm-7,
-    .col-xs-8, .col-sm-8, .col-md-8, .col-sm-8,
-    .col-xs-9, .col-sm-9, .col-md-9, .col-sm-9,
-    .col-xs-10, .col-sm-10, .col-md-10, .col-sm-10,
-    .col-xs-11, .col-sm-11, .col-md-11, .col-sm-11,
-    .col-xs-12, .col-sm-12, .col-md-12, .col-sm-12 {
-        position: relative;
-        height: 100%;
-        min-height: 1px;
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-    .row {
-        margin-right: 0;
-        margin-left: 0;
-    }
-
-</style>
+<link rel="stylesheet" href="/css/home.css">
 
 <script src="/socket.io/socket.io.js"></script>
-
 <script>
     var socket = io();
 
     socket.on('serialEvent', function (data) {
 
-        var tempValue = document.getElementById('tempValue');
-        tempValue.innerHTML=data.Temperature;
-    });
+        var soilValue = $('#soilValue');
+        soilReading(data);
 
+        var tempValue = $('#tempValue');
+        $('#tempValue').html(data.Temperature + '&#8451;');
+        if (tempValue < 5) {
+            tempValue.style.color = "#42a7f4";
+        }
+        if (tempValue > 5 && tempValue < 30) {
+            tempValue.style.color = "#40bf43";
+        }
+        if (tempValue > 30) {
+            tempValue.style.color = "#f46e41";
+        }
+    });
+    function soilReading(data) {
+        var dry = 500;
+        var soil = data.moistureValue;
+        if (soil > dry) {
+
+        }
+    }
 
 </script>
-<div class="container">
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h1 id="tempValue"></h1>
-                    </div>
-
-
-                    <div class="panel panel-default">
-                        <div class="panel-body"> {{__ "Calendar-Event"}}</div>
-                    </div>
-                </div>
+<div class="col-md-12">
+    <div class="panel-group col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <script src="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/ekstern_boks_stripe.js"></script>
+                <noscript><a href="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/">yr.no:
+                    Værvarsel for Trondheim</a></noscript>
+                <h1 id="tempValue"></h1>
             </div>
-
+            <div class="panel panel-default">
+                <div class="panel-body"> {{__ "Calendar-Event"}}</div>
+                <table id="calendarEventList" class="display" cellspacing="0" width="100%"></table>
+            </div>
         </div>
-        <div class="col-md-1">
-        </div>
+    </div>
+    <div class="col-md-1"></div>
 
-        <div class="col-md-7 panel panel-default">
-            <div id='calendar'></div>
+    <div class="col-md-6">
+        <div id='calendar'></div>
+    </div>
+</div>
+
+<!-- ADD EVENT MODAL -->
+<div id="addEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{__ "Event-Add"}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <input type="text" name="eventTitle" id="eventTitle" class="form-control" placeholder="{{__ "Event-Title"}}">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="eventDescription" id="eventDescription" class="form-control" placeholder="{{__ "Event-Description"}}">
+                </div>
+
+                <div class='input-group date form-group' id="eventStartCalendarGlyph">
+                    <input type='text' class="form-control" id='eventStart'/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+
+                <div class='input-group date form-group' id="eventEndCalendarGlyph">
+                    <input type='text' class="form-control" id='eventEnd'/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">{{__ "Add"}}</button>
+            </div>
         </div>
 
     </div>
+</div>
+<!-- ADD EVENT MODAL END -->
+
+<!-- UPDATE EVENT MODAL -->
+<div id="updateEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{__ "update"}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <input type="text" name="updateEventTitle" id="updateEventTitle" class="form-control" placeholder="{{__ "Event-Title"}}">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="updateEventDescription" id="updateEventDescription" class="form-control" placeholder="{{__ "Event-Description"}}">
+                </div>
+
+
+                <div class='input-group date form-group' id="updateEventStartCalendarGlyph">
+
+                    <input disabled type='text' class="form-control" id='updateEventStart'/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+
+
+                <div class='input-group date form-group' id="updateEventEndCalendarGlyph">
+                    <input type='text' class="form-control" id='updateEventEnd'/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="confirmUpdate" type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> {{__ "Update"}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> {{__ "Close"}}</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- UPDATE EVENT MODAL END -->
+
+<!-- DELETE EVENT MODAL -->
+<div id="deleteEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{__ "Delete"}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">{{__ "Confirm-Delete"}}</div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmDelete" type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> {{__ "Delete"}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> {{__ "Close"}}</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- DELETE EVENT MODAL END -->
+
+
+<div id="viewDescriptionModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{__ "Event-Description"}}</h4>
+            </div>
+            <div class="modal-body">
+                <p class="form-group" name="description" id="description"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="deleteEventButton" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> {{__ "Delete"}}</button>
+                <button id="updateEventButton" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> {{__ "Update"}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> {{__ "Close"}}</button>
+            </div>
+        </div>
+    </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'addEvent',
+                center: 'title',
+                right: 'today, prev, next'
+            },
+            events: '/getUserEvents',
+
+            customButtons: {
+                addEvent: {
+                    text: "{{__ "Event-Add"}}",
+                    click: function () {
+                        $("#addEventModal").modal('show');
+                    }
+                }
+            },
+
+            eventClick: function (calEvent) {
+                $("#viewDescriptionModal").modal("show");
+                $("#description").html(calEvent.description);
+
+                //DELETE EVENT MODAL
+                $("#deleteEventButton").click(function () {
+                    $("#viewDescriptionModal").modal('hide');
+                    $("#deleteEventModal").modal('show');
+                    $("#confirmDelete").click(function () {
+                        deleteEvent(calEvent.id)
+                    });
+                });
+                //DELETE EVENT MODAL END
+
+                //UPDATE EVENT MODAL
+                $("#updateEventButton").click(function () {
+                    $("#viewDescriptionModal").modal('hide');
+                    $("#updateEventModal").modal('show');
+                    $("#updateEventTitle").val(calEvent.title);
+                    $("#updateEventDescription").val(calEvent.description);
+                    $("#updateEventStart").val(calEvent.start.format("YYYY-MM-DD HH:MM"));
+                    $("#updateEventEnd").val(calEvent.end.format("YYYY-MM-DD HH:MM"));
+
+
+                    $("#confirmUpdate").click(function () {
+                        var title = $("#updateEventTitle").val();
+                        var description = $("#updateEventDescription").val();
+                        var start = $("#updateEventStart").val();
+                        var end = $("#updateEventEnd").val();
+                        updateEvent(title, description, start, end, calEvent.id);
+                    })
+                });
+                //UPDATE EVENT MODAL END
+            },
+
+            editable: true,
+            eventDrop: function (event) {
+                var start = event.start.format("YYYY-MM-DD HH:MM");
+                var end = event.end.format("YYYY-MM-DD HH:MM") || start;
+                updateDate(event.id, start, end);
+            }
+        });
+
+        $("#eventStartCalendarGlyph, #eventEndCalendarGlyph, #updateEventStartCalendarGlyph, #updateEventEndCalendarGlyph").datetimepicker({
+            format: "YYYY-MM-DD HH:MM"
+        });
+
+
+        $("#calendarEventList").dataTable({
+            ajax: {
+                dataSrc: '',
+                url: '/getAllEvents',
+            },
+            scrollY: "430px",
+            searching: false,
+            info: false,
+            lengthChange: false,
+            columns: [
+                {data: "firstname", title: "Name"},
+                {data: "title", title: "Title"},
+                {data: "description", title: "Description"},
+                {data: "start", title: "Start"},
+                {data: "end", title: "End"},
+            ],
+        });
+
+    });
+
+
+    function addEvent() {
+        $.post("/addEvent", {
+            title: $("#eventTitle").val(),
+            start: $("#eventStart").val(),
+            end: $("#eventEnd").val(),
+            description: $("#eventDescription").val()
+        })
+        window.location.reload(true);
+    }
+    ;
+
+    function deleteEvent(eventId) {
+        $.post("/deleteEvent", {
+            id: eventId
+        })
+        window.location.reload(true);
+    }
+    ;
+
+    function updateEvent(title, description, start, end, id) {
+        $.post("/updateEvent", {
+            title: title,
+            description: description,
+            start: start,
+            end: end,
+            id: id
+        });
+        window.location.reload(true);
+    }
+
+    function updateDate(id, start, end) {
+        $.post("/updateDate", {
+            id: id,
+            start: start,
+            end: end
+        });
+        window.location.reload(true);
+    }
+    ;
+
+</script>

@@ -38,19 +38,20 @@ var flash = require('connect-flash');
 var webcam = new v4l2camera.Camera("/dev/video0");
 webcam.start();*/
 
-
-
 //Uses the db.js file
 
-require('./db');
-require('./passport')(passport);
+require('./middlewares/db');
+require('./middlewares/passport')(passport);
 
 // call socket.io to the app
-app.io = require('socket.io')();
+//app.io = require('socket.io')();
+//app.io.alarmActivated = require('./middlewares/alarmActivated')(app.io);
+//app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
+
 
 
 app.get('/', function (req, res) {
-    res.render('home');
+    res.redirect('home');
 });
 
 
@@ -89,8 +90,16 @@ app.use(flash());
 
 
 
-//Router controller. Uses passport as authentication.
+//Router controller. Uses passport as authentication. //////HEAD?
 require('./router/routes')(app,passport);
+
+//Global vars
+app.use(function (req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
 
 
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
@@ -98,7 +107,6 @@ i18n.configure({
     locales: ['no', 'en'],
     fallbacks: {'no': 'en'},
     cookie: 'locale',
-    defaultLocale: 'no',
     directoryPermissions: '755',
     directory: __dirname + "/locales",
     autoReload: false,
@@ -107,6 +115,8 @@ i18n.configure({
     queryParameter: 'lang'
 });
 
+app.use(i18n.init)
+
 // register hbs helpers in res.locals' context which provides this.locale
 hbs.handlebars.registerHelper('__', function () {
     return i18n.__.apply(this, arguments);
@@ -114,7 +124,9 @@ hbs.handlebars.registerHelper('__', function () {
 hbs.handlebars.registerHelper('__n', function () {
     return i18n.__n.apply(this, arguments);
 });
-//INTERNATIONALIZATION ENDS HERE.
+
+//Router controller. Uses passport as authentication.
+require('./router/routes')(app,passport);
 
 //Express Validator
 app.use(expressValidator({
@@ -133,16 +145,6 @@ app.use(expressValidator({
         };
     }
 }));
-
-
-//Global vars
-app.use(function (req, res, next) {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-    next();
-});
-// ******** END LOG IN ********
 
 
 // catch 404 and forward to error handler
@@ -175,81 +177,5 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
-/*
-// Setting up serial communication port with Arduino
-/*var arduinoSerial = new SerialPort(arduinoPort, {
-    // look for return and newline at the end of each data packet:
-    parser: serialport.parsers.readline("\r\n")
-});
-
-// Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
-function stopStreaming() {
-    if (Object.keys(sockets).length == 0) {
-        app.set('watchingFile', false);
-        if (proc) proc.kill();
-        fs.unwatchFile('./stream/image_stream.jpg');
-        webcam.stop();
-    }
-}
-function startWebcamStream(io) {
-    if (app.get('watchingFile')) {
-        io.sockets.emit('streamCam', 'image_stream.jpg?_t=' + (Math.random() * 100000));
-        return;
-    }
-    Capture();
-    app.set('watchingFile', true);
-   console.log('Start watching......');
-}
-// Capture function 200 means 30fps
-function Capture(){
-   setInterval(function(){
-      webcam.capture(function (success) {
-           var frame = webcam.frameRaw();
-            app.io.emit('streamCam', "data:image/png;base64," + Buffer(frame).toString('base64'));
-        });
-   }, 50);
-}
-
-// start listen with socket.io Muligens flyttes til .js for aktuelle views?
-
-var sockets = {}; // Variable used to define if videostream should bi stopped
-*/
-
-app.io.on('connection', function (socket) {
-// Test av alarm knapp
-    socket.on('alarmActivated',function(){
-    console.log("Aktiver script i app.js");
-    });
-
-/*   console.log('a user connected');
-   sockets[socket.id] = socket;
-   console.log("Total clients connected : ", Object.keys(sockets).length);
-
-
-   socket.on('disconnect', function () {
-       delete sockets[socket.id];
-
-        // no more sockets, kill the stream
-      if (Object.keys(sockets).length == 0) {
-          app.set('watchingFile', false);
-          fs.unwatchFile('./stream/image_stream.jpg');
-      }
-    });
-    // Serving sensor readings from Arduino as a JSON object
-    arduinoSerial.on('data', function (data) {
-        var serialData = JSON.parse(data);
-        console.log(data);
-       // send a serial event to the web client with the data:
-        socket.emit('serialEvent', serialData);
-    });
-
-    socket.on('streamCam', function() {
-       startWebcamStream(app.io);
-    });
-
-    */
-});
-
 
 module.exports = app;

@@ -21,6 +21,19 @@
 	"Register-Confirm-Password": "Bekreft passord",
 	"Register-Button": "Registrer",
 
+	"Event-Add": "Ny hendelse",
+	"Event-Description":"Beskrivelse",
+	"Event-Title":"Tittel",
+
+	"Delete":"Slett",
+	"Update": "Oppdater",
+	"Close": "Lukk",
+	"Add": "Legg til",
+
+	"Confirm-Delete": "Er du sikker på at du vil slette hendelsen?",
+
+	"Email-Exist": "Mailen finnes allerede",
+	"Login-Required": "Vennligst logg inn",
 	"Firstname-Required": "Fornavn er påkrevd",
 	"Surname-Required": "Etternavn er påkrevd",
 	"Email-Required": "Email er påkrevd",
@@ -34,6 +47,10 @@
 	"Laser-Trip": "Laser brutt!",
 	"Gas-Detection": "Gass detektert!",
 	"Leak-Detection": "Lekasje detektert",
+	"Act-Alarmbtn": "Aktiver",
+	"Deac-Alarmbtn": "Deaktiver",
+	"ActAlarm-Modal": "Aktiver alarm",
 
-	"Calendar-Event": "Hendelser"
+	"Calendar-Events": "Hendelser"
+
 }

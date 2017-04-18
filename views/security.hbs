@@ -1,198 +1,7 @@
 <!-- include bootstrap, jquery for easy div manipulation -->
-<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-<style type="text/css">
-
-    html, body {
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-        background: #525252;
-        color: #ffffff;
-        font-family: 'Fjalla One', sans-serif;
-    }
-
-    h6{
-        size:48px;
-    }
-
-    .container {
-        width: 100%;
-        padding-right: 0;
-        padding-left: 0;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .col-xs-1, .col-sm-1, .col-md-1, .col-sm-1,
-    .col-xs-2, .col-sm-2, .col-md-2, .col-sm-2,
-    .col-xs-3, .col-sm-3, .col-md-3, .col-sm-3,
-    .col-xs-4, .col-sm-4, .col-md-4, .col-sm-4,
-    .col-xs-5, .col-sm-5, .col-md-5, .col-sm-5,
-    .col-xs-6, .col-sm-6, .col-md-6, .col-sm-6,
-    .col-xs-7, .col-sm-7, .col-md-7, .col-sm-7,
-    .col-xs-8, .col-sm-8, .col-md-8, .col-sm-8,
-    .col-xs-9, .col-sm-9, .col-md-9, .col-sm-9,
-    .col-xs-10, .col-sm-10, .col-md-10, .col-sm-10,
-    .col-xs-11, .col-sm-11, .col-md-11, .col-sm-11,
-    .col-xs-12, .col-sm-12, .col-md-12, .col-sm-12 {
-        position: relative;
-        min-height: 1px;
-        padding-right: 0;
-        padding-left: 0;
-        margin-top: 3px;
-        margin-bottom: 7px;
-    }
-
-    .row {
-        margin-right: 0;
-        margin-left: 0;
-    }
-
-    .glyphicon {
-        font-size: 50px;
-        opacity: 0.8;
-    }
-
-    .glyphicon.glyphicon-fire {
-        color: #ff9900;
-
-    }
-
-    .glyphicon.glyphicon-tint {
-        color: #00B7FF;
-    }
-
-    .glyphicon.glyphicon-cloud {
-        color: #1CA347;
-    }
-
-    .glyphicon.glyphicon-asterisk {
-        color: red;
-    }
-
-    .glyphicon.glyphicon-minus {
-        color: red;
-    }
-
-    .glyphicon.glyphicon-warning-sign {
-        color: yellow;
-        font-size: 20px;
-    }
-
-    #webCam {
-        width: 100%;
-        max-width: 640px;
-        margin: 0px auto;
-        display: block;
-        margin-top: 20px;
-    }
-</style>
-
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/security.css">
 <script src="/socket.io/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script>
-    var socket = io();
-
-    socket.on('serialEvent', function (data) {
-
-        var flameValue = document.getElementById('flameValue');
-        flameReading(data);
-        var gasValue = document.getElementById('gasValue');
-        gasReading(data);
-        var leakValue = document.getElementById('leakValue');
-        leakReading(data);
-        var laserValue = document.getElementById('laserValue');
-        laserReading(data);
-        var vibeValue = document.getElementById('vibeValue');
-        vibeReading(data);
-        var irValue = document.getElementById('irValue');
-        irReading(data);
-    });
-
-    socket.on('streamCam', function (url) {
-        $('#webCam').attr('src', url);
-        $('.start').hide();
-    });
-
-    socket.emit('streamCam');
-
-    function flameReading(data) {
-        var flameSensorValue = data.Flame;
-        if (flameSensorValue == 1) {
-            flameValue.innerHTML = "OK"
-            flameValue.style.color = "green";
-        } else {
-            flameValue.innerHTML = "{{__ "Visible-Flame"}}";
-            flameValue.style.color = "red";
-        }
-    }
-    ;
-
-    // Må kalibreres mot en gass
-    function gasReading(data) {
-        var gasSensorValue = data.Gas;
-        if (gasSensorValue <= 300) {
-            gasValue.innerHTML = "OK";
-            gasValue.style.color = "green";
-        } else {
-            gasValue.innerHTML = "{{__ "Gas-Detection"}}";
-            gasValue.style.color = "red";
-        }
-    }
-    ;
-
-    function leakReading(data) {
-        var leakSensorValue = data.LeakValue;
-        if (leakSensorValue > 970) {
-            leakValue.innerHTML = "OK";
-            leakValue.style.color = "green";
-        } else {
-            leakValue.innerHTML = "{{__ "Leak-Detection"}}";
-            leakValue.style.color = "red";
-        }
-    }
-    ;
-
-    function laserReading(data) {
-        var laserSensorValue = data.Laser;
-        if (laserSensorValue == 0) {
-            laserValue.innerHTML = "OK";
-            laserValue.style.color = "green";
-        } else {
-            laserValue.innerHTML = "{{__ "Laser-Trip"}}";
-            laserValue.style.color = "red";
-        }
-    }
-    ;
-
-    function vibeReading(data) {
-        var vibeSensorValue = data.VibeValue;
-        if (vibeSensorValue == 0) {
-            vibeValue.innerHTML = "OK";
-            vibeValue.style.color = "green";
-        } else {
-            vibeValue.innerHTML = "{{__ "Vibe-Detection"}}";
-            vibeValue.style.color = "red";
-        }
-
-    }
-    ;
-
-    function irReading(data) {
-        var irSensorValue = data.IRBarrierValue;
-        if (irSensorValue == 1) {
-            irValue.innerHTML = "OK";
-            irValue.style.color = "green";
-        } else {
-            irValue.innerHTML = "{{__ "IR-Detection"}}";
-            irValue.style.color = "red";
-        }
-    }
-    ;
-</script>
-</head>
 
 <div class="container" id="sensordata">
 
@@ -210,7 +19,8 @@
 
         <div class="row" id="gasSensor">
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-cloud " aria-hidden="true"></span><span
+                    class="glyphicon glyphicon-warning-sign " aria-hidden="true"></span>
                 <h6>Gass sensor</h6>
             </div>
             <div class="col-md-8">
@@ -230,7 +40,8 @@
 
         <div class="row" id="laserSensor">
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-minus"></span><span class="glyphicon glyphicon-asterisk"
+                                                                     aria-hidden="true"></span>
                 <h6>Laserbarriere</h6>
             </div>
             <div class="col-md-8">
@@ -257,63 +68,63 @@
                 <h3 id="vibeValue"></h3>
             </div>
         </div>
-
     </div>
-
     <div class="col-md-6">
         <img src="" id="webCam">
     </div>
-
 </div>
 <div class="container">
-    <div class = col-md-12>
-    <div class="row">
-        <div class="col-md-3">
-            <button  type="button" id="alarmBtn" class="btn btn-primary" data-toggle="modal" data-target="#alarmPw">
-                Aktiver alarm
-            </button>
-            <div class="modal fade" id="alarmPw">
-                <div class="model-dialog">
-                    <div class="model-content">
-                        <div class="model-header">
-                            <h4><span class="glyphicon glyphicon-lock"></span> Aktiver alarm</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p> Skriv inn passord for å aktivere alarmen</p>
-                            <input id="pw" type="password" placeholder="*******" style="color: #0f0f0f">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Avbryt</button>
-                            <button type="button" id="btnActivateAlarm" class="btn btn-save">Aktiver</button>
+    <div class=col-md-12>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Alarm:</h3>
+                <button id="toggle" type="button" onclick="alarmToggle()">{{__ Act-Alarmbtn}}</button>
+                <div class="modal fade" id="activateAlarmPw">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4><span class="glyphicon glyphicon-lock"></span>{{__ "ActAlarm-Modal"}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Skriv inn passord for å aktivere alarmen</p>
+                                <input id="pwAct" type="password" placeholder="*******" style="color: #0f0f0f">
+                                <div class="alert alert-error" id="pwErrorAct">
+                                    <span>
+                                         <p class="pwError">Looks like the passwords you entered don't match!</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelAcAlarm" class="btn btn-default">Avbryt</button>
+                                <button type="button" id="btnActivateAlarm" class="btn btn-save">Aktiver</button>
+                            </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="modal fade" id="deactivateAlarmPw">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4><i class="fa fa-key" style="font-size:50px;"></i></span> Deaktiver alarm</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Skriv inn passord for å deaktivere alarmen</p>
+                                <input id="pwDeac" type="password" placeholder="*******" style="color: #0f0f0f">
+                                <div class="alert alert-error" id="pwErrorDeac">
+                                     <span>
+                                            <p class="pwError">Looks like the passwords you entered don't match!</p>
+                                     </span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelDeacAlarm" class="btn btn-default">Avbryt</button>
+                                <button type="button" id="btnDeactivateAlarm" class="btn btn-save">Deaktiver</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </div>
-<script>
-    $('#btnActivateAlarm').click(function () {
-        var pwInput = $('#pw').val();
-        $('#alarmPw').modal('hide');
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
-        console.log(pwInput);
-        // bytt ut med sjekk av kryptert passord lagret i database
-        if (pwInput == 1234) {
-            console.log("passord korrekt kjør funksjon");
-            alarmaktivert();
-        }
-    })
-
-    function alarmaktivert() {
-        console.log("alarmen er aktivert ")
-        $('#alarmBtn').innerHTML = "Deaktiver alarm";
-        $('#alarmBtn').removeClass('btn-primary').addClass('btn-danger').text('Deaktiver alarm');
-        socket.emit('alarmActivated');
-    }
-</script>
-
-
+<script src="/js/securityScript.js"></script>

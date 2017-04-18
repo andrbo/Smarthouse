@@ -25,6 +25,19 @@
     "Register-Confirm-Password": "Confirm password",
     "Register-Button": "Register",
 
+    "Event-Add": "New event",
+    "Event-Description":"Description",
+    "Event-Title":"Title",
+
+    "Delete":"Delete",
+    "Update": "Update",
+    "Close": "Close",
+    "Add": "Add",
+
+    "Confirm-Delete": "Are you sure you want to delete the event?",
+
+    "Email-Exist": "The mail does already exist",
+    "Login-Required": "Please log in",
     "Firstname-Required": "Firstname is required",
     "Surname-Required": "Surname is required",
     "Email-Required": "Email is required",
@@ -38,7 +51,11 @@
     "Laser-Trip": "Laser broken!",
     "Gas-Detection": "Gas detected!",
     "Leak-Detection": "Leak detected!",
+    "Act-Alarmbtn": "Activate",
+    "Deac-Alarmbtn": "Deactivate",
+    "ActAlarm-Modal": "turn on the alarm",
 
-    "Calendar-Event": "Activities"
+    "Calendar-Events": "Activities"
+
 
 }
