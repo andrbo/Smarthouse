@@ -12,6 +12,8 @@
     "User-Profile": "Profile",
     "User-Logout":"Logout",
 
+    "Logout-Success": "Logged out",
+
     "Firstname": "First name",
     "Surname": "Surname",
     "Address": "Address",

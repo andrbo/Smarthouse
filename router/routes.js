@@ -65,8 +65,8 @@ module.exports = function (app, passport) {
     }));
 
     app.get('/logout', function (req, res) {
-        console.log("Logger ut");
         req.logout();
+        req.flash("success_msg", res.__('Logout-Success'));
         res.redirect('/');
     });
 

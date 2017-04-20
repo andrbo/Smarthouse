@@ -12,6 +12,8 @@
 	"User-Profile": "Profil",
 	"User-Logout":"Logg ut",
 
+	"Logout-Success": "Logget ut",
+
 	"Firstname": "Fornavn",
 	"Surname": "Etternavn",
 	"Verification": "Verifikasjonskode",
