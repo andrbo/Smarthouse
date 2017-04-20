@@ -10,13 +10,11 @@ module.exports = function (passport) {
 
     //Used to serialize the user for the session
     passport.serializeUser(function (user, done) {
-        console.log("Serialiserer");
         done(null, user.email);
     });
 
     //Used to deserialize the user
     passport.deserializeUser(function (email, done) {
-        console.log("Deserialiserer");
         db.query("SELECT * FROM users WHERE email = ?", [email], function (err, rows) {
             done(err, rows[0]);
         });
@@ -62,8 +60,7 @@ module.exports = function (passport) {
                                     newUser = User.getUser(email, function(err, result){
                                         var string = JSON.stringify(result);
                                         var parse = JSON.parse(string);
-                                        var retur = parse[0];
-                                        done(null, retur); //Have to return JSON data to serialize.
+                                        done(null, parse[0]); //Have to return JSON data to serialize.
                                     })
 
                                 });
@@ -91,7 +88,6 @@ module.exports = function (passport) {
 
                     crypt(password, pwordfromDB, function (err, result) {
                         if (result === false) {
-                            console.log("false");
                            done(null, false);
                         } else {
                             console.log(userFromDb[0]);

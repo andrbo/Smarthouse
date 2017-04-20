@@ -21,7 +21,8 @@ module.exports = function (app, passport) {
             });
         } else {
             res.render("home");
-        };
+        }
+        ;
     });
 
     app.get('/about', function (req, res) {
@@ -33,7 +34,8 @@ module.exports = function (app, passport) {
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        };
+        }
+        ;
     });
 
     app.get('/security', function (req, res) {
@@ -45,7 +47,8 @@ module.exports = function (app, passport) {
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        };
+        }
+        ;
     });
 
     // process the login form
@@ -69,23 +72,11 @@ module.exports = function (app, passport) {
 
     app.post('/forgot', function (req, res) {
         var email = req.body.forgotEmail;
-        var val = validator.isEmail(email);
 
         var randomPassword = generator.generate({
             length: 10,
             numbers: true
-
         });
-
-        function hashPassword(password, callback) {
-            bcrypt.genSalt(10, function (err, salt) {
-                bcrypt.hash(password, salt, function (err, hash) {
-                    password = hash;
-                    callback(err, password);
-
-                });
-            });
-        }
 
         function forgotPassword(password, email) {
             User.forgotPassword(password, email, function (err, result) {
@@ -99,17 +90,17 @@ module.exports = function (app, passport) {
         }
 
         hashPassword(randomPassword, function (err, res) {
-            if(err){
+            if (err) {
                 return err
-            }else{
+            } else {
                 forgotPassword(res, email);
                 return res
-            };
+            }
+            ;
         });
 
 
         function sendMail(email, password) {
-
             var smtpTransport = nodemailer.createTransport({
                 service: "Gmail",  //Automatically sets host, port and connection security settings
                 auth: {
@@ -120,7 +111,7 @@ module.exports = function (app, passport) {
             smtpTransport.sendMail({
                 from: "<Smarthus2017@gmail.com>", //Sender address. Must be the same as authenticated user if using Gmail.
                 to: email, // receiver
-                subject: "Emailing with nodemailer",
+                subject: "New password", //TODO: Fiks internasjonalisering
                 text: "Hei! Ditt nye passord er: " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
             }, function (error, response) {  //callback
                 if (error) {
@@ -137,101 +128,184 @@ module.exports = function (app, passport) {
 
     app.get('/profile', function (req, res) {
         if (req.isAuthenticated()) {
-            res.render("profile", {
-                login: true,
-                loginUsername: req.user.email
-            });
+            function getUserInfo(callback) {
+                User.getUser(req.user.email, function (err, result) {
+                    if (callback) {
+                        res.render("profile", {
+                            login: true,
+                            loginUsername: req.user.email,
+                            userData: JSON.stringify(result)
+                        });
+                        callback(err, result);
+                    }
+                })
+            }
+
+            getUserInfo(function (err, result) {
+            })
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        };
+        }
+        ;
     });
 
-    app.post('/profile', function (req, res) {
 
-    });
-    //CALENDAR BEGINS HERE
-    app.get("/getUserEvents", function(req, res){
+    app.post('/updatePassword', function (req, res) {
         var email = req.user.email;
-        console.log("EMAIL: " + email);
-        function getEvents(callback){
-            calModal.getUserEvents(email, function(err, result){
-                if(callback){
-                    res.send(result);
-                    callback(err, result);
+        var oldPassword = req.body.oldPassword;
+        var newPassword = req.body.newPassword;
+
+        function validatePassword(callback) {
+            User.getPassword(email, function (err, pwFromDb) {
+                if (callback) {
+                    crypt(oldPassword, pwFromDb[0].password, function (err, result) { //Comparing oldPassword to current password with hashing.
+                        if (result === true) {
+                            hashPassword(newPassword, function (err, newPass) {
+                                if (err) {
+                                    return err
+                                } else {
+                                    User.updatePassword(newPass, email, function (err, result) {
+                                        if (callback) {
+                                            res.send(result);
+                                        }
+                                    });
+                                }
+                                ;
+                            });
+                        } else {
+                            res.send(null);
+                        }
+                    });
                 }
             })
         }
-        getEvents(function(err, result){
+
+        validatePassword(function (err, result) {
         });
     });
 
-    app.get("/getAllEvents", function(req, res){
-        function getAllEvents(callback){
-            calModal.getAllEvents(function (err, result) {
-                if(callback){
+    app.post("/updateProfile", function (req, res) {
+        console.log("UPDATE PROFILE ROUTER GETS CALLED.");
+        var email = req.user.email;
+        var firstname = req.body.firstname;
+        var surname = req.body.surname;
+        var address = req.body.address;
+        var postalCode = req.body.postalCode;
+        var city = req.body.city;
+        var newEmail = req.body.email;
+
+        function updateProfile(callback) {
+            User.updateProfile(firstname, surname, address, postalCode, city, newEmail, newEmail, email, function (err, result) {
+                callback(err, result);
+                res.send(result);
+            });
+
+            //Deserialize user if email is changed.
+            if (newEmail != email) {
+                passport.deserializeUser(function (error, done) {
+                    db.query("SELECT * FROM users WHERE email = ?", [newEmail], function (err, rows) {
+                        done(err, rows[0]);
+                    });
+                });
+            }
+        };
+        updateProfile(function (err, res) {
+        });
+    });
+
+
+    //CALENDAR BEGINS HERE
+    app.get("/getUserEvents", function (req, res) {
+        var email = req.user.email;
+        console.log("EMAIL: " + email);
+        function getEvents(callback) {
+            calModal.getUserEvents(email, function (err, result) {
+                if (callback) {
                     res.send(result);
                     callback(err, result);
                 }
             })
         }
-        getAllEvents(function(err, res){});
+
+        getEvents(function (err, result) {
+        });
     });
 
-    app.post("/addEvent", function(req, res){
+    app.get("/getAllEvents", function (req, res) {
+        function getAllEvents(callback) {
+            calModal.getAllEvents(function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+
+        getAllEvents(function (err, res) {
+        });
+    });
+
+    app.post("/addEvent", function (req, res) {
         var email = req.user.email;
         var title = req.body.title;
         var description = req.body.description;
         var start = req.body.start;
         var end = req.body.end;
 
-        function addEvent(callback){
-            calModal.addEvent(email, title,description, start, end, function(err, result){
-                if(callback){
+        function addEvent(callback) {
+            calModal.addEvent(email, title, description, start, end, function (err, result) {
+                if (callback) {
                     callback(err, result);
                 }
             })
         }
-        addEvent(function(err,res){});
+
+        addEvent(function (err, res) {
+        });
     });
 
-    app.post("/deleteEvent", function(req, res){
+    app.post("/deleteEvent", function (req, res) {
         var id = req.body.id;
 
-        function deleteEvent(callback){
-            calModal.deleteEvent(id, function(err, result){
-                callback(err,result);
+        function deleteEvent(callback) {
+            calModal.deleteEvent(id, function (err, result) {
+                callback(err, result);
             })
         }
-        deleteEvent(function (err,res) {})
+
+        deleteEvent(function (err, res) {
+        })
     });
 
-    app.post("/updateEvent", function(req, res){
+    app.post("/updateEvent", function (req, res) {
         var id = req.body.id;
         var start = req.body.start;
         var end = req.body.end;
         var title = req.body.title;
         var description = req.body.description
 
-        function updateEvent(callback){
-            calModal.updateEvent(title, description, start, end, id, function(err, result){
+        function updateEvent(callback) {
+            calModal.updateEvent(title, description, start, end, id, function (err, result) {
                 callback(err, result);
             });
         };
-        updateEvent(function(err, res){});
+        updateEvent(function (err, res) {
+        });
     });
 
-    app.post("/updateDate", function(req, res){
+    app.post("/updateDate", function (req, res) {
         var id = req.body.id;
         var start = req.body.start;
         var end = req.body.end;
 
-        function updateDate(callback){
-            calModal.updateDate(start, end, id, function(err, result){
+        function updateDate(callback) {
+            calModal.updateDate(start, end, id, function (err, result) {
                 callback(err, result);
             });
         };
-        updateDate(function(err, res){});
+        updateDate(function (err, res) {
+        });
     });
 
     // alarm
@@ -253,7 +327,8 @@ module.exports = function (app, passport) {
                 db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
                     if (callback) {
                         callback(err, result);
-                    };
+                    }
+                    ;
                 });
             }
         }
@@ -306,6 +381,15 @@ module.exports = function (app, passport) {
         });
     });
 
+    function hashPassword(password, callback) {
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                password = hash;
+                callback(err, password);
+
+            });
+        });
+    }
 
     function crypt(pw, pwFromDb, callback) {
         bcrypt.compare(pw, pwFromDb, function (err, result) { //Returns true if pw is ok.
