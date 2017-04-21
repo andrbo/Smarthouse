@@ -20,7 +20,7 @@ require('./middlewares/passport')(passport);
 
 // call socket.io to the app
 app.io = require('socket.io')();
-//app.io.alarmActivated = require('./middlewares/alarmActivated')(app.io);
+app.io.alarmActivated = require('./middlewares/alarmActivated')(app.io);
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 app.get('/', function (req, res) {
