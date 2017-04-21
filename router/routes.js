@@ -8,6 +8,7 @@ module.exports = function (app, passport) {
     var db = require('../middlewares/db');
     var bcrypt = require('bcryptjs');
     var calModal = require('../models/calendar');
+    var unitModel = require('../models/units');
 
     app.get('/', function (req, res) {
         res.render('home');
@@ -21,7 +22,8 @@ module.exports = function (app, passport) {
             });
         } else {
             res.render("home");
-        };
+        }
+        ;
     });
 
     app.get('/about', function (req, res) {
@@ -33,7 +35,8 @@ module.exports = function (app, passport) {
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        };
+        }
+        ;
     });
 
     app.get('/security', function (req, res) {
@@ -45,7 +48,21 @@ module.exports = function (app, passport) {
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        };
+        }
+        ;
+    });
+
+    app.get('/lights', function (req, res) {
+        if (req.isAuthenticated()) {
+            res.render("lights", {
+                login: true,
+                loginUsername: req.user.email
+            });
+        } else {
+            req.flash("error_msg", res.__('Login-Required'));
+            res.redirect("home");
+        }
+        ;
     });
 
     // process the login form
@@ -99,12 +116,13 @@ module.exports = function (app, passport) {
         }
 
         hashPassword(randomPassword, function (err, res) {
-            if(err){
+            if (err) {
                 return err
-            }else{
+            } else {
                 forgotPassword(res, email);
                 return res
-            };
+            }
+            ;
         });
 
 
@@ -144,94 +162,104 @@ module.exports = function (app, passport) {
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
-        };
+        }
+        ;
     });
 
     app.post('/profile', function (req, res) {
 
     });
     //CALENDAR BEGINS HERE
-    app.get("/getUserEvents", function(req, res){
+    app.get("/getUserEvents", function (req, res) {
         var email = req.user.email;
         console.log("EMAIL: " + email);
-        function getEvents(callback){
-            calModal.getUserEvents(email, function(err, result){
-                if(callback){
+        function getEvents(callback) {
+            calModal.getUserEvents(email, function (err, result) {
+                if (callback) {
                     res.send(result);
                     callback(err, result);
                 }
             })
         }
-        getEvents(function(err, result){
+
+        getEvents(function (err, result) {
         });
     });
 
-    app.get("/getAllEvents", function(req, res){
-        function getAllEvents(callback){
+    app.get("/getAllEvents", function (req, res) {
+        function getAllEvents(callback) {
             calModal.getAllEvents(function (err, result) {
-                if(callback){
+                if (callback) {
                     res.send(result);
                     callback(err, result);
                 }
             })
         }
-        getAllEvents(function(err, res){});
+
+        getAllEvents(function (err, res) {
+        });
     });
 
-    app.post("/addEvent", function(req, res){
+    app.post("/addEvent", function (req, res) {
         var email = req.user.email;
         var title = req.body.title;
         var description = req.body.description;
         var start = req.body.start;
         var end = req.body.end;
 
-        function addEvent(callback){
-            calModal.addEvent(email, title,description, start, end, function(err, result){
-                if(callback){
+        function addEvent(callback) {
+            calModal.addEvent(email, title, description, start, end, function (err, result) {
+                if (callback) {
                     callback(err, result);
                 }
             })
         }
-        addEvent(function(err,res){});
+
+        addEvent(function (err, res) {
+        });
     });
 
-    app.post("/deleteEvent", function(req, res){
+    app.post("/deleteEvent", function (req, res) {
         var id = req.body.id;
 
-        function deleteEvent(callback){
-            calModal.deleteEvent(id, function(err, result){
-                callback(err,result);
+        function deleteEvent(callback) {
+            calModal.deleteEvent(id, function (err, result) {
+                callback(err, result);
             })
         }
-        deleteEvent(function (err,res) {})
+
+        deleteEvent(function (err, res) {
+        })
     });
 
-    app.post("/updateEvent", function(req, res){
+    app.post("/updateEvent", function (req, res) {
         var id = req.body.id;
         var start = req.body.start;
         var end = req.body.end;
         var title = req.body.title;
         var description = req.body.description
 
-        function updateEvent(callback){
-            calModal.updateEvent(title, description, start, end, id, function(err, result){
+        function updateEvent(callback) {
+            calModal.updateEvent(title, description, start, end, id, function (err, result) {
                 callback(err, result);
             });
         };
-        updateEvent(function(err, res){});
+        updateEvent(function (err, res) {
+        });
     });
 
-    app.post("/updateDate", function(req, res){
+    app.post("/updateDate", function (req, res) {
         var id = req.body.id;
         var start = req.body.start;
         var end = req.body.end;
 
-        function updateDate(callback){
-            calModal.updateDate(start, end, id, function(err, result){
+        function updateDate(callback) {
+            calModal.updateDate(start, end, id, function (err, result) {
                 callback(err, result);
             });
         };
-        updateDate(function(err, res){});
+        updateDate(function (err, res) {
+        });
     });
 
     // alarm
@@ -253,7 +281,8 @@ module.exports = function (app, passport) {
                 db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
                     if (callback) {
                         callback(err, result);
-                    };
+                    }
+                    ;
                 });
             }
         }
@@ -314,4 +343,70 @@ module.exports = function (app, passport) {
             }
         })
     };
+
+
+    //Units
+    app.post('/getUnits', function (req, res) {
+        function getUnits(callback) {
+            unitModel.getUnits(function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+                ;
+            });
+        };
+        getUnits(function (err, res) {
+
+        });
+    });
+
+    app.post('/addUnit', function (req, res) {
+        var description = req.body.description.trim();
+        var groupid = req.body.groupname.trim();
+        function addUnit(callback) {
+            unitModel.addUnit(description, groupid, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+                ;
+            });
+        };
+        addUnit(function (err, res) {
+
+        });
+    });
+
+
+    app.post('/addGroup', function (req, res) {
+
+        function addGroup(callback) {
+            var groupName = req.body.name;
+            unitModel.createGroup(groupName, function (err, result) {
+                if (callback) {
+                    callback(err, result);
+                    res.send(result);
+                }
+            })
+        }
+
+        addGroup(function (err, res) {
+        });
+    });
+
+
+    app.post("/getGroups", function (req, res) {
+        function getGroups(callback) {
+            unitModel.listGroup(function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+
+        getGroups(function (err, res) {
+        });
+    });
 };

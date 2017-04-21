@@ -1,0 +1,156 @@
+<div class=" jumbotron text-center">
+    <div class="container">
+        <table class="display table table-bordered" id="unitTable">
+            <thead>
+            <tr>
+                <th data-field="id">{{__ 'Light-UnitNo'}}</th>
+                <th data-field="description">{{__ 'Light-Description'}}</th>
+                <th data-field="state">{{__ 'Light-State'}}</th>
+                <th>{{__ 'Light-Toggle'}}</th>
+                <th data-field="groupid">{{__ 'Light-Group'}}</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <button class=" btn-primary" id="addDeviceBtn">{{__ 'Light-AddDevice'}}</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add device modal -->
+<div class="modal fade" id="addDeviceModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><span class="glyphicon glyphicon-cog"></span>{{__ "Light-AddDevice"}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="descriptInputnput" class="col-md-2 col-form-label">{{__ "Light-Description"}}</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="{{__ "Light-Description"}}"
+                               id="descriptInput">
+                    </div>
+
+                </div>
+                <br>
+                <!--
+                <div class="form-group row">
+                    <label for="remoteDropdown" class="col-md-2 col-form-label">{{__ "Light-Remote"}}</label>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a  id= "remoteDropSelected" class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">{{__
+                                    "Light-SelectRemote"}}
+                                <span class="caret"></span></a>-->
+                            <!-- Må oppdateres til å hente verdier fra DB -->
+                          <!--  <ul class="dropdown-menu">
+                                <li><a href="#">Fjern1</a></li>
+                                <li><a href="#">Fjern2</a></li>
+                                <li><a href="#">Fjern3</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class=col-md-4>
+                        <button class="btn-default">{{__ "Light-AddRemote"}}</button>
+                    </div>
+                </div>
+                <br>
+    -->
+                <!--
+                <div class="form-group row">
+                    <label for="setUnitCode" class="col-md-2 col-form-label">{{__ "Light-UnitNo"}}</label>
+                    <div class="col-md-6">
+                        <input id="setUnitCode" type="text" class="form-control"
+                               placeholder="{{__ "Light-SetUnitNr"}}">
+                    </div>
+                </div>
+                <br>
+                -->
+                <div class="form-group row">
+                    <h4 class="col-md-6"> {{__ "Light-AddToGroup"}}</h4>
+                </div>
+                <div class="form-group row">
+                    <label for="groupDropdown" class="col-md-2 col-form-label">{{__ "Light-SelectGroup"}}</label>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a  id= "groupDropSelected" class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+                                {{__ "Light-SelectGroup"}}
+                                <span class="caret"></span></a>
+                            <!-- Må oppdateres til å hente verdier fra DB -->
+                            <ul id = "groupValues" class="dropdown-menu">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <button id="addNewGroup"><span class="glyphicon glyphicon-plus"></span>{{__
+                                "Light-AddNewGroup"}}</button>
+                    </div>
+                    <div id="newGroupInput" class="col-md-5" style="display: none">
+                        <input id="newGroup" type="text" class="form-control" placeholder="{{__ "Light-NewGroup"}}">
+                    </div>
+                    <div id="groupErr" class="col-md-5" style="display: none">
+                        <p style="color: red">{{__ "Light-GroupError"}}</p>
+                    </div>
+                    <div id="addNewGroupBtns" class="col-md-4" style="display: none">
+                        <button id="saveNewGroup" class="btn-success">{{__ "Light-Save"}}</button>
+                        <button id="cancelNewGroup" class="btn-danger">{{__ "Light-Cancel"}}</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelAddDevice" class="btn btn-default" data-dismiss="modal">{{__
+                        "Light-Cancel"}}</button>
+                <button type="button" id="activateNewDevice" class="btn btn-save">{{__
+                        "Light-Save"}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Save and pair device modal -->
+<div class="modal fade" id="saveDeviceModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><span class="glyphicon glyphicon-transfer"></span>{{__ "Light-SaveDevicePrompt"}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="jumbotron">
+                    <p>{{__ "Light-SaveDeviceSummary"}} </p>
+                    <br>
+                    <br>
+                    <ul>
+                        <li>{{__ "Light-Description"}}:</li>
+                        <p id="sumDescript"></p>
+                        <li>{{__ "Light-Group"}}:</li>
+                        <p id="sumGroup"></p>
+                    </ul>
+                    <br>
+                    <br>
+                    <button id="saveAndPair" class="btn-success">{{__ "Light-Save"}}</button>
+                    <button id="cancelSavePair" class="btn-danger" data-dismiss="modal">{{__ "Light-Cancel"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+</div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/lightScript.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>

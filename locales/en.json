@@ -3,6 +3,7 @@
     "Menu-About": "About us",
     "Menu-Security": "Security",
     "Menu-Products":"Products",
+    "Menu-Lights": "Lights",
 
     "Login-Username": "E-mail",
     "Login-Button": "Login",
@@ -83,6 +84,26 @@
     "Activate-ActAlarm": "Activate",
     "Cancel-DeacAlarm": "Cancel",
     "Activate-DeacAlarm":"Deactivate",
+
+    "Light-Description":"Description",
+    "Light-State":"State",
+    "Light-Toggle":"On/Off",
+    "Light-Group":"Group",
+    "Light-Remote": "Remote",
+    "Light-UnitNo": "Unit no.",
+    "Light-AddDevice": "Add device",
+    "Light-SelectRemote": "Select remote to use",
+    "Light-AddRemote": "Add new remote",
+    "Light-SetUnitNr": "Set unit number for device",
+    "Light-AddToGroup": "Add device to a group?",
+    "Light-SelectGroup": "Select group",
+    "Light-AddNewGroup": "Add new group",
+    "Light-NewGroup": "Name off the new group",
+    "Light-GroupError": "Group already exists",
+    "Light-Cancel":"Cancel",
+    "Light-Save":"Save",
+    "Light-SaveDevicePrompt":"Add device to system and pair",
+    "Light-SaveDeviceSummary": "Adding the device with settings listed below to the system. Put reciever into paring mode, and click save ",
 
 
 

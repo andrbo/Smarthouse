@@ -3,6 +3,7 @@
 	"Menu-About": "Om oss",
 	"Menu-Security": "Sikkerhet",
 	"Menu-Products":"Produkter",
+	"Menu-Lights": "Lys",
 
 	"Login-Username": "E-mail",
 	"Login-Button": "Logg inn",
@@ -78,6 +79,29 @@
 	"Activate-ActAlarm": "Aktiver",
 	"Cancel-DeacAlarm": "Avbryt",
 	"Activate-DeacAlarm":"Deaktiver",
+
+	"Light-Description":"Beskrivelse",
+	"Light-State":"Status",
+	"Light-Toggle":"Av/På",
+	"Light-Group":"Gruppe",
+	"Light-Remote": "Fjernkontroll",
+	"Light-UnitNo": "Unit nr.",
+	"Light-AddDevice": "Legg til enhet",
+	"Light-SelectRemote": "Velg fjernkontroll",
+	"Light-AddRemote": "Legg til ny fjernkontroll",
+	"Light-SetUnitNr": "Legg til enhetsnummer for enhet",
+	"Light-AddToGroup": "Vil du legge enheten til en gruppe?",
+	"Light-SelectGroup": "Velg gruppe",
+	"Light-AddNewGroup": "Legg til en ny gruppe",
+	"Light-GroupError": "Gruppen eksisterer allerede",
+	"Light-NewGroup": "Navnet for den nye gruppen",
+	"Light-SaveNewGroup": "Lagre",
+	"Light-CancelNewGroup": "Avbryt",
+	"Light-CancelDevice":"Avbryt",
+	"Light-SaveDevice":"Lagre",
+	"Light-SaveDevicePrompt":"Legg enheten til i systemet og par med enhet",
+	"Light-SaveDeviceSummary": "Legger til enheten med instillingene listet nedenfor i systemet. Sett mottakeren i paringsmodus og klikk lagre.",
+
 
 	"Calendar-Events": "Hendelser"
 
