@@ -50,7 +50,7 @@ module.exports = function (app, passport) {
             res.redirect("home");
         }
         ;
-<<<<<<< HEAD
+
     });
 
     app.get('/lights', function (req, res) {
@@ -64,8 +64,6 @@ module.exports = function (app, passport) {
             res.redirect("home");
         }
         ;
-=======
->>>>>>> ae9c11a81e9517fca01ce35d008d37d63806dded
     });
 
     // process the login form
