@@ -20,7 +20,7 @@ $(function () {
     $.post('/getGroups').done(function (data) {
         var dropdown = $("#groupValues");
         for (var i = 0; i < data.length; i++) {
-            dropdown.append("<li><a href='#'>" + data[i].groupname + "</a></li>");
+            dropdown.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
         }
     });
     // lister ut enheter i tabell
@@ -29,7 +29,7 @@ $(function () {
             data: data,
             insertRow: '<button>click</button>'
         });
-    })
+    });
 });
 
 $('#unitTable td.row-link').each(function(){
@@ -102,10 +102,22 @@ $('#activateNewDevice').click(function () {
     $('#sumDescript').html(description);
     $('#sumGroup').html(group);
 });
+$("#groupDropSelected").click(function () {
+    $('.listGroups').click(function () {
+        var selText = $(this).text();
+        console.log("***********************************" + selText);
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        //$("#groupDropdownLabel").html(selText);
+
+    });
+});
 
 $('#saveAndPair').click(function () {
     var description = $('#descriptInput').val().trim();
     var groupname = $('#groupDropSelected').text();
+    if(groupname == "Select group"){
+        groupname == "";
+    };
     $.post('/addUnit', {
         description: description,
         groupname: groupname
@@ -118,7 +130,4 @@ $('#saveAndPair').click(function () {
     });
 });
 
-$('#groupValues li a').click(function () {
-    var selText = $(this).text();
-    $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-});
+

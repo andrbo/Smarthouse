@@ -36,43 +36,12 @@
 
                 </div>
                 <br>
-                <!--
-                <div class="form-group row">
-                    <label for="remoteDropdown" class="col-md-2 col-form-label">{{__ "Light-Remote"}}</label>
-                    <div class="col-md-6">
-                        <div class="btn-group">
-                            <a  id= "remoteDropSelected" class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">{{__
-                                    "Light-SelectRemote"}}
-                                <span class="caret"></span></a>-->
-                            <!-- Må oppdateres til å hente verdier fra DB -->
-                          <!--  <ul class="dropdown-menu">
-                                <li><a href="#">Fjern1</a></li>
-                                <li><a href="#">Fjern2</a></li>
-                                <li><a href="#">Fjern3</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class=col-md-4>
-                        <button class="btn-default">{{__ "Light-AddRemote"}}</button>
-                    </div>
-                </div>
-                <br>
-    -->
-                <!--
-                <div class="form-group row">
-                    <label for="setUnitCode" class="col-md-2 col-form-label">{{__ "Light-UnitNo"}}</label>
-                    <div class="col-md-6">
-                        <input id="setUnitCode" type="text" class="form-control"
-                               placeholder="{{__ "Light-SetUnitNr"}}">
-                    </div>
-                </div>
-                <br>
-                -->
+
                 <div class="form-group row">
                     <h4 class="col-md-6"> {{__ "Light-AddToGroup"}}</h4>
                 </div>
                 <div class="form-group row">
-                    <label for="groupDropdown" class="col-md-2 col-form-label">{{__ "Light-SelectGroup"}}</label>
+                    <label id="groupDropdownLabel" class="col-md-2 col-form-label">{{__ "Light-SelectGroup"}}</label>
                     <div class="col-md-6">
                         <div class="btn-group">
                             <a  id= "groupDropSelected" class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
@@ -142,8 +111,7 @@
     <div class="modal-footer">
     </div>
 </div>
-</div>
-</div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/lightScript.js"></script>
 <!-- Latest compiled and minified CSS -->
