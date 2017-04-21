@@ -50,6 +50,7 @@ module.exports = function (app, passport) {
             res.redirect("home");
         }
         ;
+<<<<<<< HEAD
     });
 
     app.get('/lights', function (req, res) {
@@ -63,6 +64,8 @@ module.exports = function (app, passport) {
             res.redirect("home");
         }
         ;
+=======
+>>>>>>> ae9c11a81e9517fca01ce35d008d37d63806dded
     });
 
     // process the login form
@@ -79,30 +82,18 @@ module.exports = function (app, passport) {
     }));
 
     app.get('/logout', function (req, res) {
-        console.log("Logger ut");
         req.logout();
+        req.flash("success_msg", res.__('Logout-Success'));
         res.redirect('/');
     });
 
     app.post('/forgot', function (req, res) {
         var email = req.body.forgotEmail;
-        var val = validator.isEmail(email);
 
         var randomPassword = generator.generate({
             length: 10,
             numbers: true
-
         });
-
-        function hashPassword(password, callback) {
-            bcrypt.genSalt(10, function (err, salt) {
-                bcrypt.hash(password, salt, function (err, hash) {
-                    password = hash;
-                    callback(err, password);
-
-                });
-            });
-        }
 
         function forgotPassword(password, email) {
             User.forgotPassword(password, email, function (err, result) {
@@ -127,7 +118,6 @@ module.exports = function (app, passport) {
 
 
         function sendMail(email, password) {
-
             var smtpTransport = nodemailer.createTransport({
                 service: "Gmail",  //Automatically sets host, port and connection security settings
                 auth: {
@@ -138,7 +128,7 @@ module.exports = function (app, passport) {
             smtpTransport.sendMail({
                 from: "<Smarthus2017@gmail.com>", //Sender address. Must be the same as authenticated user if using Gmail.
                 to: email, // receiver
-                subject: "Emailing with nodemailer",
+                subject: "New password", //TODO: Fiks internasjonalisering
                 text: "Hei! Ditt nye passord er: " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
             }, function (error, response) {  //callback
                 if (error) {
@@ -155,10 +145,21 @@ module.exports = function (app, passport) {
 
     app.get('/profile', function (req, res) {
         if (req.isAuthenticated()) {
-            res.render("profile", {
-                login: true,
-                loginUsername: req.user.email
-            });
+            function getUserInfo(callback) {
+                User.getUser(req.user.email, function (err, result) {
+                    if (callback) {
+                        res.render("profile", {
+                            login: true,
+                            loginUsername: req.user.email,
+                            userData: JSON.stringify(result)
+                        });
+                        callback(err, result);
+                    }
+                })
+            }
+
+            getUserInfo(function (err, result) {
+            })
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
@@ -166,9 +167,71 @@ module.exports = function (app, passport) {
         ;
     });
 
-    app.post('/profile', function (req, res) {
 
+    app.post('/updatePassword', function (req, res) {
+        var email = req.user.email;
+        var oldPassword = req.body.oldPassword;
+        var newPassword = req.body.newPassword;
+
+        function validatePassword(callback) {
+            User.getPassword(email, function (err, pwFromDb) {
+                if (callback) {
+                    crypt(oldPassword, pwFromDb[0].password, function (err, result) { //Comparing oldPassword to current password with hashing.
+                        if (result === true) {
+                            hashPassword(newPassword, function (err, newPass) {
+                                if (err) {
+                                    return err
+                                } else {
+                                    User.updatePassword(newPass, email, function (err, result) {
+                                        if (callback) {
+                                            res.send(result);
+                                        }
+                                    });
+                                }
+                                ;
+                            });
+                        } else {
+                            res.send(null);
+                        }
+                    });
+                }
+            })
+        }
+
+        validatePassword(function (err, result) {
+        });
     });
+
+    app.post("/updateProfile", function (req, res) {
+        console.log("UPDATE PROFILE ROUTER GETS CALLED.");
+        var email = req.user.email;
+        var firstname = req.body.firstname;
+        var surname = req.body.surname;
+        var address = req.body.address;
+        var postalCode = req.body.postalCode;
+        var city = req.body.city;
+        var newEmail = req.body.email;
+
+        function updateProfile(callback) {
+            User.updateProfile(firstname, surname, address, postalCode, city, newEmail, newEmail, email, function (err, result) {
+                callback(err, result);
+                res.send(result);
+            });
+
+            //Deserialize user if email is changed.
+            if (newEmail != email) {
+                passport.deserializeUser(function (error, done) {
+                    db.query("SELECT * FROM users WHERE email = ?", [newEmail], function (err, rows) {
+                        done(err, rows[0]);
+                    });
+                });
+            }
+        };
+        updateProfile(function (err, res) {
+        });
+    });
+
+
     //CALENDAR BEGINS HERE
     app.get("/getUserEvents", function (req, res) {
         var email = req.user.email;
@@ -335,6 +398,15 @@ module.exports = function (app, passport) {
         });
     });
 
+    function hashPassword(password, callback) {
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(password, salt, function (err, hash) {
+                password = hash;
+                callback(err, password);
+
+            });
+        });
+    }
 
     function crypt(pw, pwFromDb, callback) {
         bcrypt.compare(pw, pwFromDb, function (err, result) { //Returns true if pw is ok.

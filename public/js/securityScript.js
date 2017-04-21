@@ -180,7 +180,8 @@ $('#btnActivateAlarm').click(function () {
             $.post('/alarmToggle', {alarm: 'on'});
             buttonState(1);
             updateToggleState();
-            socket.emit('alarmActivated');
+            socket.emit('alarmToggle', {state: 1});
+            window.location.reload(true);
         } else {
             $('#pwErrorAct').show();
         }
@@ -203,13 +204,13 @@ $('#btnDeactivateAlarm').click(function () {
         var pwCheck = JSON.stringify(data);
         if (pwCheck === '"ok"') {
             $.post('/alarmToggle', {alarm: 'off'});
-            buttonState(0);
-            updateToggleState();
             $('#deactivateAlarmPw').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            socket.emit('alarmDeactivated');
-
+            buttonState(0);
+            updateToggleState();
+            socket.emit('alarmToggle', {state: 0});
+            window.location.reload(true);
         } else {
             $('#pwErrorDeac').show();
         }

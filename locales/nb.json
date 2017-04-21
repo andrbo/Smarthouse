@@ -5,9 +5,7 @@
 	"Menu-Products":"Produkter",
 	"Menu-Lights": "Lys",
 
-	"Login-Username": "E-mail",
 	"Login-Button": "Logg inn",
-	"Login-Password": "Passord",
 	"Login-Forgot-Password": "Glemt passordet?",
 	"Login-Back": "Tilbake til login",
 
@@ -15,13 +13,30 @@
 	"User-Profile": "Profil",
 	"User-Logout":"Logg ut",
 
-	"Register-Firstname": "Fornavn",
-	"Register-Surname": "Etternavn",
-	"Register-Verification": "Verifikasjonskode",
-	"Register-Email": "Email",
-	"Register-Password": "Passord",
-	"Register-Confirm-Password": "Bekreft passord",
+	"Logout-Success": "Logget ut",
+
+	"Firstname": "Fornavn",
+	"Surname": "Etternavn",
+	"Verification": "Verifikasjonskode",
+	"Email": "Email",
+	"Password": "Passord",
+	"Confirm-Password": "Bekreft passord",
 	"Register-Button": "Registrer",
+
+	"Profile-Change-Password": "Bytt passord",
+	"Profile-Update": "Ender profil",
+	"Profile-My-Profile": "My profile",
+	"Profile-Old-Password": "Gammelt passord",
+	"Profile-New-Password": "Nytt passord",
+	"Profile-Password-Length": "Password must be at least 6 characters long",
+	"Profile-Password-Mismatch": "Passwords does not match",
+	"Profile-Changed-Success": "Profil oppdatert",
+	"Profile-Changed-Failure": "Kunne ikke oppdatere profil",
+	"Profile-Password-Changed-Success": "Passord oppdatert",
+	"Profile-Password-Changed-Failure": "Kunne ikke oppdatere passord",
+
+	"Field-Not-Empty":"Field can not be empty",
+	"Field-Required": "Feltet er påkrevd",
 
 	"Inside": "Inne",
 	"Hum-Inside": "Luftfuktighet: ",

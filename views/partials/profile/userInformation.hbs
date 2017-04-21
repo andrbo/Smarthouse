@@ -1,0 +1,90 @@
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{__ "Profile-My-Profile"}}</h3>
+        </div>
+        <div class="panel-body"> <!--TODO:Fiks bilde -->
+            <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"><img alt="User Pic" src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" class="img-circle img-responsive"></div>
+
+                <div class="col-md-9 col-lg-9">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>{{__ "Firstname"}}:</td>
+                            <td id="info-firstname"></td>
+                        </tr>
+                        <tr>
+                            <td>{{__ "Surname"}}:</td>
+                            <td id="info-surname"></td>
+                        </tr>
+                        <tr>
+                            <td>{{__ "Address"}}:</td>
+                            <td id="info-address"></td>
+                        </tr>
+
+                        <tr>
+                        <tr>
+                            <td>{{__ "PostalCode"}}:</td>
+                            <td id="info-postalCode"></td>
+                        </tr>
+                        <tr>
+                            <td>{{__ "City"}}:</td>
+                            <td id="info-city"></td>
+                        </tr>
+                        <tr>
+                            <td>{{__ "Email"}}:</td>
+                            <td id="info-email"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button id="changePasswordButton" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> {{__ "Profile-Change-Password"}}</button>
+            <button id="updateProfileButton" type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i> {{__ "Profile-Update"}}</button>
+        </div>
+
+    </div>
+</div>
+
+{{> profile/updateProfile}}
+
+<script>
+    $.get("/profile", {
+        success: function () {
+            var dataReceived = "{{userData}}";
+            var data = dataReceived.replace(/&quot;/g, '"'); //Need to do this to escape HTML.
+            var dataParsed = JSON.parse(data);
+
+            $("#info-firstname").html(dataParsed[0].firstname);
+            $("#firstname").val(dataParsed[0].firstname);
+
+
+            $("#info-surname").html(dataParsed[0].surname);
+            $("#surname").val(dataParsed[0].surname);
+
+            $("#info-address").html(dataParsed[0].address);
+            $("#address").val(dataParsed[0].address);
+
+            $("#info-postalCode").html(dataParsed[0].postalCode);
+            $("#postalCode").val(dataParsed[0].postalCode);
+
+            $("#info-city").html(dataParsed[0].city);
+            $("#city").val(dataParsed[0].city);
+
+            $("#info-email").html(dataParsed[0].email);
+            $("#email").val(dataParsed[0].email);
+        }
+    });
+
+    $("#changePasswordButton").click(function () {
+        $("#updatePasswordModal").modal("show");
+    });
+
+
+    $("#updateProfileButton").click(function () {
+        $("#updateProfileModal").modal("show");
+    });
+</script>

@@ -1,0 +1,54 @@
+<div class="container">
+    <div class=col-md-12>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Alarm:</h3>
+                <button id="toggle" type="button" onclick="alarmToggle()">{{__ "Act-Alarmbtn"}}</button>
+                <div class="modal fade" id="activateAlarmPw">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4><span class="glyphicon glyphicon-lock"></span>{{__ "Act-Alarm"}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>{{__ "ActAlarm-Pw"}}</p>
+                                <input id="pwAct" type="password" placeholder="*******" style="color: #0f0f0f">
+                                <div class="alert alert-error" id="pwErrorAct">
+                                    <span>
+                                         <p class="pwError">{{__ "Alarm-PwErr"}}</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelAcAlarm" class="btn btn-default">{{__ "Cancel-ActAlarm"}}</button>
+                                <button type="button" id="btnActivateAlarm" class="btn btn-save">{{__ "Activate-ActAlarm"}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deactivateAlarmPw">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4><i class="fa fa-key" style="font-size:50px;"></i></span>{{__ "Deac-Alarm"}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>{{__ "DeacAlarm-Pw"}}</p>
+                                <input id="pwDeac" type="password" placeholder="*******" style="color: #0f0f0f">
+                                <div class="alert alert-error" id="pwErrorDeac">
+                                     <span>
+                                            <p class="pwError">{{__ "Alarm-PwErr"}}</p>
+                                     </span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnCancelDeacAlarm" class="btn btn-default">{{__ "Cancel-DeacAlarm"}}</button>
+                                <button type="button" id="btnDeactivateAlarm" class="btn btn-save">{{__ "Activate-DeacAlarm"}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

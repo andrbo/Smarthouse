@@ -34,4 +34,37 @@ console.log("values " + values);
     })
 };
 
-//TODO: opprett en exist-funksjon.
+exports.getPassword=function(email, callback){
+    var sql = 'SELECT password FROM users WHERE email = ?';
+    db.query(sql, email, function (err, res) {
+        if(callback){
+            callback(err, res);
+        };
+    })
+};
+
+exports.updatePassword=function(newPassword, email, callback){
+    var values = [newPassword, email];
+    var sql = 'UPDATE users SET password = ? WHERE email = ?';
+    db.query(sql,values, function (err, res) {
+        if(callback){
+            callback(err, res);
+        };
+    })
+};
+
+exports.updateProfile = function (firstname, surname, address, postalCode, city, email, email2, currentMail, callback) {
+    var values = [firstname, surname, address, postalCode, city, email, email2, currentMail];
+    var sql = 'UPDATE users SET firstname = ?, surname = ?, address = ?, postalCode = ?, city = ?, email = ? WHERE email = ?';
+
+    var sql = 'UPDATE users JOIN events ON users.email = events.email ' +
+        'SET users.firstname = ?, users.surname = ?, users.address = ?, users.postalCode = ?, users.city = ?, users.email = ?, events.email = ? ' +
+        'WHERE users.email = ?';
+
+    db.query(sql, values, function (err, result) {
+        if (callback) {
+            callback(err, result);
+        };
+    });
+};
+
