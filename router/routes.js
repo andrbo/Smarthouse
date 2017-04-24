@@ -298,13 +298,14 @@ module.exports = function (app, passport) {
         var start = req.body.start;
         var end = req.body.end;
         var title = req.body.title;
-        var description = req.body.description
+        var description = req.body.description;
 
         function updateEvent(callback) {
             calModal.updateEvent(title, description, start, end, id, function (err, result) {
                 callback(err, result);
             });
-        };
+        }
+
         updateEvent(function (err, res) {
         });
     });
@@ -318,7 +319,8 @@ module.exports = function (app, passport) {
             calModal.updateDate(start, end, id, function (err, result) {
                 callback(err, result);
             });
-        };
+        }
+
         updateDate(function (err, res) {
         });
     });
@@ -326,46 +328,37 @@ module.exports = function (app, passport) {
     // alarm
     app.post('/alarmToggle', function (req, res) {
         var activated = req.body.alarm;
-        console.log('test' + activated);
+        console.log('ROUTES ACTIVATED STATE' + activated);
         function toggleAlarm(id, callback) {
-            if (activated == "on") {
-                console.log('skal skrive 1 til db');
+            if (activated == "true") {
                 db.query('UPDATE sensors SET value=1 WHERE id=?', id, function (err, result) {
                     if (callback) {
-                        console.log(err);
                         callback(err, result);
                     }
-                    ;
+
                 });
             } else {
-                console.log("KJØRER ELSE.");
                 db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
                     if (callback) {
                         callback(err, result);
                     }
-                    ;
+
                 });
             }
         }
-
-        toggleAlarm(1, function (err, result) {
-        })
+        toggleAlarm(1, function (err, result) {})
     });
 
     app.post("/alarmState", function (req, res) {
         function getState(id, callback) {
             db.query("SELECT * FROM sensors WHERE id = ?", id, function (err, result) {
                 if (callback) {
-                    console.log("ERROR ALARM STATE: " + err);
-                    var string = JSON.stringify(result);
-                    var parse = JSON.parse(string);
                     callback(err, result);
-                    res.send(parse);
+                    res.send(result);
                 }
             });
-        };
-        getState(1, function (err, result) {
-        });
+        }
+        getState(1, function (err, result) {});
     });
 
     app.post('/alarmPw', function (req, res) {
@@ -374,24 +367,21 @@ module.exports = function (app, passport) {
         function getPassword(id, callback) {
             db.query("SELECT * FROM alarm WHERE id = ?", id, function (err, result) {
                 if (callback) {
-                    console.log("ERROR ALARM PW: " + err);
-                    var string = JSON.stringify(result);
-                    var parse = JSON.parse(string);
-                    var pwFromdb = parse[0].alarmpw;
+                    var pwFromdb = result[0].alarmpw;
                     console.log('parse' + pwFromdb);
                     crypt(input, pwFromdb, function (err, result) {
                         if (result === true) {
                             console.log('PW rett');
-                            res.send('ok');
+                            res.send(true);
                         } else {
                             console.log("PW feil");
-                            res.send('error');
+                            res.send(false);
                         }
                     });
                 }
-                ;
             });
-        };
+        }
+
         getPassword(1, function (err, result) {
         });
     });
@@ -412,7 +402,7 @@ module.exports = function (app, passport) {
                 callback(err, result);
             }
         })
-    };
+    }
 
 
     //Units
@@ -423,9 +413,10 @@ module.exports = function (app, passport) {
                     res.send(result);
                     callback(err, result);
                 }
-                ;
+
             });
-        };
+        }
+
         getUnits(function (err, res) {
 
         });
@@ -434,15 +425,17 @@ module.exports = function (app, passport) {
     app.post('/addUnit', function (req, res) {
         var description = req.body.description.trim();
         var groupid = req.body.groupname.trim();
+
         function addUnit(callback) {
             unitModel.addUnit(description, groupid, function (err, result) {
                 if (callback) {
                     res.send(result);
                     callback(err, result);
                 }
-                ;
+
             });
-        };
+        }
+
         addUnit(function (err, res) {
 
         });
