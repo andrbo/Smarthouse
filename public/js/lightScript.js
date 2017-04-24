@@ -64,7 +64,7 @@ $(function () {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                socket.emit('lightOff', {unitno: unitId});
+                socket.emit('deviceOff', {unitno: unitId});
                 window.location.reload(true);
             });
         } else {
@@ -74,7 +74,7 @@ $(function () {
                 state: newState
             }).done(function (data) {
                 console.log('lampe er av, skrur den på');
-                socket.emit('lightOn', {unitno: unitId});
+                socket.emit('deviceOn', {unitno: unitId});
                 window.location.reload(true);
             });
         }
