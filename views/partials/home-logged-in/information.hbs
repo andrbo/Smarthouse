@@ -1,0 +1,42 @@
+<div class="col-md-12">
+    <div id="infoPanel" class="panel-group col-md-6">
+        <div class="panel panel-info">
+            <div id="insideTemp" class="col-md-12 panel-heading"><h4>{{__ "Inside"}}</h4></div>
+            <div class="panel-body">
+                <!--<script src="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/ekstern_boks_stripe.js"></script>
+                <noscript><a href="http://www.yr.no/sted/Norge/Sør-Trøndelag/Trondheim/Trondheim/">yr.no:
+                    Værvarsel for Trondheim</a></noscript> -->
+                <div class="row">
+
+                    <div id="temp" class="col-md-6">
+                        <h6>{{__ "Temp-Inside"}}</h6>
+                        <h6 id="tempValue"></h6>
+                    </div>
+                    <div id="hum" class="col-md-6">
+                        <h6>{{__ "Hum-Inside"}}</h6>
+                        <h6 id="humValue"></h6>
+                    </div>
+                </div>
+                <div id="soilWarning" style="display: none;">
+                    <h4><i class="fa fa-leaf" style="font-size:50px;"></i></span>{{__ "Water-Plant"}}</h4>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="panel panel-warning">
+            <div id="insideTemp" class="col-md-12 panel-heading"><h4>{{__ "Inside"}}</h4></div>
+            <!--<div class="panel-body"> {{__ "Calendar-Event"}}</div>-->
+            <table id="calendarEventList" class="display" cellspacing="0" width="100%"></table>
+        </div>
+    </div>
+    <div class="panel panel-default col-md-6 pull-right">
+        <div id='calendar'></div>
+    </div>
+</div>
+
+<style type="text/css">
+    #infoPanel {
+        width: 49.5%
+    }
+</style>

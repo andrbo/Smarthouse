@@ -1,12 +1,44 @@
 <style type="text/css">
-    ul.nav a:hover {
-        color: #555 !important;
-        background-color: #e7e7e7 !important;
+
+    .navbar-inverse {
+        background: #4D5061;
+        border-bottom: 4px solid #60B078;
+        color: #FFF;
+    }
+    .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+        text-shadow: none;
+        color: #FFF;
+    }
+    .navbar-inverse .navbar-nav>.active>a,
+    .navbar-inverse .navbar-nav>.open>a,
+    .navbar-inverse .navbar-nav> ul >li,
+    .navbar-inverse .navbar-nav>li.focus>a,
+    .navbar-inverse .navbar-nav > .active > a:focus,
+    .navbar-inverse .navbar-nav > .active > a:hover,
+    .navbar-inverse .navbar-nav > .active >a:visited,
+    .navbar-inverse .navbar-nav>li:hover>a:hover {
+        background-image: #60B078;
+        background: #60B078;
+        background-color: #60B078!important;/*necessario para forcar a regra do bootstrap que tem important*/
+        color: #FFF;
+        -webkit-transition: all  ease-in .3s;
+        -o-transition: all  ease-in .3s;
+        -moz-transition: all  ease-in .3s;
+        -ms-transition: all  ease-in .3s;
+        transition: all  ease-in .3s;
+
+    }
+
+    ul.nav.navbar-nav.navbar-right:last-child  {
+        margin-right: 50px;
+    }
+
+    body{
+        background-color: #585858
     }
 </style>
 
-
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -16,7 +48,7 @@
             </button>
             <a class="navbar-brand" href="/home">Smarthouse</a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse animated fadeIn">
             <ul class="nav navbar-nav">
                 <li class="navbar-link">
                     <a href="/home">{{__ "Menu-Home"}}</a>
@@ -39,7 +71,7 @@
             {{#if login}}
                 {{> menubar-logged-in}}
             {{/if}}
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </nav>
 
