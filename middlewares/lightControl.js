@@ -25,7 +25,7 @@ module.exports = function (io) {
         });
 
         socket.on('pairDevice', function (data) {
-            var unit = JSON.stringify(data.unitno).trim();
+            var unit = data.unitno;
             rfTransmitter.nexaPairing(remote,unit, function() {
                 console.log("Done paring unit with remote: "+remote + "and unit code: "+unit);
              });
