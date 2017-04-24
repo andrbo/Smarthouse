@@ -8,7 +8,7 @@ var webcam = new v4l2camera.Camera("/dev/video0");
 webcam.start();
 
 
-// Functions used for the video streaming // Will be moved to security.js when socket.io is implemented
+// Functions used for the video streaming // Will be moved to sensorValues.js when socket.io is implemented
 function stopStreaming() {
     if (Object.keys(sockets).length == 0) {
         app.set('watchingFile', false);
