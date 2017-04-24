@@ -26,7 +26,7 @@ $(function () {
     // lister ut enheter i tabell
 
 
-    $("#unitTable").DataTable({
+  var table =  $("#unitTable").DataTable({
         ajax: {
             dataSrc: '',
             url: '/getUnits',
@@ -45,13 +45,22 @@ $(function () {
         ],
     });
 
-    var table = $('#unitTable').DataTable();
+//    var table = $('#unitTable').DataTable();
 
-    table.rows().every( function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        console.log( 'ID: '+data.id+"State: "+data.state);
-        // ... do something with data(), or this.node(), etc
-    } );
+
+    table.rows().every(function(){
+        var unit = this.data().id;
+        var state = this.data().state;
+        if(state =='1'){
+            console.log('Enheten + '+unit+' er på')
+            $('.toggleOffOn').css('color','red').html('Av');
+
+        }else{
+            console.log('Enheten + '+unit+' er av')
+            $('.toggleOffOn').css('color','green').html('På');
+        }
+        //console.log('Enhet:' +unit+""+"State: "+state);
+    });
 
     $('#unitTable tbody').on( 'click', 'button', function () {
         var data = table.row( $(this).parents('tr') ).data();
@@ -61,7 +70,6 @@ $(function () {
         }else{
             console.log('lampe er av')
         }
-        //alert(JSON.stringify(data)+'Enehtes nr: '+ JSON.stringify(data[0]) +"har status: "+ JSON.stringify(data[ 3 ] ));
     } );
 });
 //})
