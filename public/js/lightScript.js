@@ -26,7 +26,7 @@ $(function () {
     // lister ut enheter i tabell
 
 
-    $("#unitTable").DataTable({
+    var table = $("#unitTable").DataTable({
         ajax: {
             dataSrc: '',
             url: '/getUnits',
@@ -35,37 +35,34 @@ $(function () {
         searching: false,
         info: false,
         lengthChange: false,
+        "rowCallback": function(row, data, index){
+            if(data.state == 1){
+                $('td button', row).html("ON").css({"background-color": "green"});
+            }else{
+                $('td button', row).html("OFF").css({"background-color": "red"});
+            }
+        },
         columns: [
             {data: "id"},
             {data: "description"},
             {data: "state"},
             {data: "groupid"},
-            {defaultContent: "<button class='toggleOffOn'>Off</button>"},
 
-        ],
+            {defaultContent: "<button></button>"}
+        ]
     });
 
-    var table = $('#unitTable').DataTable();
 
-    table.rows().every( function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        console.log( 'ID: '+data.id+"State: "+data.state);
-        // ... do something with data(), or this.node(), etc
-    } );
-
-    $('#unitTable tbody').on( 'click', 'button', function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        console.log('STAAAAATE'+data.state);
+    $('table tbody').on( 'click', 'button', function () {
+        var data = table.row($(this).parents('tr')).data();
+        console.log('ST0AAAAATE'+data.state);
         if(data.state === 1){
             console.log('lampe er på, skrur den av');
         }else{
             console.log('lampe er av')
         }
-        //alert(JSON.stringify(data)+'Enehtes nr: '+ JSON.stringify(data[0]) +"har status: "+ JSON.stringify(data[ 3 ] ));
-    } );
+    })
 });
-//})
-//;
 
 
 
