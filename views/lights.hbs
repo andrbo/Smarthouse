@@ -1,38 +1,22 @@
 <div class=" jumbotron text-center">
     <div class="container">
-        <!--
-        <table class="display table table-bordered" id="unitTable">
-            <thead>
-            <tr>
-                <th data-field="id">{{__ 'Light-UnitNo'}}</th>
-                <th data-field="description">{{__ 'Light-Description'}}</th>
-                <th data-field="state">{{__ 'Light-State'}}</th>
-                <th data-checkbox = true>  {{__ 'Light-Toggle'}}</th>
-                <th data-field="groupid">{{__ 'Light-Group'}}</th>
-            </tr>
-            </thead>
-        </table>
-        -->
-        <!--
-        <table id="unitTable" class="display" cellspacing="0" width="100%"></table>
-    -->
         <table id="unitTable" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th>Nr</th>
-                <th>Beskrivelse</th>
-                <th>Status</th>
-                <th>Gruppe</th>
-                <th>Av/På</th>
+                <th>{{__ 'Light-UnitNo'}}</th>
+                <th>{{__ 'Light-Description'}}</th>
+                <th>{{__ 'Light-State'}}</th>
+                <th>{{__ 'Light-Group'}}</th>
+                <th>{{__ 'Light-Toggle'}}</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
-                <th>Nr</th>
-                <th>Beskrivelse</th>
-                <th>Status</th>
-                <th>Gruppe</th>
-                <th>Av/På</th>
+                <th>{{__ 'Light-UnitNo'}}</th>
+                <th>{{__ 'Light-Description'}}</th>
+                <th>{{__ 'Light-State'}}</th>
+                <th>{{__ 'Light-Group'}}</th>
+                <th>{{__ 'Light-Toggle'}}</th>
             </tr>
             </tfoot>
         </table>
@@ -136,14 +120,5 @@
     <div class="modal-footer">
     </div>
 </div>
-
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/lightScript.js"></script>
-<!-- Latest compiled and minified CSS -->
-<!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">-->
-
-<!-- Latest compiled and minified JavaScript -->
-<!--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>-->
-
-<!-- Latest compiled and minified Locales -->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-en-US.min.js"></script>-->

@@ -35,10 +35,10 @@ $(function () {
         searching: false,
         info: false,
         lengthChange: false,
-        "rowCallback": function(row, data, index){
-            if(data.state == 1){
+        "rowCallback": function (row, data, index) {
+            if (data.state == 1) {
                 $('td button', row).html("ON").css({"background-color": "green"});
-            }else{
+            } else {
                 $('td button', row).html("OFF").css({"background-color": "red"});
             }
         },
@@ -53,22 +53,33 @@ $(function () {
     });
 
 
-    $('table tbody').on( 'click', 'button', function () {
+    $('table tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
-        console.log('ST0AAAAATE'+data.state);
-        if(data.state === 1){
+        var state = data.state;
+        var unitId = data.id;
+        if (state === 1) {
             console.log('lampe er på, skrur den av');
-        }else{
-            console.log('lampe er av')
+            var newState = 0;
+            $.post('/toggleUnit', {
+                unitId: unitId,
+                state: newState
+            }).done(function (data) {
+                socket.emit('deviceOff', {unitno: unitId});
+                window.location.reload(true);
+            });
+        } else {
+            var newState = 1;
+            $.post('/toggleUnit', {
+                unitId: unitId,
+                state: newState
+            }).done(function (data) {
+                console.log('lampe er av, skrur den på');
+                socket.emit('deviceOn', {unitno: unitId});
+                window.location.reload(true);
+            });
         }
-    })
-});
+    });
 
-
-
-$('#tableBtnId').click(function(){
-    console.log('KUS KLIKKÆR');
-    $('#tableBtnId').html('NEGER');
 });
 
 
@@ -141,9 +152,10 @@ $("#groupDropSelected").click(function () {
 $('#saveAndPair').click(function () {
     var description = $('#descriptInput').val().trim();
     var groupname = $('#groupDropSelected').text();
-    if(groupname == "Select group"){
+    if (groupname == "Select group") {
         groupname == "";
-    };
+    }
+    ;
     $.post('/addUnit', {
         description: description,
         groupname: groupname

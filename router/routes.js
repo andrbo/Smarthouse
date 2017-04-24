@@ -472,4 +472,22 @@ module.exports = function (app, passport) {
         getGroups(function (err, res) {
         });
     });
+
+    app.post("/toggleUnit", function (req, res){
+        console.log('Kaller routes');
+        function toggleUnit (callback){
+            var id = req.body.unitId;
+            var state = req.body.state;
+            console.log('inne i toggleUnit med verdier' + "newstate: "+state + "id: "+id);
+            unitModel.toggleUnit(state, id, function (err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+        toggleUnit(function(err, res){
+
+        });
+    });
 };

@@ -10,6 +10,31 @@ exports.getUnits = function(callback){
     });
 };
 
+exports.toggleUnit = function(state, id,callback){
+    var values = [state, id];
+    var sql = 'UPDATE units SET state = ? WHERE id=?';
+    db.query(sql,values, function(err, result){
+        if(callback){
+            callback(err, result);
+            console.log(result);
+            console.log('ERROR UNITS'+err);
+        };
+    });
+};
+
+
+// MAL
+exports.updateEvent = function (title, description, start, end, id, callback) {
+    var values = [title, description, start, end, id];
+    var sql = 'UPDATE events SET title = ?, description = ?, start = ?, end = ? WHERE id = ?';
+
+    db.query(sql, values, function (err, result) {
+        if (callback) {
+            callback(err, result);
+        };
+    });
+};
+//
 exports.addUnit = function (description,groupid,callback){
     var values = [description,groupid];
     console.log("DESC: " + description);
@@ -43,4 +68,3 @@ exports.listGroup = function (callback){
 
 // remove group
 
-// link with group
