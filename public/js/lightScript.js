@@ -26,7 +26,7 @@ $(function () {
     // lister ut enheter i tabell
 
 
-  var table =  $("#unitTable").DataTable({
+    var table = $("#unitTable").DataTable({
         ajax: {
             dataSrc: '',
             url: '/getUnits',
@@ -35,45 +35,35 @@ $(function () {
         searching: false,
         info: false,
         lengthChange: false,
+        "rowCallback": function(row, data, index){
+            if(data.state == 1){
+                $('td button', row).html("ON").css({"background-color": "green"});
+            }else{
+                $('td button', row).html("OFF").css({"background-color": "red"});
+            }
+        },
         columns: [
             {data: "id"},
             {data: "description"},
             {data: "state"},
             {data: "groupid"},
-            {defaultContent: "<button class='toggleOffOn'>Off</button>"},
 
-        ],
+            {defaultContent: "<button></button>"}
+        ]
     });
 
-//    var table = $('#unitTable').DataTable();
 
 
-    table.rows().every(function(){
-        var unit = this.data().id;
-        var state = this.data().state;
-        if(state =='1'){
-            console.log('Enheten + '+unit+' er på')
-            $('.toggleOffOn').css('color','red').html('Av');
 
-        }else{
-            console.log('Enheten + '+unit+' er av')
-            $('.toggleOffOn').css('color','green').html('På');
-        }
-        //console.log('Enhet:' +unit+""+"State: "+state);
-    });
-
-    $('#unitTable tbody').on( 'click', 'button', function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        console.log('STAAAAATE'+data.state);
+    $('table tbody').on( 'click', 'button', function () {
+        var data = table.row($(this).parents('tr')).data();
+        console.log('ST0AAAAATE'+data.state);
         if(data.state === 1){
             console.log('lampe er på, skrur den av');
         }else{
             console.log('lampe er av')
         }
-    } );
 });
-//})
-//;
 
 
 
