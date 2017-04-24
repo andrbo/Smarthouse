@@ -10,15 +10,15 @@ module.exports = function (io) {
     io.sockets.on('connection', function (socket) {
         var remote = 23328130;
 
-        socket.on('deviceOn', function () {
-            var unit = JSON.stringify(data.unitno).trim();
+        socket.on('deviceOn', function (data) {
+            var unit = data.unitno;
             rfTransmitter.nexaOn(remote, unit, function () {
                 console.log('Enhet: ' + unit + " på");
             });
         });
 
         socket.on('deviceOff', function (data) {
-            var unit = JSON.stringify(data.unitno).trim();
+            var unit = data.unitno;
             rfTransmitter.nexaOff(remote, unit, function () {
                 console.log('Enhet: ' + unit + " av");
             });
