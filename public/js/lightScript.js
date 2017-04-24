@@ -24,25 +24,54 @@ $(function () {
         }
     });
     // lister ut enheter i tabell
-    $.post('/getUnits').done(function (data) {
-        $('#unitTable').bootstrapTable({
-            data: data,
-            insertRow: '<button>click</button>'
-        });
-    })
-});
+    //$.post('/getUnits').done(function (data) {
 
-$('#unitTable td.row-link').each(function(){
-    $(this).css('cursor','pointer').hover(
-        function(){
-            $(this).parent().addClass('active');
+    $("#unitTable").DataTable({
+        ajax: {
+            dataSrc: '',
+            url: '/getUnits',
         },
-        function(){
-            $(this).parent().removeClass('active');
-        }).click( function(){
-            document.location = $(this).parent().attr('data-href');
+        scrollY: "430px",
+        searching: false,
+        info: false,
+        lengthChange: false,
+        columns: [
+            {data: "id"},
+            {data: "description"},
+            {data: "state"},
+            {data: "groupid"},
+            {defaultContent: "<button class='toggleOffOn'>Off</button>"},
+
+        ],
+    });
+
+    var table = $('#unitTable').DataTable();
+
+    table.rows().every( function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        console.log( 'ID: '+data.id+"State: "+data.state);
+        // ... do something with data(), or this.node(), etc
+    } );
+
+    $('#unitTable tbody').on( 'click', 'button', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        console.log('STAAAAATE'+data.state);
+        if(data.state === 1){
+            console.log('lampe er på, skrur den av');
+        }else{
+            console.log('lampe er av')
         }
-    );
+        //alert(JSON.stringify(data)+'Enehtes nr: '+ JSON.stringify(data[0]) +"har status: "+ JSON.stringify(data[ 3 ] ));
+    } );
+});
+//})
+//;
+
+
+
+$('#tableBtnId').click(function(){
+    console.log('KUS KLIKKÆR');
+    $('#tableBtnId').html('NEGER');
 });
 
 

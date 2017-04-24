@@ -416,7 +416,7 @@ module.exports = function (app, passport) {
 
 
     //Units
-    app.post('/getUnits', function (req, res) {
+    app.get('/getUnits', function (req, res) {
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
