@@ -13,29 +13,29 @@ module.exports = function (io) {
         socket.on('deviceOn', function (data) {
             var unit = data.unitno;
             rfTransmitter.nexaOn(remote, unit, function () {
-                console.log('Enhet: ' + unit + " på");
             });
+            socket.broadcast.emit('deviceChange');
         });
 
         socket.on('deviceOff', function (data) {
             var unit = data.unitno;
             rfTransmitter.nexaOff(remote, unit, function () {
-                console.log('Enhet: ' + unit + " av");
             });
+            socket.broadcast.emit('deviceChange');
         });
 
         socket.on('pairDevice', function (data) {
             var unit = data.unitno;
             rfTransmitter.nexaPairing(remote,unit, function() {
-                console.log("Done paring unit with remote: "+remote + "and unit code: "+unit);
              });
+            socket.broadcast.emit('deviceChange');
         });
 
         socket.on('unpairDevice', function(data){
             var unit = data.unitno;
             rfTransmitter.nexaUnpairing(remote,unit, function(){
-                console.log("Done unpairing unit with remote: "+ remote+" and unit code: "+unit);
             })
+            socket.broadcast.emit('deviceChange');
         })
     });
 

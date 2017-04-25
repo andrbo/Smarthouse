@@ -1,5 +1,9 @@
 var socket = io();
 
+socket.on('deviceChange', function () {
+    window.location.reload(true);
+});
+
 // Funksjon for å liste ut tabell av enheter fra db
 
 // Funksjon for å slette fjernkontroller fra en kontakt
@@ -131,6 +135,21 @@ $('#changeGroup').click(function () {
     });
 });
 
+$('#saveChangeDevice').click(function () {
+    var descript = $('#editDevDescript').text();
+    var unitno = $('#editDevUnitno').text();
+    var group = $('#editDevGroup').text();
+    $.post('/changeDevice', {
+        unitno: unitno,
+        groupid: group,
+        description: descript
+    }).done(function (data) {
+        $('#editDeviceModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        window.location.reload(true);
+    });
+})
 // Functions for deleting a device
 $('#deleteDevice').click(function(){
     var descript = $('#editDevDescript').text();
@@ -156,24 +175,9 @@ $('#deleteDevice').click(function(){
     })
 })
 
-$('#saveChangeDevice').click(function () {
-    var descript = $('#editDevDescript').text();
-    var unitno = $('#editDevUnitno').text();
-    var group = $('#editDevGroup').text();
-    $.post('/changeDevice', {
-        unitno: unitno,
-        groupid: group,
-        description: descript
-    }).done(function (data) {
-        $('#editDeviceModal').modal('hide');
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
-        window.location.reload(true);
-    });
-})
 
 
-// lagre endringer
+
 
 /*
  *  Following functions is used in the add device modal
