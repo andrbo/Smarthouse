@@ -4,20 +4,11 @@ socket.on('deviceChange', function () {
     window.location.reload(true);
 });
 
-// Funksjon for å liste ut tabell av enheter fra db
-
-// Funksjon for å slette fjernkontroller fra en kontakt
-
 // Styring av grupper
 
 // Tidsbestemt styring
 
-// Socket for å oppdatere status for de andre klientene
-
-// Generelle funksjoner for å styre enheter av og på
-
-// Redigere en enhet
-
+// Fjerning av en gruppe
 
 $(function () {
     // Function used for getting the different groups from DB, for use in the dropdown when selecting group for a device
@@ -116,8 +107,6 @@ $('#changeDescription').click(function () {
         $('#changeDescripInput').css('display', 'none');
     });
 });
-
-
 // Functions for changing the group of the device
 $('#changeGroup').click(function () {
     $("#changeGroupInput").css("display", "block")
@@ -187,7 +176,6 @@ $('#deleteDevice').click(function(){
 $('#addDeviceBtn').click(function () {
     $('#addDeviceModal').modal('show');
 });
-
 // function for adding a new group
 $('#addNewGroup').click(function () {
     $('#newGroupInput').css("display", "block");
@@ -216,11 +204,6 @@ $('#addNewGroup').click(function () {
         $('#addNewGroupBtns').css("display", "none");
     });
 });
-
-
-
-
-
 // function for storing the values set by user in the modal. Later for use in the save and pair modal
 $('#activateNewDevice').click(function () {
     var description = $('#descriptInput').val().trim();
