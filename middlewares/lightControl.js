@@ -30,6 +30,13 @@ module.exports = function (io) {
                 console.log("Done paring unit with remote: "+remote + "and unit code: "+unit);
              });
         });
+
+        socket.on('unpairDevice', function(data){
+            var unit = data.unitno;
+            rfTransmitter.nexaUnpairing(remote,unit, function(){
+                console.log("Done unpairing unit with remote: "+ remote+" and unit code: "+unit);
+            })
+        })
     });
 
 };

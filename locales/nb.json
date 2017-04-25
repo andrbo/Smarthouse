@@ -116,7 +116,12 @@
 	"Light-SaveDevice":"Lagre",
 	"Light-SaveDevicePrompt":"Legg enheten til i systemet og par med enhet",
 	"Light-SaveDeviceSummary": "Legger til enheten med instillingene listet nedenfor i systemet. Sett mottakeren i paringsmodus og klikk lagre.",
-
+	"Light-Summary": "Oppsummering: ",
+	"Light-ChangeDescription": "Bytt beskrivelse",
+	"Light-ChangeGroup": "Bytt gruppe",
+	"Light-DeleteDevice": "Slett enhet",
+	"Light-DeleteDevConfirm": "Er du sikker på at du vil slette følgende enhet?",
+	"Light-DeleteUnpair": "For å slette enheten og fjerne paringen, setter du mottakeren i paringsmodus og trykker på slett enhet",
 
 	"Calendar-Events": "Hendelser"
 
