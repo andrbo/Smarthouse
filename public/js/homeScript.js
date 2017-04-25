@@ -28,16 +28,13 @@ function soilReading(data) {
 function tempReading(data) {
     var tempSensorValue = data.Temperature;
     if (tempSensorValue < 5) {
-        $('#tempValue').html(tempSensorValue + celsius);
-        $('#tempValue').css("color", "#42a7f4");
+        $('#tempValue').html(tempSensorValue + celsius).css("color", "#42a7f4");
     }
     if (tempSensorValue > 5 && tempSensorValue < 30) {
-        $('#tempValue').html(tempSensorValue + celsius);
-        $('#tempValue').css("color", "#40bf43");
+        $('#tempValue').html(tempSensorValue + celsius).css("color", "#40bf43");
     }
     if (tempSensorValue > 30) {
-        $('#tempValue').html(tempSensorValue + celsius);
-        $('#tempValue').css("color", "#f46e41");
+        $('#tempValue').html(tempSensorValue + celsius).css("color", "#f46e41");
     }
 };
 

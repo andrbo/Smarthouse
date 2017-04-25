@@ -2,7 +2,6 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    background: #525252;
     color: #ffffff;
 }
 
@@ -66,35 +65,51 @@ p.pwError{
     margin-left: 0;
 }
 
-.glyphicon {
+
+.glyphicon.glyphicon-fire {
+    color: #ff9900;
     font-size: 50px;
     opacity: 0.8;
 }
 
-.glyphicon.glyphicon-fire {
-    color: #ff9900;
-
-}
-
 .glyphicon.glyphicon-tint {
     color: #00B7FF;
+    font-size: 50px;
+    opacity: 0.8;
 }
 
 .glyphicon.glyphicon-cloud {
     color: #1CA347;
+    font-size: 50px;
+    opacity: 0.8;
 }
 
 .glyphicon.glyphicon-asterisk {
     color: red;
+    font-size: 50px;
+    opacity: 0.8;
 }
 
 .glyphicon.glyphicon-minus {
     color: red;
+    font-size: 50px;
+    opacity: 0.8;
 }
 
 .glyphicon.glyphicon-warning-sign {
     color: yellow;
     font-size: 20px;
+    opacity: 0.8;
+}
+
+.glyphicon.glyphicon-transfer{
+    font-size: 50px;
+    opacity: 0.8;
+}
+
+.glyphicon.glyphicon-equalizer{
+    font-size: 50px;
+    opacity: 0.8;
 }
 
 #webCam {

@@ -55,12 +55,11 @@ module.exports = function (io) {
             console.log("REMOVED ************************");
             //socket.broadcast.emit('alarmAct');
         });
-    });
-
-    arduinoSerial.on('data', function (data) {
-        //console.log("KJØRER VANLIG DATA")
-        var serialData = JSON.parse(data);
-        console.log(data);
-        //socket.emit('serialEvent', serialData);
+        arduinoSerial.on('data', function (data) {
+            //console.log("KJØRER VANLIG DATA")
+            var serialData = JSON.parse(data);
+            console.log(data);
+            socket.emit('serialEvent', serialData);
+        });
     });
 };

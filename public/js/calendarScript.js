@@ -1,6 +1,7 @@
 $(document).ready(function (req, res) {
 
     $('#calendar').fullCalendar({
+        height: 700,
         header: {
             left: 'addEvent',
             center: 'title',
@@ -70,7 +71,7 @@ $(document).ready(function (req, res) {
             dataSrc: '',
             url: '/getAllEvents',
         },
-        scrollY: "430px",
+        scrollY: "388px",
         searching: false,
         info: false,
         lengthChange: false,
