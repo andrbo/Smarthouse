@@ -120,7 +120,12 @@
     "Light-Save":"Save",
     "Light-SaveDevicePrompt":"Add device to system and pair",
     "Light-SaveDeviceSummary": "Adding the device with settings listed below to the system. Put reciever into paring mode, and click save ",
-
+    "Light-Summary": "Summary: ",
+    "Light-ChangeDescription": "Change description",
+    "Light-ChangeGroup": "Change group",
+    "Light-DeleteDevice": "Delete device",
+    "Light-DeleteDevConfirm": "Are you sure wou want to delete the following device?",
+    "Light-DeleteUnpair": "To delete the device and remove the paring, put the reciever into paring mode and click delete device",
 
 
     "Calendar-Events": "Activities"

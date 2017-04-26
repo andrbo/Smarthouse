@@ -481,4 +481,36 @@ module.exports = function (app, passport) {
 
         });
     });
+
+    app.post("/deleteDevice", function(req, res){
+        function deleteDevice(callback){
+            var id = req.body.unitno;
+            unitModel.deleteDevice(id, function(err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                };
+            });
+        };
+        deleteDevice(function(err, res){
+
+        });
+    });
+
+    app.post("/changeDevice", function(req, res){
+        function changeDevice(callback){
+            var id= req.body.unitno;
+            var description =  req.body.description;
+            var groupid = req.body.groupid;
+            unitModel.changeDevice(id,description,groupid, function (err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                };
+            });
+        };
+        changeDevice(function(err, res){
+
+        });
+    });
 };

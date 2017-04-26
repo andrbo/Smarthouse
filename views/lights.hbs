@@ -56,7 +56,6 @@
                                href="#">
                                 {{__ "Light-SelectGroup"}}
                                 <span class="caret"></span></a>
-                            <!-- Må oppdateres til å hente verdier fra DB -->
                             <ul id="groupValues" class="dropdown-menu">
                             </ul>
                         </div>
@@ -88,6 +87,142 @@
                         "Light-Save"}}</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Edit device modal -->
+<div class="modal fade" id="editDeviceModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">EDIT</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <h3>{{__ "Light-Summary"}}</h3>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h6>{{__ "Light-UnitNo"}}:</h6>
+                    </div>
+                    <div class="col-md-4 ">
+                        <h6 id="editDevUnitno"></h6>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h6>{{__ "Light-Description"}}:</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 id="editDevDescript"></h6>
+                    </div>
+                    <div class="col-md-4>">
+                        <button id="changeDescription" type="button" class="btn btn-primary">{{__
+                                "Light-ChangeDescription"}}</button>
+                    </div>
+                    <div id="changeDescripInput" class="form-group row" style="display: none">
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" placeholder="{{__ "Light-Description"}}"
+                                   id="newDescriptInput">
+                        </div>
+                        <div class="col-md-3">
+                            <button id="saveNewDescript" class="btn btn-success">{{__ "Light-Save"}}</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="cancelNewDescript" class="btn btn-danger">{{__ "Light-Cancel"}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h6>{{__ "Light-Group"}}:</h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 id="editDevGroup"></h6>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="changeGroup" type=button class="btn btn-primary">{{__ "Light-ChangeGroup"}}</button>
+                    </div>
+                </div>
+                <div id="changeGroupInput" class="form-group row" style="display: none">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a id="changeGroupSelected" class="btn dropdown-toggle btn-primary" data-toggle="dropdown"
+                               href="#">
+                                {{__ "Light-SelectGroup"}}
+                                <span class="caret"></span></a>
+                            <ul id="groupValuesTest" class="dropdown-menu">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button id="saveChangeGroup" class="btn btn-success">{{__ "Light-Save"}}</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button id="cancelChangeGroup" class="btn btn-danger">{{__ "Light-Cancel"}}</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <button id="deleteDevice" type="button" class="btn btn-danger">{{__
+                                "Light-DeleteDevice"}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button  id= "saveChangeDevice" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete device modal -->
+<div class="modal fade" id="deleteDeviceModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>{{__ "Light-DeleteDevice"}}</h3>
+            </div>
+            <div class="modal-body">
+                <h4>{{__ "Light-DeleteDevConfirm"}}</h4>
+                <hr>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h5>{{__ "Light-UnitNo"}}:</h5>
+                    </div>
+                    <div class="col-md-4 ">
+                        <h5 id="deleteDevUnitno"></h5>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h5>{{__ "Light-Description"}}:</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 id="deleteDevDescript"></h5>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h5>{{__ "Light-Group"}}:</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 id="deleteDevGroup"></h5>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <h4>{{__ "Light-DeleteUnpair"}}</h4>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{__ "Light-Cancel"}}</button>
+                    <button id='deleteDeviceBtn' type="button" class="btn btn-danger">{{__
+                            "Light-DeleteDevice"}}</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

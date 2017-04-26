@@ -22,19 +22,6 @@ exports.toggleUnit = function(state, id,callback){
     });
 };
 
-
-// MAL
-exports.updateEvent = function (title, description, start, end, id, callback) {
-    var values = [title, description, start, end, id];
-    var sql = 'UPDATE events SET title = ?, description = ?, start = ?, end = ? WHERE id = ?';
-
-    db.query(sql, values, function (err, result) {
-        if (callback) {
-            callback(err, result);
-        };
-    });
-};
-//
 exports.addUnit = function (description,groupid,callback){
     var values = [description,groupid];
     console.log("DESC: " + description);
@@ -61,7 +48,25 @@ exports.listGroup = function (callback){
     db.query(sql, function(err, result){
         if (callback) {
             callback(err, result);
-            console.log(result);
+        };
+    });
+};
+
+exports.deleteDevice = function(id, callback){
+    var sql= 'DELETE FROM units WHERE id = ?';
+    db.query(sql,id, function(err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
+exports.changeDevice = function(id, description, groupid, callback){
+    var values = [description,groupid, id];
+    var sql = 'UPDATE units SET description=?,groupid=? WHERE id=?'
+    db.query(sql,values, function(err, result){
+        if(callback){
+            callback(err, result);
         };
     });
 };

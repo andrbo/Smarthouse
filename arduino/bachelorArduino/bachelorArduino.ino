@@ -6,15 +6,16 @@
 #define MOISTPIN A1  // Analog input from the soil moisture sensor // https://learn.sparkfun.com/tutorials/soil-moisture-sensor-hookup-guide
 #define LEAKPIN A2   // Analog input from the rain sensor module, used as a leak monitor in this case // http://www.instructables.com/id/Arduino-Modules-Rain-Sensor/ 
 #define LIGHTSENSPIN A3
+
 // Defining Digital pins in use
 #define DHTPIN 2     // Digital input from the DHT11 temperature/humidity sensor // https://learn.adafruit.com/dht/using-a-dhtxx-sensor
 #define FLAMEPIN 3   // Digital input from the flame sensor // http://www.instructables.com/id/Arduino-Modules-Flame-Sensor/, https://docs.google.com/document/d/1FvOoJOS3eoVd8N5guKXi5Qim6IZoohg0390r2Dcsh9k/edit?pli=1
 //#define LASERPIN 4   // Laser, if deciding to make it turn on and off http://www.instructables.com/id/Keyes-KY-008-Laser-Transmitter-Demystified/
-#define PHOTOELPIN 5 // Digital input from the photoelectric sensor module // https://www.ia.omron.com/support/guide/43/introduction.html
-#define VIBEPIN 6 // Digital input from the vibration sensor module // 
-#define IRBARPIN 7 // Digital input from the Infrared barrier module // http://www.hobbypartz.com/82p-ad-infrared-barrier.html
-#define BUZZERPIN 8
-#define LEDPIN 9
+#define PHOTOELPIN 4 // Digital input from the photoelectric sensor module // https://www.ia.omron.com/support/guide/43/introduction.html
+#define VIBEPIN 5 // Digital input from the vibration sensor module //
+#define IRBARPIN 6 // Digital input from the Infrared barrier module // http://www.hobbypartz.com/82p-ad-infrared-barrier.html
+#define BUZZERPIN 7
+#define LEDPIN 8
 
 
 // Other
@@ -26,6 +27,7 @@
 DHT dht(DHTPIN, DHTTYPE);
 float h, t; // float value for humidity and temperature reading from DHT11
 float li; // Analog int value from the temt6000 light sensor
+float lux; // Value of light sensor converted to lux
 int s; // Analog int value from the mq-2 sensor
 int m; // Analog int value from the soil moisture sensor
 int r; // Analog int value from the rain sensor module/"leak sensor"
@@ -48,9 +50,9 @@ void setup() {
   pinMode(PHOTOELPIN, INPUT);
   pinMode(VIBEPIN, INPUT);
   pinMode(IRBARPIN, INPUT);
-  pinMode(LIGHTSENSPIN,  INPUT);  
-  pinMode(LEDPIN, OUTPUT); 
-  pinMode(BUZZERPIN, OUTPUT);  
+  pinMode(LIGHTSENSPIN,  INPUT);
+  pinMode(LEDPIN, OUTPUT);
+  pinMode(BUZZERPIN, OUTPUT);
 }
 
 // Loop with main program
@@ -68,7 +70,7 @@ void loop() {
   leaksensor_read();
   lightsensor_read();
   printData();
-  beep(50);
+ // beep(50);
 //  json_print();
 
   // Check if any reads failed and exit early (to try again).
@@ -78,28 +80,36 @@ void loop() {
   }
   if(isnan(s)){
     Serial.println("Failed to read from gas sensor!");
+    return;
   }
   if(isnan(m)){
     Serial.println("Failed to read from soil moisture sensor!");
+    return;
   }
   if(isnan(r)){
     Serial.println("Failed to read from leak sensor!");
+    return;
   }
   if(isnan(f)){
     Serial.println("Failed to read from flame sensor!");
+    return;
   }
   if(isnan(l)){
     Serial.println("Failed to read from lasertrip sensor!");
+    return;
   }
   if(isnan(v)){
     Serial.println("Failed to read from vibration sensor!");
+    return;
   }
   if(isnan(i)){
     Serial.println("Failed to read from infrared module!");
+    return;
   }
 
   if(isnan (li)){
     Serial.println("Failed to read from light sensor!");
+    return;
   }
 }
 
@@ -140,12 +150,12 @@ void printData() {
       "\", \"Humidity\":\"" + String(h) +
       "\", \"Laser\":\"" + String(l) +
       "\", \"Gas\":\"" + String(s) +
-      "\", \"Flame\":\"" + String(f) +    
-      "\", \"VibeValue\":\"" + String(v) +       
-      "\", \"IRBarrierValue\":\"" + String(i) +      
-      "\", \"SoilMoisture\":\"" + String(m) +      
+      "\", \"Flame\":\"" + String(f) +
+      "\", \"VibeValue\":\"" + String(v) +
+      "\", \"IRBarrierValue\":\"" + String(i) +
+      "\", \"SoilMoisture\":\"" + String(m) +
       "\", \"LeakValue\":\"" + String(r) +
-      "\", \"LightValue\":\"" + String(li) +              
+      "\", \"LightValue\":\"" + String(lux) +
       "\"}");
 }
 
@@ -194,22 +204,28 @@ void leaksensor_read()
   r = analogRead(LEAKPIN); // Read Rain sensor value
 }
 
+// https://forum.arduino.cc/index.php?topic=185158.0
 void lightsensor_read()
 {
   li = analogRead(LIGHTSENSPIN); //Read light level
+  float volts = li * 5.0 / 1024.0;
+  float amps = volts / 10000.0; // TEMT6000 intergrated resistor is 10kohms
+  float microamps = amps * 1000000.0;
+  lux = microamps * 2.0;
+
+
   // Code for dimming the Led
-  float square_ratio = li / 1023.0;      //Get percent of maximum value (1023)
-  square_ratio = pow(square_ratio, 2.0);      //Square to make response more obvious
-  analogWrite(LEDPIN, 255.0 * square_ratio);  //Adjust LED brightness relatively
+  //float square_ratio = li / 1023.0;      //Get percent of maximum value (1023)
+  //square_ratio = pow(square_ratio, 2.0);      //Square to make response more obvious
+  //analogWrite(LEDPIN, 255.0 * square_ratio);  //Adjust LED brightness relatively
 }
 
 void beep(unsigned char delayms)
-{ 
+{
   analogWrite(BUZZERPIN, 20); //Setting pin to high
   delay(delayms); //Delaying
   analogWrite(BUZZERPIN ,0); //Setting pin to LOW
   delay(delayms); //Delaying
-  
-}
 
+}
 
