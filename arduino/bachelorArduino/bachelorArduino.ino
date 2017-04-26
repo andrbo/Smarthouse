@@ -1,6 +1,8 @@
 // Including necessary libraries
 #include "DHT.h"         // https://github.com/adafruit/DHT-sensor-library
-#include "ArduinoJson.h" // https://bblanchon.github.io/ArduinoJson/doc/installation/
+#include "OneWire.h"     // http://www.pjrc.com/teensy/arduino_libraries/OneWire.zip
+#include "DallasTemperature.h" //https://github.com/milesburton/Arduino-Temperature-Control-Library
+//#include "ArduinoJson.h" // https://bblanchon.github.io/ArduinoJson/doc/installation/
 // Defining Analog pins in use
 #define GASPIN A0    // Analog input from the mq-2 sensor (gas/smoke) // https://create.arduino.cc/projecthub/Aritro/smoke-detection-using-mq-2-gas-sensor-79c54a
 #define MOISTPIN A1  // Analog input from the soil moisture sensor // https://learn.sparkfun.com/tutorials/soil-moisture-sensor-hookup-guide
@@ -16,18 +18,27 @@
 #define IRBARPIN 6 // Digital input from the Infrared barrier module // http://www.hobbypartz.com/82p-ad-infrared-barrier.html
 #define BUZZERPIN 7
 #define LEDPIN 8
+#define PIRPIN 10 // Digital input from the PIR sensor module
+#define ONEWIREBUS 11 // OneWire Bus for the ds18b20 temperature sensors. 
 
 
 // Other
 #define DHTTYPE DHT11   //Defining what type of DHTxx sensor we're using
+#define TEMP_PRECISION 9 // Used to set the resolution of the ds18b20 sensors to 9 bit
 
 
-// Declaring variables
+// Declaring variables and passing arguments to libraries
 
-DHT dht(DHTPIN, DHTTYPE);
+DHT dht(DHTPIN, DHTTYPE);    // DHT instance for the DHT11 sensor
+OneWire oneWire(ONEWIREBUS); // OneWire instance to communicate with the ds18b20 sensors
+DallasTemperature dsSensors(&oneWire);
+DeviceAddress dsSensor1,dsSensor2; //Arrays to hold ds18b20 sensor addresses. If adding more sensors to the bus, add equally more variabels here
+
 float h, t; // float value for humidity and temperature reading from DHT11
 float li; // Analog int value from the temt6000 light sensor
 float lux; // Value of light sensor converted to lux
+float ds1; //First ds18b20 sensor on bus
+float ds2; //Second ds18b20 sensor on bus
 int s; // Analog int value from the mq-2 sensor
 int m; // Analog int value from the soil moisture sensor
 int r; // Analog int value from the rain sensor module/"leak sensor"
@@ -35,6 +46,8 @@ int f; // Digital (0,1) value from flame sensor
 int l; // Digital (0,1) value from photoelectric sensor module (lasertrip reading)
 int v; // Digital (0,1) value from vibration sensor module
 int i; // Digital (0,1) value from infrared barrier module
+int p; // Digital (0,1) value from PIR sensor module
+
 
 int wetSoil = 350; // Threshold for deciding if soil is wet or dry.
 
@@ -43,6 +56,7 @@ int wetSoil = 350; // Threshold for deciding if soil is wet or dry.
 void setup() {
   Serial.begin(9600);
   dht.begin();
+  dsSensors.begin();
   pinMode(GASPIN, INPUT);
   pinMode(MOISTPIN, INPUT);
   pinMode(LEAKPIN, INPUT);
@@ -53,6 +67,13 @@ void setup() {
   pinMode(LIGHTSENSPIN,  INPUT);
   pinMode(LEDPIN, OUTPUT);
   pinMode(BUZZERPIN, OUTPUT);
+  pinMode(PIRPIN, INPUT);
+
+  // Add more lines here if adding more ds18b20 sensors to the bus. Use the varibles added in DeviceAddress.
+  if(!dsSensors.getAddress(dsSensor1, 0)) Serial.println("Unable to find address for device 0");
+  if(!dsSensors.getAddress(dsSensor2, 1)) Serial.println("Unable to find address for device 0");
+    dsSensors.setResolution(dsSensor1, TEMP_PRECISION);
+  dsSensors.setResolution(dsSensor2, TEMP_PRECISION);
 }
 
 // Loop with main program
@@ -69,6 +90,9 @@ void loop() {
   soilmoist_read();
   leaksensor_read();
   lightsensor_read();
+  pirsensor_read();
+ dsSensors.requestTemperatures();
+ ds18b20_read();
   printData();
  // beep(50);
 //  json_print();
@@ -77,73 +101,10 @@ void loop() {
   if (isnan(h) || isnan(t)) {
     Serial.println("Failed to read from DHT sensor!");
     return;
-  }
-  if(isnan(s)){
-    Serial.println("Failed to read from gas sensor!");
-    return;
-  }
-  if(isnan(m)){
-    Serial.println("Failed to read from soil moisture sensor!");
-    return;
-  }
-  if(isnan(r)){
-    Serial.println("Failed to read from leak sensor!");
-    return;
-  }
-  if(isnan(f)){
-    Serial.println("Failed to read from flame sensor!");
-    return;
-  }
-  if(isnan(l)){
-    Serial.println("Failed to read from lasertrip sensor!");
-    return;
-  }
-  if(isnan(v)){
-    Serial.println("Failed to read from vibration sensor!");
-    return;
-  }
-  if(isnan(i)){
-    Serial.println("Failed to read from infrared module!");
-    return;
-  }
-
-  if(isnan (li)){
-    Serial.println("Failed to read from light sensor!");
-    return;
-  }
+}
 }
 
-// Format serial print as JSON
-//void json_print() {
-//  DynamicJsonBuffer jsonBuffer;
-//  JsonArray& root = jsonBuffer.createArray();
-//  JsonObject& temp = root.createNestedObject().createNestedObject("temp");
-//    temp["Temperature"]= t;
-//    temp["Humidity"] = h;
-//  JsonObject& laser = root.createNestedObject().createNestedObject("laser");
-//    laser["Laser status"] = laserStatus;
-//  JsonObject& gas = root.createNestedObject().createNestedObject("gas");
-//    gas["Gas value"] = s;
-//  JsonObject& flame = root.createNestedObject().createNestedObject("flame");
-//    flame["Flame value"] = f;
-//    flame["Flame status"] = flameStatus;
-//  JsonObject& vibe = root.createNestedObject().createNestedObject("vibration");
-//    vibe["Vibration value"] = v;
-//    vibe["Vibration status"] = vibrationStatus;
-//  JsonObject& irbar = root.createNestedObject().createNestedObject("irbarrier");
-//    irbar["Infrared barreier value"] = i;
-//    irbar["Infrared barrier status"] = irbarrierStatus;
-//   JsonObject& moist = root.createNestedObject().createNestedObject("moisture");
-//    moist["Moisture value"] = m;
-//    moist["Moisture status"] = soilStatus;
-//   JsonObject& leak = root.createNestedObject().createNestedObject("leak");
-//    leak["Leak value"] = r;
-//    leak["Leak status"]= leakStatus;
-//  root.prettyPrintTo(Serial);
-//  Serial.println();
-//  delay(1000);
-// }
-
+// The outprint is on JSON form, and is the data the node application uses. If adding more sensor make sure to include these sebsors to the print if necessary.
 void printData() {
   Serial.println(
       "{\"Temperature\":\"" + String(t) +
@@ -156,6 +117,9 @@ void printData() {
       "\", \"SoilMoisture\":\"" + String(m) +
       "\", \"LeakValue\":\"" + String(r) +
       "\", \"LightValue\":\"" + String(lux) +
+      "\", \"PirValue\":\""+ String(p)+
+      "\", \"Ds1Value\":\""+ String(ds1)+
+      "\", \"Ds2Value\":\""+ String(ds2)+
       "\"}");
 }
 
@@ -218,6 +182,23 @@ void lightsensor_read()
   //float square_ratio = li / 1023.0;      //Get percent of maximum value (1023)
   //square_ratio = pow(square_ratio, 2.0);      //Square to make response more obvious
   //analogWrite(LEDPIN, 255.0 * square_ratio);  //Adjust LED brightness relatively
+}
+
+void pirsensor_read()
+{
+  p = digitalRead(PIRPIN);
+}
+float getDsTemp(DeviceAddress dsAddress)
+{
+  return dsSensors.getTempC(dsAddress);
+  
+}
+// Function reads temperature of the ds18b20 sensors. If adding more sensors to the bus, make sure you read them here also.
+
+void ds18b20_read()
+{
+  ds1 = getDsTemp(dsSensor1);
+  ds2 = getDsTemp(dsSensor2);
 }
 
 void beep(unsigned char delayms)
