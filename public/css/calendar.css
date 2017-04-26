@@ -1,0 +1,11 @@
+.container {
+    width: 96%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#updateEventStart:disabled, #updateEventEnd:disabled, #eventStart:disabled, #eventEnd:disabled {
+    background-color: #ffffff;
+}

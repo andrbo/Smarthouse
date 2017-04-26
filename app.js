@@ -25,6 +25,8 @@ app.io = require('socket.io')();
 //app.io.alarmActivated = require('./middlewares/alarmActivated')(app.io);
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
+app.io.chat = require('./public/js/chat/chat.js')(app.io);
+
 app.get('/', function (req, res) {
     res.redirect('home');
 });
@@ -86,7 +88,7 @@ i18n.configure({
     queryParameter: 'lang'
 });
 
-app.use(i18n.init)
+app.use(i18n.init);
 
 // register hbs helpers in res.locals' context which provides this.locale
 hbs.handlebars.registerHelper('__', function () {

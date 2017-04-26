@@ -1,6 +1,6 @@
 var serialport = require('serialport');
 var SerialPort = serialport; // make a local instance of it
-var arduinoPort = '/dev/cu.wchusbserial14230';
+var arduinoPort = '/dev/cu.wchusbserial14210';
 //var arduinoPort = '/dev/ttyACM0';
 
 var arduinoSerial = new SerialPort(arduinoPort, {
@@ -9,7 +9,6 @@ var arduinoSerial = new SerialPort(arduinoPort, {
 });
 
 module.exports = function (io) {
-
     io.sockets.on('connection', function (socket) {
 
         /*socket.on('alarmToggle', function (jsonData) {
@@ -58,7 +57,7 @@ module.exports = function (io) {
         arduinoSerial.on('data', function (data) {
             //console.log("KJØRER VANLIG DATA")
             var serialData = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             socket.emit('serialEvent', serialData);
         });
     });

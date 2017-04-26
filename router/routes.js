@@ -23,12 +23,11 @@ module.exports = function (app, passport) {
         } else {
             res.render("home");
         }
-        ;
     });
 
-    app.get('/about', function (req, res) {
+    app.get('/userCalendar', function (req, res) {
         if (req.isAuthenticated()) {
-            res.render("about", {
+            res.render("userCalendar", {
                 login: true,
                 loginUsername: req.user.email
             });
@@ -36,7 +35,6 @@ module.exports = function (app, passport) {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
         }
-        ;
     });
 
     app.get('/security', function (req, res) {
@@ -49,8 +47,6 @@ module.exports = function (app, passport) {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
         }
-        ;
-
     });
 
     app.get('/lights', function (req, res) {
@@ -63,7 +59,6 @@ module.exports = function (app, passport) {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
         }
-        ;
     });
 
     // process the login form
@@ -111,7 +106,6 @@ module.exports = function (app, passport) {
                 forgotPassword(res, email);
                 return res
             }
-            ;
         });
 
 
@@ -162,7 +156,6 @@ module.exports = function (app, passport) {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
         }
-        ;
     });
 
 
@@ -186,7 +179,6 @@ module.exports = function (app, passport) {
                                         }
                                     });
                                 }
-                                ;
                             });
                         } else {
                             res.send(null);
@@ -257,8 +249,7 @@ module.exports = function (app, passport) {
             })
         }
 
-        getAllEvents(function (err, res) {
-        });
+        getAllEvents(function (err, result) {});
     });
 
     app.post("/addEvent", function (req, res) {
