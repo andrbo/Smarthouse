@@ -68,10 +68,11 @@ $(document).ready(function (req, res) {
 
     $("#calendarEventList").dataTable({
         ajax: {
-            dataSrc: '',
-            url: '/getAllEvents',
+            dataSrc: "",
+            url: '/getAllEvents'
         },
-        scrollY: "388px",
+
+        pageLength:6,
         searching: false,
         info: false,
         lengthChange: false,
@@ -80,8 +81,8 @@ $(document).ready(function (req, res) {
             {data: "title", title: "Title"},
             {data: "description", title: "Description"},
             {data: "start", title: "Start"},
-            {data: "end", title: "End"},
-        ],
+            {data: "end", title: "End"}
+        ]
     });
 
 });
@@ -93,18 +94,16 @@ function addEvent() {
         start: $("#eventStart").val(),
         end: $("#eventEnd").val(),
         description: $("#eventDescription").val()
-    })
+    });
     window.location.reload(true);
 }
-;
 
 function deleteEvent(eventId) {
     $.post("/deleteEvent", {
         id: eventId
-    })
+    });
     window.location.reload(true);
 }
-;
 
 function updateEvent(title, description, start, end, id) {
     $.post("/updateEvent", {
@@ -125,4 +124,3 @@ function updateDate(id, start, end) {
     });
     window.location.reload(true);
 }
-;
