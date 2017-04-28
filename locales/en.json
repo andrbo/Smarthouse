@@ -102,6 +102,8 @@
     "Cancel-DeacAlarm": "Cancel",
     "Activate-DeacAlarm":"Deactivate",
 
+    "Light-ControlUnit": "Control units",
+    "Light-ControlGroup": "Control groups",
     "Light-Description":"Description",
     "Light-State":"State",
     "Light-Toggle":"On/Off",
@@ -121,6 +123,7 @@
     "Light-GroupError": "Group already exists",
     "Light-Cancel":"Cancel",
     "Light-Save":"Save",
+    "Light-Delete": "Delete",
     "Light-SaveDevicePrompt":"Add device to system and pair",
     "Light-SaveDeviceSummary": "Adding the device with settings listed below to the system. Put reciever into paring mode, and click save ",
     "Light-Summary": "Summary: ",

@@ -1,35 +1,61 @@
 <div class=" jumbotron text-center">
     <div class="container">
-        <table id="unitTable" class="display" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-                <th>{{__ 'Light-UnitNo'}}</th>
-                <th>{{__ 'Light-Description'}}</th>
-                <th>{{__ 'Light-State'}}</th>
-                <th>{{__ 'Light-Group'}}</th>
-                <th>{{__ 'Light-Toggle'}}</th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <th>{{__ 'Light-UnitNo'}}</th>
-                <th>{{__ 'Light-Description'}}</th>
-                <th>{{__ 'Light-State'}}</th>
-                <th>{{__ 'Light-Group'}}</th>
-                <th>{{__ 'Light-Toggle'}}</th>
-            </tr>
-            </tfoot>
-        </table>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#controlUnitTab" data-toggle="tab">{{__ "Light-ControlUnit"}}</a></li>
+                <li><a href="#controlGroupTab" id="controlGroup" data-toggle="tab">{{__ "Light-ControlGroup"}}</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="controlUnitTab">
+                    <table id="unitTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>{{__ 'Light-UnitNo'}}</th>
+                            <th>{{__ 'Light-Description'}}</th>
+                            <th>{{__ 'Light-State'}}</th>
+                            <th>{{__ 'Light-Group'}}</th>
+                            <th>{{__ 'Light-Toggle'}}</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>{{__ 'Light-UnitNo'}}</th>
+                            <th>{{__ 'Light-Description'}}</th>
+                            <th>{{__ 'Light-State'}}</th>
+                            <th>{{__ 'Light-Group'}}</th>
+                            <th>{{__ 'Light-Toggle'}}</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class=" btn-primary" id="addDeviceBtn">{{__ 'Light-AddDevice'}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="controlGroupTab">
+                    <h3>Control group</h3>
+                    <br>
+                    <br>
+                    <div class=" container">
+                        <table id="groupTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>{{__ "Light-Group"}}</th>
+                                <th>{{__ "Light-State"}}</th>
+                                <th>{{__ "Light-Toggle"}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="col-md-3">
+                            <button class="btn-primary" id="editGroupBtn">{{__ 'Light-EditGroup'}}</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <button class=" btn-primary" id="addDeviceBtn">{{__ 'Light-AddDevice'}}</button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn-primary" id="editGroupBtn">{{__ 'Light-EditGroup'}}</button>
-        </div>
     </div>
 </div>
+
 
 <!-- Add device modal -->
 <div class="modal fade" id="addDeviceModal">
@@ -210,7 +236,7 @@
                 <br>
                 <br>
                 <h4>{{__ "Light-DeleteGroup"}}?</h4>
-                <table id="groupTable" class="display" cellspacing="0" width="100%">
+                <table id="editGroupTable" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>{{__ 'Light-Group'}}</th>

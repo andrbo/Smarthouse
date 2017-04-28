@@ -10,14 +10,31 @@ exports.getUnits = function(callback){
     });
 };
 
+exports.getUnitsOfGroup = function(groupname,callback){
+    var sql = 'SELECT id FROM units WHERE groupid = ?';
+    db.query(sql,groupname, function (err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
+exports.toggleGroup = function (groupname, groupstate, callback){
+    var values = [groupstate,groupname];
+    var sql = 'UPDATE groups SET groupstate = ? WHERE groupname=?';
+    db.query(sql,values, function (err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
 exports.toggleUnit = function(state, id,callback){
     var values = [state, id];
     var sql = 'UPDATE units SET state = ? WHERE id=?';
     db.query(sql,values, function(err, result){
         if(callback){
             callback(err, result);
-            console.log(result);
-            console.log('ERROR UNITS'+err);
         };
     });
 };

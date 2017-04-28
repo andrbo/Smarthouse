@@ -413,6 +413,21 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post('/getUnitsOfGroup', function (req, res){
+        var groupId = req.body.groupId;
+        function getUnitsOfGroup(callback){
+            unitModel.getUnitsOfGroup(groupId, function (err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                };
+            });
+        }
+        getUnitsOfGroup(function(err, res){
+
+        });
+    });
+
     app.post('/addUnit', function (req, res) {
         var description = req.body.description.trim();
         var groupid = req.body.groupname.trim();
@@ -450,7 +465,7 @@ module.exports = function (app, passport) {
     });
 
 
-    app.post("/getGroups", function (req, res) {
+    app.get("/getGroups", function (req, res) {
         function getGroups(callback) {
             unitModel.listGroup(function (err, result) {
                 if (callback) {
@@ -464,15 +479,30 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post("/toggleGroup", function (req, res){
+        function toggleGroup(callback){
+            var groupId = req.body.groupId;
+            var newGroupState = req.body.state;
+            unitModel.toggleGroup(groupId, newGroupState,function (err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                };
+            });
+        };
+        toggleGroup(function (err, res){
+
+        });
+    });
+
     app.post("/toggleUnit", function (req, res){
         console.log('Kaller routes');
         function toggleUnit (callback){
             var id = req.body.unitId;
             var state = req.body.state;
-            console.log('inne i toggleUnit med verdier' + "newstate: "+state + "id: "+id);
             unitModel.toggleUnit(state, id, function (err, result){
                 if(callback){
-                    res.send(result);
+                    res.send({id: id});
                     callback(err, result);
                 }
             })

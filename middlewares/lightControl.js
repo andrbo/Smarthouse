@@ -1,9 +1,9 @@
-var rfTransmitter = require('nexa');
+//var rfTransmitter = require('nexa');
 
 //Transmitter module is connected to wiringPi pin 15
-rfTransmitter.nexaInit(15, function() {
-    console.info("RF transmitter initialized");
-});
+//rfTransmitter.nexaInit(15, function() {
+//    console.info("RF transmitter initialized");
+//});
 
 module.exports = function (io) {
 
@@ -24,16 +24,34 @@ module.exports = function (io) {
             socket.broadcast.emit('deviceChange');
         });
 
+        socket.on('groupDeviceOn', function (data) {
+            var unit = data.unitno;
+          //  rfTransmitter.nexaOn(remote, unit, function(){
+          //  });
+            console.log('Skal skru på enhet med id= ' + unit);
+        });
+
+        socket.on('groupDeviceOff', function (data) {
+            var unit = data.unitno;
+           // rfTransmitter.nexaOff(remote, unit, function(){
+           // });
+            console.log('Skal skru av enhet med id= ' + unit);
+        });
+
+        socket.on('groupToggleDone', function(){
+            socket.broadcast.emit('deviceChange'); // Muligens noe annet dersom refresh for tab er mulig
+        })
+
         socket.on('pairDevice', function (data) {
             var unit = data.unitno;
-            rfTransmitter.nexaPairing(remote,unit, function() {
-             });
+            rfTransmitter.nexaPairing(remote, unit, function () {
+            });
             socket.broadcast.emit('deviceChange');
         });
 
-        socket.on('unpairDevice', function(data){
+        socket.on('unpairDevice', function (data) {
             var unit = data.unitno;
-            rfTransmitter.nexaUnpairing(remote,unit, function(){
+            rfTransmitter.nexaUnpairing(remote, unit, function () {
             })
             socket.broadcast.emit('deviceChange');
         })

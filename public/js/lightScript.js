@@ -12,7 +12,7 @@ socket.on('deviceChange', function () {
 
 $(function () {
     // Function used for getting the different groups from DB, for use in the dropdown when selecting group for a device
-    $.post('/getGroups').done(function (data) {
+    $.get('/getGroups').done(function (data) {
         var dropdownAddDevice = $("#groupValues");
         var dropdownChangeDevice = $("#groupValuesTest");
         for (var i = 0; i < data.length; i++) {
@@ -181,7 +181,7 @@ $('#addDeviceBtn').click(function () {
 });
 $('#editGroupBtn').click(function(){
     $('#editGroupModal').modal('show');
-    var editGroupTable = $("#groupTable").DataTable({
+    var editGroupTable = $("#editGroupTable").DataTable({
         ajax: {
             dataSrc: '',
             url: '/getGroups',
@@ -192,7 +192,7 @@ $('#editGroupBtn').click(function(){
         lengthChange: false,
         columns: [
             {data: "groupname"},
-            {defaultContent: "<button></button>"}
+            {defaultContent: "<button class='btn btn-danger'>Delete</button>"} // add locales
         ]
     });
     $('#editGroupSaveNew').click(function(){
@@ -297,3 +297,82 @@ function addNewGroup(newGroup){
         }
     });
 }
+
+// functions for the control group pane
+$(function () {
+//$('#controlGroup').click(function(){
+    var groupTable = $("#groupTable").DataTable({
+        ajax: {
+            dataSrc: '',
+            url: '/getGroups',
+        },
+        scrollY: "430px",
+        searching: false,
+        info: false,
+        lengthChange: false,
+        "rowCallback": function (row, data, index) {
+            if (data.groupstate == 1) {
+                $('td button', row).html("ON").css({"background-color": "green"});
+            } else {
+                $('td button', row).html("OFF").css({"background-color": "red"});
+            }
+        },
+        columns: [
+            {data: "groupname"},
+            {data: "groupstate"},
+            {defaultContent: "<button></button>"}
+        ]
+    });
+
+    $('#groupTable tbody').on('click', 'button', function () {
+        var data = groupTable.row($(this).parents('tr')).data();
+        var state = data.groupstate;
+        var groupname = data.groupname;
+        if (state === 1) {
+            var newState = 0;
+            $.post('/toggleGroup', { // Turning the group off
+                groupId: groupname,
+                state: newState
+            }).done(function () {
+                $.post('/getUnitsOfGroup',{ // Retrieving the units belonging to the group
+                    groupId: groupname
+                }).done(function(data){
+                    for(i=0; i<data.length; i++){ // Turning the devices in the group off
+                        $.post('/toggleUnit', {
+                            unitId: data[i].id,
+                            state: newState
+                        }).done(function (data) {
+                            socket.emit('groupDeviceOff', {unitno: data.id});
+                        });
+                        console.log('FERDIG med å skru på, kaller socket for refresh');
+                        socket.emit('groupToggleDone');
+                    }
+                   // window.location.reload(true); // Må lage refresh for kun den aktive tab'en
+                })
+            });
+
+        } else {
+            var newState = 1;
+            $.post('/toggleGroup', { // Turning the group on
+                groupId: groupname,
+                state: newState
+            }).done(function () {
+                $.post('/getUnitsOfGroup',{ // Getting the devices belonging to the group
+                    groupId: groupname
+                }).done(function(data){ // Turning the devices in the group on
+                   for(i=0; i<data.length; i++){
+                       $.post('/toggleUnit', {
+                           unitId: data[i].id,
+                           state: newState
+                       }).done(function (data) {
+                           socket.emit('groupDeviceOn', {unitno: data.id});
+                       });
+                       console.log('FERDIG med å skru på, kaller socket for refresh');
+                       socket.emit('groupToggleDone');
+                   };
+                    //window.location.reload(true); // Må lage refresh for kun den aktive tab'en
+                });
+            });
+        };
+    });
+});
