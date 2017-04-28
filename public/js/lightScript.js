@@ -48,6 +48,9 @@ $(function () {
     });
 
 
+
+
+
     // Click function for the on/off toggle button in the DataTable. Function updates the DB with new state of the device,
     // and emitts a socket message to lightControl.js which in turn turns on/off the unit.
     $('table tbody').on('click', 'button', function () {
@@ -176,6 +179,28 @@ $('#deleteDevice').click(function(){
 $('#addDeviceBtn').click(function () {
     $('#addDeviceModal').modal('show');
 });
+$('#editGroupBtn').click(function(){
+    $('#editGroupModal').modal('show');
+    var editGroupTable = $("#groupTable").DataTable({
+        ajax: {
+            dataSrc: '',
+            url: '/getGroups',
+        },
+        scrollY: "430px",
+        searching: false,
+        info: false,
+        lengthChange: false,
+        columns: [
+            {data: "groupname"},
+            {defaultContent: "<button></button>"}
+        ]
+    });
+    $('#editGroupSaveNew').click(function(){
+        var groupInput= $('#editGroupNewGroupInput').val().trim();
+        console.log('Edit group input add new group: '+groupInput);
+        addNewGroup(groupInput);
+    })
+})
 // function for adding a new group
 $('#addNewGroup').click(function () {
     $('#newGroupInput').css("display", "block");
@@ -183,6 +208,8 @@ $('#addNewGroup').click(function () {
 
     $('#saveNewGroup').click(function () {
         var groupInput = $('#newGroup').val().trim();
+        addNewGroup(groupInput);
+      /*
         $.post('/addGroup', {
             name: groupInput
         }).done(function (data) {
@@ -197,6 +224,7 @@ $('#addNewGroup').click(function () {
                 $('#addNewGroupBtns').css("display", "none");
             }
         });
+        */
     });
 
     $('#cancelNewGroup').click(function () {
@@ -251,4 +279,21 @@ $('#saveAndPair').click(function () {
     });
 });
 
-
+// Function used for adding new groups in the edit group and add device modal
+function addNewGroup(newGroup){
+    var groupInput = newGroup;
+    $.post('/addGroup', {
+        name: groupInput
+    }).done(function (data) {
+        var retur = JSON.stringify(data);
+        if (retur === '""') {
+            $('#groupErr').css("display", "block");
+            if ($('#newGroupInput').click(function () {
+                    $('#groupErr').css("display", "none");
+                }));
+        } else {
+            $('#newGroupInput').css("display", "none");
+            $('#addNewGroupBtns').css("display", "none");
+        }
+    });
+}

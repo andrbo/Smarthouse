@@ -44,10 +44,11 @@
     "Field-Required": "Field is required",
 
 
-    "Inside": "Inside",
-    "Hum-Inside": "Humidity: ",
-    "Temp-Inside": "Temperature: ",
-    "Water-Plant": "Give the plants some water",
+    "Home-TempInside": "Inside",
+    "Home-TempOutside": "Outside",
+    "Home-Hum": "Humidity: ",
+    "Home-Temp": "Temperature: ",
+    "Home-WaterPlant": "Give the plants some water",
 
     "Forgot-Password-Header": "Forgot your password?",
     "Forgot-Password-Info": "Write your email and we will send you a new password",
@@ -108,6 +109,8 @@
     "Light-Remote": "Remote",
     "Light-UnitNo": "Unit no.",
     "Light-AddDevice": "Add device",
+    "Light-EditGroup": "Edit group",
+    "Light-DeleteGroup": "Delete a group",
     "Light-SelectRemote": "Select remote to use",
     "Light-AddRemote": "Add new remote",
     "Light-SetUnitNr": "Set unit number for device",

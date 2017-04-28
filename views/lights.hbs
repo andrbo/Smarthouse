@@ -25,6 +25,9 @@
         <div class="col-md-3">
             <button class=" btn-primary" id="addDeviceBtn">{{__ 'Light-AddDevice'}}</button>
         </div>
+        <div class="col-md-3">
+            <button class="btn-primary" id="editGroupBtn">{{__ 'Light-EditGroup'}}</button>
+        </div>
     </div>
 </div>
 
@@ -37,7 +40,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="descriptInputnput" class="col-md-2 col-form-label">{{__ "Light-Description"}}</label>
+                    <label for="descriptInput" class="col-md-2 col-form-label">{{__ "Light-Description"}}</label>
                     <div class="col-md-10">
                         <input class="form-control" type="text" placeholder="{{__ "Light-Description"}}"
                                id="descriptInput">
@@ -173,10 +176,57 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button  id= "saveChangeDevice" type="button" class="btn btn-primary">Save changes</button>
+                <button id="saveChangeDevice" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
+</div>
+<!-- Edit group modal -->
+<div class=" modal fade" id="editGroupModal">
+    <div class=" modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><span class="glyphicon glyphicon-cog"></span>{{__ "Light-EditGroup"}}</h3>
+            </div>
+            <div class="modal-body">
+                <h4>{{__ "Light-AddNewGroup"}}:</h4>
+                <hr>
+                <div class=form-group row>
+                    <div class = "col-md-8">
+                        <input id="editGroupNewGroupInput" type="text" class="form-control">
+                    </div>
+                    <div class = "col-md-2 pull-right" >
+                        <button id = "editGroupSaveNew" type="button" class="btn btn-success">{{__ "Light-Save"}}</button>
+                    </div>
+                </div>
+                <div class=" form-group row" style="display: none">
+                    <div class="col-md-12">
+                        <p id="addGroupSucess" style="color: green"></p>
+                    </div>
+                    <div class = "col-md-12">
+                        <p id="addGroupFail" style="color: red"></p>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <h4>{{__ "Light-DeleteGroup"}}?</h4>
+                <table id="groupTable" class="display" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>{{__ 'Light-Group'}}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="cancelEditGroup" class="btn btn-default" data-dismiss="modal">{{__
+                        "Light-Cancel"}}</button>
+            </div>
+        </div>
+    </div>
+
 </div>
 <!-- Delete device modal -->
 <div class="modal fade" id="deleteDeviceModal">

@@ -9,13 +9,26 @@
             </thead>
             <tbody>
             <tr>
-                <td id="temp">{{__ "Temp-Inside"}}</td>
+                <td>{{__ "Home-TempInside"}}</td><td></td>
+            </tr>
+            <tr>
+                <td id="temp">{{__ "Home-Temp"}}</td>
                 <td id="tempValue">No value</td>
             </tr>
-
             <tr>
-                <td id="hum">{{__ "Hum-Inside"}}</td>
+                <td id="hum">{{__ "Home-Hum"}}</td>
                 <td id="humValue">No value</td>
+            </tr>
+            <tr>
+            <td>{{__ "Home-TempOutside"}}</td><td></td>
+            </tr>
+            <tr>
+                <td>{{__ "Home-Temp"}}</td>
+                <td id="tempOut1">No value</td>
+            </tr>
+            <tr>
+                <td>{{__ "Home-Temp"}}</td>
+                <td id="tempOut2">No value</td>
             </tr>
             </tbody>
         </table>
@@ -33,7 +46,6 @@
         <h3 id="noWarningsHeader">All good!</h3>
     </div>
 </div>
-
 
 
 <div id="eventList" class="panel col-md-12 col-xs-12">
@@ -54,37 +66,36 @@
         opacity: 0.8;
     }
 
-    .table thead th{
+    .table thead th {
         font-size: 20px;
         margin-bottom: 30px;
         height: 30px;
         width: 100%
     }
 
-    .table thead th tr td{
+    .table thead th tr td {
         font-size: 20px;
         height: 93px;
         width: 100%
     }
 
     #sensorInfoPanel {
-        background-color:white;
+        background-color: white;
         width: 49%;
         height: 45%;
     }
 
     #sensorAlerts {
-        background-color:white;
+        background-color: white;
         width: 49%;
         height: 45%;
     }
 
     #eventList {
-        background-color:white;
+        background-color: white;
         height: 40%;
         margin-top: 10px;
     }
-
 
     #hum {
         width: 10%

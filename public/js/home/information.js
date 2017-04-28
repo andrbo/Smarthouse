@@ -9,7 +9,7 @@ socket.on('serialEvent', function (data) {
 
     flameReading(data);
 
-    var tempValue = $('#tempValue');
+
     tempReading(data);
 
     var humValue = $('#humValue');
@@ -69,6 +69,10 @@ function noErrors(){
 // Function for reading the temperature value of the DHT11 sensor
 function tempReading(data) {
     var tempSensorValue = data.Temperature;
+    var outTemp1 = data.Ds1Value;
+    var outTemp2 = data.Ds2Value;
+    $('#tempOut1').html(outTemp1+celsius);
+     $('#tempOut2').html(outTemp2+celsius);
     if (tempSensorValue < 5) {
         $('#tempValue').html(tempSensorValue + celsius).css("color", "#42a7f4");
     }

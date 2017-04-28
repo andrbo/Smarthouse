@@ -56,7 +56,7 @@ function activateAlarmModal(){
                 //$('.modal-backdrop').remove();
                 buttonState(1);
                 updateToggleState();
-                socket.emit('alarmActivate', {state: 1});
+                socket.emit('alarmToggle', {state: 1});
                 window.location.reload(true);
             } else {
                 $('#pwErrorAct').show();
@@ -82,7 +82,7 @@ function deActivateAlarmModal(){
                 //$('.modal-backdrop').remove();
                 buttonState(1);
                 updateToggleState();
-                socket.emit('alarmDeactivate');
+                socket.emit('alarmToggle', {state: 0});
                 window.location.reload(true);
             } else {
                 $('#pwErrorAct').show();
