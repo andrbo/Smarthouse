@@ -118,6 +118,9 @@
 	"Light-SaveDeviceSummary": "Legger til enheten med instillingene listet nedenfor i systemet. Sett mottakeren i paringsmodus og klikk lagre.",
 
 
-	"Calendar-Events": "Hendelser"
+	"Calendar-Events": "Hendelser",
+	"Calendar-New-Event": "Ny hendelse",
 
+	"Chat-meSend": "Meg",
+	"Chat-Message-Input": "Skriv din melding her..."
 }

@@ -1,4 +1,4 @@
-$(document).ready(function (req, res) {
+$(document).ready(function () {
 
     $('#calendar').fullCalendar({
         height: 700,
@@ -11,7 +11,7 @@ $(document).ready(function (req, res) {
 
         customButtons: {
             addEvent: {
-                text: "New Event",
+                text: $("#newEvent").text(),
                 click: function () {
                     $("#addEventModal").modal('show');
                 }
@@ -62,27 +62,42 @@ $(document).ready(function (req, res) {
     });
 
     $("#eventStartCalendarGlyph, #eventEndCalendarGlyph, #updateEventStartCalendarGlyph, #updateEventEndCalendarGlyph").datetimepicker({
-        format: "YYYY-MM-DD HH:MM"
+        format: "YYYY-MM-DD HH:mm"
     });
 
 
-    $("#calendarEventList").dataTable({
+    var table = $("#calendarEventList").DataTable({
         ajax: {
             dataSrc: "",
             url: '/getAllEvents'
         },
 
-        pageLength:6,
+        scrollY:280,
+        bScrollCollapse : true,
+        bPaginate: false,
         searching: false,
         info: false,
         lengthChange: false,
         columns: [
             {data: "firstname", title: "Name"},
             {data: "title", title: "Title"},
-            {data: "description", title: "Description"},
             {data: "start", title: "Start"},
             {data: "end", title: "End"}
         ]
+    });
+
+    $('#calendarEventList tbody').on('click', 'tr', function () {
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            var data = table.row(this).data();
+            $("#showDescriptionModal").modal("show");
+            $("#eventDescription").text(data.description)
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
     });
 
 });

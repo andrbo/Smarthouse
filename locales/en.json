@@ -121,9 +121,11 @@
     "Light-SaveDevicePrompt":"Add device to system and pair",
     "Light-SaveDeviceSummary": "Adding the device with settings listed below to the system. Put reciever into paring mode, and click save ",
 
+    "Calendar-Events": "Activities",
+    "Calendar-New-Event": "New event",
 
-
-    "Calendar-Events": "Activities"
+    "Chat-meSend": "Me",
+    "Chat-Message-Input": "Write your message here..."
 
 
 }
