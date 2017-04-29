@@ -1,8 +1,8 @@
 var db = require('../middlewares/db');
 
-exports.addEvent = function (email, title, description, start, end, callback) {
-    var values = [email, title, description, start, end];
-    var sql = 'INSERT INTO events (email, title, description, start, end) VALUES (?, ?, ?, ?, ?)';
+exports.addEvent = function (email, title, description, start, end, participants, callback) {
+    var values = [email, title, description, start, end, participants];
+    var sql = 'INSERT INTO events (email, title, description, start, end, participants) VALUES (?, ?, ?, ?, ?, ?)';
 
     db.query(sql, values, function (err, result) {
         if (callback) {

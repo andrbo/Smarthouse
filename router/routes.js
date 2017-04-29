@@ -8,6 +8,7 @@ module.exports = function (app, passport) {
     var db = require('../middlewares/db');
     var bcrypt = require('bcryptjs');
     var calModal = require('../models/calendar');
+    var shopModal = require('../models/shop');
     var unitModel = require('../models/units');
 
     app.get('/', function (req, res) {
@@ -18,8 +19,10 @@ module.exports = function (app, passport) {
         if (req.isAuthenticated()) {
             res.render("home", {
                 login: true,
-                loginUsername: req.user.email
+                loginUsername: req.user.email,
+                loginFirstname: req.user.firstname
             });
+            console.log("EMAIL:" + req.user.email + " NAVN: " + req.user.firstname)
         } else {
             res.render("home");
         }
@@ -158,7 +161,6 @@ module.exports = function (app, passport) {
         }
     });
 
-
     app.post('/updatePassword', function (req, res) {
         var email = req.user.email;
         var oldPassword = req.body.oldPassword;
@@ -258,6 +260,7 @@ module.exports = function (app, passport) {
         var description = req.body.description;
         var start = req.body.start;
         var end = req.body.end;
+        var participants = req.body.participants;
 
         function addEvent(callback) {
             calModal.addEvent(email, title, description, start, end, function (err, result) {
@@ -313,6 +316,54 @@ module.exports = function (app, passport) {
         }
 
         updateDate(function (err, res) {
+        });
+    });
+
+    app.get("/getShoppingList", function (req, res) {
+        function getShoppingList(callback) {
+            shopModal.getShoppingList(function (err, result) {
+                if (callback) {
+                    console.log("RESULT: " + result);
+                    console.log("ERR: " + err);
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+
+        getShoppingList(function (err, result) {
+        });
+    });
+
+    app.post("/removeProduct", function (req, res) {
+        var id = req.body.id;
+        console.log("ID: " + id);
+        function removeProduct(callback) {
+            shopModal.removeProduct(id, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+
+        removeProduct(function (err, result) {
+        });
+    });
+
+    app.post("/addProduct", function (req, res) {
+        var description = req.body.description;
+        console.log("DESC: " + description);
+        function addProduct(callback) {
+            shopModal.addProduct(description, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+
+        addProduct(function (err, result) {
         });
     });
 

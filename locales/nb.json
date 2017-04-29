@@ -127,6 +127,9 @@
 	"Light-DeleteDevConfirm": "Er du sikker på at du vil slette følgende enhet?",
 	"Light-DeleteUnpair": "For å slette enheten og fjerne paringen, setter du mottakeren i paringsmodus og trykker på slett enhet",
 
-	"Calendar-Events": "Hendelser"
+	"Calendar-Events": "Hendelser",
+	"Calendar-New-Event": "Ny hendelse",
 
+	"Chat-meSend": "Meg",
+	"Chat-Message-Input": "Skriv din melding her..."
 }

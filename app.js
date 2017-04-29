@@ -13,8 +13,10 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 
-//Uses the db.js file
+//var redis = require("connect-redis")(session);
 
+
+//Uses the db.js file
 require('./middlewares/db');
 require('./middlewares/passport')(passport);
 
@@ -25,7 +27,19 @@ app.io.lightControl = require('./middlewares/lightControl')(app.io);
 //app.io.alarmActivated = require('./middlewares/alarmActivated')(app, app.io);
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
-app.io.chat = require('./public/js/chat/chat.js')(app.io);
+
+/*
+var sessionMiddleware = session({
+    store: new redis({}),
+    secret: "secret",
+});
+
+app.io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
+
+app.use(sessionMiddleware);
+*/
 
 app.get('/', function (req, res) {
     res.redirect('home');
@@ -77,8 +91,9 @@ app.use(function (req, res, next) {
 
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
 i18n.configure({
-    locales: ['no', 'en'],
-    fallbacks: {'no': 'en'},
+    locales: ['en', 'nb'],
+    fallbacks: {'en': 'nb'},
+    defaultLocale: 'nb',
     cookie: 'locale',
     directoryPermissions: '755',
     directory: __dirname + "/locales",
@@ -99,6 +114,7 @@ hbs.handlebars.registerHelper('__n', function () {
 });
 
 //Router controller. Uses passport as authentication.
+app.io.chat = require('./public/js/chat/chat.js')(app.io);
 require('./router/routes')(app,passport);
 
 //Express Validator

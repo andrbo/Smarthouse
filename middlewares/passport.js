@@ -10,7 +10,7 @@ module.exports = function (passport) {
 
     //Used to serialize the user for the session
     passport.serializeUser(function (user, done) {
-        done(null, user.email);
+        done(null, user.email, user.firstname);
     });
 
     //Used to deserialize the user
@@ -95,8 +95,7 @@ module.exports = function (passport) {
                         }
                     });
                 }else{
-                    console.log("Bruker finnes ikke");
-                    done(null, false);
+                    done(null, false, req.flash('error_msg', req.__("Mail finnes ikke")));
                 }
             });
         }
