@@ -1,0 +1,47 @@
+<!-- Delete unit modal -->
+<div class="modal fade" id="deleteUnitModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>{{__ "Light-DeleteDevice"}}</h3>
+            </div>
+            <div class="modal-body">
+                <h4>{{__ "Light-DeleteDevConfirm"}}</h4>
+                <hr>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h5>{{__ "Light-UnitNo"}}:</h5>
+                    </div>
+                    <div class="col-md-4 ">
+                        <h5 id="deleteDevUnitno"></h5>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h5>{{__ "Light-Description"}}:</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 id="deleteDevDescript"></h5>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <h5>{{__ "Light-Group"}}:</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 id="deleteDevGroup"></h5>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <h4>{{__ "Light-DeleteUnpair"}}</h4>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{__ "Light-Cancel"}}</button>
+                    <button id='deleteDeviceBtn' type="button" class="btn btn-danger">{{__
+                            "Light-DeleteDevice"}}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

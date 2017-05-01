@@ -1,0 +1,29 @@
+<!-- Save and pair device modal -->
+<div class="modal fade" id="saveUnitModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><span class="glyphicon glyphicon-transfer"></span>{{__ "Light-SaveDevicePrompt"}}</h3>
+            </div>
+            <div class="modal-body">
+                <div class="jumbotron">
+                    <p>{{__ "Light-SaveDeviceSummary"}} </p>
+                    <br>
+                    <br>
+                    <ul>
+                        <li>{{__ "Light-Description"}}:</li>
+                        <p id="sumDescript"></p>
+                        <li>{{__ "Light-Group"}}:</li>
+                        <p id="sumGroup"></p>
+                    </ul>
+                    <br>
+                    <br>
+                    <button id="saveAndPair" class="btn-success">{{__ "Light-Save"}}</button>
+                    <button id="cancelSavePair" class="btn-danger" data-dismiss="modal">{{__ "Light-Cancel"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>

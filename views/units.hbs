@@ -1,0 +1,74 @@
+<div class=" jumbotron text-center">
+    <div class="container">
+            <ul class="nav nav-tabs" id="controlTabs">
+                <li class="active"><a href="#controlUnitTab" data-toggle="tab">{{__ "Light-ControlUnit"}}</a></li>
+                <li><a href="#controlGroupTab" id="controlGroup" data-toggle="tab">{{__ "Light-ControlGroup"}}</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="controlUnitTab">
+                    <table id="unitTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>{{__ 'Light-UnitNo'}}</th>
+                            <th>{{__ 'Light-Description'}}</th>
+                            <th>{{__ 'Light-State'}}</th>
+                            <th>{{__ 'Light-Group'}}</th>
+                            <th>{{__ 'Light-Toggle'}}</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>{{__ 'Light-UnitNo'}}</th>
+                            <th>{{__ 'Light-Description'}}</th>
+                            <th>{{__ 'Light-State'}}</th>
+                            <th>{{__ 'Light-Group'}}</th>
+                            <th>{{__ 'Light-Toggle'}}</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class=" btn-primary" id="addDeviceBtn">{{__ 'Light-AddDevice'}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="controlGroupTab">
+                    <h3>Control group</h3>
+                    <br>
+                    <br>
+                    <div class=" container">
+                        <table id="groupTable" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>{{__ "Light-Group"}}</th>
+                                <th>{{__ "Light-State"}}</th>
+                                <th>{{__ "Light-Toggle"}}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <div class="col-md-3">
+                            <button class="btn-primary" id="editGroupBtn">{{__ 'Light-EditGroup'}}</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+{{> units/addUnitModal}}
+{{> units/editUnitModal}}
+{{> units/editGroupModal}}
+{{> units/deleteUnitModal}}
+{{> units/saveUnitModal}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/units/unitControlScript.js"></script>   <!-- Add group funksjonen fungerer ikke etter flytting. Ikke for edit unit elller edit group -->
+<script src="/js/units/addUnitModalScript.js"></script>
+<script src="/js/units/editUnitModalScript.js"></script> <!-- Gruppe dropdown fungerer ikke etter flytting ellers ok -->
+<script src="/js/units/groupControlScript.js"></script>
+<script src="/js/units/editGroupModalScript.js"></script> <!-- Slette og legge til nye grupper fungerer ikke etter flytting -->
+
+
+
+

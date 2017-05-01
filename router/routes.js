@@ -52,9 +52,9 @@ module.exports = function (app, passport) {
         }
     });
 
-    app.get('/lights', function (req, res) {
+    app.get('/units', function (req, res) {
         if (req.isAuthenticated()) {
-            res.render("lights", {
+            res.render("units", {
                 login: true,
                 loginUsername: req.user.email
             });
