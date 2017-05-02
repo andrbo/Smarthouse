@@ -32,9 +32,9 @@ exports.deleteEvent = function (id, callback) {
 };
 
 //Update event when clicking "update".
-exports.updateEvent = function (title, description, start, end, id, callback) {
-    var values = [title, description, start, end, id];
-    var sql = 'UPDATE events SET title = ?, description = ?, start = ?, end = ? WHERE id = ?';
+exports.updateEvent = function (title, description, start, end, participants, id, callback) {
+    var values = [title, description, start, end, participants, id];
+    var sql = 'UPDATE events SET title = ?, description = ?, start = ?, end = ?, participants = ? WHERE id = ?';
 
     db.query(sql, values, function (err, result) {
         if (callback) {
@@ -56,10 +56,19 @@ exports.updateDate = function(start, end, id, callback){
 };
 
 exports.getAllEvents = function(callback){
-    var sql = 'SELECT events.description, events.title, events.start, events.end, users.firstname FROM events JOIN users ON events.email = users.email';
+    var sql = 'SELECT events.description, events.title, events.start, events.end, users.firstname, events.participants FROM events JOIN users ON events.email = users.email';
     db.query(sql, function(err, res){
         if(callback){
             callback(err, res);
         }
     })
-}
+};
+
+exports.getParticipants = function(id, callback){
+    var sql = 'SELECT participants FROM events WHERE id = ?';
+    db.query(sql, id, function(err, res){
+        if(callback){
+            callback(err, res);
+        }
+    })
+};

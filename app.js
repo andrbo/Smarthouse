@@ -23,6 +23,7 @@ require('./middlewares/passport')(passport);
 // call socket.io to the app
 app.io = require('socket.io')();
 
+
  app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.alarmActivated = require('./middlewares/alarmActivated')(app, app.io);
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);

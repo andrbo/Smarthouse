@@ -18,7 +18,18 @@ exports.getUser = function(email, callback){
     db.query(sql, email, function(err, res){
         if(callback){
             callback(err, res);
-        };
+        }
+    })
+};
+
+exports.getAllUsers = function(email, callback){
+    var sql = 'SELECT firstname FROM users WHERE NOT email = ?';
+    db.query(sql, email, function(err, res){
+        if(callback){
+            console.log("ERR: " + err);
+            console.log("RES: " + res);
+            callback(err, res);
+        }
     })
 };
 
