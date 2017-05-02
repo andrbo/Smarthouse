@@ -22,12 +22,19 @@ exports.getUser = function(email, callback){
     })
 };
 
+exports.getAllEmails = function (callback) {
+    var sql = 'SELECT email FROM users';
+    db.query(sql, function(err, res){
+        if(callback){
+            callback(err, res);
+        }
+    })
+};
+
 exports.getAllUsers = function(email, callback){
     var sql = 'SELECT firstname FROM users WHERE NOT email = ?';
     db.query(sql, email, function(err, res){
         if(callback){
-            console.log("ERR: " + err);
-            console.log("RES: " + res);
             callback(err, res);
         }
     })
@@ -35,12 +42,10 @@ exports.getAllUsers = function(email, callback){
 
 exports.forgotPassword=function(password, email, callback){
     var values = [password, email];
-console.log("values " + values);
     var sql = 'UPDATE users SET password = ? WHERE email = ?';
     db.query(sql,values, function (err, res) {
         if(callback){
             callback(err, res);
-            console.log("ERR " + err);
         };
     })
 };
@@ -66,7 +71,7 @@ exports.updatePassword=function(newPassword, email, callback){
 
 exports.updateProfile = function (firstname, surname, address, postalCode, city, email, email2, currentMail, callback) {
     var values = [firstname, surname, address, postalCode, city, email, email2, currentMail];
-    var sql = 'UPDATE users SET firstname = ?, surname = ?, address = ?, postalCode = ?, city = ?, email = ? WHERE email = ?';
+    //var sql = 'UPDATE users SET firstname = ?, surname = ?, address = ?, postalCode = ?, city = ?, email = ? WHERE email = ?';
 
     var sql = 'UPDATE users JOIN events ON users.email = events.email ' +
         'SET users.firstname = ?, users.surname = ?, users.address = ?, users.postalCode = ?, users.city = ?, users.email = ?, events.email = ? ' +

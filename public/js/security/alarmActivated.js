@@ -1,135 +1,202 @@
+var mailGroup = require("/Users/markusmarkussen/Documents/Github/Smarthouse/models/User.js");
+var nodemailer = require('nodemailer');
+
 var serialport = require('serialport');
 var SerialPort = serialport; // make a local instance of it
-//var arduinoPort = '/dev/cu.wchusbserial14210';
+var arduinoPort = '/dev/cu.wchusbserial14230';
 //var arduinoPort = '/dev/ttyACM0';
-var arduinoPort = 'COM4';
+//var arduinoPort = 'COM4';
 var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
 });
-var alarmState;
-var serialData ="";
+var alarmState = 0; //When server starting.
+var serialData = "";
 var tempData = [];
 
 
 module.exports = function (app, io) {
 
-    getState();
+    var currentTime = getDate();
 
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
-        switch(alarmState){
+        io.sockets.emit('serialEvent', serialData);
+        switch (alarmState) {
             case 0:
                 generalAlarm(data)
                 break;
             case 1:
-                 alarmOn(data);
-                 generalAlarm(data)
-                 break;
+                alarmOn(data);
+                generalAlarm(data)
+                break;
         }
     });
-
-
-
-function alarmOn(data){
     var alarmJson = [];
-    console.log('alarm er på')
-    var sensorData = JSON.parse(data);
-    var vibe = sensorData.VibeValue;
-    var ir = sensorData.IRBarrierValue;
-    var pir = sensorData.PirValue;
-    var laser = sensorData.Laser;
-
-    if(vibe == 1){
-        alarmJson.push({Vibe: 1});
-    };
-    if(ir == 0){
-        alarmJson.push({IR: 1});
-    }
-    if(pir == 1){
-        alarmJson.push({PIR: 1});
-    }
-    if(laser == 1){
-        alarmJson.push({Laser: 1, Time: getDate()});
-    }
-    if(alarmJson.length > 0){
-        sendAlert(alarmJson);
-        console.log('Sender epost med følgende innbruddsdata: '+ JSON.stringify(alarmJson));
-    }
-}
-
-function generalAlarm(data) {
     var generalJson = [];
-    console.log('JSON oppretter har lengde: '+generalJson.length);
-    var sensorData = JSON.parse(data);
-    var gas = sensorData.Gas;
-    var flame = sensorData.Flame;
-    var leak = sensorData.LeakValue;
-    //Thresholds
-    var gasThreshold = 200;
-    var leakThreshold = 1000;
 
-    if(gas>gasThreshold){
-       // Gass registrert
-        generalJson.push({Gas: 1});
-        console.log('Gass registrert');
-    }
-    if(flame == 0){
-       // Flamme registeert
-        generalJson.push({Flame: 1 });
-        console.log('flamme registrert');
-        console.log(JSON.stringify(generalJson));
-        console.log('JSON har nå lengde: '+generalJson.length);
-    }
-    if(leak < leakThreshold){
-        // Lekasje detektert
-        console.log('lekasje detektert');
-        generalJson.push({Leak: 1});
-        console.log()
+    function alarmOn(data) {
+        console.log('alarm er på');
+        var sensorData = JSON.parse(data);
+        var vibe = sensorData.VibeValue;
+        var ir = sensorData.IRBarrierValue;
+        var pir = sensorData.PirValue;
+        var laser = sensorData.Laser;
 
-    }
-    if(generalJson.length > 0){
-        if(tempData.length==0) {
-            tempData = generalJson;
+        if (vibe == 1) {
+            ifAlarmSendMail("Vibe", getDate());
         }
-        // Gå gjennom begge tabellene og let etter sensor med tid
-        // sammenlign om disse er mer enn 5min fra hverandre ( eller mer)
-        console.log('sender epost med følgende data: '+JSON.stringify(generalJson));
-        sendAlert(generalJson);
+        if (ir == 0) {
+            ifAlarmSendMail("IR", getDate());
+        }
+        if (pir == 1) {
+            ifAlarmSendMail("PIR", getDate());
+        }
+        if (laser == 1) {
+            ifAlarmSendMail("Laser", getDate());
+        }
+        console.log("ALARMJSON: " + JSON.stringify(alarmJson));
     }
-    //    ((sendEpost("Følgende alarmer har gått: " + strong)
-   // }
-};
 
-function getDate(){
-  var date = new Date();
-  return date;
-}
-io.sockets.on('connection', function (socket) {
-    socket.on('alarmToggle', function (data){
-        getState();
+    function ifAlarmSendMail(name, time) {
+        function getMailGroup(callback) {
+            mailGroup.getAllEmails(function (err, result) {
+                callback(err, result);
+            })
+        }
+
+        var exist = false;
+        for (var i = 0; i < alarmJson.length; i++) {
+            currentTime = getDate();
+            if (alarmJson[i].name == name) {
+                exist = true;
+            }
+
+            if (exist && (parseInt(currentTime) - parseInt(alarmJson[i].time)) > 0) {
+                if (alarmJson[i].name == name) {
+                    alarmJson.splice(i, 1);
+                }
+                alarmJson.push({name: name, time: time});
+                console.log("SENDER MAIL");
+                getMailGroup(function (err, res) {
+                    for (var i = 0; i < res.length; i++) {
+                        sendMail(res[i].email, name);
+                    }
+                });
+            }
+        }
+
+        if (!exist) {
+            console.log("Eksisterer ikke");
+            alarmJson.push({name: name, time: getDate()});
+        }
+    }
+
+    function ifGeneralAlarmSendMail(name, time) {
+        function getMailGroup(callback) {
+            mailGroup.getAllEmails(function (err, result) {
+                callback(err, result);
+            })
+        }
+
+        var exist = false;
+        for (var i = 0; i < generalJson.length; i++) {
+            currentTime = getDate();
+            if (generalJson[i].name == name) {
+                exist = true;
+            }
+
+            if (exist && (parseInt(currentTime) - parseInt(generalJson[i].time)) > 0) {
+                if (generalJson[i].name == name) {
+                    generalJson.splice(i, 1);
+                }
+                generalJson.push({name: name, time: time});
+                console.log("SENDER MAIL");
+                getMailGroup(function (err, res) {
+                    for (var i = 0; i < res.length; i++) {
+                        sendMail(res[i].email, name);
+                    }
+                });
+            }
+        }
+
+        if (!exist) {
+            console.log("Eksisterer ikke");
+            generalJson.push({name: name, time: getDate()});
+        }
+    }
+
+    function generalAlarm(data) {
+        var sensorData = JSON.parse(data);
+        var gas = sensorData.Gas;
+        var flame = sensorData.Flame;
+        var leak = sensorData.LeakValue;
+        //Thresholds
+        var gasThreshold = 300;
+        var leakThreshold = 1000;
+
+        if (gas > gasThreshold) {
+            // Gass registrert
+            ifGeneralAlarmSendMail("Gas", getDate());
+            console.log('Gass registrert');
+        }
+        if (flame == 0) {
+            // Flamme registeert
+            ifGeneralAlarmSendMail("Flame", getDate());
+            console.log('flamme registrert');
+            console.log(JSON.stringify(generalJson));
+            console.log('JSON har nå lengde: ' + generalJson.length);
+        }
+        if (leak < leakThreshold) {
+            // Lekasje detektert
+            console.log('lekasje detektert');
+            ifGeneralAlarmSendMail("Leak", getDate());
+            console.log()
+
+        }
+        console.log("GENEREAL JSJON" + JSON.stringify(generalJson));
+    }
+
+    function getDate() {
+        var date = new Date().toISOString().slice(14, 19);
+        return date;
+    }
+
+    io.sockets.on('connection', function (socket) {
+        socket.on('alarmToggle', function (data) {
+            console.log("STATE: " + data.state);
+            alarmState = data.state;
+        });
+        socket.emit('serialEvent', serialData);
+        console.log("DARTA:  " + serialData)
     });
-    socket.emit('serialEvent', serialData);
-});
 
-function sendAlert(data){
-    console.log('Recieved data in sendAlert()' + JSON.stringify(data));
-    //for(i=0; i<data.length; i++){
-    //    for(keys in )
-   // }
-}
+    function sendMail(email, name) {
+        var temp = "Følgende alarm er blitt aktivert: ";
+        var temp2 = name;
 
-function getState(){
-   // app.post('/alarmState',function(){
-   //     console.log('kjøreer spørring');
-   // });
-    alarmState = 1;
-   // Bruke denne?
-   // $.post('/alarmState').done(function (data) {
-   //     var state = JSON.stringify(data[0].value);
-   //     alarmState = state;
-   // });
-};
+        console.log("TEMP2: " + temp2);
 
-
+        var smtpTransport = nodemailer.createTransport({
+            service: "Gmail",  //Automatically sets host, port and connection security settings
+            auth: {
+                user: "Smarthus2017@gmail.com",
+                pass: "Smarthus"
+            }
+        });
+        smtpTransport.sendMail({
+            from: "<Smarthus2017@gmail.com>", //Sender address. Must be the same as authenticated user if using Gmail.
+            to: email, // receiver
+            subject: "Alarm aktivert!", //TODO: Fiks internasjonalisering
+            text: temp + temp2// body
+        }, function (error, response) {  //callback
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Message sent: " + response.message);
+                res.redirect('/home');
+            }
+            smtpTransport.close(); //Shut down the connection, no more messages.
+        });
+    }
 };
