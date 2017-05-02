@@ -12,16 +12,17 @@ module.exports = function (io) {
 
         socket.on('deviceOn', function (data) {
             var unit = data.unitno;
-
-             rfTransmitter.nexaOn(remote, unit, function () {
-            });
+            console.log('DEVICE ON------'+unit);
+            // rfTransmitter.nexaOn(remote, unit, function () {
+            //});
             socket.broadcast.emit('deviceChange');
         });
 
         socket.on('deviceOff', function (data) {
             var unit = data.unitno;
-            rfTransmitter.nexaOff(remote, unit, function () {
-            });
+            //rfTransmitter.nexaOff(remote, unit, function () {
+            //});
+            console.log('DEVICE OFF-----'+unit)
             socket.broadcast.emit('deviceChange');
         });
 
@@ -29,14 +30,14 @@ module.exports = function (io) {
             var unit = data.unitno;
           //  rfTransmitter.nexaOn(remote, unit, function(){
           //  });
-            console.log('Skal skru på enhet med id= ' + unit);
+            console.log('GroupDeviceON---------'+unit);
         });
 
         socket.on('groupDeviceOff', function (data) {
             var unit = data.unitno;
            // rfTransmitter.nexaOff(remote, unit, function(){
            // });
-            console.log('Skal skru av enhet med id= ' + unit);
+            console.log('GroupDEVICEOFF-------=' + unit);
         });
 
         socket.on('groupToggleDone', function(){
