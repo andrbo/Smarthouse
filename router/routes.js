@@ -505,6 +505,10 @@ module.exports = function (app, passport) {
             var groupName = req.body.name;
             unitModel.createGroup(groupName, function (err, result) {
                 if (callback) {
+                    if(err){
+                        res.send({addError: 1})
+                    }
+                    console.log('ERROR I ROUTES ved addGroup'+err)
                     callback(err, result);
                     res.send(result);
                 }
@@ -543,6 +547,21 @@ module.exports = function (app, passport) {
         };
         toggleGroup(function (err, res){
 
+        });
+    });
+
+    app.post("/deleteGroup", function (req, res){
+        function deleteGroup(callback){
+            var groupId = req.body.groupId;
+            console.log('Inne i routes og skal slette gruppen: '+ groupId);
+            unitModel.deleteGroup(groupId, function(err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                };
+            });
+        };
+        deleteGroup(function(err, result){
         });
     });
 
@@ -592,6 +611,20 @@ module.exports = function (app, passport) {
         };
         changeDevice(function(err, res){
 
+        });
+    });
+
+    app.post("/deleteGroupUnit", function (req, res){
+        function removeGroupFromUnit(callback){
+            var id = req.body.groupId;
+            unitModel.removeGroupFromUnit(id, function (err, result){
+                if(callback){
+                    res.send(result);
+                    callback(err, result);
+                };
+            });
+        };
+        removeGroupFromUnit(function(err, result){
         });
     });
 };

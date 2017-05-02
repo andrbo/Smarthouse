@@ -52,7 +52,7 @@ exports.addUnit = function (description,groupid,callback){
 };
 
 exports.createGroup = function (groupname,callback) {
-    var sql = 'INSERT INTO groups VALUES (?)';
+    var sql = 'INSERT INTO groups VALUES (?,DEFAULT)';
     db.query(sql, groupname, function (err, result) {
         if (callback) {
             callback(err, result);
@@ -80,8 +80,26 @@ exports.deleteDevice = function(id, callback){
 
 exports.changeDevice = function(id, description, groupid, callback){
     var values = [description,groupid, id];
-    var sql = 'UPDATE units SET description=?,groupid=? WHERE id=?'
+    var sql = 'UPDATE units SET description=?,groupid=? WHERE id=?';
     db.query(sql,values, function(err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
+exports.removeGroupFromUnit = function(groupid, callback){
+    var sql = 'UPDATE units SET groupid=DEFAULT WHERE groupid=?';
+    db.query(sql,groupid, function(err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
+exports.deleteGroup = function(groupid, callback){
+    var sql = 'DELETE FROM groups WHERE groupname=?'
+    db.query(sql,groupid,  function(err, result){
         if(callback){
             callback(err, result);
         };

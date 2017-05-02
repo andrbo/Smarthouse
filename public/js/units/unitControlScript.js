@@ -1,5 +1,5 @@
 /*
-* The Script is used in units.hbs, and takes care of filling the datatables and controlling the tabs
+ * The Script is used in units.hbs, and takes care of filling the datatables and controlling the tabs
  */
 
 var socket = io();
@@ -80,31 +80,36 @@ $(function () {
         $('#editDevGroup').html(group);
     });
 
-    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
         localStorage.setItem('lastTab', $(e.target).attr('href'));
     });
     var lastTab = localStorage.getItem('lastTab');
-    if(lastTab){
+    if (lastTab) {
         $('#controlTabs a[href="' + lastTab + '"]').tab('show');
     }
 
 });
 
 // Function used for adding new groups in the edit group and add device modal
-function addNewGroup(newGroup){
+function addNewGroup(newGroup, callback) {
     var groupInput = newGroup;
-    $.post('/addGroup', {
-        name: groupInput
-    }).done(function (data) {
-        var retur = JSON.stringify(data);
-        if (retur === '""') {
-            $('#groupErr').css("display", "block");
-            if ($('#newGroupInput').click(function () {
-                    $('#groupErr').css("display", "none");
-                }));
-        } else {
-            $('#newGroupInput').css("display", "none");
-            $('#addNewGroupBtns').css("display", "none");
-        }
-    });
+    var test = 0;
+    if(callback) {
+        $.post('/addGroup', {
+            name: groupInput
+        }).done(function (data) {
+            var error = data.addError;
+            if (error === 1) {
+                $('#groupErr').css("display", "block");
+                if ($('#newGroupInput').click(function () {
+                        $('#groupErr').css("display", "none");
+                    }));
+            } else {
+                $('#newGroupInput').css("display", "none");
+                $('#addNewGroupBtns').css("display", "none");
+                $('#groupValues').append("<li><a class='listGroups'>" + groupInput + "</a></li>")
+            }
+        });
+    }
+    console.log(test);
 }
