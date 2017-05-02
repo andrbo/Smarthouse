@@ -2,7 +2,6 @@ var socket = io();
 
 // Socket functions
 socket.on('serialEvent', function (data) {
-
     var flameValue = $('#flameValue');
     flameReading(data);
     var gasValue = $('#gasValue');
@@ -55,11 +54,12 @@ function leakReading(data) {
 
 // Function for reading the value of the photoresistor used for sensing the laser beam
 function laserReading(data) {
+    console.log("KLASER: " + data.Laser);
     var laserSensorValue = data.Laser;
     if (laserSensorValue == 0) {
         $('#laserValue').html("OK").css("color", "green");
     } else {
-        $('#laserValue').html("Laser brutt").css("color", "green");
+        $('#laserValue').html("Laser brutt").css("color", "red");
     }
 }
 

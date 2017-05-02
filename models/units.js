@@ -41,8 +41,6 @@ exports.toggleUnit = function(state, id,callback){
 
 exports.addUnit = function (description,groupid,callback){
     var values = [description,groupid];
-    console.log("DESC: " + description);
-    console.log("ID: " + groupid);
     var sql = 'INSERT INTO units (description, state, controller, groupid) VALUES (?,DEFAULT,DEFAULT,?)';
     db.query(sql,values, function (err, result) {
         if(callback){
