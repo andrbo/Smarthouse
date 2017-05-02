@@ -28,15 +28,18 @@ module.exports = function (io) {
 
         socket.on('groupDeviceOn', function (data) {
             var unit = parseInt(data.unitno);
-
+            console.log("FØR");
             rfTransmitter.nexaOn(remote, unit, function(){
+                console.log("BRUKER NEXA");
             });
             console.log('GroupDeviceON---------'+unit);
         });
 
         socket.on('groupDeviceOff', function (data) {
             var unit = parseInt(data.unitno);
+            console.log("FØR");
             rfTransmitter.nexaOff(remote, unit, function(){
+                console.log("BRUKER NEXA");
             });
             console.log('GroupDEVICEOFF-------=' + unit);
         });
