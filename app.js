@@ -26,6 +26,9 @@ app.io = require('socket.io')();
 //app.io.lightControl = require('/js/lights/lightControl')(app.io);
 app.io.lightControl = require('./public/js/units/unitControl')(app.io);
 app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io);
+
+ app.io.unitControl = require('./public/js/units/unitControl')(app.io);
+//app.io.alarmActivated = require('./middlewares/alarmActivated')(app, app.io);
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 

@@ -12,7 +12,8 @@ module.exports = function (io) {
 
         socket.on('deviceOn', function (data) {
             var unit = data.unitno;
-            rfTransmitter.nexaOn(remote, unit, function () {
+
+             rfTransmitter.nexaOn(remote, unit, function () {
             });
             socket.broadcast.emit('deviceChange');
         });

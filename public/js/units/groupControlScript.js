@@ -42,17 +42,25 @@ $(function () {
                 $.post('/getUnitsOfGroup',{ // Retrieving the units belonging to the group
                     groupId: groupname
                 }).done(function(data){
-                    for(i=0; i<data.length; i++){ // Turning the devices in the group off
+                    for(var i=0; i<data.length; i++){ // Turning the devices in the group off
                         $.post('/toggleUnit', {
                             unitId: data[i].id,
                             state: newState
                         }).done(function (data) {
-                            socket.emit('groupDeviceOff', {unitno: data.id});
+                            console.log('Sender id = '+data.id+ 'til unitControl.js');
+                            setTimeout(function(){
+                                socket.emit('groupDeviceOff', {unitno: data.id});
+                            },1500);
                         });
-                        console.log('FERDIG med å skru på, kaller socket for refresh');
-                        socket.emit('groupToggleDone');
+                        console.log('venter 1,5sek');
+                        //setTimeout(1500);
                     }
-                     window.location.reload(true); // Må lage refresh for kun den aktive tab'en
+                    //console.log('FERDIG med å skru på, kaller socket for refresh');
+                    //socket.emit('groupToggleDone');
+                    //window.location.reload(true); // Må lage refresh for kun den aktive tab'en
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },10000);
                 })
             });
         // The group is off, turning it on
@@ -65,19 +73,34 @@ $(function () {
                 $.post('/getUnitsOfGroup',{ // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function(data){ // Turning the devices in the group on
-                    for(i=0; i<data.length; i++){
+                    for(var i=0; i<data.length; i++){
                         $.post('/toggleUnit', {
                             unitId: data[i].id,
                             state: newState
                         }).done(function (data) {
-                            socket.emit('groupDeviceOn', {unitno: data.id});
+                            setTimeout(function(){
+                                console.log('Sender id = '+data.id+ 'til unitControl.js');
+                                socket.emit('groupDeviceOn', {unitno: data.id});
+                            },1500);
                         });
-                        console.log('FERDIG med å skru på, kaller socket for refresh');
-                        socket.emit('groupToggleDone');
+                        console.log('Venter 1,5sek')
+                        //setTimeout(1500);
+
                     };
-                    window.location.reload(true); // Må lage refresh for kun den aktive tab'en
+                    //console.log('FERDIG med å skru på, kaller socket for refresh');
+                    //socket.emit('groupToggleDone');
+                    //console.log('Sender id = '+data.id+ 'til unitControl.js');
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },10000); // Må lage refresh for kun den aktive tab'en
                 });
             });
         };
     });
+});
+
+// Opens the edit group modal
+$('#editGroupBtn').click(function () {
+    $('#editGroupModal').modal('show');
+
 });

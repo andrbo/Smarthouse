@@ -23,23 +23,8 @@ $('#addNewGroup').click(function () {
 
 $('#saveNewGroup').click(function () {
     var groupInput = $('#newGroup').val().trim();
-    addNewGroup(groupInput);
-    /*
-     $.post('/addGroup', {
-     name: groupInput
-     }).done(function (data) {
-     var retur = JSON.stringify(data);
-     if (retur === '""') {
-     $('#groupErr').css("display", "block");
-     if ($('#newGroupInput').click(function () {
-     $('#groupErr').css("display", "none");
-     }));
-     } else {
-     $('#newGroupInput').css("display", "none");
-     $('#addNewGroupBtns').css("display", "none");
-     }
-     });
-     */
+    addNewGroup(groupInput, function (err, result) {
+    });
 });
 
 $('#cancelNewGroup').click(function () {
@@ -49,7 +34,6 @@ $('#cancelNewGroup').click(function () {
 
 // function for storing the values set by user in the modal. Later for use in the save and pair modal
 $('#activateNewDevice').click(function () {
-    console.log('Klikker lagre i legg til modal');
     var description = $('#descriptInput').val().trim();
     var group = $('#groupDropSelected').text();
     $('#addUnitModal').modal('hide');
