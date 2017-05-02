@@ -47,6 +47,7 @@ $(function () {
                             unitId: data[i].id,
                             state: newState
                         }).done(function (data) {
+                            console.log('Sender id = '+data[i].id+ 'til unitControl.js');
                             setTimeout(function(){
                                 socket.emit('groupDeviceOff', {unitno: data.id});
                             },1500);
@@ -86,6 +87,7 @@ $(function () {
                     };
                     //console.log('FERDIG med å skru på, kaller socket for refresh');
                     //socket.emit('groupToggleDone');
+                    console.log('Sender id = '+data[i].id+ 'til unitControl.js');
                     setTimeout(function(){
                         window.location.reload(true);
                     },10000); // Må lage refresh for kun den aktive tab'en
