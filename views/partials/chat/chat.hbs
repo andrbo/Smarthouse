@@ -15,8 +15,7 @@
 
         socket.on("message", function (user, msg) {
             if (user == username) {
-                $('.chat').append('<li class="myMessages bg-success col-md-5"><h5 class="text-primary">' + '<strong>' + "{{__
-                                "Chat-meSend"}}" + '</h5>' + '</strong>' + msg + '</li>');
+                $('.chat').append('<li class="myMessages bg-success col-md-5"><h5 class="text-primary">' + '<strong>' + "{{__ "Chat-meSend"}}" + '</h5>' + '</strong>' + msg + '</li>');
             } else {
                 $('.chat').append('<li class="otherMessages bg-warning col-md-5"><h5 class="text-danger">' + '<strong>' + user + '</h5>' + '</strong>' + msg + '</li>');
             }

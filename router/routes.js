@@ -194,8 +194,20 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.get("/getAllUsers", function(req, res){
+        console.log("Getting all users.");
+        var email = req.user.email;
+
+        function getAllUsers(callback){
+            User.getAllUsers(email, function(err, result){
+                callback(err, result);
+                res.send(result);
+            })
+        }
+        getAllUsers(function(){});
+    });
+
     app.post("/updateProfile", function (req, res) {
-        console.log("UPDATE PROFILE ROUTER GETS CALLED.");
         var email = req.user.email;
         var firstname = req.body.firstname;
         var surname = req.body.surname;
@@ -241,6 +253,21 @@ module.exports = function (app, passport) {
         });
     });
 
+    app.post("/getParticipants", function (req, res) {
+        function getParticipants(callback) {
+            var id = req.body.id;
+
+            calModal.getParticipants(id, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            })
+        }
+
+        getParticipants(function (err, result) {});
+    });
+
     app.get("/getAllEvents", function (req, res) {
         function getAllEvents(callback) {
             calModal.getAllEvents(function (err, result) {
@@ -263,7 +290,7 @@ module.exports = function (app, passport) {
         var participants = req.body.participants;
 
         function addEvent(callback) {
-            calModal.addEvent(email, title, description, start, end, function (err, result) {
+            calModal.addEvent(email, title, description, start, end, participants, function (err, result) {
                 if (callback) {
                     callback(err, result);
                 }
@@ -293,9 +320,11 @@ module.exports = function (app, passport) {
         var end = req.body.end;
         var title = req.body.title;
         var description = req.body.description;
+        var participants = req.body.participants;
+        console.log("participants" + participants);
 
         function updateEvent(callback) {
-            calModal.updateEvent(title, description, start, end, id, function (err, result) {
+            calModal.updateEvent(title, description, start, end, participants, id, function (err, result) {
                 callback(err, result);
             });
         }
