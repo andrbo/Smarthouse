@@ -57,6 +57,7 @@ $(function () {
                             })
                         });
                     }
+                    $('#groupTable').DataTable().ajax.reload();
                     //console.log('FERDIG med å skru på, kaller socket for refresh');
                     //socket.emit('groupToggleDone');
                     //window.location.reload(true); // Må lage refresh for kun den aktive tab'en
@@ -92,6 +93,7 @@ $(function () {
                         //setTimeout(1500);
 
                     };
+                    $('#groupTable').DataTable().ajax.reload();
                     //console.log('FERDIG med å skru på, kaller socket for refresh');
                     //socket.emit('groupToggleDone');
                     //console.log('Sender id = '+data.id+ 'til unitControl.js');
