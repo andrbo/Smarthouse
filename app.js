@@ -19,13 +19,14 @@ var flash = require('connect-flash');
 //Uses the db.js file
 require('./middlewares/db');
 require('./middlewares/passport')(passport);
+var mailGroup = require("./models/User.js");
 
 // call socket.io to the app
 app.io = require('socket.io')();
 
 //app.io.lightControl = require('/js/lights/lightControl')(app.io);
 app.io.lightControl = require('./public/js/units/unitControl')(app.io);
-app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io);
+app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
 
  app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.alarmActivated = require('./middlewares/alarmActivated')(app, app.io);
@@ -95,9 +96,8 @@ app.use(function (req, res, next) {
 
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
 i18n.configure({
-    locales: ['en', 'nb'],
-    fallbacks: {'en': 'nb'},
-    defaultLocale: 'nb',
+    locales: ['nb', 'en'],
+    fallbacks: {'nb': 'en'},
     cookie: 'locale',
     directoryPermissions: '755',
     directory: __dirname + "/locales",
