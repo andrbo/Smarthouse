@@ -24,6 +24,7 @@ var mailGroup = require("./models/User.js");
 // call socket.io to the app
 app.io = require('socket.io')();
 
+
 //app.io.lightControl = require('/js/lights/lightControl')(app.io);
 //app.io.lightControl = require('./public/js/units/unitControl')(app.io);
 //app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
@@ -33,19 +34,24 @@ app.io = require('socket.io')();
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 
-/*
+//app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
+//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
+//app.io.videoStream = require('./public/video/videoStream')(app, app.io);
+
+
+
 var sessionMiddleware = session({
     store: new redis({}),
     secret: "secret",
 });
-
+ /*
 app.io.use(function(socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
 });
 
 app.use(sessionMiddleware);
-*/
 
+*/
 app.get('/', function (req, res) {
     res.redirect('home');
 });
