@@ -48,19 +48,22 @@ $(function () {
                             state: newState
                         }).done(function (data) {
                             console.log('Sender id = '+data.id+ 'til unitControl.js');
-                            setTimeout(function(){
+                            function test(callback){
+                                if(callback){
                                 socket.emit('groupDeviceOff', {unitno: data.id});
-                            },1500);
+                            }
+                            }test(function(){
+
+                            })
                         });
-                        console.log('venter 1,5sek');
-                        //setTimeout(1500);
                     }
+                    $('#groupTable').DataTable().ajax.reload();
                     //console.log('FERDIG med å skru på, kaller socket for refresh');
                     //socket.emit('groupToggleDone');
                     //window.location.reload(true); // Må lage refresh for kun den aktive tab'en
-                    setTimeout(function(){
-                        window.location.reload(true);
-                    },10000);
+                    //setTimeout(function(){
+                    //    window.location.reload(true);
+                   // },10000);
                 })
             });
         // The group is off, turning it on
@@ -78,21 +81,22 @@ $(function () {
                             unitId: data[i].id,
                             state: newState
                         }).done(function (data) {
-                            setTimeout(function(){
-                                console.log('Sender id = '+data.id+ 'til unitControl.js');
-                                socket.emit('groupDeviceOn', {unitno: data.id});
-                            },1500);
+                            function test(callback){
+                                if(callback){
+                                    socket.emit('groupDeviceOn', {unitno: data.id});
+                                }
+                            }test(function(){
+
+                            })
                         });
                         console.log('Venter 1,5sek')
                         //setTimeout(1500);
 
                     };
+                    $('#groupTable').DataTable().ajax.reload();
                     //console.log('FERDIG med å skru på, kaller socket for refresh');
                     //socket.emit('groupToggleDone');
                     //console.log('Sender id = '+data.id+ 'til unitControl.js');
-                    setTimeout(function(){
-                        window.location.reload(true);
-                    },10000); // Må lage refresh for kun den aktive tab'en
                 });
             });
         };

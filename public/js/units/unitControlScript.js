@@ -51,7 +51,7 @@ $(function () {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                socket.emit('deviceOff', {unitno: unitId});
+                socket.emit('groupdeviceOff', {unitno: unitId});
                 window.location.reload(true);
             });
         } else {

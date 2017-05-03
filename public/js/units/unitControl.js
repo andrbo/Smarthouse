@@ -1,9 +1,9 @@
-//var rfTransmitter = require('nexa');
+var rfTransmitter = require('nexa');
 
 //Transmitter module is connected to wiringPi pin 15
-//rfTransmitter.nexaInit(15, function() {
-//    console.info("RF transmitter initialized");
-//});
+ rfTransmitter.nexaInit(15, function() {
+    console.info("RF transmitter initialized");
+});
 
 module.exports = function (io) {
 
@@ -12,7 +12,7 @@ module.exports = function (io) {
 
         socket.on('deviceOn', function (data) {
             var unit = data.unitno;
-
+            console.log('DEVICE ON------'+unit);
              rfTransmitter.nexaOn(remote, unit, function () {
             });
             socket.broadcast.emit('deviceChange');
@@ -22,21 +22,26 @@ module.exports = function (io) {
             var unit = data.unitno;
             rfTransmitter.nexaOff(remote, unit, function () {
             });
+            console.log('DEVICE OFF-----'+unit)
             socket.broadcast.emit('deviceChange');
         });
 
         socket.on('groupDeviceOn', function (data) {
-            var unit = data.unitno;
-          //  rfTransmitter.nexaOn(remote, unit, function(){
-          //  });
-            console.log('Skal skru på enhet med id= ' + unit);
+            var unit = parseInt(data.unitno);
+            console.log("FØR");
+            rfTransmitter.nexaOn(remote, unit, function(){
+                console.log("BRUKER NEXA");
+            });
+            console.log('GroupDeviceON---------'+unit);
         });
 
         socket.on('groupDeviceOff', function (data) {
-            var unit = data.unitno;
-           // rfTransmitter.nexaOff(remote, unit, function(){
-           // });
-            console.log('Skal skru av enhet med id= ' + unit);
+            var unit = parseInt(data.unitno);
+            console.log("FØR");
+            rfTransmitter.nexaOff(remote, unit, function(){
+                console.log("BRUKER NEXA");
+            });
+            console.log('GroupDEVICEOFF-------=' + unit);
         });
 
         socket.on('groupToggleDone', function(){
