@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     $('#calendar').fullCalendar({
+        locale: "nb",
         height: 700,
         header: {
             left: 'addEvent',

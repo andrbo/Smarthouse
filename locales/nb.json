@@ -129,7 +129,50 @@
 
 	"Calendar-Events": "Hendelser",
 	"Calendar-New-Event": "Ny hendelse",
+	"Calendar-Today-Button": "I dag",
 
 	"Chat-meSend": "Meg",
-	"Chat-Message-Input": "Skriv din melding her..."
+	"Chat-Message-Input": "Skriv din melding her...",
+
+	"Month-Name-January": "Januar",
+	"Month-Name-February": "Februar",
+	"Month-Name-March": "Mars",
+	"Month-Name-April": "April",
+	"Month-Name-May": "Mai",
+	"Month-Name-June": "Juni",
+	"Month-Name-July": "Juli",
+	"Month-Name-August": "August",
+	"Month-Name-September": "September",
+	"Month-Name-October": "Oktober",
+	"Month-Name-November": "November",
+	"Month-Name-December": "Desember",
+
+	"Month-NameShort-January": "Jan",
+	"Month-NameShort-February": "Feb",
+	"Month-NameShort-March": "Mar",
+	"Month-NameShort-April": "Apr",
+	"Month-NameShort-May": "Mai",
+	"Month-NameShort-June": "Jun",
+	"Month-NameShort-July": "Jul",
+	"Month-NameShort-August": "Aug",
+	"Month-NameShort-September": "Sep",
+	"Month-NameShort-October": "Okt",
+	"Month-NameShort-November": "Nov",
+	"Month-NameShort-December": "Des",
+
+	"Day-Name-Monday":"Mandag",
+	"Day-Name-Tuesday":"Tirsdag",
+	"Day-Name-Wednesday":"Onsdag",
+	"Day-Name-Thursday":"Torsdag",
+	"Day-Name-Friday":"Fredag",
+	"Day-Name-Saturday":"Lørdag",
+	"Day-Name-Sunday":"Søndag",
+
+	"Day-NameShort-Monday":"Man",
+	"Day-NameShort-Tuesday":"Tir",
+	"Day-NameShort-Wednesday":"Ons",
+	"Day-NameShort-Thursday":"Tor",
+	"Day-NameShort-Friday":"Fre",
+	"Day-NameShort-Saturday":"Lør",
+	"Day-NameShort-Sunday":"Søn"
 }

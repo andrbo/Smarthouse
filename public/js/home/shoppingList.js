@@ -28,7 +28,7 @@ $(document).ready(function () {
         $.post("/removeProduct", {
             id: data.id
         });
-        window.location.reload(true);
+        $('#shoppingListTable').DataTable().ajax.reload();
 
     });
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
             $.post("/addProduct", {
                 description: $("#productInfo").val()
             });
-            window.location.reload(true);
+            $('#shoppingListTable').DataTable().ajax.reload();
         });
     })
 });
