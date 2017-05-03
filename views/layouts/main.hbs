@@ -4,9 +4,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 <link rel='stylesheet' href='calendar/fullcalendar/dist/fullcalendar.css'/>
 <script src='/calendar/moment/min/moment.min.js'></script>
 <script src='/calendar/fullcalendar/dist/fullcalendar.js'></script>
+
+<script src='/calendar/fullcalendar/dist/locale/nb.js'></script>
+<script src='/calendar/fullcalendar/dist/locale/en-au.js'></script>
+
 <link rel='stylesheet' href='dateTimePicker/build/css/bootstrap-datetimepicker.css'/>
 <script src='/dateTimePicker/build/js/bootstrap-datetimepicker.min.js'></script>
 
@@ -30,17 +36,29 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 col-xs-12 text-center no-padding">
             {{#if success_msg}}
-                <div class="alert alert-success">{{success_msg}}</div>
+                <div class="alert alert-success alert-dismissable">{{success_msg}}
+                <button class="close" data-dismiss="alert">
+                    <span aria-hidden="true">x</span>
+                </button>
+                </div>
             {{/if}}
 
             {{#if error_msg}}
-                <div class="alert alert-danger">{{error_msg}}</div>
+                <div class="alert alert-danger alert-dismissable">{{error_msg}}
+                    <button class="close" data-dismiss="alert">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
             {{/if}}
 
             {{#if error}}
-                <div class="alert alert-danger">{{error}}</div>
+                <div class="alert alert-danger alert-dismissable">{{error}}
+                    <button class="close" data-dismiss="alert">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
             {{/if}}
 
             {{{ body }}}

@@ -36,30 +36,40 @@ socket.on('serialEvent', function (data) {
 // Function for reading the soil moisture value from the Arduino.
 function laserReading(data) {
     var laser = data.Laser;
-    console.log("DATA: " + laser);
-    if (laser == 1) {
-        var content = "<tr><td>Laser brutt</td></tr>"
-        $('#sensorWarningsTable tbody').html(content);
+    var laserAlert = $("#laserAlarm").html();
+    var content = '<tr id="laserAlert" class="bg-danger"><td>' + laserAlert + '</td>' + '</tr>';
+    if (laser == 1 && !$("#laserAlert").length) {
+        $('#sensorWarningsTable tbody').append(content);
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
+    }
+
+    if(laser == 0){
+        $('#sensorWarningsTable #laserAlert').remove();
+        noErrors();
     }
 }
 
 // Function used for updating the value for the flame sensor
 function flameReading(data) {
     var flameSensorValue = data.Flame;
-    console.log("FLAMME: " + flameSensorValue)
-    if (flameSensorValue == 0) {
-        var content = "<tr><td>FLAMME</td></tr>"
-        $('#sensorWarningsTable tbody').html(content);
+    var flameAlert = $("#flameAlarm").html();
+    var content = '<tr id="flameAlert" class="bg-danger"><td>' + flameAlert + '</td>' + '</tr>';
+    if (flameSensorValue == 0 && !$("#flameAlert").length) {
+        $('#sensorWarningsTable tbody').append(content);
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
+    }
+
+    if(flameSensorValue == 1){
+        $('#sensorWarningsTable #flameAlert').remove();
+        noErrors();
     }
 }
 
 function noErrors(){
     var length = $("#sensorWarningsTable tr").length;
-    console.log("LENGTH:" + length);
+    console.log("NO ERRORS: " + length);
     if(length == 0){
         $('#sensorWarningGlyphicon').addClass("glyphicon-ok").css({"color": "green", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-remove");
         $('#noWarningsHeader').show();

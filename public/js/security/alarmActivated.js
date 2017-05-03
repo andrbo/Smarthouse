@@ -1,4 +1,3 @@
-var mailGroup = require("/Users/markusmarkussen/Documents/Github/Smarthouse/models/User.js");
 var nodemailer = require('nodemailer');
 
 var serialport = require('serialport');
@@ -15,8 +14,7 @@ var serialData = "";
 var tempData = [];
 
 
-module.exports = function (app, io) {
-
+module.exports = function (app, io, mailGroup) {
     var currentTime = getDate();
 
     arduinoSerial.on('data', function (data) {
@@ -145,16 +143,14 @@ module.exports = function (app, io) {
             ifGeneralAlarmSendMail("Flame", getDate());
             console.log('flamme registrert');
             console.log(JSON.stringify(generalJson));
-            console.log('JSON har nå lengde: ' + generalJson.length);
         }
         if (leak < leakThreshold) {
             // Lekasje detektert
             console.log('lekasje detektert');
             ifGeneralAlarmSendMail("Leak", getDate());
-            console.log()
 
         }
-        console.log("GENEREAL JSJON" + JSON.stringify(generalJson));
+        //console.log("GENEREAL JSJON" + JSON.stringify(generalJson));
     }
 
     function getDate() {
