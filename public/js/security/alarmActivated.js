@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 
-var serialData = require("../middlewars/arduinoData");
+var serialData = require("../middlewares/arduinoData");
 var alarmState = 0; //When server starting.
 serialData = "";
 var tempData = [];
