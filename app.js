@@ -39,12 +39,12 @@ app.io = require('socket.io')();
 //app.io.videoStream = require('./public/video/videoStream')(app, app.io);
 
 
-
+/*
 var sessionMiddleware = session({
     store: new redis({}),
     secret: "secret",
 });
- /*
+
 app.io.use(function(socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
 });
