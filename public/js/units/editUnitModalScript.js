@@ -33,20 +33,31 @@ $('#changeGroup').click(function () {
     });
 });
 
+
+
 // Function for saving the new settings
 $('#saveChangeDevice').click(function () {
     var descript = $('#editDevDescript').text();
     var unitno = $('#editDevUnitno').text();
     var group = $('#editDevGroup').text();
+    var luxState;
+    if($('#editDevLuxCheck').prop("checked") == true){
+        luxState = 1;
+    }else{
+        luxState = 0;
+    }
+    var luxTreshold = $('#editDevLuxValue').slider('getValue');
     $.post('/changeDevice', {
         unitno: unitno,
         groupid: group,
-        description: descript
+        description: descript,
+        luxstate: luxState,
+        luxtresh: luxTreshold
     }).done(function () {
         $('#editUnitModal').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
-        window.location.reload(true);
+       window.location.reload(true);
     });
 });
 
@@ -73,4 +84,10 @@ $('#deleteDevice').click(function(){
             window.location.reload(true);
         });
     });
+});
+
+$('#editDevLuxValue').slider({
+    formatter: function(value) {
+        return 'Current value: ' + value;
+    }
 });

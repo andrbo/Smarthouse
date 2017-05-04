@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/scripts/bootstrap-slider/dist/css/bootstrap-slider.min.css"/>
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <div class=" jumbotron text-center">
     <div class="container">
             <ul class="nav nav-tabs" id="controlTabs">
@@ -13,6 +15,8 @@
                             <th>{{__ 'Light-Description'}}</th>
                             <th>{{__ 'Light-State'}}</th>
                             <th>{{__ 'Light-Group'}}</th>
+                            <th style="display: none">LuxState</th>
+                            <th style="display: none">luxValue</th>
                             <th>{{__ 'Light-Toggle'}}</th>
                         </tr>
                         </thead>
@@ -22,6 +26,8 @@
                             <th>{{__ 'Light-Description'}}</th>
                             <th>{{__ 'Light-State'}}</th>
                             <th>{{__ 'Light-Group'}}</th>
+                            <th style="display: none">LuxState</th>
+                            <th style="display: none">luxValue</th>
                             <th>{{__ 'Light-Toggle'}}</th>
                         </tr>
                         </tfoot>
@@ -68,7 +74,7 @@
 <script src="/js/units/editUnitModalScript.js"></script> <!-- Gruppe dropdown fungerer ikke etter flytting ellers ok -->
 <script src="/js/units/groupControlScript.js"></script>
 <script src="/js/units/editGroupModalScript.js"></script> <!-- Slette og legge til nye grupper fungerer ikke etter flytting -->
-
-
+<script  src="/scripts/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 

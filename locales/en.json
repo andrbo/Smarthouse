@@ -132,6 +132,8 @@
     "Light-DeleteDevice": "Delete device",
     "Light-DeleteDevConfirm": "Are you sure wou want to delete the following device?",
     "Light-DeleteUnpair": "To delete the device and remove the paring, put the reciever into paring mode and click delete device",
+    "Light-ControlUnitLux": "Control unit according by the lux value?",
+    "Light-ControlUnitLuxExplain": "Activate control of unit according to lux value by setting the switch in on posistion, and then set the preferred value the unit should be turned on by. If registered lux value is lower then the selected value, the unit should be turned off",
 
     "Calendar-Events": "Activities",
     "Calendar-New-Event": "New event",

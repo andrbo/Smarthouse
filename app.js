@@ -26,15 +26,15 @@ app.io = require('socket.io')();
 
 
 //app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
-//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
+app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.videoStream = require('./public/video/videoStream')(app, app.io);
 
-
+/*
 var sessionMiddleware = session({
     store: new redis({}),
     secret: "secret",
 });
- /*
+
 app.io.use(function(socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
 });
@@ -70,6 +70,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 app.use(session({
     secret: "secret",

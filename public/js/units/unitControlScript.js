@@ -33,6 +33,8 @@ $(function () {
             {data: "description"},
             {data: "state"},
             {data: "groupid"},
+            {data: "luxstate", visible: false},
+            {data: "luxvalue", visible: false},
             {defaultContent: "<button></button>"}
         ]
     });
@@ -74,10 +76,20 @@ $(function () {
         var unit = data.id;
         var desc = data.description;
         var group = data.groupid;
+        var luxState = data.luxstate;
+        var luxValue = data.luxvalue;
         $('#editUnitModal').modal('show');
         $('#editDevUnitno').html(unit);
         $('#editDevDescript').html(desc);
         $('#editDevGroup').html(group);
+        if(luxState == 1){
+            $('#editDevLuxCheck').bootstrapToggle('on');
+            $('#editDevLuxValue').slider('setValue',luxValue);
+        }else{
+            $('#editDevLuxCheck').bootstrapToggle('off');
+            $('#editDevLuxValue').slider('disable');
+        }
+
     });
 
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -87,7 +99,7 @@ $(function () {
     if (lastTab) {
         $('#controlTabs a[href="' + lastTab + '"]').tab('show');
     }
-
+    var mySlider = $("input.slider").bootstrapSlider();
 });
 
 // Function used for adding new groups in the edit group and add device modal
