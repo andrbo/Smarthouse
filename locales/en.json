@@ -137,9 +137,50 @@
 
     "Calendar-Events": "Activities",
     "Calendar-New-Event": "New event",
+    "Calendar-Today-Button": "Today",
 
     "Chat-meSend": "Me",
-    "Chat-Message-Input": "Write your message here..."
+    "Chat-Message-Input": "Write your message here...",
 
+    "Month-Name-January": "January",
+    "Month-Name-February": "February",
+    "Month-Name-March": "March",
+    "Month-Name-April": "April",
+    "Month-Name-May": "May",
+    "Month-Name-June": "June",
+    "Month-Name-July": "July",
+    "Month-Name-August": "August",
+    "Month-Name-September": "September",
+    "Month-Name-October": "October",
+    "Month-Name-November": "November",
+    "Month-Name-December": "December",
 
+    "Month-NameShort-January": "Jan",
+    "Month-NameShort-February": "Feb",
+    "Month-NameShort-March": "Mar",
+    "Month-NameShort-April": "Apr",
+    "Month-NameShort-May": "May",
+    "Month-NameShort-June": "Jun",
+    "Month-NameShort-July": "Jul",
+    "Month-NameShort-August": "Aug",
+    "Month-NameShort-September": "Sep",
+    "Month-NameShort-October": "Oct",
+    "Month-NameShort-November": "Nov",
+    "Month-NameShort-December": "Dec",
+
+    "Day-Name-Monday":"Monday",
+    "Day-Name-Tuesday":"Tuesday",
+    "Day-Name-Wednesday":"Wednesday",
+    "Day-Name-Thursday":"Thursday",
+    "Day-Name-Friday":"Friday",
+    "Day-Name-Saturday":"Saturday",
+    "Day-Name-Sunday":"Sunday",
+
+    "Day-NameShort-Monday":"Mon",
+    "Day-NameShort-Tuesday":"Tue",
+    "Day-NameShort-Wednesday":"Wed",
+    "Day-NameShort-Thursday":"Thu",
+    "Day-NameShort-Friday":"Fri",
+    "Day-NameShort-Saturday":"Sat",
+    "Day-NameShort-Sunday":"Sun"
 }

@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
 
+<<<<<<< HEAD
 var serialport = require('serialport');
 var SerialPort = serialport; // make a local instance of it
 //var arduinoPort = '/dev/cu.wchusbserial14230';
@@ -11,12 +12,18 @@ var arduinoSerial = new SerialPort(arduinoPort, {
 });
 var alarmState = 0; //When server starts.
 var serialData = "";
+=======
+var serialData = require("../middlewares/arduinoData");
+var alarmState = 0; //When server starting.
+serialData = "";
+>>>>>>> 9d59119b8038817499b68b52783451100c46462e
 var tempData = [];
 
 
 module.exports = function (app, io, mailGroup) {
     var currentTime = getDate();
 
+<<<<<<< HEAD
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
         io.sockets.emit('serialEvent', serialData);
@@ -31,6 +38,19 @@ module.exports = function (app, io, mailGroup) {
                 break;
         }
     });
+=======
+
+    io.sockets.emit('serialEvent', serialData);
+    switch (alarmState) {
+        case 0:
+            generalAlarm(data)
+            break;
+        case 1:
+            alarmOn(data);
+            generalAlarm(data)
+            break;
+    }
+>>>>>>> 9d59119b8038817499b68b52783451100c46462e
     var alarmJson = [];
     var generalJson = [];
 

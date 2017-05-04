@@ -28,15 +28,22 @@ $(document).ready(function () {
         $.post("/removeProduct", {
             id: data.id
         });
-        window.location.reload(true);
+        $('#shoppingListTable').DataTable().ajax.reload();
 
     });
 
     $("#openAddProductModalButton").click(function () {
         $("#addProductModal").modal("show");
+        $("#addNewItemButton").click(function () {
+            var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
+            $(".itemsList").append(html);
+        });
         $("#addProductButton").click(function () {
-            $.post("/addProduct", {
-                description: $("#productInfo").val()
+            $(".productInput input").each(function () {
+                console.log("THIS: " + $(this).val());
+                $.post("/addProduct", {
+                    description: $(this).val()
+                });
             });
             window.location.reload(true);
         });

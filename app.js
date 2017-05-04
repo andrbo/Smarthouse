@@ -24,10 +24,10 @@ var mailGroup = require("./models/User.js");
 // call socket.io to the app
 app.io = require('socket.io')();
 
-
 //app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
 app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.videoStream = require('./public/video/videoStream')(app, app.io);
+
 
 /*
 var sessionMiddleware = session({
@@ -113,6 +113,16 @@ hbs.handlebars.registerHelper('__', function () {
 hbs.handlebars.registerHelper('__n', function () {
     return i18n.__n.apply(this, arguments);
 });
+/*
+hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
+    if (arguments.length < 3)
+        throw new Error("needs 2 parameters");
+    if( lvalue!=rvalue ) {
+        return options.inverse(this);
+    } else {
+        return options.fn(this);
+    }
+});*/
 
 //Router controller. Uses passport as authentication.
 app.io.chat = require('./public/js/chat/chat.js')(app.io);

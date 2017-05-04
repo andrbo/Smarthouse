@@ -57,11 +57,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add product</h4>
             </div>
-            <div class="modal-body">
-                <input id="productInfo" class="form-group"></input>
+            <div class="itemsList modal-body form-group">
+                <!--<input type="text" class="productInput form-control" placeholder="Vare">-->
             </div>
+
             <div class="modal-footer">
-                <button id="addProductButton" type="button" class="btn btn-success" data-dismiss="modal">Add</button>
+                <button id="addNewItemButton" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-plus"></span> Ny vare</button>
+                <button id="addProductButton" type="button" class="btn btn-success" data-dismiss="modal"> Legg til produkter</button>
             </div>
         </div>
     </div>
@@ -93,42 +95,10 @@
 </div>
 
 <!-- Internationalization -->
-
 <div id="laserAlarm" hidden>{{__ "Laser-Detection"}}</div>
 <div id="flameAlarm" hidden>{{__ "Visible-Flame"}}</div>
 
 <style type="text/css">
-
-    .pagination>li {
-        display: inline;
-        padding:0px !important;
-        margin:0px !important;
-        border:none !important;
-    }
-
-    #status {
-        margin-top: 10px;
-        height: 13px;
-    }
-
-    .glyphicon.glyphicon-ok {
-        color: green;
-        font-size: 100px;
-        opacity: 0.8;
-    }
-
-    .table thead th{
-        font-size: 15px;
-        margin-bottom: 30px;
-        height: 30px;
-        width: 5%
-    }
-
-    .table thead th tr td {
-        font-size: 20px;
-        height: 93px;
-        width: 5%
-    }
 
     #sensorInfoPanel {
         background-color: white;
@@ -147,8 +117,7 @@
         background-color: white;
         height: 40%;
         margin-top: 10px;
-        background-color:white;
-        height: 45%;
+
     }
 
 
@@ -170,5 +139,9 @@
 
     #temp {
         width: 10%
+    }
+
+    .productInput{
+        list-style-type: none;
     }
 </style>
