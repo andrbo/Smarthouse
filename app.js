@@ -24,18 +24,8 @@ var mailGroup = require("./models/User.js");
 // call socket.io to the app
 app.io = require('socket.io')();
 
-
-//app.io.lightControl = require('/js/lights/lightControl')(app.io);
-//app.io.lightControl = require('./public/js/units/unitControl')(app.io);
 //app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
-
-//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
-//app.io.alarmActivated = require('./middlewares/alarmActivated')(app, app.io);
-//app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
-
-
-//app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
-//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
+app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.videoStream = require('./public/video/videoStream')(app, app.io);
 
 
@@ -80,6 +70,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 app.use(session({
     secret: "secret",

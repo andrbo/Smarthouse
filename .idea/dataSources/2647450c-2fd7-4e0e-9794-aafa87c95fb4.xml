@@ -150,63 +150,73 @@
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <index id="39" parent="9" name="FK_UnitGroups">
+    <column id="39" parent="9" name="luxstate">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="40" parent="9" name="luxvalue">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="41" parent="9" name="FK_UnitGroups">
       <ColNames>groupid</ColNames>
     </index>
-    <key id="40" parent="9" name="PRIMARY">
+    <key id="42" parent="9" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="41" parent="9" name="FK_UnitGroups">
+    <foreign-key id="43" parent="9" name="FK_UnitGroups">
       <ColNames>groupid</ColNames>
       <RefSchemaName>markuma</RefSchemaName>
       <RefTableName>groups</RefTableName>
       <RefColNames>groupname</RefColNames>
     </foreign-key>
-    <column id="42" parent="10" name="email">
+    <column id="44" parent="10" name="email">
       <Position>1</Position>
       <DataType>varchar(101)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="43" parent="10" name="password">
+    <column id="45" parent="10" name="password">
       <Position>2</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="44" parent="10" name="firstname">
+    <column id="46" parent="10" name="firstname">
       <Position>3</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="45" parent="10" name="surname">
+    <column id="47" parent="10" name="surname">
       <Position>4</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="46" parent="10" name="address">
+    <column id="48" parent="10" name="address">
       <Position>5</Position>
       <DataType>varchar(101)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="47" parent="10" name="postalCode">
+    <column id="49" parent="10" name="postalCode">
       <Position>6</Position>
       <DataType>varchar(9999)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="48" parent="10" name="city">
+    <column id="50" parent="10" name="city">
       <Position>7</Position>
       <DataType>varchar(101)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="49" parent="10" name="country">
+    <column id="51" parent="10" name="country">
       <Position>8</Position>
       <DataType>varchar(101)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="50" parent="10" name="email">
+    <index id="52" parent="10" name="email">
       <ColNames>email</ColNames>
     </index>
-    <key id="51" parent="10" name="PRIMARY">
+    <key id="53" parent="10" name="PRIMARY">
       <ColNames>email</ColNames>
       <Primary>1</Primary>
     </key>

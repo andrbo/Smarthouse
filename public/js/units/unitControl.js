@@ -1,9 +1,10 @@
-var rfTransmitter = require('nexa');
+//var rfTransmitter = require('nexa');
 
 //Transmitter module is connected to wiringPi pin 15
- rfTransmitter.nexaInit(15, function() {
-    console.info("RF transmitter initialized");
-});
+// rfTransmitter.nexaInit(15, function() {
+//    console.info("RF transmitter initialized");
+//});
+
 
 module.exports = function (io) {
 
@@ -62,5 +63,4 @@ module.exports = function (io) {
             socket.broadcast.emit('deviceChange');
         })
     });
-
 };

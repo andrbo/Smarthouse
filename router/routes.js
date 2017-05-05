@@ -647,7 +647,9 @@ module.exports = function (app, passport) {
             var id= req.body.unitno;
             var description =  req.body.description;
             var groupid = req.body.groupid;
-            unitModel.changeDevice(id,description,groupid, function (err, result){
+            var luxstate = req.body.luxstate;
+            var luxtresh = req.body.luxtresh;
+            unitModel.changeDevice(id,description,groupid,luxstate, luxtresh, function (err, result){
                 if(callback){
                     res.send(result);
                     callback(err, result);

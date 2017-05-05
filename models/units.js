@@ -75,9 +75,9 @@ exports.deleteDevice = function(id, callback){
     });
 };
 
-exports.changeDevice = function(id, description, groupid, callback){
-    var values = [description,groupid, id];
-    var sql = 'UPDATE units SET description=?,groupid=? WHERE id=?';
+exports.changeDevice = function(id, description, groupid, luxstate, luxtresh, callback){
+    var values = [description,groupid, luxstate, luxtresh, id];
+    var sql = 'UPDATE units SET description=?,groupid=?, luxstate=?, luxvalue=? WHERE id=?';
     db.query(sql,values, function(err, result){
         if(callback){
             callback(err, result);
@@ -103,5 +103,4 @@ exports.deleteGroup = function(groupid, callback){
     });
 };
 
-// remove group
 

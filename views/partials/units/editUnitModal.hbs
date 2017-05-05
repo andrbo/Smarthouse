@@ -1,3 +1,9 @@
+<style>
+    #editDevLuxValueSlider .slider-selection {
+        background: #BABABA;
+    }
+</style>
+
 <!-- Edit device modal -->
 <div class="modal fade" id="editUnitModal">
     <div class="modal-dialog">
@@ -72,6 +78,27 @@
                         <button id="cancelChangeGroup" class="btn btn-danger">{{__ "Light-Cancel"}}</button>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <h4>{{__ "Light-ControlUnitLux"}}</h4>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <p>{{__ "Light-ControlUnitLuxExplain"}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <div class=col-md-2>
+                        <input id="editDevLuxCheck" type="checkbox" data-toggle="toggle">
+                    </div>
+                    <div class="col-md-10">
+                        <input id="editDevLuxValue" data-slider-id='editDevLuxValueSlider' type="text" data-slider-min="0" data-slider-max="200"
+                               data-slider-step="10"/>
+                    </div>
+                </div>
+                <hr>
                 <div class="form-group row">
                     <div class="col-md-3">
                         <button id="deleteDevice" type="button" class="btn btn-danger">{{__

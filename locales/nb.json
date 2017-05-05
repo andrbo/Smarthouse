@@ -137,6 +137,8 @@
 	"Light-DeleteDevice": "Slett enhet",
 	"Light-DeleteDevConfirm": "Er du sikker på at du vil slette følgende enhet?",
 	"Light-DeleteUnpair": "For å slette enheten og fjerne paringen, setter du mottakeren i paringsmodus og trykker på slett enhet",
+	"Light-ControlUnitLux": "Kontroller enheten etter lux-verdi? ",
+	"Light-ControlUnitLuxExplain": "Aktiver styring på lux-verdi ved å sette bryteren på, og still inn verdien du ønsker at enheten skal slå seg på av. Dersom avlest lux-verdi er lavere enn dette, vil enheten skru seg av ",
 
 	"Calendar-Events": "Hendelser",
 	"Calendar-New-Event": "Ny hendelse",
