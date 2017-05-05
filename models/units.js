@@ -31,6 +31,7 @@ exports.toggleGroup = function (groupname, groupstate, callback){
 
 exports.toggleUnit = function(state, id,callback){
     var values = [state, id];
+    console.log('INNE I TOGGLEUNIT SPØØRING MED FØLGENDE ID: '+id);
     var sql = 'UPDATE units SET state = ? WHERE id=?';
     db.query(sql,values, function(err, result){
         if(callback){
@@ -96,8 +97,17 @@ exports.removeGroupFromUnit = function(groupid, callback){
 };
 
 exports.deleteGroup = function(groupid, callback){
-    var sql = 'DELETE FROM groups WHERE groupname=?'
+    var sql = 'DELETE FROM groups WHERE groupname=?';
     db.query(sql,groupid,  function(err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
+exports.getLuxUnits = function(callback){
+    var sql = 'SELECT id,state,luxvalue FROM units WHERE luxstate=1';
+    db.query(sql, function(err, result){
         if(callback){
             callback(err, result);
         };
