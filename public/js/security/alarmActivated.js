@@ -16,7 +16,7 @@ var serialData = "";
 var luxUnits;
 
 
-module.exports = function (app, io, mailGroup, getUnitsLux) {
+module.exports = function (app, io, mailGroup) {
     var currentTime = getDate();
 
     getLuxUnits(function (err, result) {
