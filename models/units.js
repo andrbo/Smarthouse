@@ -30,7 +30,6 @@ exports.toggleGroup = function (groupname, groupstate, callback){
 
 exports.toggleUnit = function(state, id,callback){
     var values = [state, id];
-    console.log('INNE I TOGGLEUNIT SPØØRING MED FØLGENDE ID: '+id);
     var sql = 'UPDATE units SET state = ? WHERE id=?';
     db.query(sql,values, function(err, result){
         if(callback){

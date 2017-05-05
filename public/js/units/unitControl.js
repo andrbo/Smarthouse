@@ -68,7 +68,7 @@ module.exports = function (io) {
 };
 
 var toggleUnitLux= function (id, toggle){
-    console.log('Bruker funksjonen i unitControl.js, sender med id: '+id + 'og toggle' +1)
+    console.log('Bruker funksjonen i unitControl.js, sender med id: '+id + 'og toggle' +toggle)
 /*
     if(toggle == 1){
         rfTransmitter.nexaOn(remote,id, function(){
