@@ -9,14 +9,14 @@
             </div>
             <div class="modal-body">
 
-                <div class="form-group">
-                    <input type="text" name="eventTitle" id="eventTitle" class="form-control"
-                           placeholder="{{__ "Event-Title"}}">
+                <div class="eventTitleDiv form-group has-feedback">
+                    <input type="text" name="eventTitle" id="eventTitle" class="form-control" placeholder="{{__ "Event-Title"}}">
+                    <span id="titleErrorToggle" class="form-control-feedback glyphicon"></span>
                 </div>
 
-                <div class="form-group">
-                    <input type="text" name="eventDescription" id="eventDescription" class="form-control"
-                           placeholder="{{__ "Event-Description"}}">
+                <div class="eventDescriptionDiv form-group has-feedback">
+                    <input type="text" name="eventDescription" id="eventDescription" class="form-control" placeholder="{{__ "Event-Description"}}">
+                    <span id="descriptionErrorToggle" class="form-control-feedback glyphicon"></span>
                 </div>
 
                 <div class='input-group date form-group' id="eventStartCalendarGlyph">
@@ -33,23 +33,23 @@
                     </span>
                 </div>
 
+                <div id="addEventAlert" class="form-group bg-danger" hidden></div>
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="button-group">
                             <button id="participantsListButton" type="button"
                                     class="btn btn-default btn-sm dropdown-toggle pull-left" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-plus"></span> Legg til deltakere <span
+                                <span class="glyphicon glyphicon-plus"></span> {{__ "Calendar-Add-Participants"}}<span
                                     class="caret"></span></button>
                             <ul id="participantsList" class="dropdown-menu">
                             </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addEvent()">{{__
+                <button type="button" class="btn btn-primary" onclick="addEvent()">{{__
                         "Add"}}</button>
             </div>
         </div>

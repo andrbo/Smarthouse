@@ -82,7 +82,18 @@ $(document).ready(function () {
                     var description = $("#updateEventDescription").val();
                     var start = $("#updateEventStart").val();
                     var end = $("#updateEventEnd").val();
-                    updateEvent(title, description, start, end, calEvent.id, participants);
+
+                    console.log("start - end : " + (start-end));
+                    console.log("Start = end: " + start + end);
+
+                    if(start > end){
+                        console.log("START > END");
+                    }else if(start == end){
+                        console.log("START = END")
+                    }else{
+                        updateEvent(title, description, start, end, calEvent.id, participants);
+                    }
+
                 })
             });
             //UPDATE EVENT MODAL END
@@ -174,22 +185,36 @@ function addEvent() {
     for (var i = 0; i < participants.length; i++) {
         temp += participants[i] + ",";
     }
-    console.log("TEMP: " + temp);
-    $.post("/addEvent", {
-        title: $("#eventTitle").val(),
-        start: $("#eventStart").val(),
-        end: $("#eventEnd").val(),
-        description: $("#eventDescription").val(),
-        participants: temp
-    });
-    window.location.reload(true);
+
+    var title = $("#eventTitle").val();
+    var description = $("#eventDescription").val();
+    var start = $("#eventStart").val();
+    var end = $("#eventEnd").val();
+
+    console.log("start - end : " + (start-end));
+    console.log("Start = end: " + start + end);
+
+    if(start > end){
+        console.log("START > END");
+    }else if(start == end){
+        console.log("START = END")
+    }else{
+        $.post("/addEvent", {
+            title: $("#eventTitle").val(),
+            start: $("#eventStart").val(),
+            end: $("#eventEnd").val(),
+            description: $("#eventDescription").val(),
+            participants: temp
+        });
+        //window.location.reload(true);
+    }
 }
 
 function deleteEvent(eventId) {
     $.post("/deleteEvent", {
         id: eventId
     });
-    window.location.reload(true);
+    //window.location.reload(true);
 }
 
 function updateEvent(title, description, start, end, id, participants) {
@@ -201,7 +226,7 @@ function updateEvent(title, description, start, end, id, participants) {
         id: id,
         participants: participants
     });
-    window.location.reload(true);
+    //window.location.reload(true);
 }
 
 function updateDate(id, start, end) {
@@ -210,5 +235,5 @@ function updateDate(id, start, end) {
         start: start,
         end: end
     });
-    window.location.reload(true);
+    //window.location.reload(true);
 }
