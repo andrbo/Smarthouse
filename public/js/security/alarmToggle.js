@@ -1,6 +1,6 @@
 var socket = io();
 
-var toggleState; // Used for storing the value of on/off for the alarm in db
+var toggleState = 0; // Used for storing the value of on/off for the alarm in db
 $(function () { // on load function makes the connected users get the correct value of activate/deactivate alarm
     updateToggleState();
 });
@@ -18,6 +18,7 @@ socket.on('alarmAct', function () {
 function updateToggleState() {
     $.post('/alarmState').done(function (data) {
         var state = JSON.stringify(data[0].value);
+        console.log("STATE: " + state);
         buttonState(state);
         toggleState = state;
     });
@@ -25,6 +26,7 @@ function updateToggleState() {
 
 // Function for updating the css of the alarm activation button.
 function buttonState(value) {
+    console.log("value: " + value)
     if (value == 1) {
         $('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
             deActivateAlarmModal();

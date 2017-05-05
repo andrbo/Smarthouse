@@ -10,6 +10,7 @@ module.exports = function (app, passport) {
     var calModal = require('../models/calendar');
     var shopModal = require('../models/shop');
     var unitModel = require('../models/units');
+    var alarmModal = require('../models/alarm');
 
     app.get('/', function (req, res) {
         res.render('home');
@@ -22,7 +23,6 @@ module.exports = function (app, passport) {
                 loginUsername: req.user.email,
                 loginFirstname: req.user.firstname
             });
-            console.log("EMAIL:" + req.user.email + " NAVN: " + req.user.firstname)
         } else {
             res.render("home");
         }
@@ -93,7 +93,6 @@ module.exports = function (app, passport) {
 
         function forgotPassword(password, email) {
             User.forgotPassword(password, email, function (err, result) {
-                console.log(password);
                 if (err)
                     return err;
                 else {
@@ -127,9 +126,8 @@ module.exports = function (app, passport) {
                 text: "Hei! Ditt nye passord er: " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
             }, function (error, response) {  //callback
                 if (error) {
-                    console.log(error);
+
                 } else {
-                    console.log("Message sent: " + response.message);
                     res.redirect('/home');
                 }
                 smtpTransport.close(); //Shut down the connection, no more messages.
@@ -161,7 +159,7 @@ module.exports = function (app, passport) {
         }
     });
 
-    app.post('/updatePassword', function (req, res) {
+    app.post('/updateUserPassword', function (req, res) {
         var email = req.user.email;
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
@@ -195,7 +193,6 @@ module.exports = function (app, passport) {
     });
 
     app.get("/getAllUsers", function(req, res){
-        console.log("Getting all users.");
         var email = req.user.email;
 
         function getAllUsers(callback){
@@ -239,7 +236,6 @@ module.exports = function (app, passport) {
     //CALENDAR BEGINS HERE
     app.get("/getUserEvents", function (req, res) {
         var email = req.user.email;
-        console.log("EMAIL: " + email);
         function getEvents(callback) {
             calModal.getUserEvents(email, function (err, result) {
                 if (callback) {
@@ -321,7 +317,6 @@ module.exports = function (app, passport) {
         var title = req.body.title;
         var description = req.body.description;
         var participants = req.body.participants;
-        console.log("participants" + participants);
 
         function updateEvent(callback) {
             calModal.updateEvent(title, description, start, end, participants, id, function (err, result) {
@@ -352,8 +347,6 @@ module.exports = function (app, passport) {
         function getShoppingList(callback) {
             shopModal.getShoppingList(function (err, result) {
                 if (callback) {
-                    console.log("RESULT: " + result);
-                    console.log("ERR: " + err);
                     res.send(result);
                     callback(err, result);
                 }
@@ -366,7 +359,6 @@ module.exports = function (app, passport) {
 
     app.post("/removeProduct", function (req, res) {
         var id = req.body.id;
-        console.log("ID: " + id);
         function removeProduct(callback) {
             shopModal.removeProduct(id, function (err, result) {
                 if (callback) {
@@ -382,7 +374,6 @@ module.exports = function (app, passport) {
 
     app.post("/addProduct", function (req, res) {
         var description = req.body.description;
-        console.log("DESC: " + description);
         function addProduct(callback) {
             shopModal.addProduct(description, function (err, result) {
                 if (callback) {
@@ -399,22 +390,21 @@ module.exports = function (app, passport) {
     // alarm
     app.post('/alarmToggle', function (req, res) {
         var activated = req.body.alarm;
-        console.log('ROUTES ACTIVATED STATE' + activated);
         function toggleAlarm(id, callback) {
             if (activated == "true") {
-                db.query('UPDATE sensors SET value=1 WHERE id=?', id, function (err, result) {
+                alarmModal.activateAlarm(id, function (err, result) {
                     if (callback) {
+                        res.send(result);
                         callback(err, result);
                     }
-
-                });
+                })
             } else {
-                db.query('UPDATE sensors SET value=0 WHERE id=?', id, function (err, result) {
+                alarmModal.deActivateAlarm(id, function (err, result) {
                     if (callback) {
+                        res.send(result);
                         callback(err, result);
                     }
-
-                });
+                })
             }
         }
         toggleAlarm(1, function (err, result) {})
@@ -422,30 +412,26 @@ module.exports = function (app, passport) {
 
     app.post("/alarmState", function (req, res) {
         function getState(id, callback) {
-            db.query("SELECT * FROM sensors WHERE id = ?", id, function (err, result) {
+            alarmModal.getAlarmState(id, function (err, result) {
                 if (callback) {
-                    callback(err, result);
                     res.send(result);
+                    callback(err, result);
                 }
-            });
+            })
         }
         getState(1, function (err, result) {});
     });
 
     app.post('/alarmPw', function (req, res) {
         var input = req.body.pw;
-        console.log('PWINPUT: ' + input);
         function getPassword(id, callback) {
-            db.query("SELECT * FROM alarm WHERE id = ?", id, function (err, result) {
+            alarmModal.getAlarm(id, function (err, result) {
                 if (callback) {
-                    var pwFromdb = result[0].alarmpw;
-                    console.log('parse' + pwFromdb);
+                    var pwFromdb = result[0].password;
                     crypt(input, pwFromdb, function (err, result) {
                         if (result === true) {
-                            console.log('PW rett');
                             res.send(true);
                         } else {
-                            console.log("PW feil");
                             res.send(false);
                         }
                     });
@@ -454,6 +440,38 @@ module.exports = function (app, passport) {
         }
 
         getPassword(1, function (err, result) {
+        });
+    });
+
+    app.post('/updateAlarmPassword', function (req, res) {
+        var oldPassword = req.body.oldPassword;
+        var newPassword = req.body.newPassword;
+
+        function validatePassword(id, callback) {
+            alarmModal.getAlarmPassword(id, function (err, pwFromDb) {
+                if (callback) {
+                    crypt(oldPassword, pwFromDb[0].password, function (err, result) { //Comparing oldPassword to current password with hashing.
+                        if (result === true) {
+                            hashPassword(newPassword, function (err, newPass) {
+                                if (err) {
+                                    return err
+                                } else {
+                                    alarmModal.updateAlarmPassword(newPass, id, function (err, result) {
+                                        if (callback) {
+                                            res.send(result);
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            res.send(null);
+                        }
+                    });
+                }
+            })
+        }
+
+        validatePassword(1, function (err, result) {
         });
     });
 
@@ -537,7 +555,6 @@ module.exports = function (app, passport) {
                     if(err){
                         res.send({addError: 1})
                     }
-                    console.log('ERROR I ROUTES ved addGroup'+err)
                     callback(err, result);
                     res.send(result);
                 }
@@ -582,7 +599,7 @@ module.exports = function (app, passport) {
     app.post("/deleteGroup", function (req, res){
         function deleteGroup(callback){
             var groupId = req.body.groupId;
-            console.log('Inne i routes og skal slette gruppen: '+ groupId);
+
             unitModel.deleteGroup(groupId, function(err, result){
                 if(callback){
                     res.send(result);
@@ -595,7 +612,6 @@ module.exports = function (app, passport) {
     });
 
     app.post("/toggleUnit", function (req, res){
-        console.log('Kaller routes');
         function toggleUnit (callback){
             var id = req.body.unitId;
             var state = req.body.state;

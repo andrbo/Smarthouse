@@ -5,7 +5,6 @@ exports.getUnits = function(callback){
     db.query(sql, function(err, result){
         if(callback){
             callback(err, result);
-            console.log(result);
         };
     });
 };

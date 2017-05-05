@@ -1,10 +1,22 @@
 <script>
     $(document).ready(function () {
         $('#calendar').fullCalendar({
-            monthNames: ['{{__ "Month-Name-January"}}','{{__ "Month-Name-February"}}','{{__ "Month-Name-March"}}','{{__ "Month-Name-April"}}','{{__ "Month-Name-May"}}','{{__ "Month-Name-June"}}','{{__ "Month-Name-July"}}','{{__ "Month-Name-August"}}','{{__ "Month-Name-September"}}','{{__ "Month-Name-October"}}','{{__ "Month-Name-November"}}','{{__ "Month-Name-December"}}'],
-            monthNamesShort: ['{{__ "Month-NameShort-January"}}','{{__ "Month-NameShort-February"}}','{{__ "Month-NameShort-March"}}','{{__ "Month-NameShort-April"}}','{{__ "Month-NameShort-May"}}','{{__ "Month-NameShort-June"}}','{{__ "Month-NameShort-July"}}','{{__ "Month-NameShort-August"}}','{{__ "Month-NameShort-September"}}','{{__ "Month-NameShort-October"}}','{{__ "Month-NameShort-November"}}','{{__ "Month-NameShort-December"}}'],
-            dayNames: ['{{__ "Day-Name-Monday"}}','{{__ "Day-Name-Tuesday"}}','{{__ "Day-Name-Wednesday"}}','{{__ "Day-Name-Thursday"}}','{{__ "Day-Name-Friday"}}','{{__ "Day-Name-Saturday"}}','{{__ "Day-Name-Sunday"}}'],
-            dayNamesShort: ['{{__ "Day-NameShort-Monday"}}','{{__ "Day-NameShort-Tuesday"}}','{{__ "Day-NameShort-Wednesday"}}','{{__ "Day-NameShort-Thursday"}}','{{__ "Day-NameShort-Friday"}}','{{__ "Day-NameShort-Saturday"}}','{{__ "Day-NameShort-Sunday"}}'],
+            monthNames: ['{{__ "Month-Name-January"}}', '{{__ "Month-Name-February"}}', '{{__
+                    "Month-Name-March"}}', '{{__ "Month-Name-April"}}', '{{__ "Month-Name-May"}}', '{{__
+                    "Month-Name-June"}}', '{{__ "Month-Name-July"}}', '{{__ "Month-Name-August"}}', '{{__
+                    "Month-Name-September"}}', '{{__ "Month-Name-October"}}', '{{__ "Month-Name-November"}}', '{{__
+                    "Month-Name-December"}}'],
+            monthNamesShort: ['{{__ "Month-NameShort-January"}}', '{{__ "Month-NameShort-February"}}', '{{__
+                    "Month-NameShort-March"}}', '{{__ "Month-NameShort-April"}}', '{{__ "Month-NameShort-May"}}', '{{__
+                    "Month-NameShort-June"}}', '{{__ "Month-NameShort-July"}}', '{{__ "Month-NameShort-August"}}', '{{__
+                    "Month-NameShort-September"}}', '{{__ "Month-NameShort-October"}}', '{{__
+                    "Month-NameShort-November"}}', '{{__ "Month-NameShort-December"}}'],
+            dayNames: ['{{__ "Day-Name-Monday"}}', '{{__ "Day-Name-Tuesday"}}', '{{__ "Day-Name-Wednesday"}}', '{{__
+                    "Day-Name-Thursday"}}', '{{__ "Day-Name-Friday"}}', '{{__ "Day-Name-Saturday"}}', '{{__
+                    "Day-Name-Sunday"}}'],
+            dayNamesShort: ['{{__ "Day-NameShort-Monday"}}', '{{__ "Day-NameShort-Tuesday"}}', '{{__
+                    "Day-NameShort-Wednesday"}}', '{{__ "Day-NameShort-Thursday"}}', '{{__
+                    "Day-NameShort-Friday"}}', '{{__ "Day-NameShort-Saturday"}}', '{{__ "Day-NameShort-Sunday"}}'],
             height: 700,
             header: {
                 left: 'addEvent',
@@ -12,7 +24,7 @@
                 right: 'today, prev, next',
             },
 
-            buttonText:{
+            buttonText: {
                 today: "{{__ "Calendar-Today-Button"git }}",
             },
 
@@ -71,7 +83,7 @@
 
                         for (var i = 0; i < allParticipants.length; i++) {
                             $(".updateParticipants a").each(function () {
-                                if(temp[i] === $(this).text()){
+                                if (temp[i] === $(this).text()) {
                                     $(this).find(":checkbox").prop("checked", true);
                                 }
                             });
@@ -81,7 +93,7 @@
 
                     $("#confirmUpdate").click(function () {
                         $(".updateParticipants a").each(function () {
-                            if($(this).find(":checkbox").prop("checked") === true){
+                            if ($(this).find(":checkbox").prop("checked") === true) {
                                 participants += $(this).text() + ",";
                             }
                         });
@@ -90,7 +102,44 @@
                         var description = $("#updateEventDescription").val();
                         var start = $("#updateEventStart").val();
                         var end = $("#updateEventEnd").val();
-                        updateEvent(title, description, start, end, calEvent.id, participants);
+
+                        var error;
+
+                        if (start > end) {
+                            $("#updateEventAlert").text("{{__ "Calendar-Start-After-End"}}").show();
+                            error = true;
+                        }
+                        if (start == end) {
+                            $("#updateEventAlert").text("{{__ "Calendar-Start-Equals-End"}}").show();
+                            error = true;
+                        }
+
+                        if(start < end){
+                            $("#updateEventAlert").hide();
+                        }
+
+                        if($("#updateEventTitle").val().length === 0) {
+                            $(".updateEventTitleDiv").addClass("has-error");
+                            $("#updateTitleErrorToggle").addClass("glyphicon-remove");
+                            error = true
+                        }else{
+                            $(".updateEventTitleDiv").addClass("has-success").removeClass("has-error");
+                            $("#updateTitleErrorToggle").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+                        }
+
+                        if($("#updateEventDescription").val().length === 0) {
+                            $(".updateEventDescriptionDiv").addClass("has-error");
+                            $("#updateDescriptionErrorToggle").addClass("glyphicon-remove");
+                            error = true
+                        }else{
+                            $(".updateEventDescriptionDiv").addClass("has-success").removeClass("has-error");
+                            $("#updateDescriptionErrorToggle").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+                        }
+
+                        if(!error) {
+                            updateEvent(title, description, start, end, calEvent.id, participants);
+                            window.location.reload(true);
+                        }
                     })
                 });
                 //UPDATE EVENT MODAL END
@@ -156,7 +205,7 @@
 
         $("#participantsListButton, #updateParticipantsListButton").click(function () {
             selectParticipants();
-        })
+        });
     });
 
 
@@ -182,15 +231,54 @@
         for (var i = 0; i < participants.length; i++) {
             temp += participants[i] + ",";
         }
-        console.log("TEMP: " + temp);
-        $.post("/addEvent", {
-            title: $("#eventTitle").val(),
-            start: $("#eventStart").val(),
-            end: $("#eventEnd").val(),
-            description: $("#eventDescription").val(),
-            participants: temp
-        });
-        window.location.reload(true);
+        var title = $("#eventTitle").val();
+        var description = $("#eventDescription").val();
+        var start = $("#eventStart").val();
+        var end = $("#eventEnd").val();
+
+        var error;
+
+        if (start > end) {
+            $("#addEventAlert").text("{{__ "Calendar-Start-After-End"}}").show();
+            error = true;
+        }
+        if (start == end) {
+            $("#addEventAlert").text("{{__ "Calendar-Start-Equals-End"}}").show();
+            error = true;
+        }
+
+        if(start < end){
+            $("#addEventAlert").hide();
+        }
+
+        if($("#eventTitle").val().length === 0) {
+            $(".eventTitleDiv").addClass("has-error");
+            $("#titleErrorToggle").addClass("glyphicon-remove");
+            error = true
+        }else{
+            $(".eventTitleDiv").addClass("has-success").removeClass("has-error");
+            $("#titleErrorToggle").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+        }
+
+        if($("#eventDescription").val().length === 0) {
+            $(".eventDescriptionDiv").addClass("has-error");
+            $("#descriptionErrorToggle").addClass("glyphicon-remove");
+            error = true
+        }else{
+            $(".eventDescriptionDiv").addClass("has-success").removeClass("has-error");
+            $("#descriptionErrorToggle").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+        }
+
+        if(!error) {
+            $.post("/addEvent", {
+                title: title,
+                start: start,
+                end: end,
+                description: description,
+                participants: temp
+            });
+            window.location.reload(true);
+        }
     }
 
     function deleteEvent(eventId) {
