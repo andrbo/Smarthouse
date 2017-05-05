@@ -1,8 +1,9 @@
+var toggleUnitLux = require('../units/unitControl');
 var nodemailer = require('nodemailer');
-
-<<<<<<< HEAD
 var serialport = require('serialport');
+var modelUnits = require('../../../models/units');
 var SerialPort = serialport; // make a local instance of it
+
 //var arduinoPort = '/dev/cu.wchusbserial14230';
 //var arduinoPort = '/dev/ttyACM0';
 var arduinoPort = 'COM4';
@@ -12,45 +13,33 @@ var arduinoSerial = new SerialPort(arduinoPort, {
 });
 var alarmState = 0; //When server starts.
 var serialData = "";
-=======
-var serialData = require("../middlewares/arduinoData");
-var alarmState = 0; //When server starting.
-serialData = "";
->>>>>>> 9d59119b8038817499b68b52783451100c46462e
-var tempData = [];
+var luxUnits;
 
 
-module.exports = function (app, io, mailGroup) {
+module.exports = function (app, io, mailGroup, getUnitsLux) {
     var currentTime = getDate();
 
-<<<<<<< HEAD
+    getLuxUnits(function (err, result) {
+        luxUnits = result;
+    });
+
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
         io.sockets.emit('serialEvent', serialData);
-        return serialData;
+        //return serialData;
         switch (alarmState) {
             case 0:
-                generalAlarm(data)
+               // generalAlarm(data);
+                luxControl(data);
                 break;
             case 1:
-                alarmOn(data);
-                generalAlarm(data)
+               // alarmOn(data);
+               // generalAlarm(data);
+                luxControl(data);
                 break;
         }
     });
-=======
 
-    io.sockets.emit('serialEvent', serialData);
-    switch (alarmState) {
-        case 0:
-            generalAlarm(data)
-            break;
-        case 1:
-            alarmOn(data);
-            generalAlarm(data)
-            break;
-    }
->>>>>>> 9d59119b8038817499b68b52783451100c46462e
     var alarmJson = [];
     var generalJson = [];
 
@@ -184,6 +173,13 @@ module.exports = function (app, io, mailGroup) {
             console.log("STATE: " + data.state);
             alarmState = data.state;
         });
+
+        socket.on('deviceChange', function(){
+            getLuxUnits(function(err, result){
+                luxUnits = result;
+            })
+        });
+
         socket.emit('serialEvent', serialData);
         console.log("DARTA:  " + serialData)
     });
@@ -216,4 +212,55 @@ module.exports = function (app, io, mailGroup) {
             smtpTransport.close(); //Shut down the connection, no more messages.
         });
     }
+
+
+};
+
+function getLuxUnits(callback) {
+    modelUnits.getLuxUnits(function (err, result) {
+        callback(err, result);
+    })
+}
+
+function luxControl(data) {
+    var serialData = JSON.parse(data);
+    var lux = serialData.LightValue;
+    console.log('LUX VERDI '+lux);
+    for (var i = 0; i < luxUnits.length; i++) {
+        var state = luxUnits[i].state; // ENHET PÅ/AV
+        var luxTreshold = luxUnits[i].luxvalue; // GRENSEN ENHETEN SKAL SLÅ SEG PÅ VED
+        var id = luxUnits[i].id; // ID TIL ENHETEN
+
+        // DERSOM LAMPE ER AV OG LUX I ROMMET ER LAVERE ENN GRENSE FOR LAMPE SLÅ PÅ
+        if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
+            var toggle = 1;
+            console.log('Enheten er av, skal skrus på da avlest lux er lavere enn grensen')
+            console.log('For følgende id: ' +id);
+            modelUnits.toggleUnit(toggle, id, function(err){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(toggleUnitLux(id, toggle));
+                }
+            })
+
+        }
+        // DERSOM LAMPE ER PÅ OG LUX I ROMMET ER HØYERE ENN GRENSE FOR LAMPE SKRU DEN AV
+        if (state == 1 && lux > luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
+            var toggle = 0;
+            console.log('Enheten er på, skal skrus på da avlest lux er høyeree enn grensen')
+            console.log('For følgende id: ' +id);
+            modelUnits.toggleUnit(toggle, id, function(err){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(toggleUnitLux(id, toggle));
+                }
+            })
+
+        }
+    }
+    getLuxUnits(function (err, result) {
+        luxUnits = result;
+    });
 };
