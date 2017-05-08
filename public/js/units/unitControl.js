@@ -66,8 +66,8 @@ module.exports = function (io) {
 
     });
 
-
-    exports.toggleUnitLux = function (id, toggle) {
+};
+  var toggleUnitLux = function (id, toggle) {
         console.log("TOGGLE: " + toggle);
         console.log("ID: " + id)
         if (toggle == 1) {
@@ -83,6 +83,6 @@ module.exports = function (io) {
              })
         }
     };
-};
 
-//module.exports = toggleUnitLux;
+
+module.exports = toggleUnitLux;
