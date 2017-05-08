@@ -51,7 +51,6 @@ module.exports = function (passport) {
                     bcrypt.genSalt(10, function (err, salt) {
                         bcrypt.hash(password, salt, function (err, hash) {
                             password = hash;
-                            console.log("Ferdig hash: " + password);
                             if (err) {
                                 console.log(err)
                             }
@@ -64,10 +63,10 @@ module.exports = function (passport) {
                                     })
 
                                 });
-                            };
+                            }
                         });
                     });
-                };
+                }
             });
         }
     ));
@@ -79,7 +78,8 @@ module.exports = function (passport) {
             passReqToCallback: true
         },
         function (req, email, password, done) {//Callback with email and password from our form
-
+            var mailOrPasswordError = req.body.mailOrPasswordError;
+            console.log("MAIL OR PW: " + mailOrPasswordError);
             User.getUser(email, function (err, userFromDb) {
                 if(err){
                     done(err);
@@ -88,14 +88,14 @@ module.exports = function (passport) {
 
                     crypt(password, pwordfromDB, function (err, result) {
                         if (result === false) {
-                           done(null, false);
+                           done(null, false, req.flash('error_msg', mailOrPasswordError));
                         } else {
                             console.log(userFromDb[0]);
                             done(null, userFromDb[0]);
                         }
                     });
                 }else{
-                    done(null, false, req.flash('error_msg', req.__("Mail finnes ikke")));
+                    done(null, false, req.flash('error_msg', mailOrPasswordError));
                 }
             });
         }

@@ -9,6 +9,11 @@
     "Login-Forgot-Password": "Forgot password?",
     "Login-Back": "Back to login",
 
+    "Login-Form": "Login",
+    "Register-Form": "Register",
+
+    "Login-Error": "Email or password is wrong",
+
     "User-Settings":"Settings",
     "User-Profile": "Profile",
     "User-Logout":"Logout",
@@ -23,7 +28,6 @@
     "Country": "Country",
     "Email": "Email",
     "Password": "Password",
-    "Register-Confirm-Password": "Confirm password",
     "Register-Button": "Register",
 
     "Change-Password": "Change password",
@@ -57,6 +61,18 @@
     "Home-Temp": "Temperature: ",
     "Home-WaterPlant": "Give the plants some water",
 
+    "Home-Sensor-Table": "Sensor",
+    "Home-Sensor-Value": "Value",
+    "Home-Sensor-Status": "Sensor status",
+    "Home-Sensor-Value-Null": "No value",
+    "Home-No-Sensor-Warnings": "Everything ok",
+    "Home-Add-Item-Button": "Add new item",
+
+    "Add-Product-Modal-Header": "Add product",
+    "Add-New-Product-Button": "New item",
+    "Add-Products-Confirm": "Add",
+
+
     "Forgot-Password-Header": "Forgot your password?",
     "Forgot-Password-Info": "Write your email and we will send you a new password",
 
@@ -64,6 +80,7 @@
     "Event-Add": "New event",
     "Event-Description":"Description",
     "Event-Title":"Title",
+    "Event-Participants": "Participants",
 
     "Delete":"Delete",
     "Update": "Update",
@@ -148,6 +165,11 @@
     "Calendar-Add-Participants": "Add participants",
     "Calendar-Start-After-End": "Event cannot start after it ends",
     "Calendar-Start-Equals-End": "Event cannot start and end at the same time",
+
+    "Event-Table-Name": "Name",
+    "Event-Table-Title": "Title",
+    "Event-Table-Start": "Start",
+    "Event-Table-End": "End",
 
     "Chat-meSend": "Me",
     "Chat-Message-Input": "Write your message here...",

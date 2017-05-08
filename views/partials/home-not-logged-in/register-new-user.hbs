@@ -1,0 +1,197 @@
+<form id="register-form" action="register" method="post" role="form" style="display: none;">
+
+    <div class="form-group">
+        <input type="text" name="firstname" id="firstname" class="form-control form-group has-success has-feedback" placeholder="{{__ "Firstname"}}"  required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="surname" id="surname" class="form-control" placeholder="{{__ "Surname"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="address" id="address" class="form-control" placeholder="{{__ "Address"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="postalCode" id="postalCode" class="form-control" placeholder="{{__ "PostalCode"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="city" id="city" class="form-control" placeholder="{{__ "City"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="country" id="country" class="form-control" placeholder="{{__ "Country"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control" placeholder="{{__ "Email"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password" id="password" class="form-control" placeholder="{{__ "Password"}}">
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password2" id="password2" class="form-control" placeholder="{{__ "Confirm-Password"}}">
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <input type="submit" id="register-submit" class="form-control btn btn-login btn-primary" value="{{__ "Register-Button"}}">
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $('#register-form').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                firstname: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-Firstname-Regex"}}'
+                        }
+                    }
+                },
+                surname: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-Surname-Regex"}}'
+                        }
+                    }
+                },
+                address: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-Address-Regex"}}'
+                        }
+                    }
+                },
+                postalCode: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 4,
+                            max: 4,
+                            message: '{{__ "Field-PostalCode-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: '{{__ "Field-PostalCode-Regex"}}'
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-City-Regex"}}'
+                        }
+                    }
+                },
+                country: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-City-Regex"}}'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Email-Required"}}'
+                        },
+                        emailAddress: {
+                            message: '{{__ "Email-Not-Valid"}}'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        identical: {
+                            field: 'password2',
+                            message: '{{__ "Password-Mismatch"}}'
+                        },
+                        stringLength:{
+                            message:"{{__ "Password-Length"}}",
+                            min: 6
+                        }
+                    }
+                },
+                password2: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        identical: {
+                            field: 'password',
+                            message: '{{__ "Password-Mismatch"}}'
+                        },
+                        stringLength:{
+                            message:"{{__ "Password-Length"}}",
+                            min: 6
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>

@@ -8,7 +8,7 @@ $(document).ready(function () {
             url: '/getShoppingList'
         },
 
-        scrollY:280,
+        scrollY: "260px",
         bScrollCollapse : true,
         bPaginate: false,
         searching: false,

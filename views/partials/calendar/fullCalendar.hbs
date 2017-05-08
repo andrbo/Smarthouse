@@ -1,3 +1,4 @@
+<link rel='stylesheet' href='css/fullCalendar.css'/>
 <script>
     $(document).ready(function () {
         $('#calendar').fullCalendar({
@@ -69,7 +70,7 @@
 
                         var dataString = data[0].participants;
                         var allParticipants = [];
-                        var temp = dataString.split(",");
+                        var temp = dataString.split(" ");
 
 
                         $(".updateParticipants").each(function () {
@@ -94,7 +95,7 @@
                     $("#confirmUpdate").click(function () {
                         $(".updateParticipants a").each(function () {
                             if ($(this).find(":checkbox").prop("checked") === true) {
-                                participants += $(this).text() + ",";
+                                participants += $(this).text() + " ";
                             }
                         });
 
@@ -171,10 +172,10 @@
             info: false,
             lengthChange: false,
             columns: [
-                {data: "firstname", title: "Name"},
-                {data: "title", title: "Title"},
-                {data: "start", title: "Start"},
-                {data: "end", title: "End"}
+                {data: "firstname", title: '{{__ "Event-Table-Name"}}'},
+                {data: "title", title: '{{__ "Event-Table-Title"}}'},
+                {data: "start", title: '{{__ "Event-Table-Start"}}'},
+                {data: "end", title: '{{__ "Event-Table-End"}}'}
             ]
         });
 
@@ -229,7 +230,7 @@
     function addEvent() {
         var temp = [];
         for (var i = 0; i < participants.length; i++) {
-            temp += participants[i] + ",";
+            temp += participants[i] + " ";
         }
         var title = $("#eventTitle").val();
         var description = $("#eventDescription").val();

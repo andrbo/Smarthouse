@@ -1,0 +1,54 @@
+#sensorInfoPanel {
+    background-color: white;
+    height: 45%;
+}
+
+#sensorAlerts {
+    background-color: white;
+    height: 45%;
+}
+
+#eventList {
+    background-color: white;
+    height: 40%;
+    margin-top: 10px;
+
+}
+
+#shoppingList{
+    height:363px;
+}
+
+
+#openAddProductModalButton{
+    margin-top:10px;
+}
+
+
+#eventList{
+    background-color:white;
+    height: 10%;
+}
+
+#eventDescription{
+    word-wrap: break-word;
+}
+
+
+#hum {
+    width: 10%
+}
+
+#temp {
+    width: 10%
+}
+
+.productInput{
+    list-style-type: none;
+}
+
+.glyphicon.glyphicon-ok {
+    color: green;
+    font-size: 100px;
+    opacity: 0.8;
+}

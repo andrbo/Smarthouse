@@ -6,10 +6,10 @@
                 <div class="panel-heading" id="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">Login</a>
+                            <a href="#" class="active" id="login-form-link">{{__ "Login-Form"}}</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="register-form-link">Register</a>
+                            <a href="#" id="register-form-link">{{__ "Register-Form"}}</a>
                         </div>
                     </div>
                     <hr>
@@ -17,127 +17,58 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="login-form" action="/login" method="post" role="form" style="display: block;">
+                            <form id="login-form" action="login" method="post" role="form" style="display: block;">
                                 <div class="form-group input-group"><span class="input-group-addon">@</span>
-                                    <input class="form-control" placeholder="Email" name="email" id="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="Email" name="email" id="email" type="email"
+                                           autofocus>
                                 </div>
-                                <div class="form-group input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input class="form-control" placeholder="Password" name="password" id="password" type="password" value="" required="">
+                                <div class="form-group input-group"><span class="input-group-addon"><i
+                                        class="glyphicon glyphicon-lock"></i></span>
+                                    <input class="form-control" placeholder="Password" name="password" id="password"
+                                           type="password" value="" required="">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit"  id="login-submit" class="form-control btn btn-login btn-primary" value="Log In">
+                                            <input type="submit" id="login-submit"
+                                                   class="form-control btn btn-login btn-primary" value="Log In">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <input id="mailOrPasswordError" name="mailOrPasswordError" value="{{__ "Login-Error"}}" hidden>
+                                </div>
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div class="pull-right"> <a href="#" id="forgotPasswordButton">{{__ "Login-Forgot-Password"}}</a></div>
+                                            <div class="pull-right"><a href="#" id="forgotPasswordButton">{{__
+                                                    "Login-Forgot-Password"}}</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
 
-                            <!-- REGISTER FORM BEGIN -->
-                            <form id="register-form" action="register" method="post" role="form" style="display: none;">
-
-                                <div class="form-group">
-                                    <input type="text" name="firstname" id="firstname" class="form-control form-group has-success has-feedback" placeholder="{{__ "Firstname"}}"  required>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="surname" id="surname" class="form-control" placeholder="{{__ "Surname"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="address" id="address" class="form-control" placeholder="{{__ "Address"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="postalCode" id="postalCode" class="form-control" placeholder="{{__ "PostalCode"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="city" id="city" class="form-control" placeholder="{{__ "City"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="country" id="country" class="form-control" placeholder="{{__ "Country"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="{{__ "Email"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="{{__ "Password"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="password" name="password2" id="password2" class="form-control" placeholder="{{__ "Confirm-Password"}}">
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" id="register-submit" class="form-control btn btn-login btn-primary" value="{{__ "Register-Button"}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                            {{> home-not-logged-in/register-new-user}}
+                            {{> home-not-logged-in/forgot-user-password}}
                         </div>
                     </div>
-                    <!-- REGISTER FORM END -->
-
-
-                    <!-- FORGOT PASSWORD FORM -->
-                    <div style=" display: none;" id="form-forgotPassword">
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">{{__ "Forgot-Password-Header"}}</h3>
-                            </div>
-                            <h6 class="panel-body">{{__ "Forgot-Password-Info"}}</h6>
-                        </div>
-                        <form id="forgotPassword-form" action="/forgot" method="post" role="form" style="display: block;">
-                            <div class="form-group input-group"><span class="input-group-addon">@</span>
-                                <input class="form-control" placeholder="Email" name="forgotEmail" id="forgotEmail" type="email">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-3">
-                                        <input type="submit"  id="login-submit" class="form-control btn btn-login btn-primary" value="Send">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="pull-left"> <a href="#" id="backToLoginForm">{{__ "Login-Back"}}</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- FORGOT PASSWORD FORM END-->
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <script>
-    $(function() {
+    $(function () {
 
-        $('#login-form-link').click(function(e) {
+        $('#login-form-link').click(function (e) {
             $("#login-form").delay(100).fadeIn(100);
             $("#register-form").fadeOut(100);
             $('#register-form-link').removeClass('active');
             $(this).addClass('active');
             e.preventDefault();
         });
-        $('#register-form-link').click(function(e) {
+        $('#register-form-link').click(function (e) {
             $("#register-form").delay(100).fadeIn(100);
             $("#login-form").fadeOut(100);
             $('#login-form-link').removeClass('active');
@@ -145,28 +76,19 @@
             e.preventDefault();
         });
 
-        $('#forgotPasswordButton').click(function(e) {
+        $('#forgotPasswordButton').click(function (e) {
             e.preventDefault();
             $('div#form-forgotPassword').toggle('500');
             $("#login-form").fadeOut(100);
             $("#panel-heading").fadeOut(100);
         });
 
-        $('#backToLoginForm').click(function(e) {
+        $('#backToLoginForm').click(function (e) {
             e.preventDefault();
             $("#login-form").toggle("500");
             $("#panel-heading").toggle("500");
             $('div#form-forgotPassword').fadeOut(100);
         });
-
-        //Fikse bootstrap validator her.
-        $("#register-form").on('submit', function (e) {
-            var firstName = $("#firstname");
-
-            if(!firstName.val()){
-                firstName.removeClass('')
-            }
-        })
     });
 
 </script>

@@ -9,6 +9,11 @@
 	"Login-Forgot-Password": "Glemt passordet?",
 	"Login-Back": "Tilbake til login",
 
+	"Login-Form": "Logg inn",
+	"Register-Form": "Registrer",
+
+	"Login-Error": "Email eller passord er feil",
+
 	"User-Settings":"Innstillinger",
 	"User-Profile": "Profil",
 	"User-Logout":"Logg ut",
@@ -23,9 +28,9 @@
 	"Country": "Land",
 	"Email": "Email",
 	"Password": "Passord",
-	"Register-Confirm-Password": "Bekreft passord",
 	"Register-Button": "Registrer",
 
+	"Confirm-Password": "Bekreft passord",
 	"Change-Password": "Bytt passord",
 	"Old-Password": "Gammelt passord",
 	"New-Password": "Nytt passord",
@@ -55,12 +60,24 @@
 	"Home-Temp": "Temperatur: ",
 	"Home-WaterPlant": "Gi plantene litt vann",
 
+	"Home-Sensor-Table": "Sensor",
+	"Home-Sensor-Value": "Verdi",
+	"Home-Sensor-Status": "Sensorstatus",
+	"Home-Sensor-Value-Null": "Ingen verdi",
+	"Home-No-Sensor-Warnings": "Alt ok",
+	"Home-Add-Item-Button": "Ny vare",
+
+	"Add-Product-Modal-Header": "Legg til vare",
+	"Add-New-Product-Button": "Ny vare",
+	"Add-Products-Confirm": "Legg til",
+
 	"Forgot-Password-Header": "Glemt passordet?",
 	"Forgot-Password-Info": "Skriv inn din email så sender vi et nytt passord til deg",
 
 	"Event-Add": "Ny hendelse",
 	"Event-Description":"Beskrivelse",
 	"Event-Title":"Tittel",
+	"Event-Participants": "Deltakere",
 
 	"Delete":"Slett",
 	"Update": "Oppdater",
@@ -146,6 +163,11 @@
 	"Calendar-Add-Participants": "Legg til deltakere",
 	"Calendar-Start-After-End": "Startdato kan ikke være etter sluttdato",
 	"Calendar-Start-Equals-End": "Startdato og sluttdato kan ikke være den samme",
+
+	"Event-Table-Name": "Navn",
+	"Event-Table-Title": "Tittel",
+	"Event-Table-Start": "Start",
+	"Event-Table-End": "Slutt",
 
 	"Chat-meSend": "Meg",
 	"Chat-Message-Input": "Skriv din melding her...",

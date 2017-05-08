@@ -15,7 +15,8 @@
     font-size: 15px;
     margin-bottom: 30px;
     height: 30px;
-    width: 5%
+    width: 5%;
+    background-color: white;
 }
 
 .table thead th tr td {
