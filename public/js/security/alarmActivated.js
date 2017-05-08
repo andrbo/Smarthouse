@@ -219,6 +219,8 @@ module.exports = function (app, io, mailGroup) {
 function getLuxUnits(callback) {
     modelUnits.getLuxUnits(function (err, result) {
         if(callback){
+            console.log("RESULT: " + JSON.stringify(result));
+            console.log("ERR: " + err);
             callback(err, result);
         }
 
@@ -252,7 +254,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     console.log("ERROR: " + err);
                 }else{
                     console.log("ID FØR TOGGLEUNITLUX state = 0: " + id);
-                    toggleUnitLux(id, toggle);
+                    toggleUnitLux.toggleUnitLux(id, toggle);
                 }
             })
 
@@ -263,7 +265,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     console.log("ERROR: " + err);
                 }else{
                     console.log("ID FØR TOGGLEUNITLUX STATE = 1: " + id);
-                    toggleUnitLux(id, toggle);
+                    toggleUnitLux.toggleUnitLux(id, toggle);
                 }
             })
         }else{
