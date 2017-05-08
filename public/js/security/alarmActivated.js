@@ -19,6 +19,11 @@ var luxUnits;
 module.exports = function (app, io, mailGroup) {
     var currentTime = getDate();
 
+    getLuxUnits(function (err, result) {
+        console.log("GET LUX UNITS");
+        luxUnits = result;
+    });
+
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
         io.sockets.emit('serialEvent', serialData);
@@ -26,23 +31,21 @@ module.exports = function (app, io, mailGroup) {
         switch (alarmState) {
             case 0:
                // generalAlarm(data);
+                console.log("KJØRER LUX CONTROL case 0")
                 luxControl(data, function (err, res) {
-                    console.log(" ERR: " + err);
-                    console.log( "RES: " + res)
+
                 });
                 break;
             case 1:
                // alarmOn(data);
                // generalAlarm(data);
+                console.log("KJØRER LUX CONTROL case 1")
                 luxControl(data, function (err, res) {
-                    console.log("ERR: " + err);
-                    console.log("RES: " + res);
+
                 });
                 break;
         }
-        getLuxUnits(function (err, result) {
-            luxUnits = result;
-        });
+
     });
 
     var alarmJson = [];
@@ -222,16 +225,16 @@ module.exports = function (app, io, mailGroup) {
 };
 
 function getLuxUnits(callback) {
+    console.log("KJØRER GET LUX UNITS FRA METODE");
     if(callback) {
         modelUnits.getLuxUnits(function (err, result) {
-            console.log("RESULT: " + JSON.stringify(result));
-            console.log("ERR: " + err);
             callback(err, result);
         })
     }
 }
 
 function luxControl(data, callback) {
+    console.log("KJØRER LUX CONTROL FRA METODE");
     if(callback){
         var serialData = JSON.parse(data);
         var lux = serialData.LightValue;
@@ -243,23 +246,21 @@ function luxControl(data, callback) {
             luxToggleState(state, lux, luxTreshold, id, function(err, res){})
         }
         getLuxUnits(function (err, result) {
-            console.log("RESULT FRA DB: " + JSON.stringify(result));
             luxUnits = result;
-            console.log("LUX: " + JSON.stringify(luxUnits));
         });
     }
 };
 
 function luxToggleState(state, lux, luxTreshold, id, callback){
+    console.log("kjører lux TOGGLE STATE FRA METODE");
     if(callback){
         // DERSOM LAMPE ER AV OG LUX I ROMMET ER LAVERE ENN GRENSE FOR LAMPE SLÅ PÅ
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
-                    console.log("ERROR: " + err);
                 }else{
-                    console.log("ID FØR TOGGLEUNITLUX state = 0: " + id);
+                    console.log("KJØRER TOGGLE UNIT LUX MED ID: " + id + " FRA state = 0");
                     toggleUnitLux(id, toggle);
                 }
             })
@@ -268,9 +269,8 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
             var toggle = 0;
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
-                    console.log("ERROR: " + err);
                 }else{
-                    console.log("ID FØR TOGGLEUNITLUX STATE = 1: " + id);
+                    console.log("KJØRER TOGGLE UNIT LUX MED ID: " + id + " FRA state = 1");
                     toggleUnitLux(id, toggle);
                 }
             })
