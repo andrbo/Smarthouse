@@ -264,6 +264,8 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
+
+                    socket.emit('deviceChange');
                 }
             })
 
@@ -280,6 +282,8 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
+
+                    socket.emit('deviceChange');
                 }
             })
         }

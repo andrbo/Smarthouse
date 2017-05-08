@@ -64,10 +64,9 @@ module.exports = function (io) {
             socket.broadcast.emit('deviceChange');
         })
 
-        function deviceChange() {
-            socket.broadcast.emit('devicechange');
-        }
-
+        socket.on('deviceChange', function(){
+            socket.broadcast.emit('deviceChange');
+        })
     });
 
 };
@@ -78,14 +77,12 @@ var toggleUnitLux = function (id, toggle, callback) {
         if (toggle == 1) {
             rfTransmitter.nexaOn(remote, id, function () {
                 console.log(" Skrur på id " + id + " med rf");
-                deviceChange();
             });
 
             console.log('Inne i controlUnit.js, skal slå PÅ lys med id: ' + id);
         } else {
             console.log('Inne i controlUnit.js, skal slå AV lys med id: ' + id);
             rfTransmitter.nexaOff(remote, id, function () {
-                deviceChange();
                 console.log('skrur av id ' + id + " med rf");
             })
         }
