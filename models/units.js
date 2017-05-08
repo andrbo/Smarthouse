@@ -28,7 +28,7 @@ exports.toggleGroup = function (groupname, groupstate, callback){
     });
 };
 
-exports.toggleUnit = function(state, id,callback){
+exports.toggleUnit = function(state, id, callback){
     var values = [state, id];
     var sql = 'UPDATE units SET state = ? WHERE id=?';
     db.query(sql,values, function(err, result){
