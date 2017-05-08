@@ -104,8 +104,8 @@ exports.deleteGroup = function(groupid, callback){
 };
 
 exports.getLuxUnits = function(callback){
-    var sql = 'SELECT id,state,luxvalue FROM units WHERE luxstate=1';
-    db.query(sql, function(err, result){
+    var sql = 'SELECT id, state, luxvalue FROM units WHERE luxstate = ?';
+    db.query(sql, 1, function(err, result){
         if(callback){
             callback(err, result);
         };

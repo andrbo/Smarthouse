@@ -19,10 +19,6 @@ var luxUnits;
 module.exports = function (app, io, mailGroup) {
     var currentTime = getDate();
 
-    getLuxUnits(function (err, result) {
-        luxUnits = result;
-    });
-
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
         io.sockets.emit('serialEvent', serialData);
@@ -44,6 +40,9 @@ module.exports = function (app, io, mailGroup) {
                 });
                 break;
         }
+        getLuxUnits(function (err, result) {
+            luxUnits = result;
+        });
     });
 
     var alarmJson = [];
@@ -223,14 +222,13 @@ module.exports = function (app, io, mailGroup) {
 };
 
 function getLuxUnits(callback) {
-    modelUnits.getLuxUnits(function (err, result) {
-        if(callback){
+    if(callback) {
+        modelUnits.getLuxUnits(function (err, result) {
             console.log("RESULT: " + JSON.stringify(result));
             console.log("ERR: " + err);
             callback(err, result);
-        }
-
-    })
+        })
+    }
 }
 
 function luxControl(data, callback) {
