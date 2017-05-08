@@ -5,8 +5,8 @@ var modelUnits = require('../../../models/units');
 var SerialPort = serialport; // make a local instance of it
 
 //var arduinoPort = '/dev/cu.wchusbserial14230';
-//var arduinoPort = '/dev/ttyACM0';
-var arduinoPort = 'COM4';
+var arduinoPort = '/dev/ttyUSB0';
+//var arduinoPort = 'COM4';
 var arduinoSerial = new SerialPort(arduinoPort, {
     // look for return and newline at the end of each data packet:
     parser: serialport.parsers.readline("\r\n")
@@ -218,49 +218,56 @@ module.exports = function (app, io, mailGroup) {
 
 function getLuxUnits(callback) {
     modelUnits.getLuxUnits(function (err, result) {
-        callback(err, result);
+        if(callback){
+            callback(err, result);
+        }
+
     })
 }
 
 function luxControl(data) {
     var serialData = JSON.parse(data);
     var lux = serialData.LightValue;
-    console.log('LUX VERDI '+lux);
     for (var i = 0; i < luxUnits.length; i++) {
         var state = luxUnits[i].state; // ENHET PÅ/AV
         var luxTreshold = luxUnits[i].luxvalue; // GRENSEN ENHETEN SKAL SLÅ SEG PÅ VED
         var id = luxUnits[i].id; // ID TIL ENHETEN
 
+        luxToggleState(state, lux, luxTreshold, id, function(err, res){})
+    }
+    getLuxUnits(function (err, result) {
+        console.log("RESULT FRA DB: " + JSON.stringify(result));
+        luxUnits = result;
+        console.log("LUX: " + JSON.stringify(luxUnits));
+    });
+};
+
+function luxToggleState(state, lux, luxTreshold, id, callback){
+    if(callback){
         // DERSOM LAMPE ER AV OG LUX I ROMMET ER LAVERE ENN GRENSE FOR LAMPE SLÅ PÅ
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
-            console.log('Enheten er av, skal skrus på da avlest lux er lavere enn grensen')
-            console.log('For følgende id: ' +id);
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
-                    console.log(err);
+                    console.log("ERROR: " + err);
                 }else{
-                    console.log(toggleUnitLux(id, toggle));
+                    console.log("ID FØR TOGGLEUNITLUX state = 0: " + id);
+                    toggleUnitLux(id, toggle);
                 }
             })
 
-        }
-        // DERSOM LAMPE ER PÅ OG LUX I ROMMET ER HØYERE ENN GRENSE FOR LAMPE SKRU DEN AV
-        if (state == 1 && lux > luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
+        }else if(state == 1 && lux > luxTreshold){
             var toggle = 0;
-            console.log('Enheten er på, skal skrus på da avlest lux er høyeree enn grensen')
-            console.log('For følgende id: ' +id);
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
-                    console.log(err);
+                    console.log("ERROR: " + err);
                 }else{
-                    console.log(toggleUnitLux(id, toggle));
+                    console.log("ID FØR TOGGLEUNITLUX STATE = 1: " + id);
+                    toggleUnitLux(id, toggle);
                 }
             })
-
+        }else{
+            console.log("KJØRER ELSE med id: " + id)
         }
     }
-    getLuxUnits(function (err, result) {
-        luxUnits = result;
-    });
-};
+}
