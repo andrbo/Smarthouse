@@ -252,7 +252,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     console.log("ERROR: " + err);
                 }else{
                     console.log("ID FØR TOGGLEUNITLUX state = 0: " + id);
-                    toggleUnitLux.toggleUnitLux(id, toggle);
+                    toggleUnitLux(id, toggle);
                 }
             })
 
@@ -263,7 +263,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     console.log("ERROR: " + err);
                 }else{
                     console.log("ID FØR TOGGLEUNITLUX STATE = 1: " + id);
-                    toggleUnitLux.toggleUnitLux(id, toggle);
+                    toggleUnitLux(id, toggle);
                 }
             })
         }else{
