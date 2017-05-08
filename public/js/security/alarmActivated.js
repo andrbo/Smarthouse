@@ -228,6 +228,8 @@ function getLuxUnits(callback) {
     console.log("KJØRER GET LUX UNITS FRA METODE");
     if(callback) {
         modelUnits.getLuxUnits(function (err, result) {
+            console.log("ERR: " + err);
+            console.log("RES: " + JSON.stringify(result));
             callback(err, result);
         })
     }
