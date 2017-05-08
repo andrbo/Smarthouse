@@ -13,7 +13,7 @@ var arduinoSerial = new SerialPort(arduinoPort, {
 });
 var alarmState = 0; //When server starts.
 var serialData = "";
-var luxUnits;
+var luxUnits={};
 
 
 module.exports = function (app, io, mailGroup) {
@@ -252,7 +252,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     console.log("ERROR: " + err);
                 }else{
                     console.log("ID FØR TOGGLEUNITLUX state = 0: " + id);
-                    toggleUnitLux(id, toggle);
+                    toggleUnitLux.toggleUnitLux(id, toggle);
                 }
             })
 
@@ -263,7 +263,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                     console.log("ERROR: " + err);
                 }else{
                     console.log("ID FØR TOGGLEUNITLUX STATE = 1: " + id);
-                    toggleUnitLux(id, toggle);
+                    toggleUnitLux.toggleUnitLux(id, toggle);
                 }
             })
         }else{
