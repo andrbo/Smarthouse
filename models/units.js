@@ -95,8 +95,17 @@ exports.removeGroupFromUnit = function(groupid, callback){
 };
 
 exports.deleteGroup = function(groupid, callback){
-    var sql = 'DELETE FROM groups WHERE groupname=?'
+    var sql = 'DELETE FROM groups WHERE groupname=?';
     db.query(sql,groupid,  function(err, result){
+        if(callback){
+            callback(err, result);
+        };
+    });
+};
+
+exports.getLuxUnits = function(callback){
+    var sql = 'SELECT id,state,luxvalue FROM units WHERE luxstate=1';
+    db.query(sql, function(err, result){
         if(callback){
             callback(err, result);
         };

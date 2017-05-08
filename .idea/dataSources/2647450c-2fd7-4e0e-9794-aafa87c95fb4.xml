@@ -20,7 +20,7 @@
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="12" parent="4" name="alarmpw">
+    <column id="12" parent="4" name="password">
       <Position>2</Position>
       <DataType>text|0</DataType>
     </column>
@@ -62,7 +62,6 @@
     <column id="20" parent="5" name="participants">
       <Position>7</Position>
       <DataType>text|0</DataType>
-      <NotNull>1</NotNull>
     </column>
     <index id="21" parent="5" name="email">
       <ColNames>email</ColNames>

@@ -4,12 +4,13 @@
 // rfTransmitter.nexaInit(15, function() {
 //    console.info("RF transmitter initialized");
 //});
-
+var remote = 23328130;
 
 module.exports = function (io) {
 
+
     io.sockets.on('connection', function (socket) {
-        var remote = 23328130;
+
 
         socket.on('deviceOn', function (data) {
             var unit = data.unitno;
@@ -62,5 +63,23 @@ module.exports = function (io) {
             })
             socket.broadcast.emit('deviceChange');
         })
+
     });
 };
+
+var toggleUnitLux= function (id, toggle){
+    console.log('Bruker funksjonen i unitControl.js, sender med id: '+id + 'og toggle' +toggle)
+/*
+    if(toggle == 1){
+        rfTransmitter.nexaOn(remote,id, function(){
+
+        });
+    }else{
+        rfTransmitter.nexaOff(remote, id, function(){
+
+        })
+    }
+    */
+};
+
+module.exports = toggleUnitLux;
