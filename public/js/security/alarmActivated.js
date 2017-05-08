@@ -13,7 +13,7 @@ var arduinoSerial = new SerialPort(arduinoPort, {
 });
 var alarmState = 0; //When server starts.
 var serialData = "";
-var luxUnits={};
+var luxUnits;
 
 
 module.exports = function (app, io, mailGroup) {
