@@ -30,12 +30,18 @@ module.exports = function (app, io, mailGroup) {
         switch (alarmState) {
             case 0:
                // generalAlarm(data);
-                luxControl(data);
+                luxControl(data, function (err, res) {
+                    console.log(" ERR: " + err);
+                    console.log( "RES: " + res)
+                });
                 break;
             case 1:
                // alarmOn(data);
                // generalAlarm(data);
-                luxControl(data);
+                luxControl(data, function (err, res) {
+                    console.log("ERR: " + err);
+                    console.log("RES: " + res);
+                });
                 break;
         }
     });
@@ -227,21 +233,23 @@ function getLuxUnits(callback) {
     })
 }
 
-function luxControl(data) {
-    var serialData = JSON.parse(data);
-    var lux = serialData.LightValue;
-    for (var i = 0; i < luxUnits.length; i++) {
-        var state = luxUnits[i].state; // ENHET PÅ/AV
-        var luxTreshold = luxUnits[i].luxvalue; // GRENSEN ENHETEN SKAL SLÅ SEG PÅ VED
-        var id = luxUnits[i].id; // ID TIL ENHETEN
+function luxControl(data, callback) {
+    if(callback){
+        var serialData = JSON.parse(data);
+        var lux = serialData.LightValue;
+        for (var i = 0; i < luxUnits.length; i++) {
+            var state = luxUnits[i].state; // ENHET PÅ/AV
+            var luxTreshold = luxUnits[i].luxvalue; // GRENSEN ENHETEN SKAL SLÅ SEG PÅ VED
+            var id = luxUnits[i].id; // ID TIL ENHETEN
 
-        luxToggleState(state, lux, luxTreshold, id, function(err, res){})
+            luxToggleState(state, lux, luxTreshold, id, function(err, res){})
+        }
+        getLuxUnits(function (err, result) {
+            console.log("RESULT FRA DB: " + JSON.stringify(result));
+            luxUnits = result;
+            console.log("LUX: " + JSON.stringify(luxUnits));
+        });
     }
-    getLuxUnits(function (err, result) {
-        console.log("RESULT FRA DB: " + JSON.stringify(result));
-        luxUnits = result;
-        console.log("LUX: " + JSON.stringify(luxUnits));
-    });
 };
 
 function luxToggleState(state, lux, luxTreshold, id, callback){
