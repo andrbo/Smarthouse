@@ -24,8 +24,8 @@ var mailGroup = require("./models/User.js");
 // call socket.io to the app
 app.io = require('socket.io')();
 
-//app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
-//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
+app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
+app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.videoStream = require('./public/video/videoStream')(app, app.io);
 
 

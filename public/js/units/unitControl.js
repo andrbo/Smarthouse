@@ -1,9 +1,9 @@
-var rfTransmitter = require('nexa');
+//var rfTransmitter = require('nexa');
 
 //Transmitter module is connected to wiringPi pin 15
-rfTransmitter.nexaInit(15, function () {
-    console.info("RF transmitter initialized");
-});
+//rfTransmitter.nexaInit(15, function () {
+//    console.info("RF transmitter initialized");
+//});
 var remote = 23328130;
 
 module.exports = function (io) {
@@ -72,16 +72,16 @@ module.exports = function (io) {
           console.log("TOGGLE: " + toggle);
           console.log("ID: " + id)
           if (toggle == 1) {
-              rfTransmitter.nexaOn(23328130, id, function () {
-                  console.log(" Skrur på id " + id + " med rf")
-              });
+             // rfTransmitter.nexaOn(23328130, id, function () {
+             //     console.log(" Skrur på id " + id + " med rf")
+             // });
 
               console.log('Inne i controlUnit.js, skal slå PÅ lys med id: ' + id);
           } else {
               console.log('Inne i controlUnit.js, skal slå AV lys med id: ' + id);
-              rfTransmitter.nexaOff(23328130, id, function () {
-                  console.log('skrur av id ' + id + " med rf");
-              })
+             // rfTransmitter.nexaOff(23328130, id, function () {
+               //   console.log('skrur av id ' + id + " med rf");
+             // })
           }
       }
   }

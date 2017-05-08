@@ -79,7 +79,10 @@ void setup() {
 // Loop with main program
 void loop() {
   // Delay between measurements
-  delay(2000);
+  char inChar =Serial.read();
+  //Serial.println(inChar);
+  if(inChar == 'c'){
+  //delay(2000);
   temperature_read();
   humidity_read();
   gassensor_read();
@@ -101,7 +104,8 @@ void loop() {
   if (isnan(h) || isnan(t)) {
     Serial.println("Failed to read from DHT sensor!");
     return;
-}
+   }
+  }
 }
 
 // The outprint is on JSON form, and is the data the node application uses. If adding more sensor make sure to include these sebsors to the print if necessary.
