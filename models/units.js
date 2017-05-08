@@ -107,6 +107,8 @@ exports.getLuxUnits = function(callback){
     var sql = 'SELECT id, state, luxvalue FROM units WHERE luxstate = ?';
     db.query(sql, 1, function(err, result){
         if(callback){
+            console.log("ERR FRA DB: " + err);
+            console.log("RES FRA DB: " + JSON.stringify(result));
             callback(err, result);
         };
     });
