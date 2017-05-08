@@ -63,27 +63,16 @@ module.exports = function (io) {
             })
             socket.broadcast.emit('deviceChange');
         })
-
-        socket.on('deviceChange', function(){
-            socket.broadcast.emit('deviceChange');
-        })
     });
 
 };
 var toggleUnitLux = function (id, toggle, callback) {
     if (callback) {
-        console.log("TOGGLE: " + toggle);
-        console.log("ID: " + id)
         if (toggle == 1) {
             rfTransmitter.nexaOn(remote, id, function () {
-                console.log(" Skrur på id " + id + " med rf");
             });
-
-            console.log('Inne i controlUnit.js, skal slå PÅ lys med id: ' + id);
         } else {
-            console.log('Inne i controlUnit.js, skal slå AV lys med id: ' + id);
             rfTransmitter.nexaOff(remote, id, function () {
-                console.log('skrur av id ' + id + " med rf");
             })
         }
     }

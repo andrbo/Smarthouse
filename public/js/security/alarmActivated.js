@@ -47,7 +47,6 @@ arduinoSerial.on('open', openPort);
         }
 
     });
-//})
 
 
     var alarmJson = [];
@@ -253,37 +252,27 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
         // DERSOM LAMPE ER AV OG LUX I ROMMET ER LAVERE ENN GRENSE FOR LAMPE SLÅ PÅ
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
-            console.log('Lampen er av, lyst i rommet er for lav, skrur den på')
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
                 }else{
-                    console.log("KJØRER TOGGLEUNITLUX MED ID: " + id + " setter state = 1");
                     toggleUnitLux(id, toggle, function (err, res) {
                         
                     });
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
-
-                    socket.emit('deviceChange');
                 }
             })
-
         }else if(state == 1 && lux > luxTreshold){
             var toggle = 0;
-            console.log('Lampen er på, men det er for lyst, skrur den av')
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
                 }else{
-                    console.log("KJØRER TOGGLEUNIT LUXMED ID: " + id + " Skal settes til = 0");
                     toggleUnitLux(id, toggle, function (err, res) {
-                        
                     });
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
-
-                    socket.emit('deviceChange');
                 }
             })
         }
@@ -292,7 +281,6 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
 
 function openPort(){
     var startToken = 'c';
-    console.log(' porten er åpen');
     function sendData(){
         arduinoSerial.write(startToken.toString());
     }
