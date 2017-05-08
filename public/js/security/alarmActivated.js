@@ -263,7 +263,9 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                 if(err){
                 }else{
                     console.log("KJØRER TOGGLE UNIT LUX MED ID: " + id + " FRA state = 0");
-                    toggleUnitLux(id, toggle);
+                    toggleUnitLux(id, toggle, function (err, res) {
+                        
+                    });
                 }
             })
 
@@ -273,7 +275,9 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
                 if(err){
                 }else{
                     console.log("KJØRER TOGGLE UNIT LUX MED ID: " + id + " FRA state = 1");
-                    toggleUnitLux(id, toggle);
+                    toggleUnitLux(id, toggle, function (err, res) {
+                        
+                    });
                 }
             })
         }else{

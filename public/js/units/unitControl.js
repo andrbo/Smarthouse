@@ -67,22 +67,24 @@ module.exports = function (io) {
     });
 
 };
-  var toggleUnitLux = function (id, toggle) {
-        console.log("TOGGLE: " + toggle);
-        console.log("ID: " + id)
-        if (toggle == 1) {
-            rfTransmitter.nexaOn(23328130, id, function () {
-                console.log(" Skrur på id " + id +" med rf")
-            });
+  var toggleUnitLux = function (id, toggle, callback) {
+      if (callback) {
+          console.log("TOGGLE: " + toggle);
+          console.log("ID: " + id)
+          if (toggle == 1) {
+              rfTransmitter.nexaOn(23328130, id, function () {
+                  console.log(" Skrur på id " + id + " med rf")
+              });
 
-            console.log('Inne i controlUnit.js, skal slå PÅ lys med id: ' + id);
-        } else {
-            console.log('Inne i controlUnit.js, skal slå AV lys med id: ' + id);
-             rfTransmitter.nexaOff(23328130, id, function () {
-                 console.log('skrur av id '+id +" med rf");
-             })
-        }
-    };
+              console.log('Inne i controlUnit.js, skal slå PÅ lys med id: ' + id);
+          } else {
+              console.log('Inne i controlUnit.js, skal slå AV lys med id: ' + id);
+              rfTransmitter.nexaOff(23328130, id, function () {
+                  console.log('skrur av id ' + id + " med rf");
+              })
+          }
+      }
+  }
 
 
 module.exports = toggleUnitLux;
