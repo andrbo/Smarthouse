@@ -190,8 +190,6 @@ module.exports = function (app, io) {
         var temp = "Følgende alarm er blitt aktivert: ";
         var temp2 = name;
 
-        console.log("TEMP2: " + temp2);
-
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",  //Automatically sets host, port and connection security settings
             auth: {
@@ -206,9 +204,7 @@ module.exports = function (app, io) {
             text: temp + temp2// body
         }, function (error, response) {  //callback
             if (error) {
-                console.log(error);
             } else {
-                console.log("Message sent: " + response.message);
                 res.redirect('/home');
             }
             smtpTransport.close(); //Shut down the connection, no more messages.
