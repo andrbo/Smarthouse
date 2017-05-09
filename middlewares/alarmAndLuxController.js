@@ -74,8 +74,11 @@ module.exports = function (app, io) {
         if (laser == 1) {
             console.log("LASER BRUTT OG KJØRER WPI");
             wpi.setup('wpi');
-            wpi.pinMode(16, wpi.modes.OUTPUT);
+            wpi.digitalWrite(16, wpi.HIGH);
             ifAlarmSendMail("Laser", getDate());
+        }else{
+            wpi.setup('wpi');
+            wpi.digitalWrite(16, wpi.LOW);
         }
     }
 
