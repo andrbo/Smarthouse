@@ -1,9 +1,9 @@
-/*var rfTransmitter = require('nexa');
+var rfTransmitter = require('nexa');
 
 //Transmitter module is connected to wiringPi pin 15
 rfTransmitter.nexaInit(15, function () {
     console.info("RF transmitter initialized");
-});*/
+});
 var remote = 23328130;
 
 module.exports = function (io) {
@@ -17,15 +17,15 @@ module.exports = function (io) {
         socket.on("deviceOn", function (data) {
             var unit = data.unitno;
             console.log('DEVICE ON------' + unit);
-            /*rfTransmitter.nexaOn(remote, unit, function () {
-            });*/
+            rfTransmitter.nexaOn(remote, unit, function () {
+            });
             socket.emit("deviceChange");
         });
 
         socket.on("deviceOff", function (data) {
             var unit = data.unitno;
-            /*rfTransmitter.nexaOff(remote, unit, function () {
-            });*/
+            rfTransmitter.nexaOff(remote, unit, function () {
+            });
             console.log('DEVICE OFF-----' + unit)
             socket.emit("deviceChange");
         });
@@ -33,9 +33,9 @@ module.exports = function (io) {
         socket.on('groupDeviceOn', function (data) {
             var unit = parseInt(data.unitno);
             console.log("FØR");
-            /*rfTransmitter.nexaOn(remote, unit, function () {
+            rfTransmitter.nexaOn(remote, unit, function () {
                 console.log("BRUKER NEXA");
-            });*/
+            });
             console.log('GroupDeviceON---------' + unit);
             socket.emit('deviceChange');
         });
@@ -43,9 +43,9 @@ module.exports = function (io) {
         socket.on('groupDeviceOff', function (data) {
             var unit = parseInt(data.unitno);
             console.log("FØR");
-            /*rfTransmitter.nexaOff(remote, unit, function () {
+            rfTransmitter.nexaOff(remote, unit, function () {
                 console.log("BRUKER NEXA");
-            });*/
+            });
             console.log('GroupDEVICEOFF-------=' + unit);
             socket.emit('deviceChange');
         });
@@ -56,15 +56,15 @@ module.exports = function (io) {
 
         socket.on('pairDevice', function (data) {
             var unit = data.unitno;
-            /*rfTransmitter.nexaPairing(remote, unit, function () {
-            });*/
+            rfTransmitter.nexaPairing(remote, unit, function () {
+            });
             socket.emit('deviceChange');
         });
 
         socket.on('unpairDevice', function (data) {
             var unit = data.unitno;
-            /*rfTransmitter.nexaUnpairing(remote, unit, function () {
-            })*/
+            rfTransmitter.nexaUnpairing(remote, unit, function () {
+            })
             socket.broadcast.emit('deviceChange');
         })
     });

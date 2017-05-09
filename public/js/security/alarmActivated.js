@@ -4,8 +4,8 @@ var serialport = require('serialport');
 var modelUnits = require('../../../models/units');
 var SerialPort = serialport; // make a local instance of it
 
-var arduinoPort = '/dev/cu.wchusbserial14230';
-//var arduinoPort = '/dev/ttyUSB0';
+//var arduinoPort = '/dev/cu.wchusbserial14230';
+var arduinoPort = '/dev/ttyUSB0';
 //var arduinoPort = 'COM4';
 var arduinoSerial = new SerialPort(arduinoPort, {
     baudrate: 9600,

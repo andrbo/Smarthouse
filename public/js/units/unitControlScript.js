@@ -55,9 +55,13 @@ $(function () {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                console.log("SOCKET: " + data.id);
-                socket.emit("deviceOff", {unitno: data.id});
-                //window.location.reload(true);
+                function test(callback){
+                    if(callback){
+                        socket.emit('deviceOff', {unitno: data.id});
+                    }
+                }test(function(){
+
+                })
             });
         } else {
             var newState = 1;
@@ -65,9 +69,13 @@ $(function () {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                console.log('lampe er av, skrur den på');
-                socket.emit("deviceOn", {unitno: data.id});
+                function test(callback){
+                    if(callback){
+                        socket.emit('deviceOn', {unitno: data.id});
+                    }
+                }test(function(){
 
+                })
 
                 
                 //window.location.reload(true);
