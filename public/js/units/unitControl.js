@@ -15,7 +15,7 @@ module.exports = function (io) {
         });
 
         socket.on("deviceOn", function (data) {
-            var unit = data.unitno;
+            var unit = parseInt(data.unitno);
             console.log('DEVICE ON------' + unit);
             rfTransmitter.nexaOn(remote, unit, function () {
             });
@@ -23,7 +23,7 @@ module.exports = function (io) {
         });
 
         socket.on("deviceOff", function (data) {
-            var unit = data.unitno;
+            var unit = parseInt(data.unitno);
             rfTransmitter.nexaOff(remote, unit, function () {
             });
             console.log('DEVICE OFF-----' + unit)
