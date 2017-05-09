@@ -76,13 +76,15 @@ module.exports = function (app, io) {
             ifAlarmSendMail("PIR", getDate());
         }
         if (laser == 1) {
-            console.log("LASER 1 OG KJØRER WPI");
+            ifAlarmSendMail("LASER", getDate());
+            alarmLedToggle();
+        }
+    }
 
+    function alarmLedToggle(){
+        while(alarmState==1){
+            console.log("STATE 1 OG KJØRER WPI");
             wpi.digitalWrite(pin, 1);
-            ifAlarmSendMail("Laser", getDate());
-        }else{
-            console.log("LASER 0 OG KJØRER WPI");
-            wpi.digitalWrite(pin, 0);
         }
     }
 
