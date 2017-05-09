@@ -6,10 +6,6 @@ var SerialPort = serialport; // make a local instance of it
 
 var rfTransmitter = require('nexa');
 
-//Transmitter module is connected to wiringPi pin 15
-rfTransmitter.nexaInit(15, function () {
-    console.info("RF transmitter initialized");
-});
 var remote = 23328130;
 
 //var arduinoPort = '/dev/cu.wchusbserial14230';
