@@ -46,11 +46,10 @@ function activateAlarmModal(){
 
     $("#buttonActivateAlarm").click(function () {
         var pwInput = $('#passwordInputActivate').val();
-        console.log("INPUT: " + pwInput);
-
-        $.post('/alarmPw', {pw: pwInput}, function (data) {
+        $.post('/alarmPw', {
+            pw: pwInput
+        }).done(function (data) {
             var pwCheck = JSON.stringify(data);
-            console.log("Password: " + pwCheck);
             if (pwCheck === "true") {
                 $.post('/alarmToggle', {alarm: true});
                 $('#activateAlarmModal').modal('hide');
