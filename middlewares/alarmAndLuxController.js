@@ -55,6 +55,7 @@ module.exports = function (app, io) {
 
     //If alarm is on
     function alarmOn(data) {
+        wpi.setup('wpi');
         var sensorData = JSON.parse(data);
         var vibe = sensorData.VibeValue;
         var ir = sensorData.IRBarrierValue;
@@ -73,13 +74,11 @@ module.exports = function (app, io) {
         }
         if (laser == 1) {
             console.log("LASER 1 OG KJØRER WPI");
-            wpi.setup('wpi');
-            wpi.digitalWrite(16, wpi.HIGH);
+            wpi.pulseIn(16, wpi.HIGH);
             ifAlarmSendMail("Laser", getDate());
         }else{
             console.log("LASER 0 OG KJØRER WPI");
-            wpi.setup('wpi');
-            wpi.digitalWrite(16, wpi.LOW);
+            wpi.pulseIn(16, wpi.LOW);
         }
     }
 
