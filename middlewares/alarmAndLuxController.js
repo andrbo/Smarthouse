@@ -85,6 +85,9 @@ module.exports = function (app, io) {
         if(alarmState==1){
             console.log("STATE 1 OG KJØRER WPI");
             wpi.digitalWrite(pin, 1);
+        }else{
+            console.log("STATE 0 OG KJØRER WPI");
+            wpi.digitalWrite(pin, 0);
         }
     }
 
