@@ -1,7 +1,14 @@
 /*
 *  This scripts contains functions used in the control group tab of units.hbs
  */
+var socket = io();
+
 $(function () {
+// Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
+    socket.on('deviceChange', function () {
+        console.log("KJØRER DEVICE CHANGE")
+        window.location.reload(true);
+    });
 
     // Creating the DataTable with groups that exists in DB.
     var groupTable = $("#groupTable").DataTable({
@@ -106,5 +113,4 @@ $(function () {
 // Opens the edit group modal
 $('#editGroupBtn').click(function () {
     $('#editGroupModal').modal('show');
-
 });

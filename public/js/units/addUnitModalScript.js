@@ -2,17 +2,19 @@
  *  This script contains functions used in the add unit modal located in units.hbs.
  */
 
+//Get all groups when window is initalized.
+$.get('/getGroups').done(function (data) {
+    var dropdownAddDevice = $("#groupValues");
+    var dropdownChangeDevice = $("#groupValuesTest");
+    for (var i = 0; i < data.length; i++) {
+        dropdownAddDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
+        dropdownChangeDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
+    }
+});
+
 // Click function for the add new device button
 $('#addDeviceBtn').click(function () {
     $('#addUnitModal').modal('show');
-    $.get('/getGroups').done(function (data) {
-        var dropdownAddDevice = $("#groupValues");
-        var dropdownChangeDevice = $("#groupValuesTest");
-        for (var i = 0; i < data.length; i++) {
-            dropdownAddDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
-            dropdownChangeDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
-        }
-    });
 });
 
 // Functions for adding a new group. Show hidden field with a input field and save and cancel buttons
@@ -53,14 +55,10 @@ $('#saveAndPair').click(function () {
     if (groupname == "Select group") {
         groupname == "";
     }
-    ;
     $.post('/addUnit', {
         description: description,
         groupname: groupname
     }).done(function (data) {
-        $('#saveUnitModal').modal('hide');
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
         var unitId = data.insertId;
         socket.emit('pairDevice', {unitno: unitId});
         window.location.reload(true);

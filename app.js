@@ -127,6 +127,7 @@ hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
 
 //Router controller. Uses passport as authentication.
 app.io.chat = require('./public/js/chat/chat.js')(app.io);
+app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 require('./router/routes')(app,passport);
 
 //Express Validator

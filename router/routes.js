@@ -429,6 +429,7 @@ module.exports = function (app, passport) {
                 if (callback) {
                     var pwFromdb = result[0].password;
                     crypt(input, pwFromdb, function (err, result) {
+                        console.log("RESULT: " + result)
                         if (result === true) {
                             res.send(true);
                         } else {
@@ -570,8 +571,8 @@ module.exports = function (app, passport) {
         function getGroups(callback) {
             unitModel.listGroup(function (err, result) {
                 if (callback) {
-                    res.send(result);
                     callback(err, result);
+                    res.send(result);
                 }
             })
         }
@@ -588,9 +589,9 @@ module.exports = function (app, passport) {
                 if(callback){
                     res.send(result);
                     callback(err, result);
-                };
+                }
             });
-        };
+        }
         toggleGroup(function (err, res){
 
         });
@@ -617,8 +618,8 @@ module.exports = function (app, passport) {
             var state = req.body.state;
             unitModel.toggleUnit(state, id, function (err, result){
                 if(callback){
-                    res.send({id: id});
                     callback(err, result);
+                    res.send({id: id});
                 }
             })
         }

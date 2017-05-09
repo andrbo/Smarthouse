@@ -2,14 +2,14 @@
  * The Script is used in units.hbs, and takes care of filling the datatables and controlling the tabs
  */
 
-var socket = io();
-
-// Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
-socket.on('deviceChange', function () {
-    window.location.reload(true);
-});
-
 $(function () {
+
+    var socket = io();
+    // Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
+    socket.on('deviceChange', function () {
+        console.log("KJØRER DEVICE CHANGE")
+        window.location.reload(true);
+    });
 
     // Creating the DataTable which contains the different units
     var table = $("#unitTable").DataTable({
@@ -22,6 +22,7 @@ $(function () {
         info: false,
         lengthChange: false,
         "rowCallback": function (row, data, index) {
+            console.log("STATE" + data.state);
             if (data.state == 1) {
                 $('td button', row).html("ON").css({"background-color": "green"});
             } else {
@@ -42,6 +43,7 @@ $(function () {
 
     // Click function for the on/off toggle button in the DataTable. Function updates the DB with new state of the device,
     // and emitts a socket message to unitControl.js which in turn turns on/off the unit.
+
     $('table tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
         var state = data.state;
@@ -53,8 +55,9 @@ $(function () {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                socket.emit('groupdeviceOff', {unitno: unitId});
-                window.location.reload(true);
+                console.log("SOCKET: " + data.id);
+                socket.emit('deviceOff', {unitno: data.id});
+                //window.location.reload(true);
             });
         } else {
             var newState = 1;
@@ -64,14 +67,13 @@ $(function () {
             }).done(function (data) {
                 console.log('lampe er av, skrur den på');
                 socket.emit('deviceOn', {unitno: unitId});
-                window.location.reload(true);
+                //window.location.reload(true);
             });
         }
     });
 
     // Function for displaying a summary modal for each row, which also contains methods for deleting, changing group or description
-
-    $('#unitTable').on('click', ' tr', function () {
+    $('table tbody').on('click', ' tr [type!=button]', function () {
         var data = table.row(this).data();
         var unit = data.id;
         var desc = data.description;
