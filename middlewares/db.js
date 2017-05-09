@@ -11,6 +11,7 @@ var pool = mysql.createPool({
 
 pool.getConnection(function (err){
     if(err) throw err;
+    console.log("CONNECTED TO DB");
 });
 
 module.exports = pool;
