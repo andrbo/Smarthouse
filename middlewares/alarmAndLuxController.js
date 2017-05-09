@@ -76,7 +76,7 @@ module.exports = function (app, io) {
         if (laser == 1) {
             console.log("LASER 1 OG KJØRER WPI");
 
-            wpi.pwmWrite(1, 0);
+            wpi.pwmWrite(1, 100);
             ifAlarmSendMail("Laser", getDate());
         }else{
             console.log("LASER 0 OG KJØRER WPI");
