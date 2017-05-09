@@ -2,10 +2,12 @@ var nodemailer = require('nodemailer');
 var serialport = require('serialport');
 var rfTransmitter = require('nexa');
 var wpi = require('wiring-pi');
-wpi.setup('wpi');
-wpi.pinMode(1, wpi.OUTPUT);
 var modelUnits = require('../models/units');
 var mailGroup = require("../models/User.js");
+
+wpi.setup('wpi');
+var pin = 1;
+wpi.pinMode(pin, wpi.OUTPUT);
 
 var SerialPort = serialport; // make a local instance of it
 var remote = 23328130;
@@ -76,11 +78,11 @@ module.exports = function (app, io) {
         if (laser == 1) {
             console.log("LASER 1 OG KJØRER WPI");
 
-            wpi.digitalWrite(1, 1);
+            wpi.digitalWrite(pin, 1);
             ifAlarmSendMail("Laser", getDate());
         }else{
             console.log("LASER 0 OG KJØRER WPI");
-            wpi.digitalWrite(1, 0);
+            wpi.digitalWrite(pin, 0);
         }
     }
 
