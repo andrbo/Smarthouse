@@ -40,6 +40,7 @@ module.exports = function (app, io) {
         switch (alarmState) {
             case 0:
                 generalAlarm(data);
+                alarmLedToggle();
                 luxControl(data, function (err, res) {
                 });
                 break;
