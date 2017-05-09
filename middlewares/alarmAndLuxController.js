@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
 var serialport = require('serialport');
 var rfTransmitter = require('nexa');
+var wpi = require('wiring-pi');
 var modelUnits = require('../models/units');
 var mailGroup = require("../models/User.js");
 
@@ -71,6 +72,8 @@ module.exports = function (app, io) {
             ifAlarmSendMail("PIR", getDate());
         }
         if (laser == 1) {
+            wpi.pin_mode(16, wpi.PIN_MODE.OUTPUT);
+            wpi.digital_write(16, wpi.WRITE.HIGH);
             ifAlarmSendMail("Laser", getDate());
         }
     }

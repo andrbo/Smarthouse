@@ -18,17 +18,6 @@
                             <th>{{__ 'Light-Toggle'}}</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th>{{__ 'Light-UnitNo'}}</th>
-                            <th>{{__ 'Light-Description'}}</th>
-                            <th>{{__ 'Light-State'}}</th>
-                            <th>{{__ 'Light-Group'}}</th>
-                            <th style="display: none">LuxState</th>
-                            <th style="display: none">luxValue</th>
-                            <th>{{__ 'Light-Toggle'}}</th>
-                        </tr>
-                        </tfoot>
                     </table>
                     <div class="row">
                         <div class="col-md-3">
@@ -37,9 +26,6 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="controlGroupTab">
-                    <h3>Control group</h3>
-                    <br>
-                    <br>
                     <div class=" container">
                         <table id="groupTable" class="display" cellspacing="0" width="100%">
                             <thead>
@@ -64,7 +50,6 @@
 {{> units/editGroupModal}}
 {{> units/deleteUnitModal}}
 {{> units/saveUnitModal}}
-
 
 <script src="socket.io/socket.io.js"></script>
 

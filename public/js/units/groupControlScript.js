@@ -15,7 +15,7 @@ $(function () {
             dataSrc: '',
             url: '/getGroups',
         },
-        scrollY: "430px",
+        scrollY: "385px",
         searching: false,
         info: false,
         lengthChange: false,
