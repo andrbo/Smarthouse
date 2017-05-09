@@ -2,6 +2,7 @@ var nodemailer = require('nodemailer');
 var serialport = require('serialport');
 var rfTransmitter = require('nexa');
 var wpi = require('wiring-pi');
+wpi.setup('wpi');
 var modelUnits = require('../models/units');
 var mailGroup = require("../models/User.js");
 
