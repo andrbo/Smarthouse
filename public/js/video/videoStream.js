@@ -24,7 +24,6 @@ function startWebcamStream(io) {
     }
     Capture();
     app.set('watchingFile', true);
-    console.log('Start watching......');
 }
 // Capture function 200 means 30fps
 function Capture() {
@@ -39,23 +38,7 @@ function Capture() {
 var sockets = {}; // Variable used to define if videostream should bi stopped
 
 
-
     io.sockets.on('connection', function (socket) {
-
-        //console.log('a user connected');
-        //sockets[socket.id] = socket;
-        //console.log("Total clients connected : ", Object.keys(sockets).length);
-
-
-       // socket.on('disconnect', function () {
-       //     delete sockets[socket.id];
-
-            // no more sockets, kill the stream
-           // if (Object.keys(sockets).length == 0) {
-           //     app.set('watchingFile', false);
-           //     fs.unwatchFile('./stream/image_stream.jpg');
-           // }
-       // });
 
         socket.on('streamCam', function () {
             startWebcamStream(io);

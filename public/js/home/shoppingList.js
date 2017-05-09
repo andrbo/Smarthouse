@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
-    var socket = io();
+    var itemPicked = $("#itemPicked").html();
 
+    //Creates data table with shopping list elements from DB.
     var table = $("#shoppingListTable").DataTable({
         ajax: {
             dataSrc: "",
@@ -17,12 +18,12 @@ $(document).ready(function () {
         lengthChange: false,
         columns: [
             {data: "product", title:"Handleliste"},
-            {defaultContent: "<button  class='removeProduct btn btn-info glyphicon glyphicon-ok-sign'> Hentet</button>"}
+            {defaultContent: "<button  class='removeProduct btn btn-info glyphicon glyphicon-ok-sign'>" + itemPicked + "</button>"}
         ]
     });
 
+    //If row is clicked.
     $('#shoppingListTable tbody').on('click', 'tr', 'removeProduct', function () {
-
         var data = table.row(this).data();
         console.log("ID: " + data.id);
         $.post("/removeProduct", {
@@ -32,6 +33,7 @@ $(document).ready(function () {
 
     });
 
+    //Opens addProductModal
     $("#openAddProductModalButton").click(function () {
         $("#addProductModal").modal("show");
         $("#addNewItemButton").click(function () {

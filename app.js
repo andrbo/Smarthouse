@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-//var gpio = require('rpi-gpio');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -13,35 +12,11 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 
-//var redis = require("connect-redis")(session);
-
-
-//Uses the db.js file
+//Connects to DB
 require('./middlewares/db');
+//Using passport for sessions
 require('./middlewares/passport')(passport);
-var mailGroup = require("./models/User.js");
 
-// call socket.io to the app
-app.io = require('socket.io')();
-
-app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
-//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
-//app.io.videoStream = require('./public/video/videoStream')(app, app.io);
-
-
-/*
-var sessionMiddleware = session({
-    store: new redis({}),
-    secret: "secret",
-});
-
-app.io.use(function(socket, next) {
-    sessionMiddleware(socket.request, socket.request.res, next);
-});
-
-app.use(sessionMiddleware);
-
-*/
 app.get('/', function (req, res) {
     res.redirect('home');
 });
@@ -114,21 +89,17 @@ hbs.handlebars.registerHelper('__', function () {
 hbs.handlebars.registerHelper('__n', function () {
     return i18n.__n.apply(this, arguments);
 });
-/*
-hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
-    if (arguments.length < 3)
-        throw new Error("needs 2 parameters");
-    if( lvalue!=rvalue ) {
-        return options.inverse(this);
-    } else {
-        return options.fn(this);
-    }
-});*/
 
+
+// call socket.io to the app
+app.io = require('socket.io')();
 //Router controller. Uses passport as authentication.
 require('./router/routes')(app,passport);
-app.io.chat = require('./public/js/chat/chat.js')(app.io);
-app.io.unitControl = require('./public/js/units/unitControl.js')(app.io);
+
+app.io.chat = require('./middlewares/chat.js')(app.io);
+app.io.alarmActivated = require('./middlewares/alarmAndLuxController')(app, app.io);
+//app.io.unitControl = require('./middlewares/unitControl')(app.io);
+//app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 
 //Express Validator

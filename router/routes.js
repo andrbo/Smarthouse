@@ -1,3 +1,7 @@
+/*
+Routes is used to render views if the user is authenticated. File also contains CRUD operations to DB.
+ */
+
 module.exports = function (app, passport) {
 
     var generator = require('generate-password');
@@ -16,6 +20,7 @@ module.exports = function (app, passport) {
         res.render('home');
     });
 
+    //If authenticated by passport render home.
     app.get('/home', function (req, res) {
         if (req.isAuthenticated()) {
             res.render("home", {
@@ -28,6 +33,7 @@ module.exports = function (app, passport) {
         }
     });
 
+    //If authenticated by passport render calendar.
     app.get('/userCalendar', function (req, res) {
         if (req.isAuthenticated()) {
             res.render("userCalendar", {
@@ -40,6 +46,7 @@ module.exports = function (app, passport) {
         }
     });
 
+    //If authenticated by passport render security.
     app.get('/security', function (req, res) {
         if (req.isAuthenticated()) {
             res.render("security", {
@@ -52,6 +59,7 @@ module.exports = function (app, passport) {
         }
     });
 
+    //If authenticated by passport render units.
     app.get('/units', function (req, res) {
         if (req.isAuthenticated()) {
             res.render("units", {
@@ -64,25 +72,28 @@ module.exports = function (app, passport) {
         }
     });
 
-    // process the login form
+    //Process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '/home',
         failureRedirect: '/home',
         failureFlash: true
     }));
 
+    //Process the register form
     app.post('/register', passport.authenticate('local-signup', {
         successRedirect: '/home',
         failureRedirect: '/home',
         failureFlash: true
     }));
 
+    //Logout. Destroy session.
     app.get('/logout', function (req, res) {
         req.logout();
         req.flash("success_msg", res.__('Logout-Success'));
         res.redirect('/');
     });
 
+    //Forgot password. Send new to mail.
     app.post('/forgot', function (req, res) {
         var email = req.body.forgotEmail;
 
@@ -92,7 +103,7 @@ module.exports = function (app, passport) {
         });
 
         function forgotPassword(password, email) {
-            User.forgotPassword(password, email, function (err, result) {
+            User.forgotPassword(password, email, function (err) {
                 if (err)
                     return err;
                 else {
@@ -111,6 +122,7 @@ module.exports = function (app, passport) {
         });
 
 
+        //Send mail with new password
         function sendMail(email, password) {
             var smtpTransport = nodemailer.createTransport({
                 service: "Gmail",  //Automatically sets host, port and connection security settings
@@ -124,7 +136,7 @@ module.exports = function (app, passport) {
                 to: email, // receiver
                 subject: "New password", //TODO: Fiks internasjonalisering
                 text: "Hei! Ditt nye passord er: " + password + "\n\n" + "Med vennlig hilsen Smarthus-teamet"// body
-            }, function (error, response) {  //callback
+            }, function (error) {  //callback
                 if (error) {
 
                 } else {
@@ -136,6 +148,7 @@ module.exports = function (app, passport) {
 
     });
 
+    //If authenticated by passport render profile.
     app.get('/profile', function (req, res) {
         if (req.isAuthenticated()) {
             function getUserInfo(callback) {
@@ -159,6 +172,7 @@ module.exports = function (app, passport) {
         }
     });
 
+    //Update user password.
     app.post('/updateUserPassword', function (req, res) {
         var email = req.user.email;
         var oldPassword = req.body.oldPassword;
@@ -192,18 +206,23 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get("/getAllUsers", function(req, res){
+    //Get all users
+    app.get("/getAllUsers", function (req, res) {
         var email = req.user.email;
 
-        function getAllUsers(callback){
-            User.getAllUsers(email, function(err, result){
+        function getAllUsers(callback) {
+            User.getAllUsers(email, function (err, result) {
                 callback(err, result);
                 res.send(result);
             })
         }
-        getAllUsers(function(){});
+
+        getAllUsers(function () {
+        });
     });
 
+
+    //Update user profile
     app.post("/updateProfile", function (req, res) {
         var email = req.user.email;
         var firstname = req.body.firstname;
@@ -227,7 +246,8 @@ module.exports = function (app, passport) {
                     });
                 });
             }
-        };
+        }
+
         updateProfile(function (err, res) {
         });
     });
@@ -236,6 +256,7 @@ module.exports = function (app, passport) {
     //CALENDAR BEGINS HERE
     app.get("/getUserEvents", function (req, res) {
         var email = req.user.email;
+
         function getEvents(callback) {
             calModal.getUserEvents(email, function (err, result) {
                 if (callback) {
@@ -249,6 +270,7 @@ module.exports = function (app, passport) {
         });
     });
 
+    //Get all participants excepts yourself.
     app.post("/getParticipants", function (req, res) {
         function getParticipants(callback) {
             var id = req.body.id;
@@ -261,9 +283,11 @@ module.exports = function (app, passport) {
             })
         }
 
-        getParticipants(function (err, result) {});
+        getParticipants(function (err, result) {
+        });
     });
 
+    //Get all events.
     app.get("/getAllEvents", function (req, res) {
         function getAllEvents(callback) {
             calModal.getAllEvents(function (err, result) {
@@ -274,9 +298,11 @@ module.exports = function (app, passport) {
             })
         }
 
-        getAllEvents(function (err, result) {});
+        getAllEvents(function (err, result) {
+        });
     });
 
+    //Add new event
     app.post("/addEvent", function (req, res) {
         var email = req.user.email;
         var title = req.body.title;
@@ -297,6 +323,7 @@ module.exports = function (app, passport) {
         });
     });
 
+    //Delete event by id.
     app.post("/deleteEvent", function (req, res) {
         var id = req.body.id;
 
@@ -310,6 +337,7 @@ module.exports = function (app, passport) {
         })
     });
 
+    //Update event by id.
     app.post("/updateEvent", function (req, res) {
         var id = req.body.id;
         var start = req.body.start;
@@ -328,6 +356,7 @@ module.exports = function (app, passport) {
         });
     });
 
+    //Update date if event is dragged.
     app.post("/updateDate", function (req, res) {
         var id = req.body.id;
         var start = req.body.start;
@@ -343,6 +372,8 @@ module.exports = function (app, passport) {
         });
     });
 
+    //SHOPPING LIST BEGINS HERE
+    //Get shopping list
     app.get("/getShoppingList", function (req, res) {
         function getShoppingList(callback) {
             shopModal.getShoppingList(function (err, result) {
@@ -357,8 +388,10 @@ module.exports = function (app, passport) {
         });
     });
 
+    //Remove product by id.
     app.post("/removeProduct", function (req, res) {
         var id = req.body.id;
+
         function removeProduct(callback) {
             shopModal.removeProduct(id, function (err, result) {
                 if (callback) {
@@ -372,8 +405,10 @@ module.exports = function (app, passport) {
         });
     });
 
+    //Add a new product to the shopping list.
     app.post("/addProduct", function (req, res) {
         var description = req.body.description;
+
         function addProduct(callback) {
             shopModal.addProduct(description, function (err, result) {
                 if (callback) {
@@ -387,9 +422,13 @@ module.exports = function (app, passport) {
         });
     });
 
-    // alarm
+
+    //ALARM BEGINS HERE
+
+    //Toggle alarm on/off
     app.post('/alarmToggle', function (req, res) {
         var activated = req.body.alarm;
+
         function toggleAlarm(id, callback) {
             if (activated == "true") {
                 alarmModal.activateAlarm(id, function (err, result) {
@@ -407,9 +446,12 @@ module.exports = function (app, passport) {
                 })
             }
         }
-        toggleAlarm(1, function (err, result) {})
+
+        toggleAlarm(1, function (err, result) {
+        })
     });
 
+    //Get the alarm state.
     app.post("/alarmState", function (req, res) {
         function getState(id, callback) {
             alarmModal.getAlarmState(id, function (err, result) {
@@ -419,17 +461,20 @@ module.exports = function (app, passport) {
                 }
             })
         }
-        getState(1, function (err, result) {});
+
+        getState(1, function (err, result) {
+        });
     });
 
+    //Check alarm pw
     app.post('/alarmPw', function (req, res) {
         var input = req.body.pw;
+
         function getPassword(id, callback) {
             alarmModal.getAlarm(id, function (err, result) {
                 if (callback) {
                     var pwFromdb = result[0].password;
                     crypt(input, pwFromdb, function (err, result) {
-                        console.log("RESULT: " + result)
                         if (result === true) {
                             res.send(true);
                         } else {
@@ -444,6 +489,7 @@ module.exports = function (app, passport) {
         });
     });
 
+    //Update alarm password.
     app.post('/updateAlarmPassword', function (req, res) {
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
@@ -495,7 +541,8 @@ module.exports = function (app, passport) {
     }
 
 
-    //Units
+    //UNITS BEGINS HERE
+    //Get all units
     app.get('/getUnits', function (req, res) {
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
@@ -512,21 +559,8 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post('/getUnitsOfGroup', function (req, res){
-        var groupId = req.body.groupId;
-        function getUnitsOfGroup(callback){
-            unitModel.getUnitsOfGroup(groupId, function (err, result){
-                if(callback){
-                    res.send(result);
-                    callback(err, result);
-                };
-            });
-        }
-        getUnitsOfGroup(function(err, res){
 
-        });
-    });
-
+    //Add new unit
     app.post('/addUnit', function (req, res) {
         var description = req.body.description.trim();
         var groupid = req.body.groupname.trim();
@@ -542,18 +576,103 @@ module.exports = function (app, passport) {
         }
 
         addUnit(function (err, res) {
+        });
+    });
+
+    //Turn unit on/off
+    app.post("/toggleUnit", function (req, res) {
+        function toggleUnit(callback) {
+            var id = req.body.unitId;
+            var state = req.body.state;
+            unitModel.toggleUnit(state, id, function (err, result) {
+                if (callback) {
+                    callback(err, result);
+                    res.send({id: id});
+                }
+            })
+        }
+
+        toggleUnit(function (err, res) {
 
         });
     });
 
+    //Delete a unit
+    app.post("/deleteDevice", function (req, res) {
+        function deleteDevice(callback) {
+            var id = req.body.unitno;
+            unitModel.deleteDevice(id, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            });
+        }
 
+        deleteDevice(function (err, res) {
+        });
+    });
+
+    //Delete group from unit
+    app.post("/deleteGroupUnit", function (req, res) {
+        function removeGroupFromUnit(callback) {
+            var id = req.body.groupId;
+            unitModel.removeGroupFromUnit(id, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            });
+        }
+        removeGroupFromUnit(function (err, result) {
+        });
+    });
+
+    //Updates device
+    app.post("/changeDevice", function (req, res) {
+        function changeDevice(callback) {
+            var id = req.body.unitno;
+            var description = req.body.description;
+            var groupid = req.body.groupid;
+            var luxstate = req.body.luxstate;
+            var luxtresh = req.body.luxtresh;
+            unitModel.changeDevice(id, description, groupid, luxstate, luxtresh, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            });
+        }
+
+        changeDevice(function (err, res) {
+        });
+    });
+
+    //Get units belonging to group.
+    app.post('/getUnitsOfGroup', function (req, res) {
+        var groupId = req.body.groupId;
+
+        function getUnitsOfGroup(callback) {
+            unitModel.getUnitsOfGroup(groupId, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            });
+        }
+
+        getUnitsOfGroup(function (err, res) {
+
+        });
+    });
+
+    //Add new group
     app.post('/addGroup', function (req, res) {
-
         function addGroup(callback) {
             var groupName = req.body.name;
             unitModel.createGroup(groupName, function (err, result) {
                 if (callback) {
-                    if(err){
+                    if (err) {
                         res.send({addError: 1})
                     }
                     callback(err, result);
@@ -567,6 +686,7 @@ module.exports = function (app, passport) {
     });
 
 
+    //Get all groups.
     app.get("/getGroups", function (req, res) {
         function getGroups(callback) {
             unitModel.listGroup(function (err, result) {
@@ -581,100 +701,37 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post("/toggleGroup", function (req, res){
-        function toggleGroup(callback){
+    //Turn group on/off
+    app.post("/toggleGroup", function (req, res) {
+        function toggleGroup(callback) {
             var groupId = req.body.groupId;
             var newGroupState = req.body.state;
-            unitModel.toggleGroup(groupId, newGroupState,function (err, result){
-                if(callback){
+            unitModel.toggleGroup(groupId, newGroupState, function (err, result) {
+                if (callback) {
                     res.send(result);
                     callback(err, result);
                 }
             });
         }
-        toggleGroup(function (err, res){
 
+        toggleGroup(function (err, res) {
         });
     });
 
-    app.post("/deleteGroup", function (req, res){
-        function deleteGroup(callback){
+    //Delete group
+    app.post("/deleteGroup", function (req, res) {
+        function deleteGroup(callback) {
             var groupId = req.body.groupId;
 
-            unitModel.deleteGroup(groupId, function(err, result){
-                if(callback){
+            unitModel.deleteGroup(groupId, function (err, result) {
+                if (callback) {
                     res.send(result);
                     callback(err, result);
-                };
-            });
-        };
-        deleteGroup(function(err, result){
-        });
-    });
-
-    app.post("/toggleUnit", function (req, res){
-        function toggleUnit (callback){
-            var id = req.body.unitId;
-            var state = req.body.state;
-            unitModel.toggleUnit(state, id, function (err, result){
-                if(callback){
-                    callback(err, result);
-                    console.log("ERROPR: " + err);
-                    console.log("RESULT: " + JSON.stringify(result))
-                    res.send({id: id});
                 }
-            })
+            });
         }
-        toggleUnit(function(err, res){
 
-        });
-    });
-
-    app.post("/deleteDevice", function(req, res){
-        function deleteDevice(callback){
-            var id = req.body.unitno;
-            unitModel.deleteDevice(id, function(err, result){
-                if(callback){
-                    res.send(result);
-                    callback(err, result);
-                };
-            });
-        };
-        deleteDevice(function(err, res){
-
-        });
-    });
-
-    app.post("/changeDevice", function(req, res){
-        function changeDevice(callback){
-            var id= req.body.unitno;
-            var description =  req.body.description;
-            var groupid = req.body.groupid;
-            var luxstate = req.body.luxstate;
-            var luxtresh = req.body.luxtresh;
-            unitModel.changeDevice(id,description,groupid,luxstate, luxtresh, function (err, result){
-                if(callback){
-                    res.send(result);
-                    callback(err, result);
-                };
-            });
-        };
-        changeDevice(function(err, res){
-
-        });
-    });
-
-    app.post("/deleteGroupUnit", function (req, res){
-        function removeGroupFromUnit(callback){
-            var id = req.body.groupId;
-            unitModel.removeGroupFromUnit(id, function (err, result){
-                if(callback){
-                    res.send(result);
-                    callback(err, result);
-                };
-            });
-        };
-        removeGroupFromUnit(function(err, result){
+        deleteGroup(function (err, result) {
         });
     });
 };

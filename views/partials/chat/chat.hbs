@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="css/chat.css">
 <script>
     $(function () {
         var socket = io();
@@ -13,9 +13,11 @@
             $('#messageInput').val("");
         });
 
+        //Listens for new messages emited from all clients.
         socket.on("message", function (user, msg) {
             if (user == username) {
-                $('.chat').append('<li class="myMessages bg-success col-md-5"><h5 class="text-primary">' + '<strong>' + "{{__ "Chat-meSend"}}" + '</h5>' + '</strong>' + msg + '</li>');
+                $('.chat').append('<li class="myMessages bg-success col-md-5"><h5 class="text-primary">' + '<strong>' + "{{__
+                                "Chat-meSend"}}" + '</h5>' + '</strong>' + msg + '</li>');
             } else {
                 $('.chat').append('<li class="otherMessages bg-warning col-md-5"><h5 class="text-danger">' + '<strong>' + user + '</h5>' + '</strong>' + msg + '</li>');
             }
@@ -23,43 +25,11 @@
     });
 </script>
 
-<!--
-<div id="chatBox" class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span> Chat
-                    <div class="btn-group pull-right">
-                        <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" href="#chatPanel">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="panel-collapse collapse" id="chatPanel">
-                    <div id="messageWindow" class="panel-body">
-                        <ul class="chat"></ul>
-                    </div>
-
-                    <div class="panel-footer">
-                        <div class="input-group">
-                            <input id="messageInput" type="text" class="form-control input-sm"
-                                   placeholder="{{__ "Chat-Message-Input"}}"/>
-                            <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="sendMessageButton">Send</button>
-                        </span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <footer class="footer hidden-lg">
     <div id="footer" class="footer navbar-fixed-bottom">
-        <button id="openChatButton" class="btn btn-lg btn-primary"> <span class="glyphicon glyphicon-comment"></span> Chat</button>
+        <button id="openChatButton" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-comment"></span>
+            Chat
+        </button>
     </div>
 </footer>
 
@@ -83,76 +53,3 @@
         </div>
     </div>
 </div>
-
-<style>
-
-    #openChatButton{
-
-
-    }
-
-    #footer{
-
-        height: 40px;
-        width:10%;
-    }
-
-    #messageWindow {
-        height: 40%;
-    }
-
-    .myMessages {
-        word-wrap: break-word;
-        margin-left: 60%;
-    }
-
-    .otherMessages {
-        word-wrap: break-word;
-        margin-right: 60%;
-    }
-
-    #messageWindow {
-        overflow-y: scroll;
-    }
-
-    .chat {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .chat li {
-        margin-bottom: 10px;
-        padding-bottom: 5px;
-        border-bottom: 1px dotted #B3A9A9;
-    }
-
-    .chat li .chat-body p {
-        margin: 0;
-        color: #777777;
-    }
-
-    .panel, .chat {
-        margin-right: 5px;
-    }
-
-    .panel-body {
-        overflow-y: scroll;
-        height: 250px;
-    }
-
-    ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #F5F5F5;
-    }
-
-    ::-webkit-scrollbar {
-        width: 12px;
-        background-color: #F5F5F5;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-        background-color: #555;
-    }
-</style>

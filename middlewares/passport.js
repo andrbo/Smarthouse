@@ -6,7 +6,6 @@ var bcrypt = require('bcryptjs');
 
 
 module.exports = function (passport) {
-    console.log("Bruker passport.js");
 
     //Used to serialize the user for the session
     passport.serializeUser(function (user, done) {
@@ -21,6 +20,7 @@ module.exports = function (passport) {
     });
 
 
+    //Register function.
     passport.use('local-signup', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
@@ -55,13 +55,12 @@ module.exports = function (passport) {
                                 console.log(err)
                             }
                             else { //Creating new user.
-                                User.createUser(password, email, firstname, surname, address, postalCode, city, country, function(err, result){
-                                    newUser = User.getUser(email, function(err, result){
+                                User.createUser(password, email, firstname, surname, address, postalCode, city, country, function (err, result) {
+                                    newUser = User.getUser(email, function (err, result) {
                                         var string = JSON.stringify(result);
                                         var parse = JSON.parse(string);
                                         done(null, parse[0]); //Have to return JSON data to serialize.
                                     })
-
                                 });
                             }
                         });
@@ -72,6 +71,7 @@ module.exports = function (passport) {
     ));
 
 
+    //Login function
     passport.use('local-login', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
@@ -79,33 +79,31 @@ module.exports = function (passport) {
         },
         function (req, email, password, done) {//Callback with email and password from our form
             var mailOrPasswordError = req.body.mailOrPasswordError;
-            console.log("MAIL OR PW: " + mailOrPasswordError);
             User.getUser(email, function (err, userFromDb) {
-                if(err){
+                if (err) {
                     done(err);
-                }else if(userFromDb.length){ //Check if user not NULL.
+                } else if (userFromDb.length) { //Check if user not NULL.
                     var pwordfromDB = userFromDb[0].password;
 
                     crypt(password, pwordfromDB, function (err, result) {
                         if (result === false) {
-                           done(null, false, req.flash('error_msg', mailOrPasswordError));
+                            done(null, false, req.flash('error_msg', mailOrPasswordError));
                         } else {
-                            console.log(userFromDb[0]);
                             done(null, userFromDb[0]);
                         }
                     });
-                }else{
+                } else {
                     done(null, false, req.flash('error_msg', mailOrPasswordError));
                 }
             });
         }
     ));
-    
+
     function crypt(pw, pwFromDb, callback) {
         bcrypt.compare(pw, pwFromDb, function (err, result) { //Returns true if pw is ok.
             if (callback) {
                 callback(err, result);
             }
         })
-    };
+    }
 };

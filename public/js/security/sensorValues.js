@@ -16,6 +16,7 @@ socket.on('serialEvent', function (data) {
     irReading(data);
 });
 
+//Listens to webcam stream from videoStream.js
 socket.on('streamCam', function (url) {
     $('#webCam').attr('src', url);
     $('.start').hide();
@@ -29,7 +30,7 @@ function flameReading(data) {
     if (flameSensorValue == 1) {
         $('#flameValue').html("OK").css("color", "green");
     } else {
-        $('#flameValue').html("Synlig flamme").css("color", "red");
+        $('#flameValue').html($("#flameAlert").html()).css("color", "red");
     }
 }
 
@@ -39,7 +40,7 @@ function gasReading(data) {
     if (gasSensorValue <= 300) {
         $('#gasValue').html("OK").css("color", "green");
     } else {
-        $('#gasValue').html("Gas detektert").css("color", "red");
+        $('#gasValue').html($("#gasAlert").html()).css("color", "red");
     }
 }
 // Function for reading the value of the leak sensor
@@ -48,18 +49,17 @@ function leakReading(data) {
     if (leakSensorValue < 800) {
         $('#leakValue').html("OK").css("color", "green");
     } else {
-        $('#leakValue').html("Lekasje detektert").css("color", "red");
+        $('#leakValue').html($("#gasAlert").html()).css("color", "red");
     }
 }
 
 // Function for reading the value of the photoresistor used for sensing the laser beam
 function laserReading(data) {
-    console.log("KLASER: " + data.Laser);
     var laserSensorValue = data.Laser;
     if (laserSensorValue == 0) {
         $('#laserValue').html("OK").css("color", "green");
     } else {
-        $('#laserValue').html("Laser brutt").css("color", "red");
+        $('#laserValue').html($("#laserAlert").html()).css("color", "red");
     }
 }
 
@@ -70,7 +70,7 @@ function vibeReading(data) {
     if (vibeSensorValue == 0) {
         $('#vibeValue').html("OK").css("color", "green");
     } else {
-        $('#vibeValue').html("__", "Vibe-Detection").css("color", "red");
+        $('#vibeValue').html($("#vibrationAlert").html()).css("color", "red");
     }
 
 }
@@ -81,6 +81,6 @@ function irReading(data) {
     if (irSensorValue == 1) {
         $('#irValue').html("OK").css("color", "green");
     } else {
-        $('#irValue').html("{{__(IR-Detection)}}").css("color", "red");
+        $('#irValue').html($("#IRAlert").html()).css("color", "red");
     }
 }

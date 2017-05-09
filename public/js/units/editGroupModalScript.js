@@ -15,7 +15,7 @@ $(function () {
         lengthChange: false,
         columns: [
             {data: "groupname"},
-            {defaultContent: "<button class='btn btn-danger'>Delete</button>"} // add locales
+            {defaultContent: "<button class='btn btn-danger'>" +$("#deleteGroupButton").val() + "</button>"}
         ]
     });
 
@@ -23,24 +23,21 @@ $(function () {
     $('#editGroupTable tbody').on('click', 'button', function () {
         var data = editGroupTable.row($(this).parents('tr')).data();
         var id = data.groupname;
-        console.log(' Klikker slett, skal slette id: '+id);
         editGroupTable.row( $(this).parents('tr') ).remove().draw();
         $.post('/deleteGroupUnit', { // Deleting group from unitis using them
             groupId: id
         }).done(function () {
             $.post('/deleteGroup', { // Deleting the group from DB
                 groupId: id
-            }).done(function () {
-            });
+            })
         });
     });
 });
 
-
 // Function for saving the new group specified in the modal. Calls function in unitControlScript.js for posting to DB.
 $('#editGroupSaveNew').click(function () {
     var groupInput = $('#editGroupNewGroupInput').val().trim();
-    addNewGroup(groupInput, function (err, result) {
+    addNewGroup(groupInput, function () {
         $('#editGroupNewGroupInput').val("");
         $('#editGroupTable').DataTable().ajax.reload();
     });

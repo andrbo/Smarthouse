@@ -18,7 +18,6 @@ socket.on('alarmAct', function () {
 function updateToggleState() {
     $.post('/alarmState').done(function (data) {
         var state = JSON.stringify(data[0].value);
-        console.log("STATE: " + state);
         buttonState(state);
         toggleState = state;
     });
@@ -26,7 +25,6 @@ function updateToggleState() {
 
 // Function for updating the css of the alarm activation button.
 function buttonState(value) {
-    console.log("value: " + value)
     if (value == 1) {
         $('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
             deActivateAlarmModal();
@@ -52,9 +50,6 @@ function activateAlarmModal(){
             var pwCheck = JSON.stringify(data);
             if (pwCheck === "true") {
                 $.post('/alarmToggle', {alarm: true});
-                $('#activateAlarmModal').modal('hide');
-                //$('body').removeClass('modal-open');
-                //$('.modal-backdrop').remove();
                 buttonState(1);
                 updateToggleState();
                 socket.emit('alarmToggle', {state: 1});
@@ -78,9 +73,6 @@ function deActivateAlarmModal(){
             var pwCheck = JSON.stringify(data);
             if (pwCheck === "true") {
                 $.post('/alarmToggle', {alarm: false});
-                $('#deactivateAlarmModal').modal('hide');
-                //$('body').removeClass('modal-open');
-                //$('.modal-backdrop').remove();
                 buttonState(1);
                 updateToggleState();
                 socket.emit('alarmToggle', {state: 0});

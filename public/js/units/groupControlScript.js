@@ -1,12 +1,11 @@
 /*
-*  This scripts contains functions used in the control group tab of units.hbs
+ *  This scripts contains functions used in the control group tab of units.hbs
  */
 var socket = io();
 
 $(function () {
 // Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
     socket.on('deviceChange', function () {
-        console.log("KJØRER DEVICE CHANGE")
         window.location.reload(true);
     });
 
@@ -20,7 +19,7 @@ $(function () {
         searching: false,
         info: false,
         lengthChange: false,
-        "rowCallback": function (row, data, index) {
+        "rowCallback": function (row, data) {
             if (data.groupstate == 1) {
                 $('td button', row).html("ON").css({"background-color": "green"});
             } else {
@@ -46,67 +45,59 @@ $(function () {
                 groupId: groupname,
                 state: newState
             }).done(function () {
-                $.post('/getUnitsOfGroup',{ // Retrieving the units belonging to the group
+                $.post('/getUnitsOfGroup', { // Retrieving the units belonging to the group
                     groupId: groupname
-                }).done(function(data){
-                    for(var i=0; i<data.length; i++){ // Turning the devices in the group off
+                }).done(function (data) {
+                    for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
                         $.post('/toggleUnit', {
                             unitId: data[i].id,
                             state: newState
                         }).done(function (data) {
-                            console.log('Sender id = '+data.id+ 'til unitControl.js');
-                            function test(callback){
-                                if(callback){
-                                socket.emit('groupDeviceOff', {unitno: data.id});
+                            function toggleGroupDeviceOff(callback) {
+                                if (callback) {
+                                    socket.emit('groupDeviceOff', {unitno: data.id});
+                                }
                             }
-                            }test(function(){
 
+                            toggleGroupDeviceOff(function () {
                             })
                         });
                     }
                     $('#groupTable').DataTable().ajax.reload();
-                    //console.log('FERDIG med å skru på, kaller socket for refresh');
-                    //socket.emit('groupToggleDone');
-                    //window.location.reload(true); // Må lage refresh for kun den aktive tab'en
-                    //setTimeout(function(){
-                    //    window.location.reload(true);
-                   // },10000);
+
                 })
             });
-        // The group is off, turning it on
+            // The group is off, turning it on
         } else {
             var newState = 1;
             $.post('/toggleGroup', { // Turning the group on
                 groupId: groupname,
                 state: newState
             }).done(function () {
-                $.post('/getUnitsOfGroup',{ // Getting the devices belonging to the group
+                $.post('/getUnitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
-                }).done(function(data){ // Turning the devices in the group on
-                    for(var i=0; i<data.length; i++){
+                }).done(function (data) { // Turning the devices in the group on
+                    for (var i = 0; i < data.length; i++) {
                         $.post('/toggleUnit', {
                             unitId: data[i].id,
                             state: newState
                         }).done(function (data) {
-                            function test(callback){
-                                if(callback){
+                            function toggleGroupDeviceOn(callback) {
+                                if (callback) {
                                     socket.emit('groupDeviceOn', {unitno: data.id});
                                 }
-                            }test(function(){
+                            }
 
+                            toggleGroupDeviceOn(function () {
                             })
                         });
-                        console.log('Venter 1,5sek')
-                        //setTimeout(1500);
 
-                    };
+                    }
+
                     $('#groupTable').DataTable().ajax.reload();
-                    //console.log('FERDIG med å skru på, kaller socket for refresh');
-                    //socket.emit('groupToggleDone');
-                    //console.log('Sender id = '+data.id+ 'til unitControl.js');
                 });
             });
-        };
+        }
     });
 });
 

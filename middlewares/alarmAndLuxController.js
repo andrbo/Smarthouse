@@ -1,16 +1,12 @@
-var luxController = require('../units/unitControl');
 var nodemailer = require('nodemailer');
 var serialport = require('serialport');
-var modelUnits = require('../../../models/units');
-var SerialPort = serialport; // make a local instance of it
-
 var rfTransmitter = require('nexa');
+var modelUnits = require('../models/units');
+var mailGroup = require("../models/User.js");
 
+var SerialPort = serialport; // make a local instance of it
 var remote = 23328130;
-
-//var arduinoPort = '/dev/cu.wchusbserial14230';
-var arduinoPort = '/dev/ttyUSB0';
-//var arduinoPort = 'COM4';
+var arduinoPort = '/dev/ttyUSB0'; //Arduino port
 var arduinoSerial = new SerialPort(arduinoPort, {
     baudrate: 9600,
     // defaults for Arduino serial communication
@@ -26,13 +22,13 @@ var serialData = "";
 var luxUnits;
 
 
-module.exports = function (app, io, mailGroup) {
+module.exports = function (app, io) {
     var currentTime = getDate();
 
     getLuxUnits(function (err, result) {
         luxUnits = result;
     });
-arduinoSerial.on('open', openPort);
+    arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
         io.sockets.emit('serialEvent', serialData);
@@ -56,8 +52,8 @@ arduinoSerial.on('open', openPort);
     var alarmJson = [];
     var generalJson = [];
 
+    //If alarm is on
     function alarmOn(data) {
-        console.log('alarm er på');
         var sensorData = JSON.parse(data);
         var vibe = sensorData.VibeValue;
         var ir = sensorData.IRBarrierValue;
@@ -65,6 +61,7 @@ arduinoSerial.on('open', openPort);
         var laser = sensorData.Laser;
 
         if (vibe == 1) {
+            //Send mail with message and date
             ifAlarmSendMail("Vibe", getDate());
         }
         if (ir == 0) {
@@ -76,9 +73,9 @@ arduinoSerial.on('open', openPort);
         if (laser == 1) {
             ifAlarmSendMail("Laser", getDate());
         }
-        console.log("ALARMJSON: " + JSON.stringify(alarmJson));
     }
 
+    //Send mail to all registered users.
     function ifAlarmSendMail(name, time) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
@@ -98,7 +95,6 @@ arduinoSerial.on('open', openPort);
                     alarmJson.splice(i, 1);
                 }
                 alarmJson.push({name: name, time: time});
-                console.log("SENDER MAIL");
                 getMailGroup(function (err, res) {
                     for (var i = 0; i < res.length; i++) {
                         sendMail(res[i].email, name);
@@ -107,8 +103,8 @@ arduinoSerial.on('open', openPort);
             }
         }
 
+        //If alarm is not registered in the array.
         if (!exist) {
-            console.log("Eksisterer ikke");
             alarmJson.push({name: name, time: getDate()});
         }
     }
@@ -132,7 +128,6 @@ arduinoSerial.on('open', openPort);
                     generalJson.splice(i, 1);
                 }
                 generalJson.push({name: name, time: time});
-                console.log("SENDER MAIL");
                 getMailGroup(function (err, res) {
                     for (var i = 0; i < res.length; i++) {
                         sendMail(res[i].email, name);
@@ -142,7 +137,6 @@ arduinoSerial.on('open', openPort);
         }
 
         if (!exist) {
-            console.log("Eksisterer ikke");
             generalJson.push({name: name, time: getDate()});
         }
     }
@@ -157,23 +151,18 @@ arduinoSerial.on('open', openPort);
         var leakThreshold = 1000;
 
         if (gas > gasThreshold) {
-            // Gass registrert
+            //Gas registered
             ifGeneralAlarmSendMail("Gas", getDate());
-            console.log('Gass registrert');
         }
         if (flame == 0) {
-            // Flamme registeert
+            //Flame registered
             ifGeneralAlarmSendMail("Flame", getDate());
-            console.log('flamme registrert');
-            console.log(JSON.stringify(generalJson));
         }
         if (leak < leakThreshold) {
-            // Lekasje detektert
-            console.log('lekasje detektert');
+            //Leak registered
             ifGeneralAlarmSendMail("Leak", getDate());
 
         }
-        //console.log("GENEREAL JSJON" + JSON.stringify(generalJson));
     }
 
     function getDate() {
@@ -182,19 +171,19 @@ arduinoSerial.on('open', openPort);
     }
 
     io.sockets.on('connection', function (socket) {
+        //Socket listen to alarmToggle.
         socket.on('alarmToggle', function (data) {
-            console.log("STATE fra SOCKET: " + data.state);
             alarmState = data.state;
         });
 
-        socket.on('deviceChange', function(){
-            getLuxUnits(function(err, result){
+        //Socket listen to deviceChange
+        socket.on('deviceChange', function () {
+            getLuxUnits(function (err, result) {
                 luxUnits = result;
             })
         });
 
         socket.emit('serialEvent', serialData);
-        console.log("DARTA:  " + serialData)
     });
 
     function sendMail(email, name) {
@@ -230,7 +219,7 @@ arduinoSerial.on('open', openPort);
 };
 
 function getLuxUnits(callback) {
-    if(callback) {
+    if (callback) {
         modelUnits.getLuxUnits(function (err, result) {
             callback(err, result);
         })
@@ -238,42 +227,38 @@ function getLuxUnits(callback) {
 }
 
 function luxControl(data, callback) {
-    if(callback){
+    if (callback) {
         var serialData = JSON.parse(data);
         var lux = serialData.LightValue;
         for (var i = 0; i < luxUnits.length; i++) {
-            var state = luxUnits[i].state; // ENHET PÅ/AV
-            var luxTreshold = luxUnits[i].luxvalue; // GRENSEN ENHETEN SKAL SLÅ SEG PÅ VED
-            var id = luxUnits[i].id; // ID TIL ENHETEN
+            var state = luxUnits[i].state; //Unit state on/off
+            var luxTreshold = luxUnits[i].luxvalue; //Unit treshold
+            var id = luxUnits[i].id; //Unit id
 
-            luxToggleState(state, lux, luxTreshold, id, function(err, res){})
+            luxToggleState(state, lux, luxTreshold, id, function (err, res) {})
         }
     }
 };
 
-function luxToggleState(state, lux, luxTreshold, id, callback){
-    if(callback){
-        // DERSOM LAMPE ER AV OG LUX I ROMMET ER LAVERE ENN GRENSE FOR LAMPE SLÅ PÅ
+function luxToggleState(state, lux, luxTreshold, id, callback) {
+    if (callback) {
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
-            modelUnits.toggleUnit(toggle, id, function(err){
-                if(err){
-                }else{
-                    toggleUnitLux(id, toggle, function (err, res) {
-                        
-                    });
+            modelUnits.toggleUnit(toggle, id, function (err) {
+                if (err) {
+                } else {
+                    toggleUnitLux(id, toggle, function (err, res) {});
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
                 }
             })
-        }else if(state == 1 && lux > luxTreshold){
+        } else if (state == 1 && lux > luxTreshold) {
             var toggle = 0;
-            modelUnits.toggleUnit(toggle, id, function(err){
-                if(err){
-                }else{
-                    toggleUnitLux(id, toggle, function (err, res) {
-                    });
+            modelUnits.toggleUnit(toggle, id, function (err) {
+                if (err) {
+                } else {
+                    toggleUnitLux(id, toggle, function (err, res) {});
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
@@ -282,29 +267,22 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
         }
     }
 }
-
+//Turn on and off units based on lux value.
 var toggleUnitLux = function (id, toggle, callback) {
     if (callback) {
-        console.log("TOGGLE: " + toggle);
-        console.log("ID: " + id)
         if (toggle == 1) {
-        rfTransmitter.nexaOn(23328130, id, function () {
-                console.log(" Skrur på id " + id + " med rf")
-            });
-
-            console.log('Inne i controlUnit.js, skal slå PÅ lys med id: ' + id);
+            rfTransmitter.nexaOn(remote, id, function () {});
         } else {
-            console.log('Inne i controlUnit.js, skal slå AV lys med id: ' + id);
-        rfTransmitter.nexaOff(23328130, id, function () {
-                console.log('skrur av id ' + id + " med rf");
-            })
+            rfTransmitter.nexaOff(remote, id, function () {})
         }
     }
-}
+};
 
-function openPort(){
+//Function used when opening port for communication with arduino. Sends character which ard listenes to and starts printing.
+function openPort() {
     var startToken = 'c';
-    function sendData(){
+
+    function sendData() {
         arduinoSerial.write(startToken.toString());
     }
     setInterval(sendData, 1000);

@@ -1,5 +1,6 @@
 var db = require('../middlewares/db');
 
+//Get shopping list
 exports.getShoppingList = function (callback) {
     var sql = 'SELECT * FROM shoppingList';
     db.query(sql, function(err, res){
@@ -9,6 +10,7 @@ exports.getShoppingList = function (callback) {
     });
 };
 
+//Add product to shopping list.
 exports.addProduct = function (description, callback) {
     var values = [description];
     var sql = 'INSERT INTO shoppingList (product) VALUES (?)';
@@ -16,7 +18,7 @@ exports.addProduct = function (description, callback) {
     db.query(sql, values, function (err, result) {
         if (callback) {
             callback(err, result);
-        };
+        }
     });
 };
 
@@ -26,6 +28,6 @@ exports.removeProduct = function (id, callback) {
     db.query(sql, id, function(err, res){
         if(callback){
             callback(err, res);
-        };
+        }
     });
 };

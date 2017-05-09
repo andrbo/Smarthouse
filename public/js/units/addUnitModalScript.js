@@ -25,8 +25,7 @@ $('#addNewGroup').click(function () {
 
 $('#saveNewGroup').click(function () {
     var groupInput = $('#newGroup').val().trim();
-    addNewGroup(groupInput, function (err, result) {
-    });
+    addNewGroup(groupInput, function (err, result) {});
 });
 
 $('#cancelNewGroup').click(function () {

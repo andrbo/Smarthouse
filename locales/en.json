@@ -71,6 +71,7 @@
     "Add-Product-Modal-Header": "Add product",
     "Add-New-Product-Button": "New item",
     "Add-Products-Confirm": "Add",
+    "Item-Picked": "Collected",
 
 
     "Forgot-Password-Header": "Forgot your password?",
@@ -135,6 +136,7 @@
     "Light-Remote": "Remote",
     "Light-UnitNo": "Unit no.",
     "Light-AddDevice": "Add device",
+    "Light-EditUnit": "Edit unit",
     "Light-EditGroup": "Edit group",
     "Light-DeleteGroup": "Delete a group",
     "Light-SelectRemote": "Select remote to use",

@@ -70,6 +70,7 @@
 	"Add-Product-Modal-Header": "Legg til vare",
 	"Add-New-Product-Button": "Ny vare",
 	"Add-Products-Confirm": "Legg til",
+	"Item-Picked": "Hentet",
 
 	"Forgot-Password-Header": "Glemt passordet?",
 	"Forgot-Password-Info": "Skriv inn din email så sender vi et nytt passord til deg",
@@ -133,6 +134,7 @@
 	"Light-Remote": "Fjernkontroll",
 	"Light-UnitNo": "Unit nr.",
 	"Light-AddDevice": "Legg til enhet",
+	"Light-EditUnit": "Rediger enhet",
 	"Light-EditGroup": "Rediger gruppe",
 	"Light-DeleteGroup": "Slett en gruppe",
 	"Light-SelectRemote": "Velg fjernkontroll",

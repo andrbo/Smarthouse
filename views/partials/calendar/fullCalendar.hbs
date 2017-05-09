@@ -188,7 +188,6 @@
                 var data = table.row(this).data();
                 $("#showDescriptionModal").modal("show");
                 $("#eventDescription").text(data.description);
-                console.log("data: " + JSON.stringify(data));
                 $("#eventParticipants").text(data.participants);
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
@@ -196,7 +195,6 @@
         });
 
         $.get("/getAllUsers", function (data) {
-            console.log("DATA: " + JSON.stringify(data));
             for (var i = 0; i < data.length; i++) {
                 var user = data[i].firstname;
                 $("#participantsList").append('<li class="participants"><a href="#" class="small">' + '<input type="checkbox"/>' + user + '</a>' + '</li>');

@@ -4,10 +4,8 @@
 
 var socket = io();
 $(function () {
-    console.log("SOCKET ID: " + socket.id);
     // Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
     socket.on("deviceChange", function () {
-        console.log("KJØRER DEVICE CHANGE")
         window.location.reload(true);
     });
 
@@ -22,7 +20,6 @@ $(function () {
         info: false,
         lengthChange: false,
         "rowCallback": function (row, data, index) {
-            console.log("STATE" + data.state);
             if (data.state == 1) {
                 $('td button', row).html("ON").css({"background-color": "green"});
             } else {
@@ -40,7 +37,6 @@ $(function () {
         ]
     });
 
-
     // Click function for the on/off toggle button in the DataTable. Function updates the DB with new state of the device,
     // and emitts a socket message to unitControl.js which in turn turns on/off the unit.
 
@@ -49,18 +45,18 @@ $(function () {
         var state = data.state;
         var unitId = data.id;
         if (state === 1) {
-            console.log('lampe er på, skrur den av');
             var newState = 0;
             $.post('/toggleUnit', {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                function test(callback){
-                    if(callback){
+                function toggleDeviceOff(callback) {
+                    if (callback) {
                         socket.emit('deviceOff', {unitno: data.id});
                     }
-                }test(function(){
+                }
 
+                toggleDeviceOff(function () {
                 })
             });
         } else {
@@ -69,16 +65,14 @@ $(function () {
                 unitId: unitId,
                 state: newState
             }).done(function (data) {
-                function test(callback){
-                    if(callback){
+                function toggleDeviceOn(callback) {
+                    if (callback) {
                         socket.emit('deviceOn', {unitno: data.id});
                     }
-                }test(function(){
+                }
 
+                toggleDeviceOn(function () {
                 })
-
-                
-                //window.location.reload(true);
             });
         }
     });
@@ -95,10 +89,10 @@ $(function () {
         $('#editDevUnitno').html(unit);
         $('#editDevDescript').html(desc);
         $('#editDevGroup').html(group);
-        if(luxState == 1){
+        if (luxState == 1) {
             $('#editDevLuxCheck').bootstrapToggle('on');
-            $('#editDevLuxValue').slider('setValue',luxValue);
-        }else{
+            $('#editDevLuxValue').slider('setValue', luxValue);
+        } else {
             $('#editDevLuxCheck').bootstrapToggle('off');
             $('#editDevLuxValue').slider('disable');
         }
@@ -119,7 +113,7 @@ $(function () {
 function addNewGroup(newGroup, callback) {
     var groupInput = newGroup;
     var test = 0;
-    if(callback) {
+    if (callback) {
         $.post('/addGroup', {
             name: groupInput
         }).done(function (data) {
@@ -136,5 +130,4 @@ function addNewGroup(newGroup, callback) {
             }
         });
     }
-    console.log(test);
 }

@@ -1,14 +1,13 @@
 var socket = io();
 var celsius = '&#8451;';
 
-// Socket event listning to emitted data from socket located in alarmActivated.js
+// Socket event listning to emitted data from socket located in alarmAndLuxController.js
 socket.on('serialEvent', function (data) {
 
     var soilValue = $('#soilValue');
-    //soilReading(data);
+    soilReading(data);
 
     flameReading(data);
-
 
     tempReading(data);
 
@@ -19,10 +18,11 @@ socket.on('serialEvent', function (data) {
 
     laserReading(data);
 });
-// Functions below uses the json data emitted from the socket inside alarmActivated.js to display sensor values used in the home view.
+
+// Functions below uses the json data emitted from the socket inside alarmAndLuxController.js to display sensor values used in the home view.
 
 // Function for reading the soil moisture value from the Arduino.
-/*function soilReading(data) {
+function soilReading(data) {
     var dry = 500;
     var soil = data.SoilMoisture;
     if (soil > dry) {
@@ -31,7 +31,7 @@ socket.on('serialEvent', function (data) {
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
     }
-}*/
+}
 
 // Function for reading the soil moisture value from the Arduino.
 function laserReading(data) {
@@ -67,9 +67,9 @@ function flameReading(data) {
     }
 }
 
+//If all sensors are ok.
 function noErrors(){
     var length = $("#sensorWarningsTable tr").length;
-    console.log("NO ERRORS: " + length);
     if(length == 0){
         $('#sensorWarningGlyphicon').addClass("glyphicon-ok").css({"color": "green", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-remove");
         $('#noWarningsHeader').show();
@@ -99,4 +99,3 @@ function humReading(data) {
     var humSensorValue = data.Humidity;
     $('#humValue').html(humSensorValue+"%");
 }
-
