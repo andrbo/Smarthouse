@@ -619,6 +619,8 @@ module.exports = function (app, passport) {
             unitModel.toggleUnit(state, id, function (err, result){
                 if(callback){
                     callback(err, result);
+                    console.log("ERROPR: " + err);
+                    console.log("RESULT: " + JSON.stringify(result))
                     res.send({id: id});
                 }
             })

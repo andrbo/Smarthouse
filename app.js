@@ -24,8 +24,8 @@ var mailGroup = require("./models/User.js");
 // call socket.io to the app
 app.io = require('socket.io')();
 
-app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
-app.io.unitControl = require('./public/js/units/unitControl')(app.io);
+//app.io.alarmActivated = require('./public/js/security/alarmActivated')(app, app.io, mailGroup);
+//app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 //app.io.videoStream = require('./public/video/videoStream')(app, app.io);
 
 
@@ -126,9 +126,10 @@ hbs.handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
 });*/
 
 //Router controller. Uses passport as authentication.
-app.io.chat = require('./public/js/chat/chat.js')(app.io);
-app.io.unitControl = require('./public/js/units/unitControl')(app.io);
 require('./router/routes')(app,passport);
+app.io.chat = require('./public/js/chat/chat.js')(app.io);
+app.io.unitControl = require('./public/js/units/unitControl.js')(app.io);
+
 
 //Express Validator
 app.use(expressValidator({

@@ -2,11 +2,11 @@
  * The Script is used in units.hbs, and takes care of filling the datatables and controlling the tabs
  */
 
+var socket = io();
 $(function () {
-
-    var socket = io();
+    console.log("SOCKET ID: " + socket.id);
     // Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
-    socket.on('deviceChange', function () {
+    socket.on("deviceChange", function () {
         console.log("KJØRER DEVICE CHANGE")
         window.location.reload(true);
     });
@@ -56,7 +56,7 @@ $(function () {
                 state: newState
             }).done(function (data) {
                 console.log("SOCKET: " + data.id);
-                socket.emit('deviceOff', {unitno: data.id});
+                socket.emit("deviceOff", {unitno: data.id});
                 //window.location.reload(true);
             });
         } else {
@@ -66,7 +66,10 @@ $(function () {
                 state: newState
             }).done(function (data) {
                 console.log('lampe er av, skrur den på');
-                socket.emit('deviceOn', {unitno: unitId});
+                socket.emit("deviceOn", {unitno: data.id});
+
+
+                
                 //window.location.reload(true);
             });
         }
