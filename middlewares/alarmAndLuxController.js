@@ -3,6 +3,7 @@ var serialport = require('serialport');
 var rfTransmitter = require('nexa');
 var wpi = require('wiring-pi');
 wpi.setup('wpi');
+wpi.pinMode(1, wpi.OUTPUT);
 var modelUnits = require('../models/units');
 var mailGroup = require("../models/User.js");
 
@@ -74,6 +75,7 @@ module.exports = function (app, io) {
         }
         if (laser == 1) {
             console.log("LASER 1 OG KJØRER WPI");
+
             wpi.digitalWrite(1, 0);
             ifAlarmSendMail("Laser", getDate());
         }else{
