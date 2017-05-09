@@ -72,11 +72,12 @@ module.exports = function (app, io) {
             ifAlarmSendMail("PIR", getDate());
         }
         if (laser == 1) {
-            console.log("LASER BRUTT OG KJØRER WPI");
+            console.log("LASER 1 OG KJØRER WPI");
             wpi.setup('wpi');
             wpi.digitalWrite(16, wpi.HIGH);
             ifAlarmSendMail("Laser", getDate());
         }else{
+            console.log("LASER 0 OG KJØRER WPI");
             wpi.setup('wpi');
             wpi.digitalWrite(16, wpi.LOW);
         }
