@@ -82,7 +82,7 @@ module.exports = function (app, io) {
     }
 
     function alarmLedToggle(){
-        while(alarmState==1){
+        if(alarmState==1){
             console.log("STATE 1 OG KJØRER WPI");
             wpi.digitalWrite(pin, 1);
         }
