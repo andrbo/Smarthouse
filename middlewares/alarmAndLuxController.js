@@ -76,11 +76,11 @@ module.exports = function (app, io) {
         if (laser == 1) {
             console.log("LASER 1 OG KJØRER WPI");
 
-            wpi.digitalWrite(1, 0);
+            wpi.pwmWrite(1, 0);
             ifAlarmSendMail("Laser", getDate());
         }else{
             console.log("LASER 0 OG KJØRER WPI");
-            wpi.digitalWrite(1, 1023);
+            wpi.pwmWrite(1, 1023);
         }
     }
 
