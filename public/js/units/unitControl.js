@@ -68,20 +68,19 @@ module.exports = function (io) {
             socket.broadcast.emit('deviceChange');
         })
     });
+};
 
-    exports.toggleUnitLux = function (id, toggle, callback) {
-        if (callback) {
-            if (toggle == 1) {
-                rfTransmitter.nexaOn(remote, id, function () {
-                });
-            } else {
-                rfTransmitter.nexaOff(remote, id, function () {
-                })
-            }
+exports.toggleUnitLux = function (id, toggle, callback) {
+    if (callback) {
+        if (toggle == 1) {
+            rfTransmitter.nexaOn(remote, id, function () {
+            });
+        } else {
+            rfTransmitter.nexaOff(remote, id, function () {
+            })
         }
     }
-
-};
+}
 
 /*
   var toggleUnitLux = function (id, toggle, callback) {

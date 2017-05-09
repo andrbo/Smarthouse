@@ -1,4 +1,4 @@
-var toggleUnitLux = require('../units/unitControl');
+var luxController = require('../units/unitControl');
 var nodemailer = require('nodemailer');
 var serialport = require('serialport');
 var modelUnits = require('../../../models/units');
@@ -255,7 +255,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
                 }else{
-                    toggleUnitLux(id, toggle, function (err, res) {
+                    luxController.toggleUnitLux(id, toggle, function (err, res) {
                         
                     });
                     getLuxUnits(function (err, result) {
@@ -268,7 +268,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback){
             modelUnits.toggleUnit(toggle, id, function(err){
                 if(err){
                 }else{
-                    toggleUnitLux(id, toggle, function (err, res) {
+                    luxController.toggleUnitLux(id, toggle, function (err, res) {
                     });
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
