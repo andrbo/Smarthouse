@@ -69,12 +69,15 @@ module.exports = function (app, io) {
         if (vibe == 1) {
             //Send mail with message and date
             ifAlarmSendMail("Vibe", getDate());
+            alarmLedToggle();
         }
         if (ir == 0) {
             ifAlarmSendMail("IR", getDate());
+            alarmLedToggle();
         }
         if (pir == 1) {
             ifAlarmSendMail("PIR", getDate());
+            alarmLedToggle();
         }
         if (laser == 1) {
             ifAlarmSendMail("LASER", getDate());
