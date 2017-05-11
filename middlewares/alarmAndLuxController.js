@@ -36,6 +36,7 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
+        console.log(serialData)
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
@@ -210,6 +211,7 @@ module.exports = function (app, io) {
         console.log("SENDER MAIL");
         var temp = "Følgende alarm er blitt aktivert: ";
         var temp2 = name;
+        console.log("NAVN: " + temp2);
 
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",  //Automatically sets host, port and connection security settings
