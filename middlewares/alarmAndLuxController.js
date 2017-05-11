@@ -101,6 +101,7 @@ module.exports = function (app, io) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
                 callback(err, result);
+                console.log(JSON.stringify(result));
             })
         }
 
@@ -134,6 +135,7 @@ module.exports = function (app, io) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
                 callback(err, result);
+                console.log(JSON.stringify(result));
             })
         }
 
@@ -211,7 +213,7 @@ module.exports = function (app, io) {
         console.log("SENDER MAIL");
         var temp = "Følgende alarm er blitt aktivert: ";
         var temp2 = name;
-        console.log("NAVN: " + temp2);
+        console.log("MAIL: " + email);
 
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",  //Automatically sets host, port and connection security settings
