@@ -4,8 +4,8 @@ var celsius = '&#8451;';
 // Socket event listning to emitted data from socket located in alarmAndLuxController.js
 socket.on('serialEvent', function (data) {
 
-    var soilValue = $('#soilValue');
-    soilReading(data);
+    /*var soilValue = $('#soilValue');
+    soilReading(data);*/
 
     flameReading(data);
 
@@ -36,6 +36,7 @@ socket.on('serialEvent', function (data) {
 // Function for reading the soil moisture value from the Arduino.
 function laserReading(data) {
     var laser = data.Laser;
+    console.log("LASER: " + laser)
     var laserAlert = $("#laserAlarm").html();
     var content = '<tr id="laserAlert" class="bg-danger"><td>' + laserAlert + '</td>' + '</tr>';
     if (laser == 1 && !$("#laserAlert").length) {
@@ -53,7 +54,6 @@ function laserReading(data) {
 // Function used for updating the value for the flame sensor
 function flameReading(data) {
     var flameSensorValue = data.Flame;
-    console.log("FLAMME: " + flameSensorValue)
     var flameAlert = $("#flameAlarm").html();
     var content = '<tr id="flameAlert" class="bg-danger"><td>' + flameAlert + '</td>' + '</tr>';
     if (flameSensorValue == 0 && !$("#flameAlert").length) {
