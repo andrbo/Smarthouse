@@ -207,6 +207,7 @@ module.exports = function (app, io) {
     });
 
     function sendMail(email, name) {
+        console.log("SENDER MAIL");
         var temp = "Følgende alarm er blitt aktivert: ";
         var temp2 = name;
 

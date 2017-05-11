@@ -209,8 +209,8 @@ module.exports = function (app, passport) {
 
     //Get all users
     app.get("/getAllUsers", function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.email; //For testing purposes
+        var email = req.user.email;
+        //var email = req.body.email; //For testing purposes
 
         function getAllUsers(callback) {
             User.getAllUsers(email, function (err, result) {
