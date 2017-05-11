@@ -88,10 +88,8 @@ module.exports = function (app, io) {
 
     function alarmLedToggle(){
         if(alarmState==1){
-            console.log("STATE 1 OG KJØRER WPI");
             wpi.digitalWrite(pin, 1);
         }else{
-            console.log("STATE 0 OG KJØRER WPI");
             wpi.digitalWrite(pin, 0);
         }
     }
@@ -101,7 +99,6 @@ module.exports = function (app, io) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
                 callback(err, result);
-                console.log(JSON.stringify(result));
             })
         }
 
@@ -227,8 +224,9 @@ module.exports = function (app, io) {
             to: email, // receiver
             subject: "Alarm aktivert!", //TODO: Fiks internasjonalisering
             text: temp + temp2// body
-        }, function (error, response) {  //callback
+        }, function (error) {  //callback
             if (error) {
+                console.log(error);
             } else {
                 res.redirect('/home');
             }
