@@ -2,7 +2,6 @@ var socket = io();
 
 // Socket functions
 socket.on('serialEvent', function (data) {
-    console.log(data);
     var flameValue = $('#flameValue');
     flameReading(data);
     var gasValue = $('#gasValue');
