@@ -217,7 +217,7 @@ module.exports = function (app, io) {
             service: "Gmail",  //Automatically sets host, port and connection security settings
             auth: {
                 user: "Smarthus2017@gmail.com",
-                pass: "Smarthus"
+                pass: "basf2DDX"
             }
         });
         smtpTransport.sendMail({
