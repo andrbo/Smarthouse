@@ -22,7 +22,7 @@ socket.on('serialEvent', function (data) {
 // Functions below uses the json data emitted from the socket inside alarmAndLuxController.js to display sensor values used in the home view.
 
 // Function for reading the soil moisture value from the Arduino.
-function soilReading(data) {
+/*function soilReading(data) {
     var dry = 500;
     var soil = data.SoilMoisture;
     if (soil > dry) {
@@ -31,7 +31,7 @@ function soilReading(data) {
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
     }
-}
+}*/
 
 // Function for reading the soil moisture value from the Arduino.
 function laserReading(data) {
