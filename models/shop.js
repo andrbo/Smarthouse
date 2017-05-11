@@ -31,3 +31,13 @@ exports.removeProduct = function (id, callback) {
         }
     });
 };
+
+//For test purposes only!
+exports.getId = function (description, callback) {
+    var sql = 'SELECT id FROM shoppingList WHERE product = ?';
+    db.query(sql, description, function(err, res){
+        if(callback){
+            callback(err, res);
+        }
+    });
+};

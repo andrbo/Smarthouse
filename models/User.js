@@ -1,14 +1,25 @@
 var db = require('../middlewares/db');
 
 //Creates a new user.
-exports.createUser = function (password, email, firstname, surname, address, postalCode, city, country, callback) {
-    var values = [password, email, firstname, surname, address, postalCode, city, country];
-    db.query('INSERT INTO users (password, email, firstname, surname, address, postalCode, city, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', values, function (err, results) {
+exports.createUser = function (email, password, firstname, surname, address, postalCode, city, country, callback) {
+    var values = [email, password, firstname, surname, address, postalCode, city, country];
+    db.query('INSERT INTO users (email, password, firstname, surname, address, postalCode, city, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', values, function (err, results) {
         if (callback) {
             callback(err, results);
         }
     });
 };
+
+//Deletes specific user
+exports.deleteUser = function (email, callback) {
+    var sql = 'DELETE FROM users WHERE email = ?';
+    db.query(sql, email, function (err, results) {
+        if (callback) {
+            callback(err, results);
+        }
+    });
+};
+
 
 //Get user information on email.
 exports.getUser = function (email, callback) {
@@ -82,6 +93,8 @@ exports.updateProfile = function (firstname, surname, address, postalCode, city,
 
     db.query(sql, values, function (err, result) {
         if (callback) {
+            console.log("ERR: " + err);
+            console.log("RES: " + JSON.stringify(result));
             callback(err, result);
         }
     });

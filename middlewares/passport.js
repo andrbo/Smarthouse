@@ -55,7 +55,7 @@ module.exports = function (passport) {
                                 console.log(err)
                             }
                             else { //Creating new user.
-                                User.createUser(password, email, firstname, surname, address, postalCode, city, country, function (err, result) {
+                                User.createUser(email, password, firstname, surname, address, postalCode, city, country, function (err, result) {
                                     newUser = User.getUser(email, function (err, result) {
                                         var string = JSON.stringify(result);
                                         var parse = JSON.parse(string);
