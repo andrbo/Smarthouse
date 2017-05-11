@@ -36,7 +36,7 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
-        console.log("DATA: " + serialData)
+        console.log("DATA: " + JSON.stringify(serialData))
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
@@ -52,6 +52,8 @@ module.exports = function (app, io) {
                 });
                 break;
         }
+        console.log("ALARM" + alarmJson);
+        console.log("GENERAL" + generalJson);
 
     });
 
@@ -222,7 +224,7 @@ module.exports = function (app, io) {
         smtpTransport.sendMail({
             from: "<Smarthus2017@gmail.com>", //Sender address. Must be the same as authenticated user if using Gmail.
             to: email, // receiver
-            subject: "Alarm aktivert!", //TODO: Fiks internasjonalisering
+            subject: "Alarm aktivert!",
             text: temp + temp2// body
         }, function (error) {  //callback
             if (error) {
