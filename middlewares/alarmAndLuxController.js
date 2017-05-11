@@ -36,7 +36,6 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
-        console.log("DATA: " + JSON.stringify(serialData))
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
@@ -52,8 +51,8 @@ module.exports = function (app, io) {
                 });
                 break;
         }
-        console.log("ALARM" + alarmJson);
-        console.log("GENERAL" + generalJson);
+        console.log("ALARM" + JSON.stringify(alarmJson));
+        console.log("GENERAL" + JSON.stringify(generalJson));
 
     });
 
