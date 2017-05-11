@@ -37,7 +37,8 @@ $(document).ready(function () {
     $("#openAddProductModalButton").click(function () {
         $("#addProductModal").modal("show");
         $("#addNewItemButton").click(function () {
-            var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
+            //var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
+            var html = '<input type="text" class="productInput form-control" placeholder="Vare">';
             $(".itemsList").append(html);
         });
         $("#addProductButton").click(function () {
