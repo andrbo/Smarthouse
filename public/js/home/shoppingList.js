@@ -1,1 +1,53 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(C).D(0(){3 6=$("#6").a();3 r=$("#8").k({i:{B:"",A:\'/y\'},z:"E",F:h,K:2,L:2,p:2,x:2,J:2,I:[{1:"G",H:"M"},{v:"<d  4=\'9 g g-p t t-w-u\'>"+6+"</d>"}]});$(\'#8 1b\').14(\'5\',\'13\',\'9\',0(){3 1=r.12(7).1();n.o("11: "+1.b);$.m("/9",{b:1.b});$(\'#8\').k().i.f()});$("#N").5(0(){$("#15").16("1a");$("#19").5(0(){3 a=\'<j 4="s"><c 4="e-18">\'+\'<q 17="10" 4="e-Z" S="R">\'+\'</c>\'+\'</j>\';$(".Q").O(a)});$("#P").5(0(){$(".s q").T(0(){n.o("U: "+$(7).l());$.m("/Y",{X:$(7).l()})});W.V.f(h)})})});',62,74,'function|data|false|var|class|click|itemPicked|this|shoppingListTable|removeProduct|html|id|div|button|form|reload|btn|true|ajax|li|DataTable|val|post|console|log|info|input|table|productInput|glyphicon|sign|defaultContent|ok|ordering|getShoppingList|scrollY|url|dataSrc|document|ready|260px|bScrollCollapse|product|title|columns|lengthChange|bPaginate|searching|Handleliste|openAddProductModalButton|append|addProductButton|itemsList|Vare|placeholder|each|THIS|location|window|description|addProduct|control|text|ID|row|tr|on|addProductModal|modal|type|group|addNewItemButton|show|tbody'.split('|'),0,{}))
+$(document).ready(function () {
+
+    var itemPicked = $("#itemPicked").html();
+
+    //Creates data table with shopping list elements from DB.
+    var table = $("#shoppingListTable").DataTable({
+        ajax: {
+            dataSrc: "",
+            url: '/getShoppingList'
+        },
+
+        scrollY: "260px",
+        bScrollCollapse : true,
+        bPaginate: false,
+        searching: false,
+        info: false,
+        ordering: false,
+        lengthChange: false,
+        columns: [
+            {data: "product", title:"Handleliste"},
+            {defaultContent: "<button  class='removeProduct btn btn-info glyphicon glyphicon-ok-sign'>" + itemPicked + "</button>"}
+        ]
+    });
+
+    //If row is clicked.
+    $('#shoppingListTable tbody').on('click', 'tr', 'removeProduct', function () {
+        var data = table.row(this).data();
+        console.log("ID: " + data.id);
+        $.post("/removeProduct", {
+            id: data.id
+        });
+        $('#shoppingListTable').DataTable().ajax.reload();
+
+    });
+
+    //Opens addProductModal
+    $("#openAddProductModalButton").click(function () {
+        $("#addProductModal").modal("show");
+        $("#addNewItemButton").click(function () {
+            var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
+            $(".itemsList").append(html);
+        });
+        $("#addProductButton").click(function () {
+            $(".productInput input").each(function () {
+                console.log("THIS: " + $(this).val());
+                $.post("/addProduct", {
+                    description: $(this).val()
+                });
+            });
+            window.location.reload(true);
+        });
+    })
+});

@@ -1,1 +1,62 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$.G(\'/E\').m(1(5){2 x=$("#C");2 B=$("#D");I(2 i=0;i<5.J;i++){x.w("<b><a k=\'f\'>"+5[i].4+"</a></b>");B.w("<b><a k=\'f\'>"+5[i].4+"</a></b>")}});$(\'#M\').3(1(){$(\'#n\').6(\'o\')});$(\'#v\').3(1(){$(\'#r\').8("9","u");$(\'#q\').8("9","u")});$(\'#O\').3(1(){2 l=$(\'#F\').h().e();v(l,1(K,L){})});$(\'#P\').3(1(){$(\'#r\').8("9","p");$(\'#q\').8("9","p")});$(\'#H\').3(1(){2 7=$(\'#t\').h().e();2 c=$(\'#d\').j();$(\'#n\').6(\'N\');$(\'13\').19(\'6-1a\');$(\'.6-18\').17();$(\'#15\').6(\'o\');$(\'#16\').g(7);$(\'#1b\').g(c)});$(\'#Q\').3(1(){2 7=$(\'#t\').h().e();2 4=$(\'#d\').j();1c(4=="1g c"){4==""}$.1h(\'/1d\',{7:7,4:4}).m(1(5){2 A=5.1f;1e.14(\'V\',{U:A});T.R.S(W)})});$("#d").3(1(){$(\'.f\').3(1(){2 z=$(y).j();$(y).X(\'.12-c\').11(\'.10-Y\').g(z+\' <s k="Z"></s>\')})});',62,80,'|function|var|click|groupname|data|modal|description|css|display||li|group|groupDropSelected|trim|listGroups|html|val||text|class|groupInput|done|addUnitModal|show|none|addNewGroupBtns|newGroupInput|span|descriptInput|block|addNewGroup|append|dropdownAddDevice|this|selText|unitId|dropdownChangeDevice|groupValues|groupValuesTest|getGroups|newGroup|get|activateNewDevice|for|length|err|result|addDeviceBtn|hide|saveNewGroup|cancelNewGroup|saveAndPair|location|reload|window|unitno|pairDevice|true|parents|toggle|caret|dropdown|find|btn|body|emit|saveUnitModal|sumDescript|remove|backdrop|removeClass|open|sumGroup|if|addUnit|socket|insertId|Select|post'.split('|'),0,{}))
+/*
+ *  This script contains functions used in the add unit modal located in units.hbs.
+ */
+
+//Get all groups when window is initalized.
+$.get('/getGroups').done(function (data) {
+    var dropdownAddDevice = $("#groupValues");
+    var dropdownChangeDevice = $("#groupValuesTest");
+    for (var i = 0; i < data.length; i++) {
+        dropdownAddDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
+        dropdownChangeDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
+    }
+});
+
+// Click function for the add new device button
+$('#addDeviceBtn').click(function () {
+    $('#addUnitModal').modal('show');
+});
+
+// Functions for adding a new group. Show hidden field with a input field and save and cancel buttons
+$('#addNewGroup').click(function () {
+    $('#newGroupInput').css("display", "block");
+    $('#addNewGroupBtns').css("display", "block");
+});
+
+$('#saveNewGroup').click(function () {
+    var groupInput = $('#newGroup').val().trim();
+    addNewGroup(groupInput, function (err, result) {});
+});
+
+$('#cancelNewGroup').click(function () {
+    $('#newGroupInput').css("display", "none");
+    $('#addNewGroupBtns').css("display", "none");
+});
+
+
+// The function gathers the values from the add device modal, and posts the input values to the DB
+// and emits a message to unitControl.js for pairing the new device
+$('#saveAndPair').click(function () {
+    var description = $('#descriptInput').val().trim();
+    var groupname = $('#groupDropSelected').text();
+    if (groupname == "Select group") {
+        groupname == "";
+    }
+    $.post('/addUnit', {
+        description: description,
+        groupname: groupname
+    }).done(function (data) {
+        var unitId = data.insertId;
+        socket.emit('pairDevice', {unitno: unitId});
+        window.location.reload(true);
+    });
+});
+
+
+// Function for setting the text of the button from the selected value in the dropdown
+$("#groupDropSelected").click(function () {
+    $('.listGroups').click(function () {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    });
+});

@@ -1,1 +1,44 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(1(){2 0=$("#0").i({h:{l:\'\',p:\'/t\',},v:"r",s:5,u:5,q:5,m:[{3:"a"},{n:"<7 o=\'c c-I\'>"+$("#E").4()+"</7>"}]});$(\'#0 w\').G(\'j\',\'7\',1(){2 3=0.d($(8).e(\'9\')).3();2 6=3.a;0.d($(8).e(\'9\')).x().z();$.b(\'/A\',{k:6}).B(1(){$.b(\'/F\',{k:6})})})});$(\'#y\').j(1(){2 f=$(\'#g\').4().D();H(f,1(){$(\'#g\').4("");$(\'#0\').i().h.C()})});',45,45,'editGroupTable|function|var|data|val|false|id|button|this|tr|groupname|post|btn|row|parents|groupInput|editGroupNewGroupInput|ajax|DataTable|click|groupId|dataSrc|columns|defaultContent|class|url|lengthChange|430px|searching|getGroups|info|scrollY|tbody|remove|editGroupSaveNew|draw|deleteGroupUnit|done|reload|trim|deleteGroupButton|deleteGroup|on|addNewGroup|danger'.split('|'),0,{}))
+/*
+ * This script contains functions used in the edit group modal.
+ * The modal is shown when clicking the edit group button in the control group tab, og units.hbs
+ */
+$(function () {
+    // Creating a table of the existing groups in DB.
+    var editGroupTable = $("#editGroupTable").DataTable({
+        ajax: {
+            dataSrc: '',
+            url: '/getGroups',
+        },
+        scrollY: "430px",
+        searching: false,
+        info: false,
+        lengthChange: false,
+        columns: [
+            {data: "groupname"},
+            {defaultContent: "<button class='btn btn-danger'>" +$("#deleteGroupButton").val() + "</button>"}
+        ]
+    });
+
+    // Click function for the delete buttons in the table.
+    $('#editGroupTable tbody').on('click', 'button', function () {
+        var data = editGroupTable.row($(this).parents('tr')).data();
+        var id = data.groupname;
+        editGroupTable.row( $(this).parents('tr') ).remove().draw();
+        $.post('/deleteGroupUnit', { // Deleting group from unitis using them
+            groupId: id
+        }).done(function () {
+            $.post('/deleteGroup', { // Deleting the group from DB
+                groupId: id
+            })
+        });
+    });
+});
+
+// Function for saving the new group specified in the modal. Calls function in unitControlScript.js for posting to DB.
+$('#editGroupSaveNew').click(function () {
+    var groupInput = $('#editGroupNewGroupInput').val().trim();
+    addNewGroup(groupInput, function () {
+        $('#editGroupNewGroupInput').val("");
+        $('#editGroupTable').DataTable().ajax.reload();
+    });
+});

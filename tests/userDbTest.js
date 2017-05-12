@@ -21,16 +21,6 @@ describe('users', function () {
     });
 
 
-
-    /*it('should list firstname of all users except email parameter on /getAllUsers GET', function (done) {
-        chai.request(server).get('/getAllUsers').send({email:"kus@hotmail.com"}).end(function (err, res) {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body[0].should.have.property('firstname');
-            done();
-        });
-    });*/
-
     it('should set new password using forgot password', function (done) {
         User.forgotPassword("newPassword","test@hotmail.com", function (err, res) {
             User.getUser("test@hotmail.com", function(err, res){

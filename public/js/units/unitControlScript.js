@@ -1,1 +1,134 @@
-var _0x2042=["\x64\x65\x76\x69\x63\x65\x43\x68\x61\x6E\x67\x65","\x72\x65\x6C\x6F\x61\x64","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x6F\x6E","","\x2F\x67\x65\x74\x55\x6E\x69\x74\x73","\x33\x38\x35\x70\x78","\x73\x74\x61\x74\x65","\x67\x72\x65\x65\x6E","\x63\x73\x73","\x4F\x4E","\x68\x74\x6D\x6C","\x74\x64\x20\x62\x75\x74\x74\x6F\x6E","\x72\x65\x64","\x4F\x46\x46","\x69\x64","\x64\x65\x73\x63\x72\x69\x70\x74\x69\x6F\x6E","\x67\x72\x6F\x75\x70\x69\x64","\x6C\x75\x78\x73\x74\x61\x74\x65","\x6C\x75\x78\x76\x61\x6C\x75\x65","\x3C\x62\x75\x74\x74\x6F\x6E\x3E\x3C\x2F\x62\x75\x74\x74\x6F\x6E\x3E","\x23\x75\x6E\x69\x74\x54\x61\x62\x6C\x65","\x63\x6C\x69\x63\x6B","\x62\x75\x74\x74\x6F\x6E","\x64\x61\x74\x61","\x74\x72","\x70\x61\x72\x65\x6E\x74\x73","\x72\x6F\x77","\x64\x65\x76\x69\x63\x65\x4F\x66\x66","\x65\x6D\x69\x74","\x64\x6F\x6E\x65","\x2F\x74\x6F\x67\x67\x6C\x65\x55\x6E\x69\x74","\x70\x6F\x73\x74","\x64\x65\x76\x69\x63\x65\x4F\x6E","\x74\x61\x62\x6C\x65\x20\x74\x62\x6F\x64\x79","\x20\x74\x72\x20\x5B\x74\x79\x70\x65\x21\x3D\x62\x75\x74\x74\x6F\x6E\x5D","\x73\x68\x6F\x77","\x6D\x6F\x64\x61\x6C","\x23\x65\x64\x69\x74\x55\x6E\x69\x74\x4D\x6F\x64\x61\x6C","\x23\x65\x64\x69\x74\x44\x65\x76\x55\x6E\x69\x74\x6E\x6F","\x23\x65\x64\x69\x74\x44\x65\x76\x44\x65\x73\x63\x72\x69\x70\x74","\x23\x65\x64\x69\x74\x44\x65\x76\x47\x72\x6F\x75\x70","\x62\x6F\x6F\x74\x73\x74\x72\x61\x70\x54\x6F\x67\x67\x6C\x65","\x23\x65\x64\x69\x74\x44\x65\x76\x4C\x75\x78\x43\x68\x65\x63\x6B","\x73\x65\x74\x56\x61\x6C\x75\x65","\x73\x6C\x69\x64\x65\x72","\x23\x65\x64\x69\x74\x44\x65\x76\x4C\x75\x78\x56\x61\x6C\x75\x65","\x6F\x66\x66","\x64\x69\x73\x61\x62\x6C\x65","\x73\x68\x6F\x77\x2E\x62\x73\x2E\x74\x61\x62","\x6C\x61\x73\x74\x54\x61\x62","\x68\x72\x65\x66","\x61\x74\x74\x72","\x74\x61\x72\x67\x65\x74","\x73\x65\x74\x49\x74\x65\x6D","\x61\x5B\x64\x61\x74\x61\x2D\x74\x6F\x67\x67\x6C\x65\x3D\x22\x74\x61\x62\x22\x5D","\x67\x65\x74\x49\x74\x65\x6D","\x74\x61\x62","\x23\x63\x6F\x6E\x74\x72\x6F\x6C\x54\x61\x62\x73\x20\x61\x5B\x68\x72\x65\x66\x3D\x22","\x22\x5D","\x62\x6F\x6F\x74\x73\x74\x72\x61\x70\x53\x6C\x69\x64\x65\x72","\x69\x6E\x70\x75\x74\x2E\x73\x6C\x69\x64\x65\x72","\x61\x64\x64\x45\x72\x72\x6F\x72","\x64\x69\x73\x70\x6C\x61\x79","\x62\x6C\x6F\x63\x6B","\x23\x67\x72\x6F\x75\x70\x45\x72\x72","\x6E\x6F\x6E\x65","\x23\x6E\x65\x77\x47\x72\x6F\x75\x70\x49\x6E\x70\x75\x74","\x23\x61\x64\x64\x4E\x65\x77\x47\x72\x6F\x75\x70\x42\x74\x6E\x73","\x3C\x6C\x69\x3E\x3C\x61\x20\x63\x6C\x61\x73\x73\x3D\x27\x6C\x69\x73\x74\x47\x72\x6F\x75\x70\x73\x27\x3E","\x3C\x2F\x61\x3E\x3C\x2F\x6C\x69\x3E","\x61\x70\x70\x65\x6E\x64","\x23\x67\x72\x6F\x75\x70\x56\x61\x6C\x75\x65\x73","\x2F\x61\x64\x64\x47\x72\x6F\x75\x70"];var socket=io();$(function(){socket[_0x2042[3]](_0x2042[0],function(){window[_0x2042[2]][_0x2042[1]](true)});var _0x5337x2=$(_0x2042[21]).DataTable({ajax:{dataSrc:_0x2042[4],url:_0x2042[5]},scrollY:_0x2042[6],bPaginate:true,searching:false,info:false,lengthChange:false,"\x72\x6F\x77\x43\x61\x6C\x6C\x62\x61\x63\x6B":function(_0x5337x3,_0x5337x4,_0x5337x5){if(_0x5337x4[_0x2042[7]]== 1){$(_0x2042[12],_0x5337x3)[_0x2042[11]](_0x2042[10])[_0x2042[9]]({"\x62\x61\x63\x6B\x67\x72\x6F\x75\x6E\x64\x2D\x63\x6F\x6C\x6F\x72":_0x2042[8]})}else {$(_0x2042[12],_0x5337x3)[_0x2042[11]](_0x2042[14])[_0x2042[9]]({"\x62\x61\x63\x6B\x67\x72\x6F\x75\x6E\x64\x2D\x63\x6F\x6C\x6F\x72":_0x2042[13]})}},columns:[{data:_0x2042[15]},{data:_0x2042[16]},{data:_0x2042[7]},{data:_0x2042[17]},{data:_0x2042[18],visible:false},{data:_0x2042[19],visible:false},{defaultContent:_0x2042[20]}]});$(_0x2042[34])[_0x2042[3]](_0x2042[22],_0x2042[23],function(){var _0x5337x4=_0x5337x2[_0x2042[27]]($(this)[_0x2042[26]](_0x2042[25]))[_0x2042[24]]();var _0x5337x6=_0x5337x4[_0x2042[7]];var _0x5337x7=_0x5337x4[_0x2042[15]];if(_0x5337x6=== 1){var _0x5337x8=0;$[_0x2042[32]](_0x2042[31],{unitId:_0x5337x7,state:_0x5337x8})[_0x2042[30]](function(_0x5337x4){function _0x5337x9(_0x5337xa){if(_0x5337xa){socket[_0x2042[29]](_0x2042[28],{unitno:_0x5337x4[_0x2042[15]]})}}_0x5337x9(function(){})})}else {var _0x5337x8=1;$[_0x2042[32]](_0x2042[31],{unitId:_0x5337x7,state:_0x5337x8})[_0x2042[30]](function(_0x5337x4){function _0x5337xb(_0x5337xa){if(_0x5337xa){socket[_0x2042[29]](_0x2042[33],{unitno:_0x5337x4[_0x2042[15]]})}}_0x5337xb(function(){})})}});$(_0x2042[34])[_0x2042[3]](_0x2042[22],_0x2042[35],function(){var _0x5337x4=_0x5337x2[_0x2042[27]](this)[_0x2042[24]]();var _0x5337xc=_0x5337x4[_0x2042[15]];var _0x5337xd=_0x5337x4[_0x2042[16]];var _0x5337xe=_0x5337x4[_0x2042[17]];var _0x5337xf=_0x5337x4[_0x2042[18]];var _0x5337x10=_0x5337x4[_0x2042[19]];$(_0x2042[38])[_0x2042[37]](_0x2042[36]);$(_0x2042[39])[_0x2042[11]](_0x5337xc);$(_0x2042[40])[_0x2042[11]](_0x5337xd);$(_0x2042[41])[_0x2042[11]](_0x5337xe);if(_0x5337xf== 1){$(_0x2042[43])[_0x2042[42]](_0x2042[3]);$(_0x2042[46])[_0x2042[45]](_0x2042[44],_0x5337x10)}else {$(_0x2042[43])[_0x2042[42]](_0x2042[47]);$(_0x2042[46])[_0x2042[45]](_0x2042[48])}});$(_0x2042[55])[_0x2042[3]](_0x2042[49],function(_0x5337x11){localStorage[_0x2042[54]](_0x2042[50],$(_0x5337x11[_0x2042[53]])[_0x2042[52]](_0x2042[51]))});var _0x5337x12=localStorage[_0x2042[56]](_0x2042[50]);if(_0x5337x12){$(_0x2042[58]+ _0x5337x12+ _0x2042[59])[_0x2042[57]](_0x2042[36])};var _0x5337x13=$(_0x2042[61])[_0x2042[60]]()});function addNewGroup(_0x5337x15,_0x5337xa){var _0x5337x16=_0x5337x15;var _0x5337x17=0;if(_0x5337xa){$[_0x2042[32]](_0x2042[73],{name:_0x5337x16})[_0x2042[30]](function(_0x5337x4){var _0x5337x18=_0x5337x4[_0x2042[62]];if(_0x5337x18=== 1){$(_0x2042[65])[_0x2042[9]](_0x2042[63],_0x2042[64]);if($(_0x2042[67])[_0x2042[22]](function(){$(_0x2042[65])[_0x2042[9]](_0x2042[63],_0x2042[66])})){;}}else {$(_0x2042[67])[_0x2042[9]](_0x2042[63],_0x2042[66]);$(_0x2042[68])[_0x2042[9]](_0x2042[63],_0x2042[66]);$(_0x2042[72])[_0x2042[71]](_0x2042[69]+ _0x5337x16+ _0x2042[70])}})}}
+/*
+ * The Script is used in units.hbs, and takes care of filling the datatables and controlling the tabs
+ */
+
+var socket = io();
+$(function () {
+    // Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
+    socket.on("deviceChange", function () {
+        window.location.reload(true);
+    });
+
+    // Creating the DataTable which contains the different units
+    var table = $("#unitTable").DataTable({
+        ajax: {
+            dataSrc: '',
+            url: '/getUnits',
+        },
+        scrollY: "385px",
+        bPaginate: true,
+        searching: false,
+        info: false,
+        lengthChange: false,
+        "rowCallback": function (row, data, index) {
+            if (data.state == 1) {
+                $('td button', row).html("ON").css({"background-color": "green"});
+            } else {
+                $('td button', row).html("OFF").css({"background-color": "red"});
+            }
+        },
+        columns: [
+            {data: "id"},
+            {data: "description"},
+            {data: "state"},
+            {data: "groupid"},
+            {data: "luxstate", visible: false},
+            {data: "luxvalue", visible: false},
+            {defaultContent: "<button></button>"}
+        ]
+    });
+
+    // Click function for the on/off toggle button in the DataTable. Function updates the DB with new state of the device,
+    // and emitts a socket message to unitControl.js which in turn turns on/off the unit.
+
+    $('table tbody').on('click', 'button', function () {
+        var data = table.row($(this).parents('tr')).data();
+        var state = data.state;
+        var unitId = data.id;
+        if (state === 1) {
+            var newState = 0;
+            $.post('/toggleUnit', {
+                unitId: unitId,
+                state: newState
+            }).done(function (data) {
+                function toggleDeviceOff(callback) {
+                    if (callback) {
+                        socket.emit('deviceOff', {unitno: data.id});
+                    }
+                }
+
+                toggleDeviceOff(function () {
+                })
+            });
+        } else {
+            var newState = 1;
+            $.post('/toggleUnit', {
+                unitId: unitId,
+                state: newState
+            }).done(function (data) {
+                function toggleDeviceOn(callback) {
+                    if (callback) {
+                        socket.emit('deviceOn', {unitno: data.id});
+                    }
+                }
+
+                toggleDeviceOn(function () {
+                })
+            });
+        }
+    });
+
+    // Function for displaying a summary modal for each row, which also contains methods for deleting, changing group or description
+    $('table tbody').on('click', ' tr [type!=button]', function () {
+        var data = table.row(this).data();
+        var unit = data.id;
+        var desc = data.description;
+        var group = data.groupid;
+        var luxState = data.luxstate;
+        var luxValue = data.luxvalue;
+        $('#editUnitModal').modal('show');
+        $('#editDevUnitno').html(unit);
+        $('#editDevDescript').html(desc);
+        $('#editDevGroup').html(group);
+        if (luxState == 1) {
+            $('#editDevLuxCheck').bootstrapToggle('on');
+            $('#editDevLuxValue').slider('setValue', luxValue);
+        } else {
+            $('#editDevLuxCheck').bootstrapToggle('off');
+            $('#editDevLuxValue').slider('disable');
+        }
+
+    });
+
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        localStorage.setItem('lastTab', $(e.target).attr('href'));
+    });
+    var lastTab = localStorage.getItem('lastTab');
+    if (lastTab) {
+        $('#controlTabs a[href="' + lastTab + '"]').tab('show');
+    }
+    var mySlider = $("input.slider").bootstrapSlider();
+});
+
+// Function used for adding new groups in the edit group and add device modal
+function addNewGroup(newGroup, callback) {
+    var groupInput = newGroup;
+    var test = 0;
+    if (callback) {
+        $.post('/addGroup', {
+            name: groupInput
+        }).done(function (data) {
+            var error = data.addError;
+            if (error === 1) {
+                $('#groupErr').css("display", "block");
+                if ($('#newGroupInput').click(function () {
+                        $('#groupErr').css("display", "none");
+                    }));
+            } else {
+                $('#newGroupInput').css("display", "none");
+                $('#addNewGroupBtns').css("display", "none");
+                $('#groupValues').append("<li><a class='listGroups'>" + groupInput + "</a></li>")
+            }
+        });
+    }
+}

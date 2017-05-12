@@ -1,1 +1,85 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('3 7=K();3 v=0;$(2(){a()});7.q(\'L\',2(){5(0)});7.q(\'I\',2(){5(1)});2 a(){$.6(\'/F\').m(2(4){3 9=h.j(4[0].l);5(9);v=9})}2 5(l){g(l==1){$(\'#p\').u(\'M\').t("s-r","N").b(2(){n()})}i{$(\'#p\').u(\'R\').t("s-r","Q").b(2(){k()})}}2 k(){$(\'#k\').o(\'d\');$("#S").b(2(){3 e=$(\'#H\').D();$.6(\'/w\',{E:e}).m(2(4){3 f=h.j(4);g(f==="8"){$.6(\'/c\',{B:8});5(1);a();7.C(\'c\',{9:1});x.y.z(8)}i{$(\'#A\').d()}})})}2 n(){$(\'#G\').o(\'d\');$("#O").b(2(){3 e=$(\'#J\').D();$.6(\'/w\',{E:e},2(4){3 f=h.j(4);g(f==="8"){$.6(\'/c\',{B:P});5(1);a();7.C(\'c\',{9:0});x.y.z(8)}i{$(\'#A\').d()}})})}',55,55,'||function|var|data|buttonState|post|socket|true|state|updateToggleState|click|alarmToggle|show|pwInput|pwCheck|if|JSON|else|stringify|activateAlarmModal|value|done|deActivateAlarmModal|modal|alarmButton|on|color|background|css|html|toggleState|alarmPw|window|location|reload|pwErrorAct|alarm|emit|val|pw|alarmState|deactivateAlarmModal|passwordInputActivate|alarmAct|passwordInputDeactivate|io|alarmDeac|Deaktiver|red|buttonDeactivateAlarm|false|green|Aktiver|buttonActivateAlarm'.split('|'),0,{}))
+var socket = io();
+
+var toggleState = 0; // Used for storing the value of on/off for the alarm in db
+$(function () { // on load function makes the connected users get the correct value of activate/deactivate alarm
+    updateToggleState();
+});
+
+socket.on('alarmDeac', function () {
+    buttonState(0);
+});
+
+socket.on('alarmAct', function () {
+    buttonState(1);
+});
+
+// The function updates the local variable of toggle state, by connecting to the database and reads the value.
+// This value is the emitted with a socket to the server, which in turn broadcasts a message to all connected user with the current value of toggleState
+function updateToggleState() {
+    $.post('/alarmState').done(function (data) {
+        var state = JSON.stringify(data[0].value);
+        buttonState(state);
+        toggleState = state;
+    });
+}
+
+// Function for updating the css of the alarm activation button.
+function buttonState(value) {
+    if (value == 1) {
+        $('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
+            deActivateAlarmModal();
+        });
+    } else {
+        $('#alarmButton').html('Aktiver').css("background-color", "green").click(function () {
+            activateAlarmModal();
+        });
+    }
+}
+
+// Click function for the activate alarm button inside the activate alarm modal
+// The function checks for valid input password from the user by comparing input with the hashed value stored in db.
+// If the password is correct, the value of alarm state in db is updated, the button in the view is updated and other connected users is updated.
+function activateAlarmModal(){
+    $('#activateAlarmModal').modal('show');
+
+    $("#buttonActivateAlarm").click(function () {
+        var pwInput = $('#passwordInputActivate').val();
+        $.post('/alarmPw', {
+            pw: pwInput
+        }).done(function (data) {
+            var pwCheck = JSON.stringify(data);
+            if (pwCheck === "true") {
+                $.post('/alarmToggle', {alarm: true});
+                buttonState(1);
+                updateToggleState();
+                socket.emit('alarmToggle', {state: 1});
+                window.location.reload(true);
+            } else {
+                $('#pwErrorAct').show();
+            }
+        });
+    });
+}
+
+
+// Click function for the deactivate alarm button in the deactivate alarm modal
+// The opposite function of the ones described in #btnActivateAlarm function
+function deActivateAlarmModal(){
+    $('#deactivateAlarmModal').modal('show');
+    $("#buttonDeactivateAlarm").click(function () {
+        var pwInput = $('#passwordInputDeactivate').val();
+
+        $.post('/alarmPw', {pw: pwInput}, function (data) {
+            var pwCheck = JSON.stringify(data);
+            if (pwCheck === "true") {
+                $.post('/alarmToggle', {alarm: false});
+                buttonState(1);
+                updateToggleState();
+                socket.emit('alarmToggle', {state: 0});
+                window.location.reload(true);
+            } else {
+                $('#pwErrorAct').show();
+            }
+        });
+    });
+}

@@ -22,11 +22,11 @@
             header: {
                 left: 'addEvent',
                 center: 'title',
-                right: 'today, prev, next',
+                right: 'today, prev, next'
             },
 
             buttonText: {
-                today: "{{__ "Calendar-Today-Button"git }}",
+                today: "{{__ "Calendar-Today-Button"git }}"
             },
 
             events: '/getUserEvents',
@@ -42,6 +42,7 @@
 
             eventClick: function (calEvent) {
                 $("#viewDescriptionModal").modal("show");
+                console.log(JSON.stringify(calEvent.start));
                 $("#description").html(calEvent.description);
 
                 //DELETE EVENT MODAL
@@ -60,8 +61,8 @@
                     $("#updateEventModal").modal('show');
                     $("#updateEventTitle").val(calEvent.title);
                     $("#updateEventDescription").val(calEvent.description);
-                    $("#updateEventStart").val(calEvent.start.format("YYYY-MM-DD HH:MM"));
-                    $("#updateEventEnd").val(calEvent.end.format("YYYY-MM-DD HH:MM"));
+                    $("#updateEventStart").val(calEvent.start.format("YYYY-MM-DD HH:mm"));
+                    $("#updateEventEnd").val(calEvent.end.format("YYYY-MM-DD HH:mm"));
 
                     var participants = "";
                     $.post("/getParticipants", {
@@ -154,7 +155,7 @@
             }
         });
 
-        $("#eventStartCalendarGlyph, #eventEndCalendarGlyph, #updateEventStartCalendarGlyph, #updateEventEndCalendarGlyph").datetimepicker({
+        $("#eventStartCalendarGlyph, #eventEndCalendarGlyph, #updateEventStartCalendarGlyph, #updateEventEndCalendarGlyph, #updateEventStart, #updateEventEnd, #eventStart, #eventEnd").datetimepicker({
             format: "YYYY-MM-DD HH:mm"
         });
 

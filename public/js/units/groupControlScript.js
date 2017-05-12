@@ -1,1 +1,107 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('4 d=P();$(3(){d.r(\'O\',3(){N.Q.l(R)});4 6=$("#6").m({n:{U:\'\',T:\'/M\',},V:"K",H:j,I:j,J:j,"G":3(c,2){f(2.k==1){$(\'s b\',c).t("S").u({"v-w":"12"})}x{$(\'s b\',c).t("14").u({"v-w":"17"})}},18:[{2:"5"},{2:"k"},{19:"<b></b>"}]});$(\'#6 16\').r(\'E\',\'b\',3(){4 2=6.c($(Y).X(\'Z\')).2();4 9=2.k;4 5=2.5;f(9===1){4 a=0;$.7(\'/o\',{h:5,9:a}).8(3(){$.7(\'/p\',{h:5}).8(3(2){D(4 i=0;i<2.F;i++){$.7(\'/C\',{y:2[i].g,9:a}).8(3(2){3 q(e){f(e){d.B(\'10\',{A:2.g})}}q(3(){})})}$(\'#6\').m().n.l()})})}x{4 a=1;$.7(\'/o\',{h:5,9:a}).8(3(){$.7(\'/p\',{h:5}).8(3(2){D(4 i=0;i<2.F;i++){$.7(\'/C\',{y:2[i].g,9:a}).8(3(2){3 z(e){f(e){d.B(\'13\',{A:2.g})}}z(3(){})})}$(\'#6\').m().n.l()})})}})});$(\'#W\').E(3(){$(\'#15\').L(\'11\')});',62,72,'||data|function|var|groupname|groupTable|post|done|state|newState|button|row|socket|callback|if|id|groupId||false|groupstate|reload|DataTable|ajax|toggleGroup|getUnitsOfGroup|toggleGroupDeviceOff|on|td|html|css|background|color|else|unitId|toggleGroupDeviceOn|unitno|emit|toggleUnit|for|click|length|rowCallback|searching|info|lengthChange|385px|modal|getGroups|window|deviceChange|io|location|true|ON|url|dataSrc|scrollY|editGroupBtn|parents|this|tr|groupDeviceOff|show|green|groupDeviceOn|OFF|editGroupModal|tbody|red|columns|defaultContent'.split('|'),0,{}))
+/*
+ *  This scripts contains functions used in the control group tab of units.hbs
+ */
+var socket = io();
+
+$(function () {
+// Socket function for reloading the page, if another has made changes. This ensures that the system is displaying the correct state, descriptions and so on.
+    socket.on('deviceChange', function () {
+        window.location.reload(true);
+    });
+
+    // Creating the DataTable with groups that exists in DB.
+    var groupTable = $("#groupTable").DataTable({
+        ajax: {
+            dataSrc: '',
+            url: '/getGroups',
+        },
+        scrollY: "385px",
+        searching: false,
+        info: false,
+        lengthChange: false,
+        "rowCallback": function (row, data) {
+            if (data.groupstate == 1) {
+                $('td button', row).html("ON").css({"background-color": "green"});
+            } else {
+                $('td button', row).html("OFF").css({"background-color": "red"});
+            }
+        },
+        columns: [
+            {data: "groupname"},
+            {data: "groupstate"},
+            {defaultContent: "<button></button>"}
+        ]
+    });
+
+    // Click function for toggling a group on/off
+    $('#groupTable tbody').on('click', 'button', function () {
+        var data = groupTable.row($(this).parents('tr')).data();
+        var state = data.groupstate;
+        var groupname = data.groupname;
+        // If group is on, turn it off
+        if (state === 1) {
+            var newState = 0;
+            $.post('/toggleGroup', { // Turning the group off
+                groupId: groupname,
+                state: newState
+            }).done(function () {
+                $.post('/getUnitsOfGroup', { // Retrieving the units belonging to the group
+                    groupId: groupname
+                }).done(function (data) {
+                    for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
+                        $.post('/toggleUnit', {
+                            unitId: data[i].id,
+                            state: newState
+                        }).done(function (data) {
+                            function toggleGroupDeviceOff(callback) {
+                                if (callback) {
+                                    socket.emit('groupDeviceOff', {unitno: data.id});
+                                }
+                            }
+
+                            toggleGroupDeviceOff(function () {
+                            })
+                        });
+                    }
+                    $('#groupTable').DataTable().ajax.reload();
+
+                })
+            });
+            // The group is off, turning it on
+        } else {
+            var newState = 1;
+            $.post('/toggleGroup', { // Turning the group on
+                groupId: groupname,
+                state: newState
+            }).done(function () {
+                $.post('/getUnitsOfGroup', { // Getting the devices belonging to the group
+                    groupId: groupname
+                }).done(function (data) { // Turning the devices in the group on
+                    for (var i = 0; i < data.length; i++) {
+                        $.post('/toggleUnit', {
+                            unitId: data[i].id,
+                            state: newState
+                        }).done(function (data) {
+                            function toggleGroupDeviceOn(callback) {
+                                if (callback) {
+                                    socket.emit('groupDeviceOn', {unitno: data.id});
+                                }
+                            }
+
+                            toggleGroupDeviceOn(function () {
+                            })
+                        });
+
+                    }
+
+                    $('#groupTable').DataTable().ajax.reload();
+                });
+            });
+        }
+    });
+});
+
+// Opens the edit group modal
+$('#editGroupBtn').click(function () {
+    $('#editGroupModal').modal('show');
+});

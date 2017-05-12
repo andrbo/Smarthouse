@@ -52,6 +52,8 @@
 	"Field-Address-Regex": "Addresse kan kun inneholde bokstaver",
 	"Field-PostalCode-Regex": "Postnummeret kan kun inneholde tall",
 	"Field-City-Regex": "Byen kan kun inneholde bokstaver",
+	"Field-Unit-Regex": "Beskrivelsen kan kun inneholde bokstaver",
+	"Field-Group-Regex": "Gruppen kan kun inneholde bokstaver eller tall",
 	"Field-Required": "Feltet er påkrevd",
 
 	"Home-TempInside": "Inne",

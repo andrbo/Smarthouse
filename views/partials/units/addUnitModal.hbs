@@ -7,13 +7,10 @@
                 <h3><span class="glyphicon glyphicon-cog"></span>{{__ "Light-AddDevice"}}</h3>
             </div>
             <div class="modal-body">
-                <div class="form-group row">
-                    <label for="descriptInput" class="col-md-2 col-form-label">{{__ "Light-Description"}}</label>
-                    <div class="col-md-10">
-                        <input class="form-control" type="text" placeholder="{{__ "Light-Description"}}"
-                               id="descriptInput">
-                    </div>
-
+                <label for="descriptInput" class="col-md-2 col-form-label">{{__ "Light-Description"}}</label>
+                <div class="col-md-10 form-group has-feedback">
+                    <input type="text" name="descriptInput" id="descriptInput" class="form-control"
+                           placeholder="{{__ "Light-Description"}}">
                 </div>
                 <br>
                 <div class="form-group row">
@@ -39,7 +36,8 @@
                                 "Light-AddNewGroup"}}</button>
                     </div>
                     <div id="newGroupInput" class="col-md-5" style="display: none">
-                        <input id="newGroup" type="text" class="form-control" placeholder="{{__ "Light-NewGroup"}}">
+                        <input id="newGroup" name="newGroup" type="text" class="form-control"
+                               placeholder="{{__ "Light-NewGroup"}}">
                     </div>
                     <div id="groupErr" class="col-md-5" style="display: none">
                         <p style="color: red">{{__ "Light-GroupError"}}</p>
@@ -48,15 +46,75 @@
                         <button id="saveNewGroup" class="btn-success">{{__ "Light-Save"}}</button>
                         <button id="cancelNewGroup" class="btn-danger">{{__ "Light-Cancel"}}</button>
                     </div>
-
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="cancelAddDevice" class="btn btn-default" data-dismiss="modal">{{__
                         "Light-Cancel"}}</button>
-                <button type="button" id="activateNewDevice" class="btn btn-save">{{__
+                <button type="button" id="activateNewDevice" class="btn btn-save" onclick="newUnit()">{{__
                         "Light-Save"}}</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#addUnitModal').bootstrapValidator({
+            message: 'This value is not valid',
+            fields: {
+                newGroup: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-Group-Regex"}}'
+                        }
+                    }
+                },
+                descriptInput: {
+                    validators: {
+                        notEmpty: {
+                            message: '{{__ "Field-Not-Empty"}}'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 30,
+                            message: '{{__ "Field-Characters-Check"}}'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: '{{__ "Field-Unit-Regex"}}'
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    function newUnit() {
+        var bootstrapValidator = $("#addUnitModal").data("bootstrapValidator");
+        bootstrapValidator.validate();
+
+        if (bootstrapValidator.isValid()) {
+            // function for storing the values set by user in the modal. Later for use in the save and pair modal
+
+            var description = $('#descriptInput').val().trim();
+            var group = $('#groupDropSelected').text();
+            $('#addUnitModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            $('#saveUnitModal').modal('show');
+            $('#sumDescript').html(description);
+            $('#sumGroup').html(group);
+
+        }
+    }
+</script>

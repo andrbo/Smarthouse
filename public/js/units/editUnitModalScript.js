@@ -1,1 +1,90 @@
-var _0xb262=["\x64\x69\x73\x70\x6C\x61\x79","\x62\x6C\x6F\x63\x6B","\x63\x73\x73","\x23\x63\x68\x61\x6E\x67\x65\x44\x65\x73\x63\x72\x69\x70\x49\x6E\x70\x75\x74","\x76\x61\x6C","\x23\x6E\x65\x77\x44\x65\x73\x63\x72\x69\x70\x74\x49\x6E\x70\x75\x74","\x68\x74\x6D\x6C","\x23\x65\x64\x69\x74\x44\x65\x76\x44\x65\x73\x63\x72\x69\x70\x74","\x6E\x6F\x6E\x65","\x63\x6C\x69\x63\x6B","\x23\x73\x61\x76\x65\x4E\x65\x77\x44\x65\x73\x63\x72\x69\x70\x74","\x23\x63\x61\x6E\x63\x65\x6C\x4E\x65\x77\x44\x65\x73\x63\x72\x69\x70\x74","\x23\x63\x68\x61\x6E\x67\x65\x44\x65\x73\x63\x72\x69\x70\x74\x69\x6F\x6E","\x23\x63\x68\x61\x6E\x67\x65\x47\x72\x6F\x75\x70\x49\x6E\x70\x75\x74","\x74\x65\x78\x74","\x20\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x63\x61\x72\x65\x74\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x2E\x64\x72\x6F\x70\x64\x6F\x77\x6E\x2D\x74\x6F\x67\x67\x6C\x65","\x66\x69\x6E\x64","\x2E\x62\x74\x6E\x2D\x67\x72\x6F\x75\x70","\x70\x61\x72\x65\x6E\x74\x73","\x2E\x6C\x69\x73\x74\x47\x72\x6F\x75\x70\x73","\x23\x63\x68\x61\x6E\x67\x65\x47\x72\x6F\x75\x70\x53\x65\x6C\x65\x63\x74\x65\x64","\x23\x65\x64\x69\x74\x44\x65\x76\x47\x72\x6F\x75\x70","\x23\x73\x61\x76\x65\x43\x68\x61\x6E\x67\x65\x47\x72\x6F\x75\x70","\x23\x63\x61\x6E\x63\x65\x6C\x43\x68\x61\x6E\x67\x65\x47\x72\x6F\x75\x70","\x23\x63\x68\x61\x6E\x67\x65\x47\x72\x6F\x75\x70","\x23\x65\x64\x69\x74\x44\x65\x76\x55\x6E\x69\x74\x6E\x6F","\x63\x68\x65\x63\x6B\x65\x64","\x70\x72\x6F\x70","\x23\x65\x64\x69\x74\x44\x65\x76\x4C\x75\x78\x43\x68\x65\x63\x6B","\x67\x65\x74\x56\x61\x6C\x75\x65","\x73\x6C\x69\x64\x65\x72","\x23\x65\x64\x69\x74\x44\x65\x76\x4C\x75\x78\x56\x61\x6C\x75\x65","\x72\x65\x6C\x6F\x61\x64","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x64\x6F\x6E\x65","\x2F\x63\x68\x61\x6E\x67\x65\x44\x65\x76\x69\x63\x65","\x70\x6F\x73\x74","\x23\x73\x61\x76\x65\x43\x68\x61\x6E\x67\x65\x44\x65\x76\x69\x63\x65","\x68\x69\x64\x65","\x6D\x6F\x64\x61\x6C","\x23\x65\x64\x69\x74\x55\x6E\x69\x74\x4D\x6F\x64\x61\x6C","\x6D\x6F\x64\x61\x6C\x2D\x6F\x70\x65\x6E","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x62\x6F\x64\x79","\x72\x65\x6D\x6F\x76\x65","\x2E\x6D\x6F\x64\x61\x6C\x2D\x62\x61\x63\x6B\x64\x72\x6F\x70","\x73\x68\x6F\x77","\x23\x64\x65\x6C\x65\x74\x65\x55\x6E\x69\x74\x4D\x6F\x64\x61\x6C","\x23\x64\x65\x6C\x65\x74\x65\x44\x65\x76\x55\x6E\x69\x74\x6E\x6F","\x23\x64\x65\x6C\x65\x74\x65\x44\x65\x76\x44\x65\x73\x63\x72\x69\x70\x74","\x23\x64\x65\x6C\x65\x74\x65\x44\x65\x76\x47\x72\x6F\x75\x70","\x75\x6E\x70\x61\x69\x72\x44\x65\x76\x69\x63\x65","\x65\x6D\x69\x74","\x2F\x64\x65\x6C\x65\x74\x65\x44\x65\x76\x69\x63\x65","\x23\x64\x65\x6C\x65\x74\x65\x44\x65\x76\x69\x63\x65\x42\x74\x6E","\x23\x64\x65\x6C\x65\x74\x65\x44\x65\x76\x69\x63\x65"];$(_0xb262[12])[_0xb262[9]](function(){$(_0xb262[3])[_0xb262[2]](_0xb262[0],_0xb262[1]);$(_0xb262[10])[_0xb262[9]](function(){var _0xcaecx1=$(_0xb262[5])[_0xb262[4]]();$(_0xb262[7])[_0xb262[6]](_0xcaecx1);$(_0xb262[3])[_0xb262[2]](_0xb262[0],_0xb262[8])});$(_0xb262[11])[_0xb262[9]](function(){$(_0xb262[3])[_0xb262[2]](_0xb262[0],_0xb262[8])})});$(_0xb262[25])[_0xb262[9]](function(){$(_0xb262[13])[_0xb262[2]](_0xb262[0],_0xb262[1]);$(_0xb262[20])[_0xb262[9]](function(){var _0xcaecx2=$(this)[_0xb262[14]]();$(this)[_0xb262[19]](_0xb262[18])[_0xb262[17]](_0xb262[16])[_0xb262[6]](_0xcaecx2+ _0xb262[15])});$(_0xb262[23])[_0xb262[9]](function(){var _0xcaecx3=$(_0xb262[21])[_0xb262[14]]();$(_0xb262[22])[_0xb262[6]](_0xcaecx3);$(_0xb262[13])[_0xb262[2]](_0xb262[0],_0xb262[8])});$(_0xb262[24])[_0xb262[9]](function(){$(_0xb262[13])[_0xb262[2]](_0xb262[0],_0xb262[8])})});$(_0xb262[38])[_0xb262[9]](function(){var _0xcaecx4=$(_0xb262[7])[_0xb262[14]]();var _0xcaecx5=$(_0xb262[26])[_0xb262[14]]();var _0xcaecx6=$(_0xb262[22])[_0xb262[14]]();var _0xcaecx7;if($(_0xb262[29])[_0xb262[28]](_0xb262[27])== true){_0xcaecx7= 1}else {_0xcaecx7= 0};var _0xcaecx8=$(_0xb262[32])[_0xb262[31]](_0xb262[30]);$[_0xb262[37]](_0xb262[36],{unitno:_0xcaecx5,groupid:_0xcaecx6,description:_0xcaecx4,luxstate:_0xcaecx7,luxtresh:_0xcaecx8})[_0xb262[35]](function(){window[_0xb262[34]][_0xb262[33]](true)})});$(_0xb262[56])[_0xb262[9]](function(){var _0xcaecx4=$(_0xb262[7])[_0xb262[14]]();var _0xcaecx5=$(_0xb262[26])[_0xb262[14]]();var _0xcaecx6=$(_0xb262[22])[_0xb262[14]]();$(_0xb262[41])[_0xb262[40]](_0xb262[39]);$(_0xb262[44])[_0xb262[43]](_0xb262[42]);$(_0xb262[46])[_0xb262[45]]();$(_0xb262[48])[_0xb262[40]](_0xb262[47]);$(_0xb262[49])[_0xb262[6]](_0xcaecx5);$(_0xb262[50])[_0xb262[6]](_0xcaecx4);$(_0xb262[51])[_0xb262[6]](_0xcaecx6);$(_0xb262[55])[_0xb262[9]](function(){$[_0xb262[37]](_0xb262[54],{unitno:_0xcaecx5})[_0xb262[35]](function(){socket[_0xb262[53]](_0xb262[52],{unitno:_0xcaecx5});window[_0xb262[34]][_0xb262[33]](true)})})});$(_0xb262[32])[_0xb262[31]]({formatter:function(_0xcaecx9){return _0xcaecx9}})
+/*
+ * This script contains functions used by the edit unit modal located in units.hbs
+ * The modal is triggered from within unitControlScript.js, but click functions ++ for the modal is located here
+ */
+
+// Functions for changing the description of the device
+$('#changeDescription').click(function () {
+    $('#changeDescripInput').css('display', 'block');
+    $('#saveNewDescript').click(function () {
+        var newDescription = $('#newDescriptInput').val();
+        $('#editDevDescript').html(newDescription);
+        $('#changeDescripInput').css('display', 'none');
+    });
+    $('#cancelNewDescript').click(function () {
+        $('#changeDescripInput').css('display', 'none');
+    });
+});
+
+// Functions for changing the group of the unit
+$('#changeGroup').click(function () {
+    $("#changeGroupInput").css("display", "block")
+    $('.listGroups').click(function () {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    });
+    $('#saveChangeGroup').click(function () {
+        var newGroup = $('#changeGroupSelected').text();
+        $('#editDevGroup').html(newGroup);
+        $('#changeGroupInput').css('display', 'none');
+    });
+    $('#cancelChangeGroup').click(function () {
+        $('#changeGroupInput').css('display', 'none');
+    });
+});
+
+
+// Function for saving the new settings
+$('#saveChangeDevice').click(function () {
+    var descript = $('#editDevDescript').text();
+    var unitno = $('#editDevUnitno').text();
+    var group = $('#editDevGroup').text();
+    var luxState;
+    if ($('#editDevLuxCheck').prop("checked") == true) {
+        luxState = 1;
+    } else {
+        luxState = 0;
+    }
+    var luxTreshold = $('#editDevLuxValue').slider('getValue');
+    $.post('/changeDevice', {
+        unitno: unitno,
+        groupid: group,
+        description: descript,
+        luxstate: luxState,
+        luxtresh: luxTreshold
+    }).done(function () {
+
+        window.location.reload(true);
+    });
+});
+
+// Function for deleting a device
+$('#deleteDevice').click(function () {
+    var descript = $('#editDevDescript').text();
+    var unitno = $('#editDevUnitno').text();
+    var group = $('#editDevGroup').text();
+    $('#editUnitModal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    $('#deleteUnitModal').modal('show');
+    $('#deleteDevUnitno').html(unitno);
+    $('#deleteDevDescript').html(descript);
+    $('#deleteDevGroup').html(group);
+    $('#deleteDeviceBtn').click(function () {
+        $.post('/deleteDevice', {
+            unitno: unitno,
+        }).done(function () {
+            /*$('#deleteUnitModal').modal('hide');
+             $('body').removeClass('modal-open');
+             $('.modal-backdrop').remove();*/
+            socket.emit('unpairDevice', {unitno: unitno});
+            window.location.reload(true);
+        });
+    });
+});
+
+$('#editDevLuxValue').slider({
+    formatter: function (value) {
+        return value;
+    }
+});

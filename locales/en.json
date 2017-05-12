@@ -52,6 +52,8 @@
     "Field-Address-Regex": "The address can only consist of alphabetical letters",
     "Field-PostalCode-Regex": "The postal code can only consist of numbers",
     "Field-City-Regex": "The address can only consist of alphabetical letters",
+    "Field-Unit-Regex": "The description can only consist of alphabetical letters",
+    "Field-Group-Regex": "The group can only consist of alphabetical letters or numbers",
     "Field-Required": "Field is required",
 
 
