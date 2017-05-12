@@ -10,6 +10,26 @@ exports.getUnits = function (callback) {
     });
 };
 
+//Get unit by id
+exports.getUnit = function (id, callback) {
+    var sql = 'SELECT * FROM units WHERE id=?';
+    db.query(sql, id, function (err, result) {
+        if (callback) {
+            callback(err, result);
+        }
+    });
+};
+
+//Get id by description for test purposes, do not use otherwise.
+exports.getId = function (description, callback) {
+    var sql = 'SELECT id FROM units WHERE description = ?';
+    db.query(sql, description, function (err, result) {
+        if (callback) {
+            callback(err, result);
+        }
+    });
+};
+
 //Toggles unit on/off
 exports.toggleUnit = function (state, id, callback) {
     var values = [state, id];
@@ -24,7 +44,7 @@ exports.toggleUnit = function (state, id, callback) {
 //Add a new unit.
 exports.addUnit = function (description, groupid, callback) {
     var values = [description, groupid];
-    var sql = 'INSERT INTO units (description, state, controller, groupid) VALUES (?,DEFAULT,DEFAULT,?)';
+    var sql = 'INSERT INTO units (description, state, controller, groupid, luxstate, luxvalue) VALUES (?,DEFAULT,DEFAULT,?, DEFAULT, DEFAULT)';
     db.query(sql, values, function (err, result) {
         if (callback) {
             callback(err, result);
@@ -55,9 +75,9 @@ exports.changeDevice = function (id, description, groupid, luxstate, luxtresh, c
 };
 
 //Remove group from unit.
-exports.removeGroupFromUnit = function (groupid, callback) {
-    var sql = 'UPDATE units SET groupid=DEFAULT WHERE groupid=?';
-    db.query(sql, groupid, function (err, result) {
+exports.removeGroupFromUnit = function (id, callback) {
+    var sql = 'UPDATE units SET groupid=DEFAULT WHERE id=?';
+    db.query(sql, id, function (err, result) {
         if (callback) {
             callback(err, result);
         }
@@ -66,7 +86,7 @@ exports.removeGroupFromUnit = function (groupid, callback) {
 
 //Get all units belonging to a specific group
 exports.getUnitsOfGroup = function (groupname, callback) {
-    var sql = 'SELECT id FROM units WHERE groupid = ?';
+    var sql = 'SELECT * FROM units WHERE groupid = ?';
     db.query(sql, groupname, function (err, result) {
         if (callback) {
             callback(err, result);

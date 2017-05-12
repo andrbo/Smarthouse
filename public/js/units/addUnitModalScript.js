@@ -33,18 +33,6 @@ $('#cancelNewGroup').click(function () {
     $('#addNewGroupBtns').css("display", "none");
 });
 
-// function for storing the values set by user in the modal. Later for use in the save and pair modal
-$('#activateNewDevice').click(function () {
-    var description = $('#descriptInput').val().trim();
-    var group = $('#groupDropSelected').text();
-    $('#addUnitModal').modal('hide');
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    $('#saveUnitModal').modal('show');
-    $('#sumDescript').html(description);
-    $('#sumGroup').html(group);
-});
-
 
 // The function gathers the values from the add device modal, and posts the input values to the DB
 // and emits a message to unitControl.js for pairing the new device

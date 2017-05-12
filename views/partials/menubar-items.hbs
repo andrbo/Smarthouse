@@ -32,14 +32,13 @@
                 {{/if}}
             </ul>
             {{#if login}}
-                {{> menubar-logged-in}}
+                {{> home-logged-in/menubar-logged-in}}
             {{/if}}
         </div>
     </div>
 </nav>
 
 <!-- Menubar items hover -->
-<script src="/js/chat/chatEmiter.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('a[href="' + location.pathname + '"]').closest('li').addClass('active');

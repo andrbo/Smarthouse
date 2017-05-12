@@ -75,8 +75,8 @@ $('#deleteDevice').click(function () {
             unitno: unitno,
         }).done(function () {
             /*$('#deleteUnitModal').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();*/
+             $('body').removeClass('modal-open');
+             $('.modal-backdrop').remove();*/
             socket.emit('unpairDevice', {unitno: unitno});
             window.location.reload(true);
         });

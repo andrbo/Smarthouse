@@ -21,6 +21,16 @@ exports.getUserEvents = function (email, callback) {
     });
 };
 
+//get id for test purpose only!
+exports.getId = function (email, callback) {
+    var sql = 'SELECT id FROM events WHERE email = ?';
+    db.query(sql, email, function (err, res) {
+        if (callback) {
+            callback(err, res);
+        }
+    });
+};
+
 //Delete event when clicking "delete"
 exports.deleteEvent = function (id, callback) {
     var sql = 'DELETE FROM events WHERE id = ?';

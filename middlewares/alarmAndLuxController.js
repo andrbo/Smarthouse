@@ -1,8 +1,13 @@
 var nodemailer = require('nodemailer');
 var serialport = require('serialport');
 var rfTransmitter = require('nexa');
+var wpi = require('wiring-pi');
 var modelUnits = require('../models/units');
 var mailGroup = require("../models/User.js");
+
+wpi.setup('wpi');
+var pin = 1;
+wpi.pinMode(pin, wpi.OUTPUT);
 
 var SerialPort = serialport; // make a local instance of it
 var remote = 23328130;
@@ -35,6 +40,7 @@ module.exports = function (app, io) {
         switch (alarmState) {
             case 0:
                 generalAlarm(data);
+                alarmLedToggle();
                 luxControl(data, function (err, res) {
                 });
                 break;
@@ -45,6 +51,8 @@ module.exports = function (app, io) {
                 });
                 break;
         }
+        console.log("ALARM" + JSON.stringify(alarmJson));
+        console.log("GENERAL" + JSON.stringify(generalJson));
 
     });
 
@@ -63,15 +71,27 @@ module.exports = function (app, io) {
         if (vibe == 1) {
             //Send mail with message and date
             ifAlarmSendMail("Vibe", getDate());
+            alarmLedToggle();
         }
         if (ir == 0) {
             ifAlarmSendMail("IR", getDate());
+            alarmLedToggle();
         }
         if (pir == 1) {
             ifAlarmSendMail("PIR", getDate());
+            alarmLedToggle();
         }
         if (laser == 1) {
-            ifAlarmSendMail("Laser", getDate());
+            ifAlarmSendMail("LASER", getDate());
+            alarmLedToggle();
+        }
+    }
+
+    function alarmLedToggle(){
+        if(alarmState==1){
+            wpi.digitalWrite(pin, 1);
+        }else{
+            wpi.digitalWrite(pin, 0);
         }
     }
 
@@ -113,6 +133,7 @@ module.exports = function (app, io) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
                 callback(err, result);
+                console.log(JSON.stringify(result));
             })
         }
 
@@ -147,7 +168,7 @@ module.exports = function (app, io) {
         var flame = sensorData.Flame;
         var leak = sensorData.LeakValue;
         //Thresholds
-        var gasThreshold = 300;
+        var gasThreshold = 400;
         var leakThreshold = 1000;
 
         if (gas > gasThreshold) {
@@ -187,28 +208,27 @@ module.exports = function (app, io) {
     });
 
     function sendMail(email, name) {
+        console.log("SENDER MAIL");
         var temp = "Følgende alarm er blitt aktivert: ";
         var temp2 = name;
-
-        console.log("TEMP2: " + temp2);
+        console.log("MAIL: " + email);
 
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",  //Automatically sets host, port and connection security settings
             auth: {
                 user: "Smarthus2017@gmail.com",
-                pass: "Smarthus"
+                pass: "basf2DDX"
             }
         });
         smtpTransport.sendMail({
             from: "<Smarthus2017@gmail.com>", //Sender address. Must be the same as authenticated user if using Gmail.
             to: email, // receiver
-            subject: "Alarm aktivert!", //TODO: Fiks internasjonalisering
+            subject: "Alarm aktivert!",
             text: temp + temp2// body
-        }, function (error, response) {  //callback
+        }, function (error) {  //callback
             if (error) {
                 console.log(error);
             } else {
-                console.log("Message sent: " + response.message);
                 res.redirect('/home');
             }
             smtpTransport.close(); //Shut down the connection, no more messages.
