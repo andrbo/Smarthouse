@@ -96,10 +96,10 @@ app.io = require('socket.io')();
 //Router controller. Uses passport as authentication.
 require('./router/routes')(app,passport);
 
-//app.io.chat = require('./middlewares/chat.js')(app.io);
-//app.io.alarmActivated = require('./middlewares/alarmAndLuxController')(app, app.io);
-//app.io.unitControl = require('./middlewares/unitControl')(app.io);
-//app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
+app.io.chat = require('./middlewares/chat.js')(app.io);
+app.io.alarmActivated = require('./middlewares/alarmAndLuxController')(app, app.io);
+app.io.unitControl = require('./middlewares/unitControl')(app.io);
+app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 
 //Express Validator
