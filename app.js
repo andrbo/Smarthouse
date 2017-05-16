@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var i18n = require('i18n');
-var expressValidator = require('express-validator');
 var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
