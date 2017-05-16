@@ -1,21 +1,20 @@
 // Including necessary libraries
-#include "DHT.h"         // https://github.com/adafruit/DHT-sensor-library
+#include "DHT.h"         // https://github.com/adafruit/DHT-sensor-library/archive/master.zip
 #include "OneWire.h"     // http://www.pjrc.com/teensy/arduino_libraries/OneWire.zip
-#include "DallasTemperature.h" //https://github.com/milesburton/Arduino-Temperature-Control-Library
-//#include "ArduinoJson.h" // https://bblanchon.github.io/ArduinoJson/doc/installation/
+#include "DallasTemperature.h" //https://github.com/milesburton/Arduino-Temperature-Control-Library/archive/master.zip
 // Defining Analog pins in use
-#define GASPIN A0    // Analog input from the mq-2 sensor (gas/smoke) // https://create.arduino.cc/projecthub/Aritro/smoke-detection-using-mq-2-gas-sensor-79c54a
-#define MOISTPIN A1  // Analog input from the soil moisture sensor // https://learn.sparkfun.com/tutorials/soil-moisture-sensor-hookup-guide
-#define LEAKPIN A2   // Analog input from the rain sensor module, used as a leak monitor in this case // http://www.instructables.com/id/Arduino-Modules-Rain-Sensor/ 
+#define GASPIN A0    // Analog input from the mq-2 sensor (gas/smoke) 
+#define MOISTPIN A1  // Analog input from the soil moisture sensor 
+#define LEAKPIN A2   // Analog input from the rain sensor module, used as a leak monitor in this case 
 #define LIGHTSENSPIN A3
 
 // Defining Digital pins in use
-#define DHTPIN 2     // Digital input from the DHT11 temperature/humidity sensor // https://learn.adafruit.com/dht/using-a-dhtxx-sensor
-#define FLAMEPIN 3   // Digital input from the flame sensor // http://www.instructables.com/id/Arduino-Modules-Flame-Sensor/, https://docs.google.com/document/d/1FvOoJOS3eoVd8N5guKXi5Qim6IZoohg0390r2Dcsh9k/edit?pli=1
-//#define LASERPIN 4   // Laser, if deciding to make it turn on and off http://www.instructables.com/id/Keyes-KY-008-Laser-Transmitter-Demystified/
-#define PHOTOELPIN 4 // Digital input from the photoelectric sensor module // https://www.ia.omron.com/support/guide/43/introduction.html
-#define VIBEPIN 5 // Digital input from the vibration sensor module //
-#define IRBARPIN 6 // Digital input from the Infrared barrier module // http://www.hobbypartz.com/82p-ad-infrared-barrier.html
+#define DHTPIN 2     // Digital input from the DHT11 temperature/humidity sensor
+#define FLAMEPIN 3   // Digital input from the flame sensor 
+//#define LASERPIN 4   // Laser, if deciding to make it turn on and off 
+#define PHOTOELPIN 4 // Digital input from the photoelectric sensor module 
+#define VIBEPIN 5 // Digital input from the vibration sensor module 
+#define IRBARPIN 6 // Digital input from the Infrared barrier module 
 #define BUZZERPIN 7
 #define LEDPIN 8
 #define PIRPIN 10 // Digital input from the PIR sensor module

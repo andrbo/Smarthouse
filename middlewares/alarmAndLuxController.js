@@ -12,6 +12,7 @@ wpi.pinMode(pin, wpi.OUTPUT);
 var SerialPort = serialport; // make a local instance of it
 var remote = 23328130;
 var arduinoPort = '/dev/ttyUSB0'; //Arduino port
+//var arduinoPort = 'COM4';
 var arduinoSerial = new SerialPort(arduinoPort, {
     baudrate: 9600,
     // defaults for Arduino serial communication
@@ -194,7 +195,9 @@ module.exports = function (app, io) {
     io.sockets.on('connection', function (socket) {
         //Socket listen to alarmToggle.
         socket.on('alarmToggle', function (data) {
+            console.log('Mottatt alarmToggle, skal emitte til andre');
             alarmState = data.state;
+                socket.broadcast.emit('alarmChange');
         });
 
         //Socket listen to deviceChange

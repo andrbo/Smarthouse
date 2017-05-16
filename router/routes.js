@@ -174,8 +174,8 @@ module.exports = function (app, passport) {
 
     //Update user password.
     app.post('/updateUserPassword', function (req, res) {
-        var email = req.user.email;
-        //var email = req.body.email; //For test usage only
+        //var email = req.user.email;
+        var email = req.body.email; //For test usage only
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
 
@@ -209,8 +209,8 @@ module.exports = function (app, passport) {
 
     //Get all users
     app.get("/getAllUsers", function (req, res) {
-        var email = req.user.email;
-        //var email = req.body.email; //For testing purposes
+        //var email = req.user.email;
+        var email = req.body.email; //For testing purposes
 
         function getAllUsers(callback) {
             User.getAllUsers(email, function (err, result) {

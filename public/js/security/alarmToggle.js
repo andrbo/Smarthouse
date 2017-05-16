@@ -3,14 +3,38 @@ var socket = io();
 var toggleState = 0; // Used for storing the value of on/off for the alarm in db
 $(function () { // on load function makes the connected users get the correct value of activate/deactivate alarm
     updateToggleState();
-});
 
-socket.on('alarmDeac', function () {
-    buttonState(0);
-});
+    $("#alarmToggleBtn").on("change", function () {
+        console.log('klikkææær');
+        if ($(this).hasClass("off")) {
+            console.log('Knappen står av, skal skru på');
+            activateAlarmModal();
+        }
+        else {
+            console.log('Knappen er på skal skru av');
+            deActivateAlarmModal();
+        }
+    });
 
-socket.on('alarmAct', function () {
-    buttonState(1);
+});
+// $("#alarmToggleBtn").click(function() {
+//     console.log('klikkææær');
+//     /*if($(this).hasClass("off")){
+//      console.log('Knappen står av, skal skru på');
+//      //activateAlarmModal();
+//      }
+//      else{
+//      console.log('Knappen er på skal skru av');
+//      //deActivateAlarmModal();
+//      }
+//      */
+// });
+
+
+// Brukes?
+socket.on('alarmChange', function () {
+    console.log('mottatt alarmchange klient');
+    window.location.reload(true);
 });
 
 // The function updates the local variable of toggle state, by connecting to the database and reads the value.
@@ -26,20 +50,23 @@ function updateToggleState() {
 // Function for updating the css of the alarm activation button.
 function buttonState(value) {
     if (value == 1) {
-        $('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
-            deActivateAlarmModal();
-        });
+        $('#alarmToggleBtn').bootstrapToggle('On');
+        //$('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
+        //    deActivateAlarmModal();
+        //});
     } else {
-        $('#alarmButton').html('Aktiver').css("background-color", "green").click(function () {
-            activateAlarmModal();
-        });
+        $('#alarmToggleBtn').bootstrapToggle('Off');
+        //$('#alarmButton').html('Aktiver').css("background-color", "green").click(function () {
+        //    activateAlarmModal();
+        //});
     }
 }
+
 
 // Click function for the activate alarm button inside the activate alarm modal
 // The function checks for valid input password from the user by comparing input with the hashed value stored in db.
 // If the password is correct, the value of alarm state in db is updated, the button in the view is updated and other connected users is updated.
-function activateAlarmModal(){
+function activateAlarmModal() {
     $('#activateAlarmModal').modal('show');
 
     $("#buttonActivateAlarm").click(function () {
@@ -64,7 +91,7 @@ function activateAlarmModal(){
 
 // Click function for the deactivate alarm button in the deactivate alarm modal
 // The opposite function of the ones described in #btnActivateAlarm function
-function deActivateAlarmModal(){
+function deActivateAlarmModal() {
     $('#deactivateAlarmModal').modal('show');
     $("#buttonDeactivateAlarm").click(function () {
         var pwInput = $('#passwordInputDeactivate').val();
@@ -83,3 +110,12 @@ function deActivateAlarmModal(){
         });
     });
 }
+
+$('#actAlarmCancelBtn').click(function(){
+    $('#alarmToggleBtn').bootstrapToggle('off');
+    $('#activateAlarmModal').modal('hide');
+});
+$('#deacAlarmCancelBtn').click(function () {
+    $('#alarmToggleBtn').bootstrapToggle('on');
+    $('#deactivateAlarmModal').modal('hide');
+});

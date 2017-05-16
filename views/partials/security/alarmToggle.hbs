@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-3">
                 <h3>Alarm:</h3>
-                <button id="alarmButton" type="button">{{__ "Act-Alarmbtn"}}</button>
-
+                <!--<button id="alarmButton" type="button">{{__ "Act-Alarmbtn"}}</button> -->
+                <input id="alarmToggleBtn" type="checkbox" data-toggle="toggle">
                 <div class="modal fade" id="activateAlarmModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -25,7 +25,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="buttonChangeAlarmPassword btn btn-primary pull-left" data-dismiss="modal"><i class="glyphicon glyphicon-edit"></i> {{__ "Change-Password"}}</button>
                                 <button type="button" id="buttonActivateAlarm" class="btn btn-success" >{{__ "Activate-ActAlarm"}}</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-default">{{__ "Cancel-ActAlarm"}}</button>
+                                <button type="button" id= "actAlarmCancelBtn" class="btn btn-default">{{__ "Cancel-ActAlarm"}}</button>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="buttonChangeAlarmPassword btn btn-primary pull-left" data-dismiss="modal"><i class="glyphicon glyphicon-edit"></i> {{__ "Change-Password"}}</button>
                                 <button type="button" id="buttonDeactivateAlarm" class="btn btn-danger">{{__ "Activate-DeacAlarm"}}</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-default">{{__ "Cancel-DeacAlarm"}}</button>
+                                <button type="button" id="deacAlarmCancelBtn"  class="btn btn-default">{{__ "Cancel-DeacAlarm"}}</button>
                             </div>
                         </div>
                     </div>
