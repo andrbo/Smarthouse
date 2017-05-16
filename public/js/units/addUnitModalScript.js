@@ -42,9 +42,8 @@ $('#saveAndPair').click(function () {
     if (groupname == "Select group") {
         groupname == "";
     }
-    $.post('/addUnit', {
+    $.post('/units/'+groupname, {
         description: description,
-        groupname: groupname
     }).done(function (data) {
         var unitId = data.insertId;
         socket.emit('pairDevice', {unitno: unitId});

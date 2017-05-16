@@ -174,8 +174,8 @@ module.exports = function (app, passport) {
 
     //Update user password.
     app.post('/updateUserPassword', function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.email; //For test usage only
+        var email = req.user.email;
+        //var email = req.body.email; //For test usage only
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
 
@@ -208,9 +208,9 @@ module.exports = function (app, passport) {
     });
 
     //Get all users
-    app.get("/getAllUsers", function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.email; //For testing purposes
+    app.get("/users", function (req, res) {
+        var email = req.user.email;
+        //var email = req.body.email; //For testing purposes
 
         function getAllUsers(callback) {
             User.getAllUsers(email, function (err, result) {
@@ -224,7 +224,7 @@ module.exports = function (app, passport) {
     });
 
     //Update user profile
-    app.post("/updateProfile", function (req, res) {
+    app.put("/users/:id", function (req, res) {
         var email = req.user.email;
         var firstname = req.body.firstname;
         var surname = req.body.surname;
@@ -272,13 +272,16 @@ module.exports = function (app, passport) {
     });
 
     //Get all participants excepts yourself.
-    app.post("/getParticipants", function (req, res) {
-        function getParticipants(callback) {
-            var id = req.body.id;
+    app.get("/participants/:id", function (req, res) {
+        var id = req.params.id;
+        console.log("ID PARTI: " + id);
 
+        function getParticipants(callback) {
             calModal.getParticipants(id, function (err, result) {
                 if (callback) {
                     res.send(result);
+                    console.log("ERROR: " + err);
+                    console.log("RESULT: " + JSON.stringify(result));
                     callback(err, result);
                 }
             })
@@ -289,7 +292,7 @@ module.exports = function (app, passport) {
     });
 
     //Get all events.
-    app.get("/getAllEvents", function (req, res) {
+    app.get("/events", function (req, res) {
         function getAllEvents(callback) {
             calModal.getAllEvents(function (err, result) {
                 if (callback) {
@@ -304,7 +307,7 @@ module.exports = function (app, passport) {
     });
 
     //Add new event
-    app.post("/addEvent", function (req, res) {
+    app.post("/events", function (req, res) {
         var email = req.user.email;
         var title = req.body.title;
         var description = req.body.description;
@@ -325,13 +328,13 @@ module.exports = function (app, passport) {
     });
 
     //Delete event by id.
-    app.post("/deleteEvent", function (req, res) {
-        var id = req.body.id;
+    app.delete("/events/:id", function (req, res) {
+        var id = req.params.id;
 
         function deleteEvent(callback) {
             calModal.deleteEvent(id, function (err, result) {
                 callback(err, result);
-            })
+            })u
         }
 
         deleteEvent(function (err, res) {
@@ -339,8 +342,8 @@ module.exports = function (app, passport) {
     });
 
     //Update event by id.
-    app.post("/updateEvent", function (req, res) {
-        var id = req.body.id;
+    app.put("/events/:id", function (req, res) {
+        var id = req.params.id;
         var start = req.body.start;
         var end = req.body.end;
         var title = req.body.title;
@@ -375,7 +378,7 @@ module.exports = function (app, passport) {
 
     //SHOPPING LIST BEGINS HERE
     //Get shopping list
-    app.get("/getShoppingList", function (req, res) {
+    app.get("/shoppingList", function (req, res) {
         function getShoppingList(callback) {
             shopModal.getShoppingList(function (err, result) {
                 if (callback) {
@@ -390,9 +393,8 @@ module.exports = function (app, passport) {
     });
 
     //Remove product by id.
-    app.post("/removeProduct", function (req, res) {
-        var id = req.body.id;
-
+    app.delete("/shoppingList/:id", function (req, res) {
+        var id = req.params.id;
         function removeProduct(callback) {
             shopModal.removeProduct(id, function (err, result) {
                 if (callback) {
@@ -407,7 +409,7 @@ module.exports = function (app, passport) {
     });
 
     //Add a new product to the shopping list.
-    app.post("/addProduct", function (req, res) {
+    app.post("/shoppingList", function (req, res) {
         var description = req.body.description;
 
         function addProduct(callback) {
@@ -427,7 +429,7 @@ module.exports = function (app, passport) {
     //ALARM BEGINS HERE
 
     //Toggle alarm on/off
-    app.post('/alarmToggle', function (req, res) {
+    app.post('/alarm', function (req, res) {
         var activated = req.body.alarm;
 
         function toggleAlarm(id, callback) {
@@ -453,7 +455,7 @@ module.exports = function (app, passport) {
     });
 
     //Get the alarm state.
-    app.post("/alarmState", function (req, res) {
+    app.get("/alarm", function (req, res) {
         function getState(id, callback) {
             alarmModal.getAlarmState(id, function (err, result) {
                 if (callback) {
@@ -491,7 +493,7 @@ module.exports = function (app, passport) {
     });
 
     //Update alarm password.
-    app.post('/updateAlarmPassword', function (req, res) {
+    app.put('/alarm', function (req, res) {
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
 
@@ -544,7 +546,7 @@ module.exports = function (app, passport) {
 
     //UNITS BEGINS HERE
     //Get all units
-    app.get('/getUnits', function (req, res) {
+    app.get('/units', function (req, res) {
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
@@ -562,9 +564,9 @@ module.exports = function (app, passport) {
 
 
     //Add new unit
-    app.post('/addUnit', function (req, res) {
+    app.post('/units', function (req, res) {
         var description = req.body.description.trim();
-        var groupid = req.body.groupname.trim();
+        var groupid = req.params.groupname.trim();
 
         function addUnit(callback) {
             unitModel.addUnit(description, groupid, function (err, result) {
@@ -577,6 +579,42 @@ module.exports = function (app, passport) {
         }
 
         addUnit(function (err, res) {
+        });
+    });
+
+    //Delete a unit
+    app.delete("/units/:id", function (req, res) {
+        function deleteDevice(callback) {
+            var id = req.body.unitno;
+            unitModel.deleteDevice(id, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            });
+        }
+
+        deleteDevice(function (err, res) {
+        });
+    });
+
+    //Update a unit
+    app.put("/units/:id", function (req, res) {
+        function changeDevice(callback) {
+            var id = req.body.unitno;
+            var description = req.body.description;
+            var groupid = req.body.groupid;
+            var luxstate = req.body.luxstate;
+            var luxtresh = req.body.luxtresh;
+            unitModel.changeDevice(id, description, groupid, luxstate, luxtresh, function (err, result) {
+                if (callback) {
+                    res.send(result);
+                    callback(err, result);
+                }
+            });
+        }
+
+        changeDevice(function (err, res) {
         });
     });
 
@@ -598,22 +636,6 @@ module.exports = function (app, passport) {
         });
     });
 
-    //Delete a unit
-    app.post("/deleteDevice", function (req, res) {
-        function deleteDevice(callback) {
-            var id = req.body.unitno;
-            unitModel.deleteDevice(id, function (err, result) {
-                if (callback) {
-                    res.send(result);
-                    callback(err, result);
-                }
-            });
-        }
-
-        deleteDevice(function (err, res) {
-        });
-    });
-
     //Delete group from unit
     app.post("/deleteGroupUnit", function (req, res) {
         function removeGroupFromUnit(callback) {
@@ -629,28 +651,8 @@ module.exports = function (app, passport) {
         });
     });
 
-    //Updates device
-    app.post("/changeDevice", function (req, res) {
-        function changeDevice(callback) {
-            var id = req.body.unitno;
-            var description = req.body.description;
-            var groupid = req.body.groupid;
-            var luxstate = req.body.luxstate;
-            var luxtresh = req.body.luxtresh;
-            unitModel.changeDevice(id, description, groupid, luxstate, luxtresh, function (err, result) {
-                if (callback) {
-                    res.send(result);
-                    callback(err, result);
-                }
-            });
-        }
-
-        changeDevice(function (err, res) {
-        });
-    });
-
     //Get units belonging to group.
-    app.post('/getUnitsOfGroup', function (req, res) {
+    app.get('/getUnitsOfGroup', function (req, res) {
         var groupId = req.body.groupId;
 
         function getUnitsOfGroup(callback) {
@@ -668,7 +670,7 @@ module.exports = function (app, passport) {
     });
 
     //Add new group
-    app.post('/addGroup', function (req, res) {
+    app.post('/groups', function (req, res) {
         function addGroup(callback) {
             var groupName = req.body.name;
             unitModel.createGroup(groupName, function (err, result) {
@@ -688,7 +690,7 @@ module.exports = function (app, passport) {
 
 
     //Get all groups.
-    app.get("/getGroups", function (req, res) {
+    app.get("/groups", function (req, res) {
         function getGroups(callback) {
             unitModel.listGroup(function (err, result) {
                 if (callback) {
@@ -703,7 +705,7 @@ module.exports = function (app, passport) {
     });
 
     //Turn group on/off
-    app.post("/toggleGroup", function (req, res) {
+    app.put("/groups/:id", function (req, res) {
         function toggleGroup(callback) {
             var groupId = req.body.groupId;
             var newGroupState = req.body.state;
@@ -720,7 +722,7 @@ module.exports = function (app, passport) {
     });
 
     //Delete group
-    app.post("/deleteGroup", function (req, res) {
+    app.delete("/groups/:id", function (req, res) {
         function deleteGroup(callback) {
             var groupId = req.body.groupId;
 

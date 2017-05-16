@@ -6,7 +6,7 @@ $(document).ready(function () {
     var table = $("#shoppingListTable").DataTable({
         ajax: {
             dataSrc: "",
-            url: '/getShoppingList'
+            url: '/shoppingList'
         },
 
         scrollY: "260px",
@@ -26,11 +26,13 @@ $(document).ready(function () {
     $('#shoppingListTable tbody').on('click', 'tr', 'removeProduct', function () {
         var data = table.row(this).data();
         console.log("ID: " + data.id);
-        $.post("/removeProduct", {
-            id: data.id
-        });
-        $('#shoppingListTable').DataTable().ajax.reload();
 
+        $.ajax({
+            url: "/shoppingList/" + data.id,
+            type: 'DELETE'
+        });
+
+        $('#shoppingListTable').DataTable().ajax.reload();
     });
 
     //Opens addProductModal
@@ -43,7 +45,7 @@ $(document).ready(function () {
         $("#addProductButton").click(function () {
             $(".productInput input").each(function () {
                 console.log("THIS: " + $(this).val());
-                $.post("/addProduct", {
+                $.post("/shoppingList", {
                     description: $(this).val()
                 });
             });

@@ -65,9 +65,7 @@
                     $("#updateEventEnd").val(calEvent.end.format("YYYY-MM-DD HH:mm"));
 
                     var participants = "";
-                    $.post("/getParticipants", {
-                        id: calEvent.id
-                    }).done(function (data) {
+                    $.get("/participants/" + calEvent.id).done(function (data) {
 
                         var dataString = data[0].participants;
                         var allParticipants = [];
@@ -163,7 +161,7 @@
         var table = $("#calendarEventList").DataTable({
             ajax: {
                 dataSrc: "",
-                url: '/getAllEvents'
+                url: '/events'
             },
 
             scrollY: 280,
@@ -195,7 +193,7 @@
             }
         });
 
-        $.get("/getAllUsers", function (data) {
+        $.get("/users", function (data) {
             for (var i = 0; i < data.length; i++) {
                 var user = data[i].firstname;
                 $("#participantsList").append('<li class="participants"><a href="#" class="small">' + '<input type="checkbox"/>' + user + '</a>' + '</li>');
@@ -271,7 +269,7 @@
         }
 
         if(!error) {
-            $.post("/addEvent", {
+            $.post("/events", {
                 title: title,
                 start: start,
                 end: end,
@@ -283,20 +281,24 @@
     }
 
     function deleteEvent(eventId) {
-        $.post("/deleteEvent", {
-            id: eventId
+        $.ajax({
+            url: "/events/" + eventId,
+            type: 'DELETE'
         });
         window.location.reload(true);
     }
 
     function updateEvent(title, description, start, end, id, participants) {
-        $.post("/updateEvent", {
-            title: title,
-            description: description,
-            start: start,
-            end: end,
-            id: id,
-            participants: participants
+        $.ajax({
+            url: "/events/" + id,
+            type: 'PUT',
+            data: {
+                title: title,
+                description: description,
+                start: start,
+                end: end,
+                participants: participants
+            }
         });
         window.location.reload(true);
     }
