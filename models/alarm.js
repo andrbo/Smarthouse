@@ -1,26 +1,6 @@
 var db = require('../middlewares/db');
 
 
-//Add new alarm for test purpose only!
-exports.addAlarm = function (password, callback) {
-    var sql = 'INSERT INTO alarm (password) VALUES (?)';
-    db.query(sql, password, function (err, result) {
-        if (callback) {
-            callback(err, result);
-        }
-    });
-};
-
-//Delete alarm for test purpose only!
-exports.deleteAlarm = function (password, callback) {
-    var sql = 'DELETE FROM alarm WHERE password = ?';
-    db.query(sql, password, function (err, result) {
-        if (callback) {
-            callback(err, result);
-        }
-    });
-};
-
 exports.getAlarmState = function (id, callback) {
     var sql = 'SELECT value FROM alarm WHERE id = ?';
     db.query(sql, id, function (err, result) {
