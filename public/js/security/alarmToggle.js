@@ -1,45 +1,15 @@
 var socket = io();
 
 var toggleState = 0; // Used for storing the value of on/off for the alarm in db
+
+socket.on('alarmChange', function () {
+    window.location.reload(true);
+});
+
 $(function () { // on load function makes the connected users get the correct value of activate/deactivate alarm
+    console.log('Kaller updateToggleState');
     updateToggleState();
 
-    socket.on("alarmDeac", function () {
-        buttonState(0);
-        /*console.log('klikkææær');
-        if ($(this).hasClass("off")) {
-            console.log('Knappen står av, skal skru på');
-            activateAlarmModal();
-        }
-        else {
-            console.log('Knappen er på skal skru av');
-            deActivateAlarmModal();
-        }*/
-    });
-
-    socket.on("alarmAct", function () {
-        buttonState(1);
-    });
-
-});
-// $("#alarmToggleBtn").click(function() {
-//     console.log('klikkææær');
-//     /*if($(this).hasClass("off")){
-//      console.log('Knappen står av, skal skru på');
-//      //activateAlarmModal();
-//      }
-//      else{
-//      console.log('Knappen er på skal skru av');
-//      //deActivateAlarmModal();
-//      }
-//      */
-// });
-
-
-// Brukes?
-socket.on('alarmChange', function () {
-    console.log('mottatt alarmchange klient');
-    window.location.reload(true);
 });
 
 // The function updates the local variable of toggle state, by connecting to the database and reads the value.
@@ -49,21 +19,20 @@ function updateToggleState() {
         var state = JSON.stringify(data[0].value);
         buttonState(state);
         toggleState = state;
+        console.log('Får toggle state: '+toggleState);
     });
 }
 
 // Function for updating the css of the alarm activation button.
 function buttonState(value) {
     if (value == 1) {
-        $('#alarmToggleBtn').bootstrapToggle('On');
-        //$('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
-        //    deActivateAlarmModal();
-        //});
+        $('#alarmButton').html('Deaktiver').css("background-color", "red").click(function () {
+            deActivateAlarmModal();
+        });
     } else {
-        $('#alarmToggleBtn').bootstrapToggle('Off');
-        //$('#alarmButton').html('Aktiver').css("background-color", "green").click(function () {
-        //    activateAlarmModal();
-        //});
+        $('#alarmButton').html('Aktiver').css("background-color", "green").click(function () {
+            activateAlarmModal();
+        });
     }
 }
 
@@ -114,13 +83,5 @@ function deActivateAlarmModal() {
             }
         });
     });
-}
+};
 
-$('#actAlarmCancelBtn').click(function(){
-    $('#alarmToggleBtn').bootstrapToggle('off');
-    $('#activateAlarmModal').modal('hide');
-});
-$('#deacAlarmCancelBtn').click(function () {
-    $('#alarmToggleBtn').bootstrapToggle('on');
-    $('#deactivateAlarmModal').modal('hide');
-});
