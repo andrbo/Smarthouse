@@ -101,25 +101,6 @@ app.io.chat = require('./middlewares/chat.js')(app.io);
 //app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 
-// //Express Validator
-// app.use(expressValidator({
-//     errorFormatter: function (param, msg, value) {
-//         var namespace = param.split('.')
-//             , root = namespace.shift()
-//             , formParam = root;
-//
-//         while (namespace.length) {
-//             formParam += '[' + namespace.shift() + ']';
-//         }
-//         return {
-//             param: formParam,
-//             msg: msg,
-//             value: value
-//         };
-//     }
-// }));
-
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
