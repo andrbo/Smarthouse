@@ -4,8 +4,9 @@ var toggleState = 0; // Used for storing the value of on/off for the alarm in db
 $(function () { // on load function makes the connected users get the correct value of activate/deactivate alarm
     updateToggleState();
 
-    $("#alarmToggleBtn").on("change", function () {
-        console.log('klikkææær');
+    socket.on("alarmDeac", function () {
+        buttonState(0);
+        /*console.log('klikkææær');
         if ($(this).hasClass("off")) {
             console.log('Knappen står av, skal skru på');
             activateAlarmModal();
@@ -13,7 +14,11 @@ $(function () { // on load function makes the connected users get the correct va
         else {
             console.log('Knappen er på skal skru av');
             deActivateAlarmModal();
-        }
+        }*/
+    });
+
+    socket.on("alarmAct", function () {
+        buttonState(1);
     });
 
 });
