@@ -549,7 +549,6 @@ module.exports = function (app, passport) {
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
-                    console.log("KOMMER HIT********************")
                     res.send(result);
                     callback(err, result);
                 }
