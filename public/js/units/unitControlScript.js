@@ -115,7 +115,7 @@ function addNewGroup(newGroup, callback) {
     var groupInput = newGroup;
     var test = 0;
     if (callback) {
-        $.post('/addGroup', {
+        $.post('/groups', {
             name: groupInput
         }).done(function (data) {
             var error = data.addError;
@@ -129,6 +129,7 @@ function addNewGroup(newGroup, callback) {
                 $('#addNewGroupBtns').css("display", "none");
                 $('#groupValues').append("<li><a class='listGroups'>" + groupInput + "</a></li>")
             }
+            window.location.reload(true);
         });
     }
 }

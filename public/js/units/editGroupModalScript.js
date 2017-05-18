@@ -7,7 +7,7 @@ $(function () {
     var editGroupTable = $("#editGroupTable").DataTable({
         ajax: {
             dataSrc: '',
-            url: '/getGroups',
+            url: '/groups',
         },
         scrollY: "430px",
         searching: false,
@@ -15,7 +15,7 @@ $(function () {
         lengthChange: false,
         columns: [
             {data: "groupname"},
-            {defaultContent: "<button class='btn btn-danger'>" +$("#deleteGroupButton").val() + "</button>"}
+            {defaultContent: "<button class='btn btn-danger'> Slett</button>"}
         ]
     });
 
@@ -27,8 +27,9 @@ $(function () {
         $.post('/deleteGroupUnit', { // Deleting group from unitis using them
             groupId: id
         }).done(function () {
-            $.post('/deleteGroup', { // Deleting the group from DB
-                groupId: id
+            $.ajax({ // Deleting the group from DB
+                url: "/groups/" + id,
+                type: 'DELETE'
             })
         });
     });

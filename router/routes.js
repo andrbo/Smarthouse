@@ -174,8 +174,8 @@ module.exports = function (app, passport) {
 
     //Update user password.
     app.post('/updateUserPassword', function (req, res) {
-        var email = req.user.email;
-        //var email = req.body.email; //For test usage only
+        //var email = req.user.email;
+        var email = req.body.email; //For test usage only
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
 
@@ -190,6 +190,7 @@ module.exports = function (app, passport) {
                                 } else {
                                     User.updatePassword(newPass, email, function (err, result) {
                                         if (callback) {
+
                                             res.send(result);
                                         }
                                     });
@@ -209,8 +210,8 @@ module.exports = function (app, passport) {
 
     //Get all users
     app.get("/users", function (req, res) {
-        var email = req.user.email;
-        //var email = req.body.email; //For testing purposes
+        //var email = req.user.email;
+        var email = req.body.email; //For testing purposes
 
         function getAllUsers(callback) {
             User.getAllUsers(email, function (err, result) {
@@ -224,8 +225,9 @@ module.exports = function (app, passport) {
     });
 
     //Update user profile
-    app.put("/users/:id", function (req, res) {
-        var email = req.user.email;
+    app.put("/users", function (req, res) {
+        //var email = req.user.email;
+        var email = req.body.emailTest; //For test purposes only
         var firstname = req.body.firstname;
         var surname = req.body.surname;
         var address = req.body.address;
@@ -256,7 +258,8 @@ module.exports = function (app, passport) {
 
     //CALENDAR BEGINS HERE
     app.get("/getUserEvents", function (req, res) {
-        var email = req.user.email;
+        //var email = req.user.email;
+        var email = req.body.email; //For test purposes only
 
         function getEvents(callback) {
             calModal.getUserEvents(email, function (err, result) {
@@ -271,17 +274,13 @@ module.exports = function (app, passport) {
         });
     });
 
-    //Get all participants excepts yourself.
+    //Get all participants for given event.
     app.get("/participants/:id", function (req, res) {
         var id = req.params.id;
-        console.log("ID PARTI: " + id);
-
         function getParticipants(callback) {
             calModal.getParticipants(id, function (err, result) {
                 if (callback) {
                     res.send(result);
-                    console.log("ERROR: " + err);
-                    console.log("RESULT: " + JSON.stringify(result));
                     callback(err, result);
                 }
             })
@@ -334,7 +333,7 @@ module.exports = function (app, passport) {
         function deleteEvent(callback) {
             calModal.deleteEvent(id, function (err, result) {
                 callback(err, result);
-            })u
+            })
         }
 
         deleteEvent(function (err, res) {
@@ -547,9 +546,11 @@ module.exports = function (app, passport) {
     //UNITS BEGINS HERE
     //Get all units
     app.get('/units', function (req, res) {
+
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
+                    console.log("KOMMER HIT********************")
                     res.send(result);
                     callback(err, result);
                 }
@@ -566,7 +567,7 @@ module.exports = function (app, passport) {
     //Add new unit
     app.post('/units', function (req, res) {
         var description = req.body.description.trim();
-        var groupid = req.params.groupname.trim();
+        var groupid = req.body.groupname.trim();
 
         function addUnit(callback) {
             unitModel.addUnit(description, groupid, function (err, result) {
@@ -583,9 +584,11 @@ module.exports = function (app, passport) {
     });
 
     //Delete a unit
-    app.delete("/units/:id", function (req, res) {
+    app.delete("/units/:unitno", function (req, res) {
+        var id = req.params.unitno;
+
+        console.log("ID: " + id);
         function deleteDevice(callback) {
-            var id = req.body.unitno;
             unitModel.deleteDevice(id, function (err, result) {
                 if (callback) {
                     res.send(result);
@@ -599,9 +602,9 @@ module.exports = function (app, passport) {
     });
 
     //Update a unit
-    app.put("/units/:id", function (req, res) {
+    app.put("/units/:unitno", function (req, res) {
         function changeDevice(callback) {
-            var id = req.body.unitno;
+            var id = req.params.unitno;
             var description = req.body.description;
             var groupid = req.body.groupid;
             var luxstate = req.body.luxstate;
@@ -724,7 +727,7 @@ module.exports = function (app, passport) {
     //Delete group
     app.delete("/groups/:id", function (req, res) {
         function deleteGroup(callback) {
-            var groupId = req.body.groupId;
+            var groupId = req.params.id;
 
             unitModel.deleteGroup(groupId, function (err, result) {
                 if (callback) {

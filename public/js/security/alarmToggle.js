@@ -45,7 +45,7 @@ socket.on('alarmChange', function () {
 // The function updates the local variable of toggle state, by connecting to the database and reads the value.
 // This value is the emitted with a socket to the server, which in turn broadcasts a message to all connected user with the current value of toggleState
 function updateToggleState() {
-    $.post('/alarmState').done(function (data) {
+    $.get('/alarm').done(function (data) {
         var state = JSON.stringify(data[0].value);
         buttonState(state);
         toggleState = state;
@@ -81,7 +81,7 @@ function activateAlarmModal() {
         }).done(function (data) {
             var pwCheck = JSON.stringify(data);
             if (pwCheck === "true") {
-                $.post('/alarmToggle', {alarm: true});
+                $.post('/alarm', {alarm: true});
                 buttonState(1);
                 updateToggleState();
                 socket.emit('alarmToggle', {state: 1});
@@ -104,7 +104,7 @@ function deActivateAlarmModal() {
         $.post('/alarmPw', {pw: pwInput}, function (data) {
             var pwCheck = JSON.stringify(data);
             if (pwCheck === "true") {
-                $.post('/alarmToggle', {alarm: false});
+                $.post('/alarm', {alarm: false});
                 buttonState(1);
                 updateToggleState();
                 socket.emit('alarmToggle', {state: 0});

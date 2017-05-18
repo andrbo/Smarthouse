@@ -3,9 +3,9 @@
  */
 
 //Get all groups when window is initalized.
-$.get('/getGroups').done(function (data) {
+$.get('/groups').done(function (data) {
     var dropdownAddDevice = $("#groupValues");
-    var dropdownChangeDevice = $("#groupValuesTest");
+    var dropdownChangeDevice = $("#groupValuesChange");
     for (var i = 0; i < data.length; i++) {
         dropdownAddDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
         dropdownChangeDevice.append("<li><a class='listGroups'>" + data[i].groupname + "</a></li>");
@@ -42,8 +42,9 @@ $('#saveAndPair').click(function () {
     if (groupname == "Select group") {
         groupname == "";
     }
-    $.post('/units/'+groupname, {
+    $.post('/units', {
         description: description,
+        groupname:groupname
     }).done(function (data) {
         var unitId = data.insertId;
         socket.emit('pairDevice', {unitno: unitId});

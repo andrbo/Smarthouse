@@ -148,15 +148,19 @@
         bootstrapValidator.validate();
 
         if(bootstrapValidator.isValid()){
-            $.post("/updateProfile", {
-                firstname: $("#firstname").val(),
-                surname: $("#surname").val(),
-                address: $("#address").val(),
-                postalCode: $("#postalCode").val(),
-                city: $("#city").val(),
-                email: $("#email").val()
-            });
-            window.location.reload(true);
+            console.log("FIRSTNAME: " + $("#firstname").val());
+            $.ajax({
+                url: "/users",
+                type: 'PUT',
+                data: {
+                    firstname: $("#firstname").val(),
+                    surname: $("#surname").val(),
+                    address: $("#address").val(),
+                    postalCode: $("#postalCode").val(),
+                    city: $("#city").val(),
+                    email: $("#email").val()
+                }
+            })
         }
     }
 </script>

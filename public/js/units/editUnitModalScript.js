@@ -46,14 +46,31 @@ $('#saveChangeDevice').click(function () {
         luxState = 0;
     }
     var luxTreshold = $('#editDevLuxValue').slider('getValue');
-    $.post('/changeDevice', {
-        unitno: unitno,
-        groupid: group,
-        description: descript,
-        luxstate: luxState,
-        luxtresh: luxTreshold
-    }).done(function () {
 
+
+    $.ajax({
+        url: "/units/" + unitno,
+        type: 'PUT',
+        data: {
+            groupid: group,
+            description: descript,
+            luxstate: luxState,
+            luxtresh: luxTreshold
+        }
+    }).done(function () {
+        window.location.reload(true);
+    });
+
+    $.ajax({
+        url: "/units/" + unitno,
+        type: 'PUT',
+        data: {
+            groupid: group,
+            description: descript,
+            luxstate: luxState,
+            luxtresh: luxTreshold
+        }
+    }).done(function(){
         window.location.reload(true);
     });
 });
@@ -71,9 +88,10 @@ $('#deleteDevice').click(function () {
     $('#deleteDevDescript').html(descript);
     $('#deleteDevGroup').html(group);
     $('#deleteDeviceBtn').click(function () {
-        $.post('/deleteDevice', {
-            unitno: unitno,
-        }).done(function () {
+        $.ajax({
+            url: "/units/" + unitno,
+            type: 'DELETE'
+        }).done(function(){
             /*$('#deleteUnitModal').modal('hide');
              $('body').removeClass('modal-open');
              $('.modal-backdrop').remove();*/

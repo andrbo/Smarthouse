@@ -93,8 +93,6 @@ exports.updateProfile = function (firstname, surname, address, postalCode, city,
 
     db.query(sql, values, function (err, result) {
         if (callback) {
-            console.log("ERR: " + err);
-            console.log("RES: " + JSON.stringify(result));
             callback(err, result);
         }
     });

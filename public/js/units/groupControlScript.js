@@ -13,7 +13,7 @@ $(function () {
     var groupTable = $("#groupTable").DataTable({
         ajax: {
             dataSrc: '',
-            url: '/getGroups',
+            url: '/groups',
         },
         scrollY: "385px",
         searching: false,
