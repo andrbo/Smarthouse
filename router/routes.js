@@ -7,7 +7,6 @@ module.exports = function (app, passport) {
     var generator = require('generate-password');
     var nodemailer = require('nodemailer');
     var User = require('../models/User');
-    var validator = require('validator');
     var flash = require('connect-flash');
     var db = require('../middlewares/db');
     var bcrypt = require('bcryptjs');
