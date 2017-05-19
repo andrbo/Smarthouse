@@ -544,7 +544,7 @@ module.exports = function (app, passport) {
 
     //UNITS BEGINS HERE
     //Get all units
-    app.get('/units', function (req, res) {
+    app.get('/unitsData', function (req, res) {
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
