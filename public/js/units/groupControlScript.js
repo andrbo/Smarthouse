@@ -53,8 +53,7 @@ $(function () {
                     groupId: groupname
                 }).done(function (data) {
                     for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
-                        $.post('/toggleUnit', {
-                            unitId: data[i].id,
+                        $.post('/toggleUnit/' + data[i].id, {
                             state: newState
                         }).done(function (data) {
                             function toggleGroupDeviceOff(callback) {
@@ -85,8 +84,7 @@ $(function () {
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
                     for (var i = 0; i < data.length; i++) {
-                        $.post('/toggleUnit', {
-                            unitId: data[i].id,
+                        $.post('/toggleUnit/' + data[i].id, {
                             state: newState
                         }).done(function (data) {
                             function toggleGroupDeviceOn(callback) {
