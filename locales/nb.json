@@ -49,7 +49,7 @@
 	"Field-PostalCode-Characters-Check": "Postnummeret må inneholde 4 nummer",
 	"Field-Firstname-Regex": "Fornavnet kan kun inneholde bokstaver",
 	"Field-Surname-Regex": "Etternavnet kan kun inneholde bokstaver",
-	"Field-Address-Regex": "Addresse kan kun inneholde bokstaver",
+	"Field-Address-Regex": "Addresse kan kun inneholde bokstaver, tall og mellomrom",
 	"Field-PostalCode-Regex": "Postnummeret kan kun inneholde tall",
 	"Field-City-Regex": "Byen kan kun inneholde bokstaver",
 	"Field-Unit-Regex": "Beskrivelsen kan kun inneholde bokstaver",

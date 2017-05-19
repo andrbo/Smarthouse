@@ -39,6 +39,7 @@
                     }
                 }
             },
+            timeFormat: "HH:mm",
 
             eventClick: function (calEvent) {
                 $("#viewDescriptionModal").modal("show");
@@ -147,8 +148,8 @@
 
             editable: true,
             eventDrop: function (event) {
-                var start = event.start.format("YYYY-MM-DD HH:MM");
-                var end = event.end.format("YYYY-MM-DD HH:MM") || start;
+                var start = event.start.format("YYYY-MM-DD HH:mm");
+                var end = event.end.format("YYYY-MM-DD HH:mm") || start;
                 updateDate(event.id, start, end);
             }
         });

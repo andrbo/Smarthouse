@@ -173,8 +173,8 @@ module.exports = function (app, passport) {
 
     //Update user password.
     app.post('/updateUserPassword', function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.email; //For test usage only
+        var email = req.user.email;
+        //var email = req.body.email; //For test usage only
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
 
@@ -209,8 +209,8 @@ module.exports = function (app, passport) {
 
     //Get all users
     app.get("/users", function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.email; //For testing purposes
+        var email = req.user.email;
+        //var email = req.body.email; //For testing purposes
 
         function getAllUsers(callback) {
             User.getAllUsers(email, function (err, result) {
@@ -225,8 +225,8 @@ module.exports = function (app, passport) {
 
     //Update user profile
     app.put("/users", function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.emailTest; //For test purposes only
+        var email = req.user.email;
+        //var email = req.body.emailTest; //For test purposes only
         var firstname = req.body.firstname;
         var surname = req.body.surname;
         var address = req.body.address;
@@ -257,8 +257,8 @@ module.exports = function (app, passport) {
 
     //CALENDAR BEGINS HERE
     app.get("/getUserEvents", function (req, res) {
-        //var email = req.user.email;
-        var email = req.body.email; //For test purposes only
+        var email = req.user.email;
+        //var email = req.body.email; //For test purposes only
 
         function getEvents(callback) {
             calModal.getUserEvents(email, function (err, result) {

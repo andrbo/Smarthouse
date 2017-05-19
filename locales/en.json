@@ -49,7 +49,7 @@
     "Field-PostalCode-Characters-Check": "The postal code must be 4 characters long",
     "Field-Firstname-Regex": "The firstname can only consist of alphabetical letters",
     "Field-Surname-Regex": "The surname can only consist of alphabetical letters",
-    "Field-Address-Regex": "The address can only consist of alphabetical letters",
+    "Field-Address-Regex": "The address can only consist of alphabetical letters, numbers and space",
     "Field-PostalCode-Regex": "The postal code can only consist of numbers",
     "Field-City-Regex": "The address can only consist of alphabetical letters",
     "Field-Unit-Regex": "The description can only consist of alphabetical letters",
