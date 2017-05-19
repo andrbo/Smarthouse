@@ -53,7 +53,6 @@ $(function () {
                     groupId: groupname
                 }).done(function (data) {
                     for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
-                        console.log("KOMMER HIT")
                         $.post('/toggleUnit/' + data[i].id, {
                             state: newState
                         }).done(function (data) {
@@ -81,6 +80,7 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
+                console.log("KOMMER HIT")
                 $.get('/getUnitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
