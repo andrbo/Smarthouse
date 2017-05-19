@@ -50,7 +50,6 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
-                console.log("GROUPNAME FRA VIEW: " + groupname);
                 $.post('/unitsOfGroup', { // Retrieving the units belonging to the group
                     groupId: groupname
                 }).done(function (data) {

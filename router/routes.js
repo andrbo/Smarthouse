@@ -654,14 +654,10 @@ module.exports = function (app, passport) {
 
     //Get units belonging to group.
     app.post('/unitsOfGroup', function (req, res) {
-        console.log("*********" + JSON.stringify(req.body));
         var groupId = req.body.groupId;
-        console.log("GROUPID CONTROLLER: " + groupId)
-
         function getUnitsOfGroup(callback) {
             unitModel.getUnitsOfGroup(groupId, function (err, result) {
                 if (callback) {
-                    console.log("**************" +JSON.stringify(result));
                     callback(err, result);
                     res.send(result);
                 }

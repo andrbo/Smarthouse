@@ -37,6 +37,7 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
+        console.log(serialData);
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
@@ -52,8 +53,8 @@ module.exports = function (app, io) {
                 });
                 break;
         }
-        //console.log("ALARM" + JSON.stringify(alarmJson));
-        //console.log("GENERAL" + JSON.stringify(generalJson));
+        console.log("ALARM" + JSON.stringify(alarmJson));
+        console.log("GENERAL" + JSON.stringify(generalJson));
 
     });
 
@@ -134,7 +135,6 @@ module.exports = function (app, io) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
                 callback(err, result);
-                console.log(JSON.stringify(result));
             })
         }
 
