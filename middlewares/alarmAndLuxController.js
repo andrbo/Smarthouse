@@ -52,8 +52,8 @@ module.exports = function (app, io) {
                 });
                 break;
         }
-        console.log("ALARM" + JSON.stringify(alarmJson));
-        console.log("GENERAL" + JSON.stringify(generalJson));
+        //console.log("ALARM" + JSON.stringify(alarmJson));
+        //console.log("GENERAL" + JSON.stringify(generalJson));
 
     });
 
