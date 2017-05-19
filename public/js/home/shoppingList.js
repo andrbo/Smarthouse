@@ -58,7 +58,7 @@ $(document).ready(function () {
         // and empty the modal-content element
 
         $('.itemsList').empty();
-        $("#addnewitembutton").empty();
+        $("#addNewItemButton").empty();
         var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
         $(".itemsList").append(html);
 
