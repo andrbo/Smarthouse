@@ -82,8 +82,12 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
-                $.get('/getUnitsOfGroup', { // Getting the devices belonging to the group
-                    groupId: groupname
+                $.ajax({
+                    url: "/getUnitsOfGroup",
+                    type: 'GET',
+                    data: {
+                        groupId: groupname
+                    }
                 }).done(function (data) { // Turning the devices in the group on
                     console.log("DATA: " + JSON.stringify(data))
                     for (var i = 0; i < data.length; i++) {
