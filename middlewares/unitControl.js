@@ -72,9 +72,12 @@ module.exports = function (io) {
         //Unpairing a unit.
         socket.on('unpairDevice', function (data) {
             var unit = data.unitno;
+            console.log("UNIT NR: " + unit)
             rfTransmitter.nexaUnpairing(remote, unit, function (err, res) {
+                console.log("ERR: " +err);
+                console.log("Res: " + res);
                 if(err){
-                    console.log("ERROR");
+                    console.log("ERROR " + err);
                 }
             });
             socket.broadcast.emit('deviceChange');
