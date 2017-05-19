@@ -41,9 +41,13 @@ $(function () {
         // If group is on, turn it off
         if (state === 1) {
             var newState = 0;
-            $.post('/toggleGroup', { // Turning the group off
-                groupId: groupname,
-                state: newState
+
+            $.ajax({
+                url: "/toggleGroup/" + groupname,
+                type: 'PUT',
+                data: {
+                    state: newState
+                }
             }).done(function () {
                 $.post('/getUnitsOfGroup', { // Retrieving the units belonging to the group
                     groupId: groupname
@@ -70,9 +74,12 @@ $(function () {
             // The group is off, turning it on
         } else {
             var newState = 1;
-            $.post('/toggleGroup', { // Turning the group on
-                groupId: groupname,
-                state: newState
+            $.ajax({
+                url: "/toggleGroup/" + groupname,
+                type: 'PUT',
+                data: {
+                    state: newState
+                }
             }).done(function () {
                 $.post('/getUnitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
