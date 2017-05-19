@@ -654,7 +654,7 @@ module.exports = function (app, passport) {
 
     //Get units belonging to group.
     app.get('/getUnitsOfGroup', function (req, res) {
-        var groupId = req.body.groupname;
+        var groupId = req.body.groupId;
 
         function getUnitsOfGroup(callback) {
             unitModel.getUnitsOfGroup(groupId, function (err, result) {
