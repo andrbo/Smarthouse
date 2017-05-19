@@ -49,7 +49,7 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
-                $.post('/getUnitsOfGroup', { // Retrieving the units belonging to the group
+                $.get('/getUnitsOfGroup', { // Retrieving the units belonging to the group
                     groupId: groupname
                 }).done(function (data) {
                     for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
@@ -81,7 +81,7 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
-                $.post('/getUnitsOfGroup', { // Getting the devices belonging to the group
+                $.get('/getUnitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
                     for (var i = 0; i < data.length; i++) {
