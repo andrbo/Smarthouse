@@ -23,7 +23,7 @@ $(document).ready(function () {
     });
 
     //If row is clicked.
-    $('#shoppingListTable tbody').on('click', 'tr', 'removeProduct', function () {
+    $('#shoppingListTable tbody').on('click', 'tr button', 'removeProduct', function () {
         var data = table.row(this).data();
         console.log("ID: " + data.id);
 
@@ -56,6 +56,7 @@ $(document).ready(function () {
     $('body').on('hidden.bs.modal', function () {
         $(this).removeData();
         $('.itemsList').empty();
+        $("#addProductModal").empty();
         var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
         $(".itemsList").append(html);
     });
