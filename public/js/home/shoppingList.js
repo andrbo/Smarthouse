@@ -51,5 +51,10 @@ $(document).ready(function () {
             });
             window.location.reload(true);
         });
-    })
+    });
+
+    $('#addProductModal').on('hidden.bs.modal', '.modal', function () {
+        console.log("HIDDEN")
+        $(this).removeData('bs.modal');
+    });
 });
