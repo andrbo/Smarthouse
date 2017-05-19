@@ -25,7 +25,7 @@
 }
 
 
-#eventList .th{
+#eventList th{
     background-color:white;
     height: 10%;
 }
