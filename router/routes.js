@@ -707,13 +707,14 @@ module.exports = function (app, passport) {
 
     //Turn group on/off
     app.put("/groups/:id", function (req, res) {
+        console.log("KJØRER TOGGLE")
         function toggleGroup(callback) {
             var groupId = req.params.id;
             var newGroupState = req.body.state;
             unitModel.toggleGroup(groupId, newGroupState, function (err, result) {
                 if (callback) {
-                    res.send(result);
                     callback(err, result);
+                    res.send(result);
                 }
             });
         }
