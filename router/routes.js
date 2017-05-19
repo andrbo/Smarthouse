@@ -621,6 +621,7 @@ module.exports = function (app, passport) {
     //Turn unit on/off
     app.post("/toggleUnit/:id", function (req, res) {
         function toggleUnit(callback) {
+            console.log("ID ********** " + req.params.id);
             var id = req.params.id;
             var state = req.body.state;
             unitModel.toggleUnit(state, id, function (err, result) {
