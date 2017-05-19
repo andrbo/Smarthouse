@@ -54,8 +54,7 @@ $(document).ready(function () {
     });
 
     $('body').on('hidden.bs.modal', '.modal', function () {
-        console.log("HIDDEN");
-        console.log("THIS:" + JSON.stringify(this))
-        $(this).removeData("bs.modal");
+        //$(this).removeData("bs.modal");
+        window.location.reload(true);
     });
 });
