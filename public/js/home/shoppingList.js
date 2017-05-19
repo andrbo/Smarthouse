@@ -53,7 +53,7 @@ $(document).ready(function () {
         });
     });
 
-    $('body').on('hidden.bs.modal', '.modal', function () {
+    $('body').on('hidden.bs.modal', function () {
         $(this).removeData();
         $('.itemsList').empty();
         var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
