@@ -56,6 +56,6 @@ $(document).ready(function () {
     $('body').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
         // and empty the modal-content element
-        $('#modal-container .modal-content').empty();
+        $('#addProductModal').empty();
     });
 });
