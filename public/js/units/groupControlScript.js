@@ -52,7 +52,7 @@ $(function () {
             }).done(function () {
                 console.log("GROUPNAME FRA VIEW: " + groupname);
                 $.get('/getUnitsOfGroup', { // Retrieving the units belonging to the group
-                    groupId: groupname
+                    test: groupname
                 }).done(function (data) {
                     for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
                         $.post('/toggleUnit/' + data[i].id, {
@@ -84,7 +84,7 @@ $(function () {
             }).done(function () {
 
                 $.get('/getUnitsOfGroup', { // Getting the devices belonging to the group
-                    groupId: groupname
+                    test: groupname
                 }).done(function (data) { // Turning the devices in the group on
                     console.log("DATA: " + JSON.stringify(data))
                     for (var i = 0; i < data.length; i++) {
