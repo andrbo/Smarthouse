@@ -545,12 +545,10 @@ module.exports = function (app, passport) {
     //UNITS BEGINS HERE
     //Get all units
     app.get('/units', function (req, res) {
-
         function getUnits(callback) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
                     callback(err, result);
-                    console.log("*******************************" + JSON.stringify(result))
                     res.send(result);
                 }
 
