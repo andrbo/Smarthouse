@@ -51,7 +51,7 @@ $(function () {
                 }
             }).done(function () {
                 console.log("GROUPNAME FRA VIEW: " + groupname);
-                $.POST('/unitsOfGroup', { // Retrieving the units belonging to the group
+                $.post('/unitsOfGroup', { // Retrieving the units belonging to the group
                     groupId: groupname
                 }).done(function (data) {
                     for (var i = 0; i < data.length; i++) { // Turning the devices in the group off
@@ -83,7 +83,7 @@ $(function () {
                 }
             }).done(function () {
 
-                $.POST('/unitsOfGroup', { // Getting the devices belonging to the group
+                $.post('/unitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
                     console.log("DATA: " + JSON.stringify(data))
