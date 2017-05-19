@@ -619,9 +619,9 @@ module.exports = function (app, passport) {
     });
 
     //Turn unit on/off
-    app.post("/toggleUnit", function (req, res) {
+    app.post("/toggleUnit/:id", function (req, res) {
         function toggleUnit(callback) {
-            var id = req.body.unitId;
+            var id = req.params.id;
             var state = req.body.state;
             unitModel.toggleUnit(state, id, function (err, result) {
                 if (callback) {
