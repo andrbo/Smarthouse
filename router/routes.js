@@ -708,7 +708,7 @@ module.exports = function (app, passport) {
     //Turn group on/off
     app.put("/groups/:id", function (req, res) {
         function toggleGroup(callback) {
-            var groupId = req.body.groupId;
+            var groupId = req.params.id;
             var newGroupState = req.body.state;
             unitModel.toggleGroup(groupId, newGroupState, function (err, result) {
                 if (callback) {

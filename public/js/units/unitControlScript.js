@@ -13,7 +13,7 @@ $(function () {
     var table = $("#unitTable").DataTable({
         ajax: {
             dataSrc: '',
-            url: '/units',
+            url: '/units'
         },
         scrollY: "385px",
         bPaginate: true,
@@ -47,8 +47,7 @@ $(function () {
         var unitId = data.id;
         if (state === 1) {
             var newState = 0;
-            $.post('/toggleUnit', {
-                unitId: unitId,
+            $.post('/toggleUnit/' + unitId, {
                 state: newState
             }).done(function (data) {
                 function toggleDeviceOff(callback) {
@@ -62,8 +61,7 @@ $(function () {
             });
         } else {
             var newState = 1;
-            $.post('/toggleUnit', {
-                unitId: unitId,
+            $.post('/toggleUnit/' + unitId, {
                 state: newState
             }).done(function (data) {
                 function toggleDeviceOn(callback) {
