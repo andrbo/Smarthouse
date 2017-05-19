@@ -566,11 +566,14 @@ module.exports = function (app, passport) {
         var description = req.body.description.trim();
         var groupid = req.body.groupname.trim();
 
+        console.log("DESCR: " + description);
+        console.log("GROUP: " + groupid);
+
         function addUnit(callback) {
             unitModel.addUnit(description, groupid, function (err, result) {
                 if (callback) {
-                    res.send(result);
                     callback(err, result);
+                    res.send(result);
                 }
 
             });
