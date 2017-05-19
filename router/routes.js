@@ -659,8 +659,9 @@ module.exports = function (app, passport) {
         function getUnitsOfGroup(callback) {
             unitModel.getUnitsOfGroup(groupId, function (err, result) {
                 if (callback) {
-                    res.send(result);
+                    console.log("**************" +JSON.stringify(result));
                     callback(err, result);
+                    res.send(result);
                 }
             });
         }
@@ -707,7 +708,6 @@ module.exports = function (app, passport) {
 
     //Turn group on/off
     app.put("/groups/:id", function (req, res) {
-        console.log("KJØRER TOGGLE")
         function toggleGroup(callback) {
             var groupId = req.params.id;
             var newGroupState = req.body.state;

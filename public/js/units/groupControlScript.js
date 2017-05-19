@@ -80,7 +80,6 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
-                console.log("KOMMER HIT")
                 $.get('/getUnitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
