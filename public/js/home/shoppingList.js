@@ -56,6 +56,10 @@ $(document).ready(function () {
     $('body').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
         // and empty the modal-content element
-        $('#addProductModal .modal-body').empty();
+
+        $('.itemsList').empty();
+        var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
+        $(".itemsList").append(html);
+
     });
 });
