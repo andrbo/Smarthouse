@@ -86,7 +86,6 @@ exports.removeGroupFromUnit = function (id, callback) {
 
 //Get all units belonging to a specific group
 exports.getUnitsOfGroup = function (groupname, callback) {
-    console.log("GROUPNAME; " + groupname)
     var sql = 'SELECT * FROM units WHERE groupid = ?';
     db.query(sql, groupname, function (err, result) {
         if (callback) {
