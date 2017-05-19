@@ -550,7 +550,7 @@ module.exports = function (app, passport) {
             unitModel.getUnits(function (err, result) {
                 if (callback) {
                     callback(err, result);
-                    console.log(JSON.stringify(result))
+                    console.log("*******************************" + JSON.stringify(result))
                     res.send(result);
                 }
 

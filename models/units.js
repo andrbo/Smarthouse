@@ -5,6 +5,8 @@ exports.getUnits = function (callback) {
     var sql = 'SELECT * FROM units';
     db.query(sql, function (err, result) {
         if (callback) {
+            console.log("ERR: " + err);
+            console.log("RES: " + JSON.stringify(result))
             callback(err, result);
         }
     });

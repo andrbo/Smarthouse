@@ -39,7 +39,7 @@ $(function () {
     });
 
     // Click function for the on/off toggle button in the DataTable. Function updates the DB with new state of the device,
-    // and emitts a socket message to unitControl.js which in turn turns on/off the unit.
+    // and emits a socket message to unitControl.js which in turn turns on/off the unit.
 
     $('table tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
