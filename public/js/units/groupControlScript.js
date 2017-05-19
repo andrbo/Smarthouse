@@ -43,7 +43,7 @@ $(function () {
             var newState = 0;
 
             $.ajax({
-                url: "/toggleGroup/" + groupname,
+                url: "/groups/" + groupname,
                 type: 'PUT',
                 data: {
                     state: newState
@@ -75,7 +75,7 @@ $(function () {
         } else {
             var newState = 1;
             $.ajax({
-                url: "/toggleGroup/" + groupname,
+                url: "/groups/" + groupname,
                 type: 'PUT',
                 data: {
                     state: newState
