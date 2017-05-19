@@ -23,7 +23,7 @@ $(document).ready(function () {
     });
 
     //If row is clicked.
-    $('#shoppingListTable tbody').on('click', 'removeProduct', function () {
+    $('#shoppingListTable tbody').on('click', 'button', function () {
         var data = table.row(this).data();
         console.log("ID: " + data.id);
 
