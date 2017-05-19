@@ -38,7 +38,7 @@ $(function () {
         var data = groupTable.row($(this).parents('tr')).data();
         var state = data.groupstate;
         var groupname = data.groupname;
-        console.log("GROUPNAME FRA VIEW: " + groupname);
+
         // If group is on, turn it off
         if (state === 1) {
             var newState = 0;
@@ -50,6 +50,7 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
+                console.log("GROUPNAME FRA VIEW: " + groupname);
                 $.get('/getUnitsOfGroup', { // Retrieving the units belonging to the group
                     groupId: groupname
                 }).done(function (data) {
