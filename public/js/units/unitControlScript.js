@@ -13,7 +13,7 @@ $(function () {
     var table = $("#unitTable").DataTable({
         ajax: {
             dataSrc: '',
-            url: '/getUnits',
+            url: '/units',
         },
         scrollY: "385px",
         bPaginate: true,
