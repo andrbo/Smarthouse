@@ -47,6 +47,7 @@ $('#saveAndPair').click(function () {
         groupname:groupname
     }).done(function (data) {
         var unitId = data.insertId;
+        console.log("UNIT ID: " + unitId)
         socket.emit('pairDevice', {unitno: unitId});
         window.location.reload(true);
     });

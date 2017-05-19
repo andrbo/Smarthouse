@@ -9,7 +9,7 @@ $(function () {
             dataSrc: '',
             url: '/groups',
         },
-        scrollY: "430px",
+        scrollY: "200px",
         searching: false,
         info: false,
         lengthChange: false,
