@@ -53,7 +53,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#addProductModal').on('hidden.bs.modal', '.modal', function () {
+    $('body').on('hidden.bs.modal', '.modal', function () {
         console.log("HIDDEN")
         $(this).removeData('bs.modal');
     });
