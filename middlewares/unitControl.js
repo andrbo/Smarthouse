@@ -60,7 +60,7 @@ module.exports = function (io) {
 
         //Pairing a new unit when unit is in pairing mode. Remote id and unit id is stored on the device.
         socket.on('pairDevice', function (data) {
-            var unit = data.unitno;
+            var unit = parseInt(data.unitno);
             rfTransmitter.nexaPairing(remote, unit, function (err, res) {
                 if(err){
                     console.log("ERROR");
@@ -71,14 +71,9 @@ module.exports = function (io) {
 
         //Unpairing a unit.
         socket.on('unpairDevice', function (data) {
-            var unit = data.unitno;
+            var unit = parseInt(data.unitno);
             console.log("UNIT NR: " + unit)
-            rfTransmitter.nexaUnpairing(remote, unit, function (err, res) {
-                console.log("ERR: " +err);
-                console.log("Res: " + res);
-                if(err){
-                    console.log("ERROR " + err);
-                }
+            rfTransmitter.nexaUnpairing(remote, unit, function () {
             });
             socket.broadcast.emit('deviceChange');
         })
