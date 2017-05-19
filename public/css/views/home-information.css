@@ -16,7 +16,7 @@
 }
 
 #shoppingList{
-    height:363px;
+    height:326px;
 }
 
 
@@ -25,7 +25,7 @@
 }
 
 
-#eventList{
+#eventList .th{
     background-color:white;
     height: 10%;
 }
