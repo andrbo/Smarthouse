@@ -89,6 +89,8 @@ exports.getUnitsOfGroup = function (groupname, callback) {
     var sql = 'SELECT * FROM units WHERE groupid = ?';
     db.query(sql, groupname, function (err, result) {
         if (callback) {
+            console.log("ERR: " + err);
+            console.log("RES: " + JSON.stringify(result));
             callback(err, result);
         }
     });
