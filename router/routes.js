@@ -653,7 +653,7 @@ module.exports = function (app, passport) {
     });
 
     //Get units belonging to group.
-    app.get('/getUnitsOfGroup', function (req, res) {
+    app.get('/unitsOfGroup', function (req, res) {
         console.log("*********" + JSON.stringify(req.body));
         var groupId = req.body.groupId;
         console.log("GROUPID CONTROLLER: " + groupId)
