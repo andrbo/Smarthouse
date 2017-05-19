@@ -37,7 +37,6 @@ $(document).ready(function () {
 
     //Opens addProductModal
     $("#openAddProductModalButton").click(function () {
-        $('.itemsList').empty();
         $("#addProductModal").modal("show");
         $("#addNewItemButton").click(function () {
             var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
@@ -55,12 +54,9 @@ $(document).ready(function () {
     });
 
     $('body').on('hidden.bs.modal', '.modal', function () {
-        $(this).removeData('bs.modal');
-        // and empty the modal-content element
-
+        $(this).removeData();
         $('.itemsList').empty();
         var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
         $(".itemsList").append(html);
-
     });
 });
