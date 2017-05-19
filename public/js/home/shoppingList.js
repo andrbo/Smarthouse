@@ -54,7 +54,8 @@ $(document).ready(function () {
     });
 
     $('body').on('hidden.bs.modal', '.modal', function () {
-        console.log("HIDDEN")
-        $(this).removeData('.modal');
+        console.log("HIDDEN");
+        console.log("THIS:" + this)
+        $(this).removeData($("#addProductModal"));
     });
 });
