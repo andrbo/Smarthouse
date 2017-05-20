@@ -13,68 +13,46 @@ module.exports = function (io) {
         //Listens to message from client for turning device on. Uses RF-transmitter.
         socket.on("deviceOn", function (data) {
             var unit = parseInt(data.unitno);
-            rfTransmitter.nexaOn(remote, unit, function (err, res) {
-                if(err){
-                    console.log("ERROR");
-                }
-            });
+            rfTransmitter.nexaOn(remote, unit, function () {});
             socket.emit("deviceChange");
         });
 
         //Listens to message from client for turning device off. Uses RF-transmitter.
         socket.on("deviceOff", function (data) {
             var unit = parseInt(data.unitno);
-            rfTransmitter.nexaOff(remote, unit, function (err, res) {
-                if(err){
-                    console.log("ERROR");
-                }
-            });
+            rfTransmitter.nexaOff(remote, unit, function () {});
             socket.emit("deviceChange");
         });
 
         //Listens to message from client for turning group on. Uses RF-transmitter.
         socket.on('groupDeviceOn', function (data) {
             var unit = parseInt(data.unitno);
-            rfTransmitter.nexaOn(remote, unit, function (err, res) {
-                if(err){
-                    console.log("ERROR");
-                }
-            });
+            rfTransmitter.nexaOn(remote, unit, function () {});
             socket.emit('deviceChange');
         });
 
         //Listens to message from client for turning group off. Uses RF-transmitter.
         socket.on('groupDeviceOff', function (data) {
             var unit = parseInt(data.unitno);
-            rfTransmitter.nexaOff(remote, unit, function (err, res) {
-                if(err){
-                    console.log("ERROR");
-                }
-            });
+            rfTransmitter.nexaOff(remote, unit, function () {});
             socket.emit('deviceChange');
         });
 
         socket.on('groupToggleDone', function () {
-            socket.emit('deviceChange'); //TODO: Muligens noe annet dersom refresh for tab er mulig
+            socket.emit('deviceChange');
         });
 
         //Pairing a new unit when unit is in pairing mode. Remote id and unit id is stored on the device.
         socket.on('pairDevice', function (data) {
             var unit = parseInt(data.unitno);
-            rfTransmitter.nexaPairing(remote, unit, function (err, res) {
-                if(err){
-                    console.log("ERROR");
-                }
-            });
+            rfTransmitter.nexaPairing(remote, unit, function () {});
             socket.emit('deviceChange');
         });
 
         //Unpairing a unit.
         socket.on('unpairDevice', function (data) {
             var unit = parseInt(data.unitno);
-            console.log("UNIT NR: " + unit)
-            rfTransmitter.nexaUnpairing(remote, unit, function () {
-            });
+            rfTransmitter.nexaUnpairing(remote, unit, function () {});
             socket.broadcast.emit('deviceChange');
         })
     });
