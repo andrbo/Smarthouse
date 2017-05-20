@@ -49,7 +49,7 @@ function leakReading(data) {
     if (leakSensorValue < 800) {
         $('#leakValue').html("OK").css("color", "green");
     } else {
-        $('#leakValue').html($("#gasAlert").html()).css("color", "red");
+        $('#leakValue').html($("#leakAlert").html()).css("color", "red");
     }
 }
 
