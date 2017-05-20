@@ -245,6 +245,9 @@ function getLuxUnits(callback) {
     if (callback) {
         modelUnits.getLuxUnits(function (err, result) {
             callback(err, result);
+            console.log("ERR: " + err);
+            console.log("RES: " + JSON.stringify(result));
+
         })
     }
 }
@@ -266,10 +269,12 @@ function luxControl(data, callback) {
 function luxToggleState(state, lux, luxTreshold, id, callback) {
     if (callback) {
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
+            console.log("KJØRER IF")
             var toggle = 1;
             modelUnits.toggleUnit(toggle, id, function (err) {
                 if (err) {
                 } else {
+                    console.log("KJØRER TOGGLE STATE")
                     toggleUnitLux(id, toggle, function (err, res) {});
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
@@ -277,10 +282,12 @@ function luxToggleState(state, lux, luxTreshold, id, callback) {
                 }
             })
         } else if (state == 1 && lux > luxTreshold) {
+            console.log("KJØRER else if")
             var toggle = 0;
             modelUnits.toggleUnit(toggle, id, function (err) {
                 if (err) {
                 } else {
+                    console.log("KJØRER TOGGLE STATE")
                     toggleUnitLux(id, toggle, function (err, res) {});
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
