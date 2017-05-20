@@ -118,6 +118,7 @@
     "Laser-Detection": "Laser broken!",
     "Gas-Detection": "Gas detected!",
     "Leak-Detection": "Leak detected!",
+    "Flame-Detection": "Flame detected!",
 
     "Deac-Alarm": "Deactivate the alarm",
     "DeacAlarm-Pw": "Type in your password to deavtivate the alarm",
