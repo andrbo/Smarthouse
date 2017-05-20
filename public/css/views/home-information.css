@@ -16,18 +16,12 @@
 }
 
 #shoppingList{
-    height:326px;
+    height:320px;
 }
 
 
 #openAddProductModalButton{
     margin-top:10px;
-}
-
-
-.table>thead:first-child>tr:first-child>th{
-    background-color:white;
-    height: 10%;
 }
 
 #eventDescription{

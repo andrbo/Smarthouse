@@ -9,7 +9,7 @@ $(document).ready(function () {
             url: '/shoppingList'
         },
 
-        scrollY: "260px",
+        scrollY: "240px",
         bScrollCollapse : true,
         bPaginate: false,
         searching: false,
@@ -51,14 +51,5 @@ $(document).ready(function () {
             });
             window.location.reload(true);
         });
-    });
-
-    $('body').on('hidden.bs.modal', function () {
-        /*$(this).removeData();
-        $('.itemsList').empty();
-        $("#addProductModal").empty();
-        var html = '<li class="productInput"><div class="form-group">' + '<input type="text" class="form-control" placeholder="Vare">' + '</div>' + '</li>';
-        $(".itemsList").append(html);*/
-        window.location.reload(true);
     });
 });
