@@ -1,24 +1,28 @@
 #sensorInfoPanel {
     background-color: white;
-    height: 45%;
+    height: 325px;
 }
+
 
 #sensorAlerts {
     background-color: white;
-    height: 45%;
+    height: 325px;
+}
+
+#sensorAlerts h3{
+    height:25px;
 }
 
 #eventList {
     background-color: white;
-    height: 40%;
+    height: 325px;
     margin-top: 10px;
 
 }
 
 #shoppingList{
-    height:320px;
+    height:325px;
 }
-
 
 #openAddProductModalButton{
     margin-top:10px;

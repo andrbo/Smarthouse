@@ -15,7 +15,7 @@ $(function () {
             dataSrc: '',
             url: '/unitsData'
         },
-        scrollY: "385px",
+        scrollY: "320px",
         bPaginate: true,
         searching: false,
         info: false,

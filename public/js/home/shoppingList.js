@@ -9,7 +9,7 @@ $(document).ready(function () {
             url: '/shoppingList'
         },
 
-        scrollY: "220px",
+        scrollY: "223px",
         bScrollCollapse : true,
         bPaginate: false,
         searching: false,

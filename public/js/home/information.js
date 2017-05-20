@@ -84,6 +84,8 @@ function tempReading(data) {
     var outTemp2 = data.Ds2Value;
     $('#tempOut1').html(outTemp1+celsius);
     $('#tempOut2').html(outTemp2+celsius);
+    $('#tempValue').html(tempSensorValue + celsius).css("color", "#42a7f4");
+
 }
 
 // Function for reading the humidity value of the  DHT11 sensor
