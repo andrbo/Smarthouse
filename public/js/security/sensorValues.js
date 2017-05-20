@@ -46,7 +46,7 @@ function gasReading(data) {
 // Function for reading the value of the leak sensor
 function leakReading(data) {
     var leakSensorValue = data.LeakValue;
-    if (leakSensorValue < 800) {
+    if (leakSensorValue > 900) {
         $('#leakValue').html("OK").css("color", "green");
     } else {
         $('#leakValue').html($("#leakAlert").html()).css("color", "red");
