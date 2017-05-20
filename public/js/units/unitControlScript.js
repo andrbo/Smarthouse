@@ -93,9 +93,8 @@ $(function () {
             $('#editDevLuxValue').slider('setValue', luxValue);
         } else {
             $('#editDevLuxCheck').bootstrapToggle('off');
-            $('#editDevLuxValue').slider('disable');
+            $('#editDevLuxValue').slider('setValue', luxValue).slider('disable');
         }
-
     });
 
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -111,7 +110,6 @@ $(function () {
 // Function used for adding new groups in the edit group and add device modal
 function addNewGroup(newGroup, callback) {
     var groupInput = newGroup;
-    var test = 0;
     if (callback) {
         $.post('/groups', {
             name: groupInput

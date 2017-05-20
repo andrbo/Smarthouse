@@ -92,9 +92,6 @@ $('#deleteDevice').click(function () {
             url: "/units/" + unitno,
             type: 'DELETE'
         }).done(function(){
-            /*$('#deleteUnitModal').modal('hide');
-             $('body').removeClass('modal-open');
-             $('.modal-backdrop').remove();*/
             socket.emit('unpairDevice', {unitno: unitno});
             window.location.reload(true);
         });
