@@ -264,10 +264,9 @@ function luxControl(data, callback) {
             luxToggleState(state, lux, luxTreshold, id, function (err, res) {})
         }
     }
-};
+}
 
 function luxToggleState(state, lux, luxTreshold, id, callback) {
-    console.log("KJØRER LUX TOGGLE STATE.")
     if (callback) {
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
