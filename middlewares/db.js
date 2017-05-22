@@ -1,3 +1,5 @@
+/*This script connects to the database*/
+
 var mysql = require('mysql');
 
 //Database connection. Uses pool for multiple users.
@@ -11,7 +13,6 @@ var pool = mysql.createPool({
 
 pool.getConnection(function (err){
     if(err) throw err;
-    console.log("CONNECTED TO DB");
 });
 
 module.exports = pool;

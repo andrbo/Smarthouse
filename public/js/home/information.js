@@ -1,3 +1,5 @@
+/*This script controlls the information that is shown in information.hbs*/
+
 var socket = io();
 var celsius = '&#8451;';
 
@@ -22,7 +24,7 @@ socket.on('serialEvent', function (data) {
 // Functions below uses the json data emitted from the socket inside alarmAndLuxController.js to display sensor values used in the home view.
 
 // Function for reading the soil moisture value from the Arduino.
-/*function soilReading(data) {
+function soilReading(data) {
     var dry = 500;
     var soil = data.SoilMoisture;
     if (soil > dry) {
@@ -31,12 +33,11 @@ socket.on('serialEvent', function (data) {
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
     }
-}*/
+}
 
 // Function for reading the soil moisture value from the Arduino.
 function laserReading(data) {
     var laser = data.Laser;
-    console.log("LASER: " + laser)
     var laserAlert = $("#laserAlarm").html();
     var content = '<tr id="laserAlert" class="bg-danger"><td>' + laserAlert + '</td>' + '</tr>';
     if (laser == 1 && !$("#laserAlert").length) {

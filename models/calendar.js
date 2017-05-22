@@ -1,3 +1,5 @@
+/*Database modal for calendar.*/
+
 var db = require('../middlewares/db');
 
 exports.addEvent = function (email, title, description, start, end, participants, callback) {

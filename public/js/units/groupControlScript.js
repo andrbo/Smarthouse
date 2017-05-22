@@ -85,7 +85,6 @@ $(function () {
                 $.post('/unitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
-                    console.log("DATA: " + JSON.stringify(data))
                     for (var i = 0; i < data.length; i++) {
                         $.post('/toggleUnit/' + data[i].id, {
                             state: newState

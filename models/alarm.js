@@ -1,5 +1,6 @@
-var db = require('../middlewares/db');
+/*Database modal for alarm.*/
 
+var db = require('../middlewares/db');
 
 exports.getAlarmState = function (id, callback) {
     var sql = 'SELECT value FROM alarm WHERE id = ?';

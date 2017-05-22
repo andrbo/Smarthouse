@@ -1,3 +1,5 @@
+/*DB modal for units.*/
+
 var db = require('../middlewares/db');
 
 //Get all units.

@@ -1,3 +1,5 @@
+/*This script controlls the information that is shown in shoppingList.hbs*/
+
 $(document).ready(function () {
 
     var itemPicked = $("#itemPicked").html();
@@ -25,8 +27,6 @@ $(document).ready(function () {
     //If row is clicked.
     $('#shoppingListTable tbody').on('click', 'tr', "removeProduct", function () {
         var data = table.row(this).data();
-        console.log("ID: " + data.id);
-
         $.ajax({
             url: "/shoppingList/" + data.id,
             type: 'DELETE'
@@ -44,7 +44,6 @@ $(document).ready(function () {
         });
         $("#addProductButton").click(function () {
             $(".productInput input").each(function () {
-                console.log("THIS: " + $(this).val());
                 $.post("/shoppingList", {
                     description: $(this).val()
                 });

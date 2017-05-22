@@ -1,3 +1,5 @@
+/*This script autenticate users and serialize them to a session*/
+
 var mysql = require('mysql');
 var LocalStrategy = require('passport-local').Strategy;
 var db = require('../middlewares/db');
@@ -29,7 +31,6 @@ module.exports = function (passport) {
         function (req, email, password, done) {
 
             User.getUser(email, function (err, result) {
-                console.log(result);
                 if (err)
                     done(err);
                 if (result.length) { //Check if email already exist.

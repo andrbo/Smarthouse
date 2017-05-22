@@ -1,3 +1,5 @@
+/*DB modal for users*/
+
 var db = require('../middlewares/db');
 
 //Creates a new user.

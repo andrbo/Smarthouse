@@ -1,3 +1,5 @@
+/*This script lets the user toggle the alarm. It also controlls the alarmToggle.hbs view*/
+
 var socket = io();
 
 var toggleState = 0; // Used for storing the value of on/off for the alarm in db
@@ -7,7 +9,6 @@ socket.on('alarmChange', function () {
 });
 
 $(function () { // on load function makes the connected users get the correct value of activate/deactivate alarm
-    console.log('Kaller updateToggleState');
     updateToggleState();
 
 });
@@ -19,7 +20,6 @@ function updateToggleState() {
         var state = JSON.stringify(data[0].value);
         buttonState(state);
         toggleState = state;
-        console.log('Får toggle state: '+toggleState);
     });
 }
 

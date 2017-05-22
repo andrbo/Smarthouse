@@ -566,9 +566,6 @@ module.exports = function (app, passport) {
         var description = req.body.description.trim();
         var groupid = req.body.groupname.trim();
 
-        console.log("DESCR: " + description);
-        console.log("GROUP: " + groupid);
-
         function addUnit(callback) {
             unitModel.addUnit(description, groupid, function (err, result) {
                 if (callback) {
@@ -587,7 +584,6 @@ module.exports = function (app, passport) {
     app.delete("/units/:unitno", function (req, res) {
         var id = req.params.unitno;
 
-        console.log("ID: " + id);
         function deleteDevice(callback) {
             unitModel.deleteDevice(id, function (err, result) {
                 if (callback) {
@@ -624,7 +620,7 @@ module.exports = function (app, passport) {
     //Turn unit on/off
     app.post("/toggleUnit/:id", function (req, res) {
         function toggleUnit(callback) {
-            console.log("ID ********** " + req.params.id);
+
             var id = req.params.id;
             var state = req.body.state;
             unitModel.toggleUnit(state, id, function (err, result) {

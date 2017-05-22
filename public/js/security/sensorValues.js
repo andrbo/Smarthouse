@@ -1,3 +1,5 @@
+/*Script for showing the sensor values in sensorValues.hbs*/
+
 var socket = io();
 
 // Socket functions

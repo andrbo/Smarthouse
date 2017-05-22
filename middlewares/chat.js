@@ -1,3 +1,5 @@
+/*This scripts lets the users communicate with each other through sockets.*/
+
 module.exports = function(io) {
     io.sockets.on('connection', function (socket) {
 

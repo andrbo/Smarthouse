@@ -145,7 +145,6 @@ describe('tests', function () {
 
     it("should update a unit", function (done) {
         Units.getId("description", function(err, res){
-            console.log("ID: " + res[0].id);
             chai.request(server).put("/units/" + res[0].id).send({
                 description: "description",
                 groupid: "Stue",
@@ -166,7 +165,6 @@ describe('tests', function () {
             res.should.have.status(200);
             Units.listGroup(function (err, result) {
                 result[1].groupname.should.equal("newGroup")
-                console.log(JSON.stringify(result));
                 Units.deleteGroup("newGroup", function (err, res) {
                     done();
                 })

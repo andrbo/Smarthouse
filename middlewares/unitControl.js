@@ -1,3 +1,5 @@
+/*This script let us controll the nexa units via RF transmitter. Then we use socket communication for updating states.*/
+
 var rfTransmitter = require('nexa');
 
 //Transmitter module is connected to wiringPi pin 15

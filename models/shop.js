@@ -1,3 +1,5 @@
+/*DB modal for shop*/
+
 var db = require('../middlewares/db');
 
 //Get shopping list

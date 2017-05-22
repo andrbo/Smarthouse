@@ -1,3 +1,7 @@
+/*This scripts controls the alarm and lux. The lux can toggle the lights.
+* If turning the alarm on, the user will be notified if there is a burglary*/
+
+
 var nodemailer = require('nodemailer');
 var serialport = require('serialport');
 var rfTransmitter = require('nexa');
@@ -37,7 +41,6 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
-        console.log(serialData);
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
@@ -52,10 +55,7 @@ module.exports = function (app, io) {
                 luxControl(data, function (err, res) {
                 });
                 break;
-        }/*
-        console.log("ALARM" + JSON.stringify(alarmJson));
-        console.log("GENERAL" + JSON.stringify(generalJson));
-*/
+        }
     });
 
 
@@ -195,7 +195,6 @@ module.exports = function (app, io) {
     io.sockets.on('connection', function (socket) {
         //Socket listen to alarmToggle.
         socket.on('alarmToggle', function (data) {
-            console.log('Mottatt alarmToggle, skal emitte til andre');
             alarmState = data.state;
                 socket.broadcast.emit('alarmChange');
         });
@@ -211,10 +210,8 @@ module.exports = function (app, io) {
     });
 
     function sendMail(email, name) {
-        console.log("SENDER MAIL");
         var temp = "Følgende alarm er blitt aktivert: ";
         var temp2 = name;
-        console.log("MAIL: " + email);
 
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",  //Automatically sets host, port and connection security settings
@@ -245,9 +242,6 @@ function getLuxUnits(callback) {
     if (callback) {
         modelUnits.getLuxUnits(function (err, result) {
             callback(err, result);
-            console.log("ERR: " + err);
-            console.log("RES: " + JSON.stringify(result));
-
         })
     }
 }
@@ -267,7 +261,6 @@ function luxControl(data, callback) {
 }
 
 function luxToggleState(state, lux, luxTreshold, id, callback) {
-    console.log("Kjører lux toggle");
     if (callback) {
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
