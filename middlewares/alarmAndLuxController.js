@@ -127,6 +127,7 @@ module.exports = function (app, io) {
         }
     }
 
+    //If general data is trigged, send mail
     function ifGeneralAlarmSendMail(name, time) {
         function getMailGroup(callback) {
             mailGroup.getAllEmails(function (err, result) {
@@ -230,10 +231,9 @@ module.exports = function (app, io) {
             smtpTransport.close(); //Shut down the connection, no more messages.
         });
     }
-
-
 };
 
+//Get all units where lux state = 1
 function getLuxUnits(callback) {
     if (callback) {
         modelUnits.getLuxUnits(function (err, result) {
@@ -251,12 +251,12 @@ function luxControl(data, callback) {
             var luxTreshold = luxUnits[i].luxvalue; //Unit treshold
             var id = luxUnits[i].id; //Unit id
 
-            luxToggleState(state, lux, luxTreshold, id, function (err, res) {
-            })
+            luxToggleState(state, lux, luxTreshold, id, function (err, res) {})
         }
     }
 }
 
+//Toggle unit on/off
 function luxToggleState(state, lux, luxTreshold, id, callback) {
     if (callback) {
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
