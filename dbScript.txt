@@ -57,8 +57,6 @@ CREATE TABLE users(
 
 CREATE INDEX email ON users (email);
 
-INSERT INTO events (email, title, description, start, end, participants) VALUES (?, ?, ?, ?, ?, ?)
-
 
 //Password is "password" fully hashed.
 INSERT INTO alarm (password, value) VALUES ($2a$10$DFsRPxRDjXiHMTscPYSy7u3GrE21HK5UkxSZv9.Dc271PIHL6gH.a, 1)
