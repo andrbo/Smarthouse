@@ -6,6 +6,8 @@ var celsius = '&#8451;';
 // Socket event listning to emitted data from socket located in alarmAndLuxController.js
 socket.on('serialEvent', function (data) {
 
+    console.log(JSON.stringify(data));
+
     var soilValue = $('#soilValue');
     soilReading(data);
 
