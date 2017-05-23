@@ -471,6 +471,8 @@ module.exports = function (app, passport) {
                                     alarmModal.updateAlarmPassword(newPass, id, function (err, result) {
                                         if (callback) {
                                             res.send(result);
+                                            console.log("RESULT: " + JSON.stringify(result));
+                                            console.log("ERR: " + err);
                                         }
                                     });
                                 }
