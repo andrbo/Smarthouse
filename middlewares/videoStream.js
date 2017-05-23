@@ -1,4 +1,5 @@
-/*This file controls the video stream which is shown at the "security" page*/
+/*This file controls the video stream which is shown at the "security" page
+* The code is based on the following github project; https://github.com/mmahrous/Web-Cam-to-Web/blob/master/index.js*/
 
 module.exports = function (app, io) {
 
