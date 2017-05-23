@@ -144,7 +144,6 @@ module.exports = function (app, passport) {
                 smtpTransport.close(); //Shut down the connection, no more messages.
             });
         }
-
     });
 
     //If authenticated by passport render profile.
@@ -162,9 +161,7 @@ module.exports = function (app, passport) {
                     }
                 })
             }
-
-            getUserInfo(function (err, result) {
-            })
+            getUserInfo(function (err, result) {})
         } else {
             req.flash("error_msg", res.__('Login-Required'));
             res.redirect("home");
@@ -189,7 +186,6 @@ module.exports = function (app, passport) {
                                 } else {
                                     User.updatePassword(newPass, email, function (err, result) {
                                         if (callback) {
-
                                             res.send(result);
                                         }
                                     });
@@ -202,9 +198,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        validatePassword(function (err, result) {
-        });
+        validatePassword(function (err, result) {});
     });
 
     //Get all users
@@ -218,9 +212,7 @@ module.exports = function (app, passport) {
                 res.send(result);
             })
         }
-
-        getAllUsers(function () {
-        });
+        getAllUsers(function () {});
     });
 
     //Update user profile
@@ -249,9 +241,7 @@ module.exports = function (app, passport) {
                 });
             }
         }
-
-        updateProfile(function (err, res) {
-        });
+        updateProfile(function (err, res) {});
     });
 
 
@@ -268,9 +258,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        getEvents(function (err, result) {
-        });
+        getEvents(function (err, result) {});
     });
 
     //Get all participants for given event.
@@ -284,9 +272,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        getParticipants(function (err, result) {
-        });
+        getParticipants(function (err, result) {});
     });
 
     //Get all events.
@@ -299,9 +285,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        getAllEvents(function (err, result) {
-        });
+        getAllEvents(function (err, result) {});
     });
 
     //Add new event
@@ -320,9 +304,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        addEvent(function (err, res) {
-        });
+        addEvent(function (err, res) {});
     });
 
     //Delete event by id.
@@ -334,9 +316,7 @@ module.exports = function (app, passport) {
                 callback(err, result);
             })
         }
-
-        deleteEvent(function (err, res) {
-        })
+        deleteEvent(function (err, res) {})
     });
 
     //Update event by id.
@@ -353,9 +333,7 @@ module.exports = function (app, passport) {
                 callback(err, result);
             });
         }
-
-        updateEvent(function (err, res) {
-        });
+        updateEvent(function (err, res) {});
     });
 
     //Update date if event is dragged.
@@ -369,9 +347,7 @@ module.exports = function (app, passport) {
                 callback(err, result);
             });
         }
-
-        updateDate(function (err, res) {
-        });
+        updateDate(function (err, res) {});
     });
 
     //SHOPPING LIST BEGINS HERE
@@ -385,9 +361,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        getShoppingList(function (err, result) {
-        });
+        getShoppingList(function (err, result) {});
     });
 
     //Remove product by id.
@@ -401,9 +375,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        removeProduct(function (err, result) {
-        });
+        removeProduct(function (err, result) {});
     });
 
     //Add a new product to the shopping list.
@@ -418,9 +390,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        addProduct(function (err, result) {
-        });
+        addProduct(function (err, result) {});
     });
 
 
@@ -447,9 +417,7 @@ module.exports = function (app, passport) {
                 })
             }
         }
-
-        toggleAlarm(1, function (err, result) {
-        })
+        toggleAlarm(1, function (err, result) {})
     });
 
     //Get the alarm state.
@@ -462,9 +430,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        getState(1, function (err, result) {
-        });
+        getState(1, function (err, result) {});
     });
 
     //Check alarm pw
@@ -485,9 +451,7 @@ module.exports = function (app, passport) {
                 }
             });
         }
-
-        getPassword(1, function (err, result) {
-        });
+        getPassword(1, function (err, result) {});
     });
 
     //Update alarm password.
@@ -518,9 +482,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        validatePassword(1, function (err, result) {
-        });
+        validatePassword(1, function (err, result) {});
     });
 
     function hashPassword(password, callback) {
@@ -554,10 +516,7 @@ module.exports = function (app, passport) {
 
             });
         }
-
-        getUnits(function (err, res) {
-
-        });
+        getUnits(function (err, res) {});
     });
 
 
@@ -575,9 +534,7 @@ module.exports = function (app, passport) {
 
             });
         }
-
-        addUnit(function (err, res) {
-        });
+        addUnit(function (err, res) {});
     });
 
     //Delete a unit
@@ -592,9 +549,7 @@ module.exports = function (app, passport) {
                 }
             });
         }
-
-        deleteDevice(function (err, res) {
-        });
+        deleteDevice(function (err, res) {});
     });
 
     //Update a unit
@@ -612,9 +567,7 @@ module.exports = function (app, passport) {
                 }
             });
         }
-
-        changeDevice(function (err, res) {
-        });
+        changeDevice(function (err, res) {});
     });
 
     //Turn unit on/off
@@ -630,10 +583,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        toggleUnit(function (err, res) {
-
-        });
+        toggleUnit(function (err, res) {});
     });
 
     //Delete group from unit
@@ -647,8 +597,7 @@ module.exports = function (app, passport) {
                 }
             });
         }
-        removeGroupFromUnit(function (err, result) {
-        });
+        removeGroupFromUnit(function (err, result) {});
     });
 
     //Get units belonging to group.
@@ -663,9 +612,7 @@ module.exports = function (app, passport) {
             });
         }
 
-        getUnitsOfGroup(function (err, res) {
-
-        });
+        getUnitsOfGroup(function (err, res) {});
     });
 
     //Add new group
@@ -682,11 +629,8 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        addGroup(function (err, res) {
-        });
+        addGroup(function (err, res) {});
     });
-
 
     //Get all groups.
     app.get("/groups", function (req, res) {
@@ -698,9 +642,7 @@ module.exports = function (app, passport) {
                 }
             })
         }
-
-        getGroups(function (err, res) {
-        });
+        getGroups(function (err, res) {});
     });
 
     //Turn group on/off
@@ -715,9 +657,7 @@ module.exports = function (app, passport) {
                 }
             });
         }
-
-        toggleGroup(function (err, res) {
-        });
+        toggleGroup(function (err, res) {});
     });
 
     //Delete group
@@ -732,8 +672,6 @@ module.exports = function (app, passport) {
                 }
             });
         }
-
-        deleteGroup(function (err, result) {
-        });
+        deleteGroup(function (err, result) {});
     });
 };

@@ -40,7 +40,6 @@ $(function () {
 
     // Click function for the on/off toggle button in the DataTable. Function updates the DB with new state of the device,
     // and emits a socket message to unitControl.js which in turn turns on/off the unit.
-
     $('table tbody').on('click', 'button', function () {
         var data = table.row($(this).parents('tr')).data();
         var state = data.state;
@@ -55,9 +54,7 @@ $(function () {
                         socket.emit('deviceOff', {unitno: data.id});
                     }
                 }
-
-                toggleDeviceOff(function () {
-                })
+                toggleDeviceOff(function () {})
             });
         } else {
             var newState = 1;
@@ -69,9 +66,7 @@ $(function () {
                         socket.emit('deviceOn', {unitno: data.id});
                     }
                 }
-
-                toggleDeviceOn(function () {
-                })
+                toggleDeviceOn(function () {})
             });
         }
     });
@@ -104,7 +99,6 @@ $(function () {
     if (lastTab) {
         $('#controlTabs a[href="' + lastTab + '"]').tab('show');
     }
-    var mySlider = $("input.slider").bootstrapSlider();
 });
 
 // Function used for adding new groups in the edit group and add device modal
@@ -115,9 +109,9 @@ function addNewGroup(newGroup, callback) {
             name: groupInput
         }).done(function (data) {
             var error = data.addError;
-            if (error === 1) {
+            if(error === 1) {
                 $('#groupErr').css("display", "block");
-                if ($('#newGroupInput').click(function () {
+                if($('#newGroupInput').click(function () {
                         $('#groupErr').css("display", "none");
                     }));
             } else {

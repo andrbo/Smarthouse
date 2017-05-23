@@ -1,6 +1,5 @@
 /*This scripts controls the alarm and lux. The lux can toggle the lights.
-* If turning the alarm on, the user will be notified if there is a burglary*/
-
+ * If turning the alarm on, the user will be notified if there is a burglary*/
 
 var nodemailer = require('nodemailer');
 var serialport = require('serialport');
@@ -16,7 +15,6 @@ wpi.pinMode(pin, wpi.OUTPUT);
 var SerialPort = serialport; // make a local instance of it
 var remote = 23328130;
 var arduinoPort = '/dev/ttyUSB0'; //Arduino port
-//var arduinoPort = 'COM4';
 var arduinoSerial = new SerialPort(arduinoPort, {
     baudrate: 9600,
     // defaults for Arduino serial communication
@@ -46,14 +44,12 @@ module.exports = function (app, io) {
             case 0:
                 generalAlarm(data);
                 alarmLedToggle();
-                luxControl(data, function (err, res) {
-                });
+                luxControl(data, function (err, res) {});
                 break;
             case 1:
                 alarmOn(data);
                 generalAlarm(data);
-                luxControl(data, function (err, res) {
-                });
+                luxControl(data, function (err, res) {});
                 break;
         }
     });
@@ -89,10 +85,10 @@ module.exports = function (app, io) {
         }
     }
 
-    function alarmLedToggle(){
-        if(alarmState==1){
+    function alarmLedToggle() {
+        if (alarmState == 1) {
             wpi.digitalWrite(pin, 1);
-        }else{
+        } else {
             wpi.digitalWrite(pin, 0);
         }
     }
@@ -196,7 +192,7 @@ module.exports = function (app, io) {
         //Socket listen to alarmToggle.
         socket.on('alarmToggle', function (data) {
             alarmState = data.state;
-                socket.broadcast.emit('alarmChange');
+            socket.broadcast.emit('alarmChange');
         });
 
         //Socket listen to deviceChange
@@ -255,7 +251,8 @@ function luxControl(data, callback) {
             var luxTreshold = luxUnits[i].luxvalue; //Unit treshold
             var id = luxUnits[i].id; //Unit id
 
-            luxToggleState(state, lux, luxTreshold, id, function (err, res) {})
+            luxToggleState(state, lux, luxTreshold, id, function (err, res) {
+            })
         }
     }
 }
@@ -267,7 +264,8 @@ function luxToggleState(state, lux, luxTreshold, id, callback) {
             modelUnits.toggleUnit(toggle, id, function (err) {
                 if (err) {
                 } else {
-                    toggleUnitLux(id, toggle, function (err, res) {});
+                    toggleUnitLux(id, toggle, function (err, res) {
+                    });
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
@@ -278,7 +276,8 @@ function luxToggleState(state, lux, luxTreshold, id, callback) {
             modelUnits.toggleUnit(toggle, id, function (err) {
                 if (err) {
                 } else {
-                    toggleUnitLux(id, toggle, function (err, res) {});
+                    toggleUnitLux(id, toggle, function (err, res) {
+                    });
                     getLuxUnits(function (err, result) {
                         luxUnits = result;
                     });
@@ -291,9 +290,11 @@ function luxToggleState(state, lux, luxTreshold, id, callback) {
 var toggleUnitLux = function (id, toggle, callback) {
     if (callback) {
         if (toggle == 1) {
-            rfTransmitter.nexaOn(remote, id, function () {});
+            rfTransmitter.nexaOn(remote, id, function () {
+            });
         } else {
-            rfTransmitter.nexaOff(remote, id, function () {})
+            rfTransmitter.nexaOff(remote, id, function () {
+            })
         }
     }
 };
@@ -305,5 +306,6 @@ function openPort() {
     function sendData() {
         arduinoSerial.write(startToken.toString());
     }
+
     setInterval(sendData, 1000);
 }

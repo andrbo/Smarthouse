@@ -6,8 +6,8 @@ var celsius = '&#8451;';
 // Socket event listning to emitted data from socket located in alarmAndLuxController.js
 socket.on('serialEvent', function (data) {
 
-    /*var soilValue = $('#soilValue');
-    soilReading(data);*/
+    var soilValue = $('#soilValue');
+    soilReading(data);
 
     flameReading(data);
 
@@ -28,9 +28,13 @@ function soilReading(data) {
     var dry = 500;
     var soil = data.SoilMoisture;
     if (soil > dry) {
-        var content = "<tr><td>Vann planta</td></tr>"
+        var content = "<tr><td>Vann planta</td></tr>";
         $('#sensorWarningsTable tbody').html(content);
-        $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
+        $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({
+            "color": "red",
+            "font-size": "100px",
+            "opacity": "0.8"
+        }).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
     }
 }
@@ -42,11 +46,14 @@ function laserReading(data) {
     var content = '<tr id="laserAlert" class="bg-danger"><td>' + laserAlert + '</td>' + '</tr>';
     if (laser == 1 && !$("#laserAlert").length) {
         $('#sensorWarningsTable tbody').append(content);
-        $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
+        $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({
+            "color": "red",
+            "font-size": "100px",
+            "opacity": "0.8"
+        }).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
     }
-
-    if(laser == 0){
+    if (laser == 0) {
         $('#sensorWarningsTable #laserAlert').remove();
         noErrors();
     }
@@ -59,21 +66,28 @@ function flameReading(data) {
     var content = '<tr id="flameAlert" class="bg-danger"><td>' + flameAlert + '</td>' + '</tr>';
     if (flameSensorValue == 0 && !$("#flameAlert").length) {
         $('#sensorWarningsTable tbody').append(content);
-        $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({"color": "red", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-ok");
+        $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({
+            "color": "red",
+            "font-size": "100px",
+            "opacity": "0.8"
+        }).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
     }
-
-    if(flameSensorValue == 1){
+    if (flameSensorValue == 1) {
         $('#sensorWarningsTable #flameAlert').remove();
         noErrors();
     }
 }
 
 //If all sensors are ok.
-function noErrors(){
+function noErrors() {
     var length = $("#sensorWarningsTable tr").length;
-    if(length == 0){
-        $('#sensorWarningGlyphicon').addClass("glyphicon-ok").css({"color": "green", "font-size": "100px", "opacity": "0.8"}).removeClass("glyphicon-remove");
+    if (length == 0) {
+        $('#sensorWarningGlyphicon').addClass("glyphicon-ok").css({
+            "color": "green",
+            "font-size": "100px",
+            "opacity": "0.8"
+        }).removeClass("glyphicon-remove");
         $('#noWarningsHeader').show();
     }
 }
@@ -83,14 +97,13 @@ function tempReading(data) {
     var tempSensorValue = data.Temperature;
     var outTemp1 = data.Ds1Value;
     var outTemp2 = data.Ds2Value;
-    $('#tempOut1').html(outTemp1+celsius);
-    $('#tempOut2').html(outTemp2+celsius);
+    $('#tempOut1').html(outTemp1 + celsius);
+    $('#tempOut2').html(outTemp2 + celsius);
     $('#tempValue').html(tempSensorValue + celsius);
-
 }
 
 // Function for reading the humidity value of the  DHT11 sensor
 function humReading(data) {
     var humSensorValue = data.Humidity;
-    $('#humValue').html(humSensorValue+"%");
+    $('#humValue').html(humSensorValue + "%");
 }

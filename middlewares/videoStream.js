@@ -26,7 +26,7 @@ module.exports = function (app, io) {
                 var frame = webcam.frameRaw();
                 io.emit('streamCam', "data:image/png;base64," + Buffer(frame).toString('base64'));
             });
-        }, 50);
+        }, 200);
     }
 
     io.sockets.on('connection', function (socket) {

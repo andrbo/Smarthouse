@@ -65,7 +65,6 @@ function laserReading(data) {
     }
 }
 
-
 // Function for reading the value of the vibration sensor
 function vibeReading(data) {
     var vibeSensorValue = data.VibeValue;
@@ -74,7 +73,6 @@ function vibeReading(data) {
     } else {
         $('#vibeValue').html($("#vibrationAlert").html()).css("color", "red");
     }
-
 }
 
 // Function for reading the value of the IR barrier sensor module

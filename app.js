@@ -56,7 +56,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
 //Global vars
 app.use(function (req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
@@ -64,7 +63,6 @@ app.use(function (req, res, next) {
     res.locals.error = req.flash('error');
     next();
 });
-
 
 //INTERNATIONALIZATION STARTS HERE. CURRENTLY NORWEGIAN AND ENGLISH.
 i18n.configure({
@@ -89,7 +87,6 @@ hbs.handlebars.registerHelper('__n', function () {
     return i18n.__n.apply(this, arguments);
 });
 
-
 // call socket.io to the app
 app.io = require('socket.io')();
 //Router controller. Uses passport as authentication.
@@ -99,7 +96,6 @@ app.io.chat = require('./middlewares/chat.js')(app.io);
 app.io.alarmActivated = require('./middlewares/alarmAndLuxController')(app, app.io);
 app.io.unitControl = require('./middlewares/unitControl')(app.io);
 app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

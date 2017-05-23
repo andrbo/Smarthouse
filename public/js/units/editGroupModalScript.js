@@ -7,7 +7,7 @@ $(function () {
     var editGroupTable = $("#editGroupTable").DataTable({
         ajax: {
             dataSrc: '',
-            url: '/groups',
+            url: '/groups'
         },
         scrollY: "200px",
         searching: false,

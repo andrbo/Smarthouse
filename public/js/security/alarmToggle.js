@@ -36,7 +36,6 @@ function buttonState(value) {
     }
 }
 
-
 // Click function for the activate alarm button inside the activate alarm modal
 // The function checks for valid input password from the user by comparing input with the hashed value stored in db.
 // If the password is correct, the value of alarm state in db is updated, the button in the view is updated and other connected users is updated.

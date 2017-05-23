@@ -6,7 +6,6 @@ var db = require('../middlewares/db');
 var User = require('../models/User');
 var bcrypt = require('bcryptjs');
 
-
 module.exports = function (passport) {
 
     //Used to serialize the user for the session

@@ -68,7 +68,6 @@ $(function () {
                         });
                     }
                     $('#groupTable').DataTable().ajax.reload();
-
                 })
             });
             // The group is off, turning it on
@@ -81,7 +80,6 @@ $(function () {
                     state: newState
                 }
             }).done(function () {
-
                 $.post('/unitsOfGroup', { // Getting the devices belonging to the group
                     groupId: groupname
                 }).done(function (data) { // Turning the devices in the group on
@@ -94,13 +92,9 @@ $(function () {
                                     socket.emit('groupDeviceOn', {unitno: data.id});
                                 }
                             }
-
-                            toggleGroupDeviceOn(function () {
-                            })
+                            toggleGroupDeviceOn(function () {})
                         });
-
                     }
-
                     $('#groupTable').DataTable().ajax.reload();
                 });
             });
