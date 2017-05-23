@@ -27,15 +27,20 @@ socket.on('serialEvent', function (data) {
 function soilReading(data) {
     var dry = 500;
     var soil = data.SoilMoisture;
-    if (soil > dry) {
-        var content = "<tr><td>Vann planta</td></tr>";
-        $('#sensorWarningsTable tbody').html(content);
+    var laserAlert = $("#soilAlarm").html();
+    var content = '<tr id="laserAlert" class="bg-danger"><td>' + laserAlert + '</td>' + '</tr>';
+    if (soil > dry && !$("#laserAlert").length) {
+        $('#sensorWarningsTable tbody').append(content);
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({
             "color": "red",
             "font-size": "100px",
             "opacity": "0.8"
         }).removeClass("glyphicon-ok");
         $('#noWarningsHeader').hide();
+    }
+    if (soil <  dry) {
+        $('#sensorWarningsTable #laserAlert').remove();
+        noErrors();
     }
 }
 
