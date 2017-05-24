@@ -227,19 +227,28 @@ module.exports = function (app, passport) {
         var newEmail = req.body.email;
 
         function updateProfile(callback) {
-            User.updateProfile(firstname, surname, address, postalCode, city, newEmail, newEmail, email, function (err, result) {
-                callback(err, result);
-                res.send(result);
-            });
 
-            //Deserialize user if email is changed.
-            if (newEmail != email) {
-                passport.deserializeUser(function (error, done) {
-                    db.query("SELECT * FROM users WHERE email = ?", [newEmail], function (err, rows) {
-                        done(err, rows[0]);
+            calModal.getUserEvents(email, function (err, result) {
+                if(result.length){
+                    User.updateProfile(firstname, surname, address, postalCode, city, newEmail, newEmail, email, function (err, result) {
+                        callback(err, result);
+                        res.send(result);
                     });
-                });
-            }
+                }else{
+                    User.updateProfileIfEventsIsEmpty(firstname, surname, address, postalCode, city, newEmail, email, function (err, result) {
+                        callback(err, result);
+                        res.send(result);
+                    });
+                }
+                //Deserialize user if email is changed.
+                if (newEmail != email) {
+                    passport.deserializeUser(function (error, done) {
+                        db.query("SELECT * FROM users WHERE email = ?", [newEmail], function (err, rows) {
+                            done(err, rows[0]);
+                        });
+                    });
+                }
+            });
         }
         updateProfile(function (err, res) {});
     });
@@ -471,8 +480,6 @@ module.exports = function (app, passport) {
                                     alarmModal.updateAlarmPassword(newPass, id, function (err, result) {
                                         if (callback) {
                                             res.send(result);
-                                            console.log("RESULT: " + JSON.stringify(result));
-                                            console.log("ERR: " + err);
                                         }
                                     });
                                 }

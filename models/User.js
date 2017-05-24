@@ -99,3 +99,18 @@ exports.updateProfile = function (firstname, surname, address, postalCode, city,
         }
     });
 };
+
+//Updates profile if no events
+exports.updateProfileIfEventsIsEmpty = function (firstname, surname, address, postalCode, city, email, currentMail, callback) {
+    var values = [firstname, surname, address, postalCode, city, email, currentMail];
+
+    var sql = 'UPDATE users ' +
+        'SET firstname = ?, surname = ?, address = ?, postalCode = ?, city = ?, email = ? ' +
+        'WHERE email = ?';
+
+    db.query(sql, values, function (err, result) {
+        if (callback) {
+            callback(err, result);
+        }
+    });
+};
