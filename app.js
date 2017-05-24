@@ -37,15 +37,15 @@ app.set('view engine', 'hbs');
 app.engine('hbs', hbs.engine);
 
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '/middlewares')))
+app.use(express.static(path.join(__dirname, '/middlewares')));
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
+// uncomment after placing your favicon in /public
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use(session({
     secret: "secret",
@@ -93,9 +93,9 @@ app.io = require('socket.io')();
 require('./router/routes')(app,passport);
 
 app.io.chat = require('./middlewares/chat.js')(app.io);
-app.io.alarmActivated = require('./middlewares/alarmAndLuxController')(app, app.io);
-app.io.unitControl = require('./middlewares/unitControl')(app.io);
-app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
+//app.io.alarmActivated = require('./middlewares/alarmAndLuxController')(app, app.io);
+//app.io.unitControl = require('./middlewares/unitControl')(app.io);
+//app.io.videoStream = require('./middlewares/videoStream')(app, app.io);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
