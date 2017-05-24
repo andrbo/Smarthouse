@@ -1,8 +1,10 @@
+
 CREATE TABLE alarm(
-    id INT(11) DEFAULT '0' PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     password TEXT,
     value INT(11) DEFAULT '0' NOT NULL
 );
+
 
 CREATE TABLE events(
     email VARCHAR(101) NOT NULL,
@@ -14,23 +16,29 @@ CREATE TABLE events(
     participants TEXT
 );
 
+
 CREATE INDEX email ON events (email);
+
 
 CREATE TABLE groups(
     groupname VARCHAR(100) PRIMARY KEY NOT NULL,
     groupstate INT(11) DEFAULT '0' NOT NULL
 );
 
+
 CREATE UNIQUE INDEX groups_groupname_uindex ON groups (groupname);
+
 CREATE TABLE sensors(
     id INT(255) PRIMARY KEY NOT NULL,
     value INT(2) NOT NULL
 );
 
+
 CREATE TABLE shoppingList(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product TEXT NOT NULL
 );
+
 
 CREATE TABLE units(
     id INT(255) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -43,7 +51,7 @@ CREATE TABLE units(
     CONSTRAINT units_fk FOREIGN KEY (groupid) REFERENCES groups (groupname)
 );
 
-CREATE INDEX units_fk ON units (groupid);
+
 CREATE TABLE users(
     email VARCHAR(101) PRIMARY KEY NOT NULL,
     password TEXT NOT NULL,
@@ -55,8 +63,10 @@ CREATE TABLE users(
     country VARCHAR(101) NOT NULL
 );
 
+
 CREATE INDEX email ON users (email);
 
 
-//Password is "password" fully hashed.
-INSERT INTO alarm (password, value) VALUES ($2a$10$DFsRPxRDjXiHMTscPYSy7u3GrE21HK5UkxSZv9.Dc271PIHL6gH.a, 1)
+#Password is "password" with hash value
+
+INSERT INTO alarm (password, value) VALUES ("$2a$10$DFsRPxRDjXiHMTscPYSy7u3GrE21HK5UkxSZv9.Dc271PIHL6gH.a", 1)
