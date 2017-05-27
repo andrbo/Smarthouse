@@ -39,6 +39,7 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
+        console.log(serialData);
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
@@ -251,9 +252,6 @@ function luxControl(data, callback) {
             var state = luxUnits[i].state; //Unit state on/off
             var luxTreshold = luxUnits[i].luxvalue; //Unit treshold
             var id = luxUnits[i].id; //Unit id
-
-            console.log("LUX: " + lux);
-            console.log("TRESH: " + luxTreshold);
 
             luxToggleState(state, lux, luxTreshold, id, function (err, res) {})
         }
