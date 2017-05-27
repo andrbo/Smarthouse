@@ -39,13 +39,13 @@ module.exports = function (app, io) {
     arduinoSerial.on('open', openPort);
     arduinoSerial.on('data', function (data) {
         serialData = JSON.parse(data);
-        console.log(serialData);
         io.sockets.emit('serialEvent', serialData);
         switch (alarmState) {
             case 0:
                 generalAlarm(data);
                 alarmLedToggle();
-                luxControl(data, function (err, res) {});
+                luxControl(data, function (err, res) {
+                });
                 break;
             case 1:
                 alarmOn(data);
@@ -262,6 +262,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback) {
     if (callback) {
         if (state == 0 && lux < luxTreshold) { // The selected luxvalue for the device is lower or equal to the lux value read by the sensor. Turning the device on.
             var toggle = 1;
+            console.log("1 if");
             modelUnits.toggleUnit(toggle, id, function (err) {
                 if (err) {
                 } else {
@@ -273,6 +274,7 @@ function luxToggleState(state, lux, luxTreshold, id, callback) {
                 }
             })
         } else if (state == 1 && lux > luxTreshold) {
+            console.log("2 if")
             var toggle = 0;
             modelUnits.toggleUnit(toggle, id, function (err) {
                 if (err) {
