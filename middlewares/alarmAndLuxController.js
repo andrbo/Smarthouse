@@ -167,7 +167,7 @@ module.exports = function (app, io) {
         var flame = sensorData.Flame;
         var leak = sensorData.LeakValue;
         //Thresholds
-        var gasThreshold = 600;
+        var gasThreshold = 800;
         var leakThreshold = 1000;
 
         if (gas > gasThreshold) {
