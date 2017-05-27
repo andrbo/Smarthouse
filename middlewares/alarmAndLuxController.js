@@ -252,6 +252,9 @@ function luxControl(data, callback) {
             var luxTreshold = luxUnits[i].luxvalue; //Unit treshold
             var id = luxUnits[i].id; //Unit id
 
+            console.log("LUX: " + lux);
+            console.log("TRESH: " + luxTreshold);
+
             luxToggleState(state, lux, luxTreshold, id, function (err, res) {})
         }
     }
