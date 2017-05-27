@@ -8,8 +8,8 @@ socket.on('serialEvent', function (data) {
 
     console.log(JSON.stringify(data));
 
-    var soilValue = $('#soilValue');
-    soilReading(data);
+    /*var soilValue = $('#soilValue');
+    soilReading(data);*/
 
     flameReading(data);
 
