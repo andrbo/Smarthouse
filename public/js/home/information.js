@@ -41,7 +41,7 @@ function soilReading(data) {
         $('#noWarningsHeader').hide();
     }
     if (soil <  dry) {
-        $('#sensorWarningsTable #soilAlarm').remove();
+        $('#sensorWarningsTable #soilAlert').remove();
         noErrors();
     }
 }
