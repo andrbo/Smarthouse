@@ -29,8 +29,8 @@ socket.on('serialEvent', function (data) {
 function soilReading(data) {
     var dry = 500;
     var soil = data.SoilMoisture;
-    var laserAlert = $("#soilAlarm").html();
-    var content = '<tr id="laserAlert" class="bg-danger"><td>' + laserAlert + '</td>' + '</tr>';
+    var soilAlert = $("#soilAlarm").html();
+    var content = '<tr id="soilAlert" class="bg-danger"><td>' + soilAlert + '</td>' + '</tr>';
     if (soil > dry && !$("#laserAlert").length) {
         $('#sensorWarningsTable tbody').append(content);
         $('#sensorWarningGlyphicon').addClass("glyphicon-remove").css({
@@ -41,7 +41,7 @@ function soilReading(data) {
         $('#noWarningsHeader').hide();
     }
     if (soil <  dry) {
-        $('#sensorWarningsTable #laserAlert').remove();
+        $('#sensorWarningsTable #soilAlarm').remove();
         noErrors();
     }
 }
